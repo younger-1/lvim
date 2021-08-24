@@ -6,21 +6,8 @@ lvim.colorscheme = "darkplus"
 -- change background to #1b1c25
 lvim.transparent_window = false
 vim.opt.wrap = false
+vim.opt.cmdheight = 1
 lvim.debug = false
-
--- lua
-local sumneko_root_path = vim.fn.getenv "HOME" .. "/.local/bin/sumneko-lua/server"
-local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
-lvim.lang.lua.lsp.setup.cmd = {
-  sumneko_binary,
-  "-E",
-  sumneko_root_path .. "/main.lua",
-}
-lvim.lang.lua.formatters = { { exe = "stylua" } }
-
--- cpp
-lvim.lang.cpp.lsp.setup.cmd = { "clangd" }
-lvim.lang.cpp.formatters = { { exe = "clang_format" } }
 
 -- keymappings
 lvim.leader = "space"
@@ -54,10 +41,6 @@ lvim.builtin.which_key.mappings["r"] = {
   f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
 }
 lvim.builtin.which_key.mappings.f = { "<cmd>lua require('lir.float').toggle()<cr>", "Files" }
-lvim.builtin.which_key.mappings["P"] = {
-  "<cmd>lua require'telescope'.extensions.project.project{}<CR>",
-  "Projects",
-}
 
 lvim.builtin.nvimtree.auto_open = 0
 -- vim.g.nvim_tree_disable_netrw = 0
@@ -77,7 +60,7 @@ lvim.builtin.telescope.on_config_done = function()
   lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
 end
 
--- Additional Plugins
+-- -- Additional Plugins
 lvim.plugins = {
   { "lunarvim/colorschemes" },
   { "folke/tokyonight.nvim" },
