@@ -8,20 +8,6 @@ lvim.transparent_window = false
 vim.opt.wrap = false
 lvim.debug = false
 
--- lua
-local sumneko_root_path = vim.fn.getenv "HOME" .. "/.local/bin/sumneko-lua/server"
-local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
-lvim.lang.lua.lsp.setup.cmd = {
-  sumneko_binary,
-  "-E",
-  sumneko_root_path .. "/main.lua",
-}
-lvim.lang.lua.formatters = { { exe = "stylua" } }
-
--- cpp
-lvim.lang.cpp.lsp.setup.cmd = { "clangd" }
-lvim.lang.cpp.formatters = { { exe = "clang_format" } }
-
 -- keymappings
 lvim.leader = "space"
 
@@ -64,7 +50,7 @@ lvim.builtin.nvimtree.auto_open = 0
 -- vim.g.nvim_tree_hijack_netrw = 0
 
 -- Treesitter
--- lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.autotag.enable = true
 lvim.builtin.treesitter.playground.enable = true
 
