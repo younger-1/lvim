@@ -3,6 +3,41 @@
 --             Author: Younger-1@github             --
 ---[[--------------------------------------------]]---
 
+--[[
+use {
+  'myusername/example',        -- The plugin location string
+  -- The following keys are all optional
+  disable = boolean,           -- Mark a plugin as inactive
+  as = string,                 -- Specifies an alias under which to install the plugin
+  installer = function,        -- Specifies custom installer. See "custom installers" below.
+  updater = function,          -- Specifies custom updater. See "custom installers" below.
+  after = string or list,      -- Specifies plugins to load before this plugin. See "sequencing" below
+  rtp = string,                -- Specifies a subdirectory of the plugin to add to runtimepath.
+  opt = boolean,               -- Manually marks a plugin as optional.
+  branch = string,             -- Specifies a git branch to use
+  tag = string,                -- Specifies a git tag to use
+  commit = string,             -- Specifies a git commit to use
+  lock = boolean,              -- Skip this plugin in updates/syncs
+  run = string, function, or table, -- Post-update/install hook. See "update/install hooks".
+  requires = string or list,   -- Specifies plugin dependencies. See "dependencies".
+  rocks = string or list,      -- Specifies Luarocks dependencies for the plugin
+  config = string or function, -- Specifies code to run after this plugin is loaded.
+  -- The setup key implies opt = true
+  setup = string or function,  -- Specifies code to run before this plugin is loaded.
+  -- The following keys all imply lazy-loading and imply opt = true
+  cmd = string or list,        -- Specifies commands which load this plugin. Can be an autocmd pattern.
+  ft = string or list,         -- Specifies filetypes which load this plugin.
+  keys = string or list,       -- Specifies maps which load this plugin. See "Keybindings".
+  event = string or list,      -- Specifies autocommand events which load this plugin.
+  fn = string or list          -- Specifies functions which load this plugin.
+  cond = string, function, or list of strings/functions,   -- Specifies a conditional test to load this plugin
+  module = string or list      -- Specifies Lua module names for require. When requiring a string which starts
+                               -- with one of these module names, the plugin will be loaded.
+  module_pattern = string/list -- Specifies Lua pattern of Lua module names for require. When
+  requiring a string which matches one of these patterns, the plugin will be loaded.
+}
+--]]
+
 -- general
 lvim.format_on_save = true
 lvim.colorscheme = "onedarker"
@@ -10,6 +45,7 @@ lvim.transparent_window = false
 vim.opt.wrap = false
 -- lvim.log.level = "warn"
 lvim.debug = false
+vim.opt.clipboard = ""
 
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
@@ -21,6 +57,37 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<esc><esc>"] = "<cmd>nohlsearch<cr>"
 lvim.keys.normal_mode["Y"] = "y$"
 lvim.keys.visual_mode["p"] = [["_dP]]
+lvim.keys.visual_mode["Y"] = [["+y]]
+
+vim.cmd [[
+noremap ,p "+p
+cnoremap <C-V> <C-R>+
+inoremap <C-V> <C-G>u<C-R><C-O>+
+onoremap H ^
+onoremap L $
+cnoremap <C-a> <HOME>
+
+" Open in VSCode from Vim
+command! OpenInVSCode exe '!code --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
+" Open in VSCode from Vim and preserve the working directory
+command! OpenCwdInVSCode exe 'silent !code "' . getcwd() . '" --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
+
+function! TabMessage(cmd)
+  redir => message
+  silent execute a:cmd
+  redir END
+  if empty(message)
+    echoerr "This command do NOT have output"
+  else
+    " Use "new" instead of "tabnew" below if you prefer split windows instead of tabs
+    tabnew
+    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
+    silent put=message
+  endif
+endfunction
+
+command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
+]]
 
 -- LSP
 lvim.lsp.diagnostics.virtual_text = false
@@ -253,6 +320,7 @@ lvim.plugins = {
   -- },
   {
     "dccsillag/magma-nvim",
+    disable = true,
   },
   {
     "metakirby5/codi.vim",
@@ -297,6 +365,7 @@ lvim.plugins = {
     { "tpope/vim-scriptease" },
     { "tpope/vim-fugitive" },
     { "wakatime/vim-wakatime" },
+    -- { "gelguy/wilder.nvim", run = ":UpdateRemotePlugins", event = "CmdlineEnter", config = require "user.wilder" },
     { "mbbill/undotree", cmd = "UndotreeToggle" },
     {
       "bkad/CamelCaseMotion",
@@ -335,7 +404,14 @@ lvim.plugins = {
 
 -- TODO: q quits in spectr_panel ft
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- O.user_autocommands = {{ "BufWinEnter", "*", "echo \"hi again\""}}
-
+lvim.autocommands.custom_groups = {
+  -- { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
+  -- Return to last edit position when opening files (You want this!)
+  {
+    "BufReadPost",
+    "*",
+    [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
+  },
+}
 -- way to get os name
 -- print(vim.loop.os_uname().sysname)
