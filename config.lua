@@ -1,14 +1,22 @@
+---[[--------------------------------------------]]---
+--      config.lua - Configuration for LunarVim     --
+--             Author: Younger-1@github             --
+---[[--------------------------------------------]]---
+
 -- general
 lvim.format_on_save = false
--- lvim.colorscheme = "darkplus"
-lvim.colorscheme = "darkplus"
+lvim.lint_on_save = false
+-- Colors: "darkplus"
+lvim.colorscheme = "spacegray"
 -- vim.g.tokyonight_style = "night"
 -- change background to #1b1c25
 lvim.transparent_window = false
 vim.opt.wrap = false
+-- lvim.log.level = "warn"
 lvim.debug = false
 
 -- keymappings
+-- view all the defaults by pressing <leader>Lk
 lvim.leader = "space"
 
 lvim.keys.normal_mode["<esc><esc>"] = "<cmd>nohlsearch<cr>"
@@ -16,7 +24,7 @@ lvim.keys.normal_mode["Y"] = "y$"
 lvim.keys.visual_mode["p"] = [["_dP]]
 
 -- LSP
-lvim.lsp.diagnostics.virtual_text = false
+lvim.lsp.diagnostics.virtual_text = true
 lvim.lsp.override = { "java" }
 require("user.json_schemas").setup()
 
@@ -44,6 +52,16 @@ lvim.builtin.which_key.mappings["P"] = {
   "<cmd>lua require'telescope'.extensions.project.project{}<CR>",
   "Projects",
 }
+-- lvim.builtin.which_key.mappings["t"] = {
+--   name = "+Trouble",
+--   t = { "<cmd>TroubleToggle<cr>", "Diagnostics" },
+--   r = { "<cmd>Trouble lsp_references<cr>", "References" },
+--   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+--   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnosticss" },
+--   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+--   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+--   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnosticss" },
+-- }
 
 lvim.builtin.nvimtree.auto_open = 0
 -- vim.g.nvim_tree_disable_netrw = 0
@@ -51,16 +69,22 @@ lvim.builtin.nvimtree.auto_open = 0
 
 -- Treesitter
 lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.autotag.enable = true
+lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.treesitter.playground.enable = true
 
 -- Telescope
 lvim.builtin.telescope.on_config_done = function()
   local actions = require "telescope.actions"
+  -- for input mode
   lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
   lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
   lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
   lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
+  -- for normal mode
+  lvim.builtin.telescope.defaults.mappings.n["<C-n>"] = actions.cycle_history_next
+  lvim.builtin.telescope.defaults.mappings.n["<C-p>"] = actions.cycle_history_prev
 end
 
 -- Additional Plugins
@@ -82,6 +106,7 @@ lvim.plugins = {
     config = function()
       require("user.octo").config()
     end,
+    disable = true,
   },
   {
     "ray-x/lsp_signature.nvim",
@@ -122,6 +147,11 @@ lvim.plugins = {
     config = function()
       require("user.hop").config()
     end,
+  },
+  {
+    "ggandor/lightspeed.nvim",
+    event = "BufRead",
+    disable = true,
   },
   {
     "mattn/vim-gist",
