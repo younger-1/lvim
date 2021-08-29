@@ -4,16 +4,15 @@
 ---[[--------------------------------------------]]---
 
 -- general
-lvim.format_on_save = false
-lvim.lint_on_save = false
--- Colors: "darkplus"
-lvim.colorscheme = "spacegray"
--- vim.g.tokyonight_style = "night"
--- change background to #1b1c25
+lvim.format_on_save = true
+lvim.colorscheme = "onedarker"
 lvim.transparent_window = false
 vim.opt.wrap = false
 -- lvim.log.level = "warn"
 lvim.debug = false
+
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 -- keymappings
 -- view all the defaults by pressing <leader>Lk
@@ -24,7 +23,7 @@ lvim.keys.normal_mode["Y"] = "y$"
 lvim.keys.visual_mode["p"] = [["_dP]]
 
 -- LSP
-lvim.lsp.diagnostics.virtual_text = true
+lvim.lsp.diagnostics.virtual_text = false
 lvim.lsp.override = { "java" }
 require("user.json_schemas").setup()
 
@@ -48,24 +47,24 @@ lvim.builtin.which_key.mappings["r"] = {
   f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
 }
 lvim.builtin.which_key.mappings.f = { "<cmd>lua require('lir.float').toggle()<cr>", "Files" }
-lvim.builtin.which_key.mappings["P"] = {
-  "<cmd>lua require'telescope'.extensions.project.project{}<CR>",
-  "Projects",
-}
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   t = { "<cmd>TroubleToggle<cr>", "Diagnostics" },
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnosticss" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnosticss" },
--- }
+lvim.builtin.which_key.mappings.s.P = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings.s.T = { "<cmd>TodoTelescope<CR>", "Projects" }
 
-lvim.builtin.nvimtree.auto_open = 0
--- vim.g.nvim_tree_disable_netrw = 0
--- vim.g.nvim_tree_hijack_netrw = 0
+lvim.builtin.which_key.mappings["x"] = {
+  name = "+Trouble",
+  x = { "<cmd>TroubleToggle<cr>", "Diagnostics" },
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnosticss" },
+  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnosticss" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+}
+
+lvim.builtin.which_key.mappings["k"] = {
+  name = "+Kit",
+  t = { "<cmd>TodoQuickFix<cr>", "Todo" },
+}
 
 -- Treesitter
 lvim.builtin.treesitter.ensure_installed = "maintained"
@@ -90,6 +89,7 @@ end
 -- Additional Plugins
 lvim.plugins = {
   { "lunarvim/colorschemes" },
+  { "lunarvim/onedarker" },
   { "folke/tokyonight.nvim" },
   { "mfussenegger/nvim-jdtls" },
   -- {
@@ -147,11 +147,11 @@ lvim.plugins = {
     config = function()
       require("user.hop").config()
     end,
+    disable = true,
   },
   {
     "ggandor/lightspeed.nvim",
     event = "BufRead",
-    disable = true,
   },
   {
     "mattn/vim-gist",
@@ -191,13 +191,13 @@ lvim.plugins = {
       require("user.colorizer").config()
     end,
   },
-  {
-    "nvim-telescope/telescope-project.nvim",
-    event = "BufWinEnter",
-    setup = function()
-      vim.cmd [[packadd telescope.nvim]]
-    end,
-  },
+  -- {
+  --   "nvim-telescope/telescope-project.nvim",
+  --   event = "BufWinEnter",
+  --   setup = function()
+  --     vim.cmd [[packadd telescope.nvim]]
+  --   end,
+  -- },
   {
     "windwp/nvim-spectre",
     event = "BufRead",
@@ -231,6 +231,13 @@ lvim.plugins = {
       require("user.notify").config()
     end,
   },
+  {
+    "simrat39/symbols-outline.nvim",
+    -- cmd = "SymbolsOutline",
+    config = function()
+      require("user.outline").config()
+    end,
+  },
   -- TODO: maybe oneday
   -- { "gelguy/wilder.nvim",
   --   config = function ()
@@ -246,10 +253,6 @@ lvim.plugins = {
   -- },
   {
     "dccsillag/magma-nvim",
-  },
-  {
-    "simrat39/symbols-outline.nvim",
-    cmd = "SymbolsOutline",
   },
   {
     "metakirby5/codi.vim",
@@ -279,6 +282,19 @@ lvim.plugins = {
   {
     "sindrets/diffview.nvim",
     event = "BufRead",
+  },
+  {
+    "folke/todo-comments.nvim",
+    cmd = { "TodoQuickFix", "TodoTelescope" },
+    config = function()
+      require("todo-comments").setup {}
+    end,
+  },
+  {
+    { "tpope/vim-surround" },
+    { "tpope/vim-repeat" },
+    { "tpope/vim-scriptease" },
+    { "tpope/vim-fugitive" },
   },
 }
 
