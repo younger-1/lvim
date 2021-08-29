@@ -291,10 +291,45 @@ lvim.plugins = {
     end,
   },
   {
+    -- vim plugins
     { "tpope/vim-surround" },
     { "tpope/vim-repeat" },
     { "tpope/vim-scriptease" },
     { "tpope/vim-fugitive" },
+    { "wakatime/vim-wakatime" },
+    { "mbbill/undotree", cmd = "UndotreeToggle" },
+    {
+      "bkad/CamelCaseMotion",
+      config = function()
+        require "user.camelcase"
+      end,
+    },
+    {
+      "mg979/vim-visual-multi",
+      config = function()
+        require "user.multi-cursor"
+      end,
+    },
+    {
+      "haya14busa/vim-asterisk",
+      config = function()
+        require "user.asterisk"
+      end,
+    },
+    {
+      "junegunn/vim-easy-align",
+      config = function()
+        require "user.easy-align"
+      end,
+    },
+  },
+  {
+    -- vim colorschemes
+    "sainnhe/sonokai",
+    "sainnhe/edge",
+    "sainnhe/everforest",
+    "sainnhe/gruvbox-material",
+    "NLKNguyen/papercolor-theme",
   },
 }
 
