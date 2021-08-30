@@ -46,6 +46,7 @@ vim.opt.wrap = false
 -- lvim.log.level = "warn"
 lvim.debug = false
 vim.opt.clipboard = ""
+vim.opt.inccommand = "split"
 
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
@@ -66,6 +67,8 @@ inoremap <C-V> <C-G>u<C-R><C-O>+
 onoremap H ^
 onoremap L $
 cnoremap <C-a> <HOME>
+inoremap <C-U> <C-G>u<C-U>
+inoremap <C-W> <C-G>u<C-W>
 
 " Open in VSCode from Vim
 command! OpenInVSCode exe '!code --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
@@ -119,12 +122,14 @@ lvim.builtin.which_key.mappings.s.T = { "<cmd>TodoTelescope<CR>", "Projects" }
 
 lvim.builtin.which_key.mappings["x"] = {
   name = "+Trouble",
-  x = { "<cmd>TroubleToggle<cr>", "Diagnostics" },
-  r = { "<cmd>Trouble lsp_references<cr>", "References" },
-  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnosticss" },
-  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnosticss" },
-  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  x = { "<cmd>TroubleToggle<cr>", "Open" },
+  r = { "<cmd>Trouble lsp_references<cr>", "Ref" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Def" },
+  i = { "<cmd>Trouble lsp_implementations<cr>", "Impl" },
+  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnos" },
+  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnos[workspace]" },
+  j = { "<cmd>Trouble telescope<cr>", "LocationList" },
+  k = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
 }
 
@@ -359,6 +364,16 @@ lvim.plugins = {
     end,
   },
   {
+    "romgrk/nvim-treesitter-context",
+    cmd = "TSContextToggle",
+    config = function()
+      require("treesitter-context").setup {
+        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        throttle = true, -- Throttles plugin updates (may improve performance)
+      }
+    end,
+  },
+  {
     -- vim plugins
     { "tpope/vim-surround" },
     { "tpope/vim-repeat" },
@@ -399,6 +414,8 @@ lvim.plugins = {
     "sainnhe/everforest",
     "sainnhe/gruvbox-material",
     "NLKNguyen/papercolor-theme",
+    "bluz71/vim-moonfly-colors",
+    "bluz71/vim-nightfly-guicolors",
   },
 }
 
