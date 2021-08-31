@@ -61,6 +61,11 @@ lvim.keys.visual_mode["p"] = [["_dP]]
 lvim.keys.visual_mode["Y"] = [["+y]]
 
 vim.cmd [[
+" 朝闻道，金、木、水、火、土；【真香定律（王境泽）】；《静夜诗（李白）》。
+" 唐僧问道：‘泼猴，若我救你出来，你该如何报答我？’ 悟空：“你若放我出来，我定会送你上西天！”
+set matchpairs+=【:】,（:）,《:》,‘:’,“:”,；:。,，:。
+set listchars=eol:↲,space:·,trail:~,tab:>-,extends:>,precedes:<,nbsp:+
+
 noremap ,p "+p
 cnoremap <C-V> <C-R>+
 inoremap <C-V> <C-G>u<C-R><C-O>+
