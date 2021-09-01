@@ -452,6 +452,12 @@ lvim.plugins = {
     "bluz71/vim-nightfly-guicolors",
     -- lua colorscheme
     {
+      "Pocco81/Catppuccino.nvim",
+      config = function()
+        require "theme.catppuccino"
+      end,
+    },
+    {
       "shaunsingh/nord.nvim",
       setup = function()
         vim.g.nord_borders = true
