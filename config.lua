@@ -1,3 +1,10 @@
+--  ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗
+--  ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║
+--  ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║
+--  ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║
+--  ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║
+--  ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝
+
 ---[[--------------------------------------------]]---
 --      config.lua - Configuration for LunarVim     --
 --             Author: Younger-1@github             --
@@ -399,6 +406,7 @@ lvim.plugins = {
     { "tpope/vim-scriptease" },
     { "tpope/vim-fugitive" },
     { "wakatime/vim-wakatime" },
+    { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" } },
     -- { "gelguy/wilder.nvim", run = ":UpdateRemotePlugins", event = "CmdlineEnter", config = require "user.wilder" },
     { "mbbill/undotree", cmd = "UndotreeToggle" },
     {
@@ -425,6 +433,13 @@ lvim.plugins = {
         require "user.easy-align"
       end,
     },
+    {
+      "kamykn/spelunker.vim",
+      event = "BufRead",
+      config = function()
+        vim.g.enable_spelunker_vim = 0
+      end,
+    },
   },
   {
     -- vim colorschemes
@@ -435,6 +450,13 @@ lvim.plugins = {
     "NLKNguyen/papercolor-theme",
     "bluz71/vim-moonfly-colors",
     "bluz71/vim-nightfly-guicolors",
+    -- lua colorscheme
+    {
+      "shaunsingh/nord.nvim",
+      setup = function()
+        vim.g.nord_borders = true
+      end,
+    },
   },
 }
 
