@@ -64,8 +64,9 @@ lvim.leader = "space"
 
 lvim.keys.normal_mode["<esc><esc>"] = "<cmd>nohlsearch<cr>"
 lvim.keys.normal_mode["Y"] = "y$"
-lvim.keys.visual_mode["p"] = [["_dP]]
 lvim.keys.visual_mode["Y"] = [["+y]]
+lvim.keys.visual_mode["x"] = [["_x]]
+lvim.keys.visual_mode["X"] = [["+x]]
 
 vim.cmd [[
 " 朝闻道，金、木、水、火、土；【真香定律（王境泽）】；《静夜诗（李白）》。
@@ -73,7 +74,6 @@ vim.cmd [[
 set matchpairs+=【:】,（:）,《:》,‘:’,“:”,；:。,，:。
 set listchars=eol:↲,trail:~,tab:>-,extends:>,precedes:<,nbsp:+
 
-noremap ,p "+p
 cnoremap <C-V> <C-R>+
 inoremap <C-V> <C-G>u<C-R><C-O>+
 onoremap H ^
