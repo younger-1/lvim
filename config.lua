@@ -65,7 +65,7 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<esc><esc>"] = "<cmd>nohlsearch<cr>"
 lvim.keys.normal_mode["Y"] = "y$"
 lvim.keys.visual_mode["Y"] = [["+y]]
-lvim.keys.visual_mode["x"] = [["_x]]
+lvim.keys.visual_mode["d"] = [["_d]]
 lvim.keys.visual_mode["X"] = [["+x]]
 
 vim.cmd [[
@@ -119,6 +119,8 @@ lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.dap.active = true
 lvim.builtin.bufferline.active = true
+lvim.builtin.gitsigns.opts.numhl = true
+lvim.builtin.gitsigns.opts.keymaps["x ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
 -- lvim.builtin.lualine.options.theme = "tokyonight"
 -- lvim.builtin.tabnine = { active = true } -- only use for solidity and other langs that I don't have a langserver for
 -- if lvim.builtin.tabnine.active then
@@ -126,6 +128,10 @@ lvim.builtin.bufferline.active = true
 -- end
 
 -- Whichkey
+lvim.builtin.which_key.mappings.g['"'] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blames" }
+lvim.builtin.which_key.mappings.g["'"] = { "<cmd>Gitsigns toggle_linehl<cr>", "Highlight" }
+lvim.builtin.which_key.mappings.g.q = { "<cmd>Gitsigns setqflist<cr>", "Quickfix" }
+lvim.builtin.which_key.mappings.g.S = { "<cmd>Gitsigns stage_buffer<cr>", "Quickfix" }
 lvim.builtin.which_key.mappings.l.d = { "<cmd>TroubleToggle<cr>", "Diagnostics" }
 lvim.builtin.which_key.mappings.l.R = { "<cmd>TroubleToggle lsp_references<cr>", "References" }
 lvim.builtin.which_key.mappings.l.o = { "<cmd>SymbolsOutline<cr>", "Outline" }
