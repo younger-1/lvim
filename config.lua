@@ -71,7 +71,7 @@ vim.cmd [[
 " 朝闻道，金、木、水、火、土；【真香定律（王境泽）】；《静夜诗（李白）》。
 " 唐僧问道：‘泼猴，若我救你出来，你该如何报答我？’ 悟空：“你若放我出来，我定会送你上西天！”
 set matchpairs+=【:】,（:）,《:》,‘:’,“:”,；:。,，:。
-set listchars=eol:↲,space:·,trail:~,tab:>-,extends:>,precedes:<,nbsp:+
+set listchars=eol:↲,trail:~,tab:>-,extends:>,precedes:<,nbsp:+
 
 noremap ,p "+p
 cnoremap <C-V> <C-R>+
@@ -114,6 +114,7 @@ lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.dap.active = true
 lvim.builtin.bufferline.active = true
+-- lvim.builtin.lualine.options.theme = "tokyonight"
 
 -- Whichkey
 lvim.builtin.which_key.mappings.l.d = { "<cmd>TroubleToggle<cr>", "Diagnostics" }
@@ -174,7 +175,13 @@ end
 lvim.plugins = {
   { "lunarvim/colorschemes" },
   { "lunarvim/onedarker" },
-  { "folke/tokyonight.nvim" },
+  {
+    "folke/tokyonight.nvim",
+    config = function()
+      vim.g.tokyonight_style = "day" -- storm, night, day
+      -- lvim.builtin.lualine.options.theme = "tokyonight"
+    end,
+  },
   { "mfussenegger/nvim-jdtls" },
   -- {
   --   "abecodes/tabout.nvim",
@@ -459,10 +466,11 @@ lvim.plugins = {
     },
     {
       "shaunsingh/nord.nvim",
-      setup = function()
+      config = function()
         vim.g.nord_borders = true
       end,
     },
+    { "tanvirtin/monokai.nvim" },
   },
 }
 
