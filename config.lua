@@ -224,9 +224,11 @@ lvim.plugins = {
   },
   {
     "unblevable/quick-scope",
+    event = "BufRead",
     config = function()
       require "user.quickscope"
     end,
+    disable = true,
   },
   {
     "kevinhwang91/rnvimr",
@@ -259,6 +261,9 @@ lvim.plugins = {
   {
     "ggandor/lightspeed.nvim",
     event = "BufRead",
+    config = function()
+      require "user.lightspeed"
+    end,
   },
   {
     "mattn/vim-gist",
@@ -421,6 +426,7 @@ lvim.plugins = {
     config = function()
       require "user.neorg"
     end,
+    disabled = true,
   },
   {
     "kristijanhusak/orgmode.nvim",
@@ -428,6 +434,7 @@ lvim.plugins = {
     config = function()
       require("orgmode").setup {}
     end,
+    disabled = true,
   },
   {
     -- vim plugins
@@ -439,6 +446,12 @@ lvim.plugins = {
     { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" } },
     -- { "gelguy/wilder.nvim", run = ":UpdateRemotePlugins", event = "CmdlineEnter", config = require "user.wilder" },
     { "mbbill/undotree", cmd = "UndotreeToggle" },
+    {
+      "sheerun/vim-polyglot",
+      setup = function()
+        vim.g.polyglot_disabled = { "sensible" }
+      end,
+    },
     {
       "bkad/CamelCaseMotion",
       config = function()
