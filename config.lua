@@ -449,7 +449,7 @@ lvim.plugins = {
     {
       "sheerun/vim-polyglot",
       setup = function()
-        vim.g.polyglot_disabled = { "sensible" }
+        -- vim.g.polyglot_disabled = { "markdown" }
       end,
     },
     {
@@ -517,7 +517,7 @@ lvim.autocommands.custom_groups = {
   -- { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
   -- Return to last edit position when opening files (You want this!)
   {
-    "BufReadPost",
+    "BufWinEnter",
     "*",
     [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
   },
