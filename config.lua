@@ -56,7 +56,6 @@ lvim.debug = false
 vim.opt.clipboard = ""
 vim.opt.inccommand = "split"
 
-
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 
@@ -217,7 +216,7 @@ lvim.plugins = {
       require("user.tabout").config()
     end,
     wants = { "nvim-treesitter" }, -- or require if not used so far
-    after = { "nvim-compe", "vim-vsnip" }, -- if a completion plugin is using tabs load it before
+    after = { "nvim-cmp" }, -- if a completion plugin is using tabs load it before
   },
   {
     "pwntester/octo.nvim",
