@@ -45,6 +45,7 @@ use {
 }
 --]]
 
+require "theme.dash-pic"
 -- general
 lvim.format_on_save = true
 lvim.colorscheme = "onedarker"
