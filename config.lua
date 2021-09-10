@@ -183,6 +183,7 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.autotag.enable = true
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.treesitter.playground.enable = true
+lvim.builtin.treesitter.rainbow.enable = true
 
 -- Telescope
 lvim.builtin.telescope.on_config_done = function()
@@ -465,6 +466,9 @@ lvim.plugins = {
     disabled = true,
   },
   {
+    "p00f/nvim-ts-rainbow",
+  },
+  {
     -- vim plugins
     { "tpope/vim-surround" },
     { "tpope/vim-repeat" },
@@ -477,7 +481,7 @@ lvim.plugins = {
     {
       "sheerun/vim-polyglot",
       setup = function()
-        -- vim.g.polyglot_disabled = { "markdown" }
+        vim.g.polyglot_disabled = { "markdown" }
       end,
     },
     {
