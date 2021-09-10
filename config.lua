@@ -175,6 +175,7 @@ lvim.builtin.which_key.mappings["x"] = {
 lvim.builtin.which_key.mappings["k"] = {
   name = "+Kit",
   t = { "<cmd>TodoQuickFix<cr>", "Todo" },
+  m = { "<cmd>MinimapToggle<cr>", "Minimap" },
 }
 
 -- Treesitter
@@ -467,6 +468,16 @@ lvim.plugins = {
   },
   {
     "p00f/nvim-ts-rainbow",
+  },
+  {
+    "wfxr/minimap.vim",
+    run = "cargo install --locked code-minimap",
+    cmd = { "MinimapToggle" },
+    config = function()
+      vim.cmd "let g:minimap_width = 10"
+      vim.cmd "let g:minimap_auto_start = 1"
+      vim.cmd "let g:minimap_auto_start_win_enter = 1"
+    end,
   },
   {
     -- vim plugins
