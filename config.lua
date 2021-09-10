@@ -63,7 +63,7 @@ vim.opt.inccommand = "split"
 -- view all the defaults by pressing <leader>Lk
 lvim.leader = "space"
 
-lvim.keys.normal_mode["<esc><esc>"] = "<cmd>nohlsearch<cr>"
+lvim.keys.normal_mode["z<C-l>"] = "<cmd>nohlsearch<cr>"
 lvim.keys.normal_mode["Y"] = "y$"
 lvim.keys.visual_mode["Y"] = [["+y]]
 lvim.keys.visual_mode["d"] = [["_d]]
@@ -475,8 +475,9 @@ lvim.plugins = {
     cmd = { "MinimapToggle" },
     config = function()
       vim.cmd "let g:minimap_width = 10"
-      vim.cmd "let g:minimap_auto_start = 1"
-      vim.cmd "let g:minimap_auto_start_win_enter = 1"
+      vim.cmd "let g:minimap_close_filetypes = ['startify', 'netrw', 'vim-plug', 'dashboard']"
+      vim.cmd "let g:minimap_git_colors = 1"
+      vim.cmd "let g:minimap_highlight_search = 1"
     end,
   },
   {
@@ -486,6 +487,7 @@ lvim.plugins = {
     { "tpope/vim-scriptease" },
     { "tpope/vim-fugitive" },
     { "wakatime/vim-wakatime" },
+    { "dhruvasagar/vim-zoom" },
     { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" } },
     -- { "gelguy/wilder.nvim", run = ":UpdateRemotePlugins", event = "CmdlineEnter", config = require "user.wilder" },
     { "mbbill/undotree", cmd = "UndotreeToggle" },
@@ -497,6 +499,7 @@ lvim.plugins = {
     },
     {
       "bkad/CamelCaseMotion",
+      -- TODO: c,w
       config = function()
         require "user.camelcase"
       end,
