@@ -48,11 +48,11 @@ use {
 require "theme.dash-pic"
 -- general
 lvim.format_on_save = true
-lvim.colorscheme = "onedarker"
 lvim.transparent_window = false
-vim.opt.wrap = false
+-- lvim.colorscheme = "onedarker"
 -- lvim.log.level = "warn"
 lvim.debug = false
+vim.opt.wrap = false
 vim.opt.clipboard = ""
 vim.opt.inccommand = "split"
 
@@ -202,15 +202,6 @@ end
 
 -- Additional Plugins
 lvim.plugins = {
-  { "lunarvim/colorschemes" },
-  { "lunarvim/onedarker" },
-  {
-    "folke/tokyonight.nvim",
-    config = function()
-      vim.g.tokyonight_style = "day" -- storm, night, day
-      -- lvim.builtin.lualine.options.theme = "tokyonight"
-    end,
-  },
   { "mfussenegger/nvim-jdtls" },
   -- { "ChristianChiarulli/vim-solidity" },
   {
@@ -273,13 +264,6 @@ lvim.plugins = {
     disable = true,
   },
   {
-    "ggandor/lightspeed.nvim",
-    event = "BufRead",
-    config = function()
-      require "user.lightspeed"
-    end,
-  },
-  {
     -- Note for this to work you need to create a pat and put it in `~/.gist-vim` as <token XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX>
     -- You will also need to set github username like:
     --
@@ -298,13 +282,6 @@ lvim.plugins = {
     "tamago324/lir.nvim",
     config = function()
       require "user.lir"
-    end,
-  },
-  {
-    "andymass/vim-matchup",
-    event = "CursorMoved",
-    config = function()
-      require "user.matchup"
     end,
   },
   {
@@ -435,48 +412,64 @@ lvim.plugins = {
     event = "BufRead",
   },
   {
-    "folke/todo-comments.nvim",
-    cmd = { "TodoQuickFix", "TodoTelescope" },
-    config = function()
-      require("todo-comments").setup {}
-    end,
-  },
-  {
-    "romgrk/nvim-treesitter-context",
-    cmd = "TSContextToggle",
-    config = function()
-      require("treesitter-context").setup {
-        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-        throttle = true, -- Throttles plugin updates (may improve performance)
-      }
-    end,
-  },
-  {
-    "vhyrro/neorg",
-    ft = "norg",
-    config = function()
-      require "user.neorg"
-    end,
-    disabled = true,
-  },
-  {
-    "kristijanhusak/orgmode.nvim",
-    ft = { "org" },
-    config = function()
-      require("orgmode").setup {}
-    end,
-    disabled = true,
-  },
-  {
-    "p00f/nvim-ts-rainbow",
-  },
-  {
-    "beauwilliams/focus.nvim",
-    cmd = "FocusToggle",
-    config = function()
-      local focus = require "focus"
-      focus.hybridnumber = true
-    end,
+    {
+      "andymass/vim-matchup",
+      event = "CursorMoved",
+      config = function()
+        require "user.matchup"
+      end,
+    },
+    {
+      "ggandor/lightspeed.nvim",
+      event = "BufRead",
+      config = function()
+        require "user.lightspeed"
+      end,
+    },
+    {
+      "folke/todo-comments.nvim",
+      cmd = { "TodoQuickFix", "TodoTelescope" },
+      config = function()
+        require("todo-comments").setup {}
+      end,
+    },
+    {
+      "romgrk/nvim-treesitter-context",
+      cmd = "TSContextToggle",
+      config = function()
+        require("treesitter-context").setup {
+          enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+          throttle = true, -- Throttles plugin updates (may improve performance)
+        }
+      end,
+    },
+    {
+      "vhyrro/neorg",
+      ft = "norg",
+      config = function()
+        require "user.neorg"
+      end,
+      disabled = true,
+    },
+    {
+      "kristijanhusak/orgmode.nvim",
+      ft = { "org" },
+      config = function()
+        require("orgmode").setup {}
+      end,
+      disabled = true,
+    },
+    {
+      "p00f/nvim-ts-rainbow",
+    },
+    {
+      "beauwilliams/focus.nvim",
+      cmd = "FocusToggle",
+      config = function()
+        local focus = require "focus"
+        focus.hybridnumber = true
+      end,
+    },
   },
   {
     -- vim plugins
@@ -485,7 +478,7 @@ lvim.plugins = {
     { "tpope/vim-scriptease" },
     { "tpope/vim-fugitive" },
     { "wakatime/vim-wakatime" },
-    { "dhruvasagar/vim-zoom" },
+    { "dhruvasagar/vim-zoom", keys = "<C-w>m" },
     { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" } },
     -- { "gelguy/wilder.nvim", run = ":UpdateRemotePlugins", event = "CmdlineEnter", config = require "user.wilder" },
     { "mbbill/undotree", cmd = "UndotreeToggle" },
@@ -549,6 +542,14 @@ lvim.plugins = {
     "bluz71/vim-moonfly-colors",
     "bluz71/vim-nightfly-guicolors",
     -- lua colorscheme
+    { "lunarvim/colorschemes" },
+    {
+      "folke/tokyonight.nvim",
+      config = function()
+        vim.g.tokyonight_style = "day" -- storm, night, day
+        -- lvim.builtin.lualine.options.theme = "tokyonight"
+      end,
+    },
     {
       "Pocco81/Catppuccino.nvim",
       config = function()
