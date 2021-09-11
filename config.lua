@@ -125,7 +125,7 @@ lvim.builtin.gitsigns.opts.keymaps["x ih"] = ':<C-U>lua require"gitsigns.actions
 -- lvim.builtin.lualine.options.theme = "tokyonight"
 -- lvim.builtin.tabnine = { active = true } -- only use for solidity and other langs that I don't have a langserver for
 -- if lvim.builtin.tabnine.active then
---   lvim.builtin.compe.source.tabnine = { kind = " ", priority = 150, max_reslts = 6 }
+--   lvim.builtin.compe.source.tabnine = { kind = " ﮧ ", priority = 150, max_reslts = 6 }
 -- end
 
 -- Whichkey
@@ -219,7 +219,7 @@ lvim.plugins = {
       require("user.tabout").config()
     end,
     wants = { "nvim-treesitter" }, -- or require if not used so far
-    after = { "nvim-cmp" }, -- if a completion plugin is using tabs load it before
+    after = { "nvim-cmp", "LuaSnip" }, -- if a completion plugin is using tabs load it before
   },
   {
     "pwntester/octo.nvim",
