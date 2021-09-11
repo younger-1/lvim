@@ -176,6 +176,7 @@ lvim.builtin.which_key.mappings["k"] = {
   name = "+Kit",
   t = { "<cmd>TodoQuickFix<cr>", "Todo" },
   m = { "<cmd>MinimapToggle<cr>", "Minimap" },
+  z = { "<cmd>FocusToggle<cr>", "AutoZoom" },
 }
 
 -- Treesitter
@@ -470,14 +471,11 @@ lvim.plugins = {
     "p00f/nvim-ts-rainbow",
   },
   {
-    "wfxr/minimap.vim",
-    run = "cargo install --locked code-minimap",
-    cmd = { "MinimapToggle" },
+    "beauwilliams/focus.nvim",
+    cmd = "FocusToggle",
     config = function()
-      vim.cmd "let g:minimap_width = 10"
-      vim.cmd "let g:minimap_close_filetypes = ['startify', 'netrw', 'vim-plug', 'dashboard']"
-      vim.cmd "let g:minimap_git_colors = 1"
-      vim.cmd "let g:minimap_highlight_search = 1"
+      local focus = require "focus"
+      focus.hybridnumber = true
     end,
   },
   {
@@ -527,6 +525,17 @@ lvim.plugins = {
       event = "BufRead",
       config = function()
         vim.g.enable_spelunker_vim = 0
+      end,
+    },
+    {
+      "wfxr/minimap.vim",
+      run = "cargo install --locked code-minimap",
+      cmd = { "MinimapToggle" },
+      config = function()
+        vim.cmd "let g:minimap_width = 10"
+        vim.cmd "let g:minimap_close_filetypes = ['startify', 'netrw', 'vim-plug', 'dashboard']"
+        vim.cmd "let g:minimap_git_colors = 1"
+        vim.cmd "let g:minimap_highlight_search = 1"
       end,
     },
   },
