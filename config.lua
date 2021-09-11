@@ -416,12 +416,41 @@ lvim.plugins = {
     event = "BufRead",
   },
   -- younger
+  -- { "gelguy/wilder.nvim", run = ":UpdateRemotePlugins", event = "CmdlineEnter", config = require "user.wilder" },
   {
+    "romgrk/nvim-treesitter-context",
+    cmd = "TSContextToggle",
+    config = function()
+      require("treesitter-context").setup {
+        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        throttle = true, -- Throttles plugin updates (may improve performance)
+      }
+    end,
+  },
+  -- [Appearance]
+  { "p00f/nvim-ts-rainbow" },
+  -- [Text Object]
+  -- {},
+  -- [Motion]
+  {
+    {
+      "bkad/CamelCaseMotion",
+      -- TODO: c,w
+      config = function()
+        require "user.camelcase"
+      end,
+    },
     {
       "andymass/vim-matchup",
       event = "CursorMoved",
       config = function()
         require "user.matchup"
+      end,
+    },
+    {
+      "haya14busa/vim-asterisk",
+      config = function()
+        require "user.asterisk"
       end,
     },
     {
@@ -431,23 +460,71 @@ lvim.plugins = {
         require "user.lightspeed"
       end,
     },
+  },
+  -- [Change]
+  {
+    { "tpope/vim-surround" },
+    { "tpope/vim-repeat" },
+    { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" } },
     {
-      "folke/todo-comments.nvim",
-      cmd = { "TodoQuickFix", "TodoTelescope" },
+      "mg979/vim-visual-multi",
       config = function()
-        require("todo-comments").setup {}
+        require "user.multi-cursor"
       end,
     },
     {
-      "romgrk/nvim-treesitter-context",
-      cmd = "TSContextToggle",
+      "junegunn/vim-easy-align",
       config = function()
-        require("treesitter-context").setup {
-          enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-          throttle = true, -- Throttles plugin updates (may improve performance)
-        }
+        require "user.easy-align"
       end,
     },
+  },
+  -- [Vim Helper]
+  { "tpope/vim-scriptease" },
+  -- [Buffer | Window | Tab]
+  {
+    {
+      "beauwilliams/focus.nvim",
+      cmd = "FocusToggle",
+      config = function()
+        local focus = require "focus"
+        focus.hybridnumber = true
+      end,
+    },
+    { "dhruvasagar/vim-zoom", keys = "<C-w>m" },
+  },
+  -- [Files]
+  -- {},
+  -- [Find]
+  -- {},
+  -- [Terminal]
+  -- {},
+  -- [UI]
+  {
+    {
+      "liuchengxu/vista.vim",
+      cmd = "Vista",
+      config = function()
+        vim.g.vista_icon_indent = { "╰─▸ ", "├─▸ " }
+      end,
+    },
+    { "mbbill/undotree", cmd = "UndotreeToggle" },
+    {
+      "wfxr/minimap.vim",
+      run = "cargo install --locked code-minimap",
+      cmd = { "MinimapToggle" },
+      config = function()
+        vim.cmd "let g:minimap_width = 10"
+        vim.cmd "let g:minimap_close_filetypes = ['startify', 'netrw', 'vim-plug', 'dashboard']"
+        vim.cmd "let g:minimap_git_colors = 1"
+        vim.cmd "let g:minimap_highlight_search = 1"
+      end,
+    },
+  },
+  -- [Git]
+  { "tpope/vim-fugitive" },
+  -- [Write]
+  {
     {
       "vhyrro/neorg",
       ft = "norg",
@@ -465,84 +542,33 @@ lvim.plugins = {
       disabled = true,
     },
     {
-      "p00f/nvim-ts-rainbow",
-    },
-    {
-      "beauwilliams/focus.nvim",
-      cmd = "FocusToggle",
+      "folke/todo-comments.nvim",
+      cmd = { "TodoQuickFix", "TodoTelescope" },
       config = function()
-        local focus = require "focus"
-        focus.hybridnumber = true
-      end,
-    },
-    {
-      "liuchengxu/vista.vim",
-      cmd = "Vista",
-      config = function()
-        vim.g.vista_icon_indent = { "╰─▸ ", "├─▸ " }
+        require("todo-comments").setup {}
       end,
     },
   },
+  -- [Tools]
+  -- {},
+  -- [Web]
+  { "wakatime/vim-wakatime" },
+  -- [LSP]
+  -- {},
+  -- [Spell]
   {
-    -- vim plugins
-    { "tpope/vim-surround" },
-    { "tpope/vim-repeat" },
-    { "tpope/vim-scriptease" },
-    { "tpope/vim-fugitive" },
-    { "wakatime/vim-wakatime" },
-    { "dhruvasagar/vim-zoom", keys = "<C-w>m" },
-    { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" } },
-    -- { "gelguy/wilder.nvim", run = ":UpdateRemotePlugins", event = "CmdlineEnter", config = require "user.wilder" },
-    { "mbbill/undotree", cmd = "UndotreeToggle" },
-    {
-      "sheerun/vim-polyglot",
-      setup = function()
-        vim.g.polyglot_disabled = { "markdown" }
-      end,
-    },
-    {
-      "bkad/CamelCaseMotion",
-      -- TODO: c,w
-      config = function()
-        require "user.camelcase"
-      end,
-    },
-    {
-      "mg979/vim-visual-multi",
-      config = function()
-        require "user.multi-cursor"
-      end,
-    },
-    {
-      "haya14busa/vim-asterisk",
-      config = function()
-        require "user.asterisk"
-      end,
-    },
-    {
-      "junegunn/vim-easy-align",
-      config = function()
-        require "user.easy-align"
-      end,
-    },
-    {
-      "kamykn/spelunker.vim",
-      event = "BufRead",
-      config = function()
-        vim.g.enable_spelunker_vim = 0
-      end,
-    },
-    {
-      "wfxr/minimap.vim",
-      run = "cargo install --locked code-minimap",
-      cmd = { "MinimapToggle" },
-      config = function()
-        vim.cmd "let g:minimap_width = 10"
-        vim.cmd "let g:minimap_close_filetypes = ['startify', 'netrw', 'vim-plug', 'dashboard']"
-        vim.cmd "let g:minimap_git_colors = 1"
-        vim.cmd "let g:minimap_highlight_search = 1"
-      end,
-    },
+    "kamykn/spelunker.vim",
+    event = "BufRead",
+    config = function()
+      vim.g.enable_spelunker_vim = 0
+    end,
+  },
+  -- [Languages]
+  {
+    "sheerun/vim-polyglot",
+    setup = function()
+      vim.g.polyglot_disabled = { "markdown" }
+    end,
   },
   {
     -- vim colorschemes
