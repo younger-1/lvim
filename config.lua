@@ -209,14 +209,6 @@ lvim.plugins = {
   { "mfussenegger/nvim-jdtls" },
   -- { "ChristianChiarulli/vim-solidity" },
   {
-    "abecodes/tabout.nvim",
-    config = function()
-      require("user.tabout").config()
-    end,
-    wants = { "nvim-treesitter" }, -- or require if not used so far
-    after = { "nvim-cmp", "LuaSnip" }, -- if a completion plugin is using tabs load it before
-  },
-  {
     "pwntester/octo.nvim",
     event = "BufRead",
     config = function()
@@ -225,47 +217,11 @@ lvim.plugins = {
     disable = true,
   },
   {
-    "ray-x/lsp_signature.nvim",
-    event = "InsertEnter",
-    config = function()
-      require("user.lsp_signature").config()
-    end,
-  },
-  {
-    "unblevable/quick-scope",
-    event = "BufRead",
-    config = function()
-      require "user.quickscope"
-    end,
-    disable = true,
-  },
-  {
-    "kevinhwang91/rnvimr",
-    config = function()
-      require "user.rnvimr"
-    end,
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    -- event = "BufReadPre",
-    config = function()
-      require "user.blankline"
-    end,
-  },
-  {
     "ruifm/gitlinker.nvim",
     event = "BufRead",
     config = function()
       require("user.gitlinker").config()
     end,
-  },
-  {
-    "phaazon/hop.nvim",
-    event = "BufRead",
-    config = function()
-      require("user.hop").config()
-    end,
-    disable = true,
   },
   {
     -- Note for this to work you need to create a pat and put it in `~/.gist-vim` as <token XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX>
@@ -282,32 +238,6 @@ lvim.plugins = {
       vim.g.gist_open_browser_after_post = 1
     end,
   },
-  {
-    "tamago324/lir.nvim",
-    config = function()
-      require "user.lir"
-    end,
-  },
-  {
-    "nacro90/numb.nvim",
-    event = "BufRead",
-    config = function()
-      require("user.numb").config()
-    end,
-  },
-  {
-    "monaqa/dial.nvim",
-    event = "BufRead",
-    config = function()
-      require("user.dial").config()
-    end,
-  },
-  {
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("user.colorizer").config()
-    end,
-  },
   -- {
   --   "nvim-telescope/telescope-project.nvim",
   --   event = "BufWinEnter",
@@ -320,12 +250,6 @@ lvim.plugins = {
     event = "BufRead",
     config = function()
       require("user.spectre").config()
-    end,
-  },
-  {
-    "folke/zen-mode.nvim",
-    config = function()
-      require("user.zen").config()
     end,
   },
   {
@@ -346,13 +270,6 @@ lvim.plugins = {
     event = "BufRead",
     config = function()
       require("user.notify").config()
-    end,
-  },
-  {
-    "simrat39/symbols-outline.nvim",
-    -- cmd = "SymbolsOutline",
-    config = function()
-      require("user.outline").config()
     end,
   },
   -- TODO: maybe oneday
@@ -428,11 +345,42 @@ lvim.plugins = {
     end,
   },
   -- [Appearance]
-  { "p00f/nvim-ts-rainbow" },
+  {
+    {
+      "lukas-reineke/indent-blankline.nvim",
+      -- event = "BufReadPre",
+      config = function()
+        require "user.blankline"
+      end,
+    },
+    { "p00f/nvim-ts-rainbow" },
+    {
+      "norcalli/nvim-colorizer.lua",
+      config = function()
+        require("user.colorizer").config()
+      end,
+    },
+  },
   -- [Text Object]
   -- {},
   -- [Motion]
   {
+    {
+      "unblevable/quick-scope",
+      event = "BufRead",
+      config = function()
+        require "user.quickscope"
+      end,
+      disable = true,
+    },
+    {
+      "abecodes/tabout.nvim",
+      config = function()
+        require("user.tabout").config()
+      end,
+      wants = { "nvim-treesitter" }, -- or require if not used so far
+      after = { "nvim-cmp", "LuaSnip" }, -- if a completion plugin is using tabs load it before
+    },
     {
       "bkad/CamelCaseMotion",
       -- TODO: c,w
@@ -454,10 +402,25 @@ lvim.plugins = {
       end,
     },
     {
+      "phaazon/hop.nvim",
+      event = "BufRead",
+      config = function()
+        require("user.hop").config()
+      end,
+      disable = true,
+    },
+    {
       "ggandor/lightspeed.nvim",
       event = "BufRead",
       config = function()
         require "user.lightspeed"
+      end,
+    },
+    {
+      "nacro90/numb.nvim",
+      event = "BufRead",
+      config = function()
+        require("user.numb").config()
       end,
     },
   },
@@ -478,6 +441,13 @@ lvim.plugins = {
         require "user.easy-align"
       end,
     },
+    {
+      "monaqa/dial.nvim",
+      event = "BufRead",
+      config = function()
+        require("user.dial").config()
+      end,
+    },
   },
   -- [Vim Helper]
   { "tpope/vim-scriptease" },
@@ -494,7 +464,18 @@ lvim.plugins = {
     { "dhruvasagar/vim-zoom", keys = "<C-w>m" },
   },
   -- [Files]
-  -- {},
+  {
+    "kevinhwang91/rnvimr",
+    config = function()
+      require "user.rnvimr"
+    end,
+  },
+  {
+    "tamago324/lir.nvim",
+    config = function()
+      require "user.lir"
+    end,
+  },
   -- [Find]
   -- {},
   -- [Terminal]
@@ -508,10 +489,16 @@ lvim.plugins = {
         vim.g.vista_icon_indent = { "╰─▸ ", "├─▸ " }
       end,
     },
+    {
+      "simrat39/symbols-outline.nvim",
+      -- cmd = "SymbolsOutline",
+      config = function()
+        require("user.outline").config()
+      end,
+    },
     { "mbbill/undotree", cmd = "UndotreeToggle" },
     {
       "wfxr/minimap.vim",
-      run = "cargo install --locked code-minimap",
       cmd = { "MinimapToggle" },
       config = function()
         vim.cmd "let g:minimap_width = 10"
@@ -522,9 +509,15 @@ lvim.plugins = {
     },
   },
   -- [Git]
-  { "tpope/vim-fugitive" },
+  { "tpope/vim-fugitive", cmd = { "Git", "GBrowse" } },
   -- [Write]
   {
+    {
+      "folke/zen-mode.nvim",
+      config = function()
+        require("user.zen").config()
+      end,
+    },
     {
       "vhyrro/neorg",
       ft = "norg",
@@ -554,7 +547,13 @@ lvim.plugins = {
   -- [Web]
   { "wakatime/vim-wakatime" },
   -- [LSP]
-  -- {},
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "InsertEnter",
+    config = function()
+      require("user.lsp_signature").config()
+    end,
+  },
   -- [Spell]
   {
     "kamykn/spelunker.vim",
@@ -604,7 +603,6 @@ lvim.plugins = {
   },
 }
 
-vim.cmd [[ au CmdWinEnter * quit ]]
 -- TODO: q quits in spectr_panel ft
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 lvim.autocommands.custom_groups = {
