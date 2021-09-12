@@ -78,7 +78,10 @@ set listchars=space:·,eol:↲,trail:~,tab:>-,extends:>,precedes:<,nbsp:+
 cnoremap <C-V> <C-R>+
 inoremap <C-V> <C-G>u<C-R><C-O>+
 onoremap H ^
+vnoremap H ^
 onoremap L $
+vnoremap L $
+" g. z.
 cnoremap <C-a> <HOME>
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-W> <C-G>u<C-W>
@@ -163,7 +166,7 @@ lvim.builtin.which_key.mappings.f = { "<cmd>lua require('lir.float').toggle()<cr
 lvim.builtin.which_key.mappings.s.P = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings.s.T = { "<cmd>TodoTelescope<CR>", "Projects" }
 
-lvim.builtin.which_key.mappings["x"] = {
+lvim.builtin.which_key.mappings.x = {
   name = "+Trouble",
   x = { "<cmd>TroubleToggle<cr>", "Open" },
   r = { "<cmd>Trouble lsp_references<cr>", "Ref" },
@@ -176,7 +179,7 @@ lvim.builtin.which_key.mappings["x"] = {
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
 }
 
-lvim.builtin.which_key.mappings["k"] = {
+lvim.builtin.which_key.mappings.k = {
   name = "+Kit",
   t = { "<cmd>TodoQuickFix<cr>", "Todo" },
   m = { "<cmd>MinimapToggle<cr>", "Minimap" },
@@ -245,19 +248,6 @@ lvim.plugins = {
   --     vim.cmd [[packadd telescope.nvim]]
   --   end,
   -- },
-  {
-    "windwp/nvim-spectre",
-    event = "BufRead",
-    config = function()
-      require("user.spectre").config()
-    end,
-  },
-  {
-    "karb94/neoscroll.nvim",
-    config = function()
-      require("user.neoscroll").config()
-    end,
-  },
   {
     "vuki656/package-info.nvim",
     config = function()
@@ -423,6 +413,12 @@ lvim.plugins = {
         require("user.numb").config()
       end,
     },
+    {
+      "karb94/neoscroll.nvim",
+      config = function()
+        require("user.neoscroll").config()
+      end,
+    },
   },
   -- [Change]
   {
@@ -448,9 +444,20 @@ lvim.plugins = {
         require("user.dial").config()
       end,
     },
+    {
+      "dhruvasagar/vim-table-mode",
+      cmd = "TableModeToggle",
+      keys = ",tm",
+      setup = function()
+        vim.g.table_mode_map_prefix = ",t"
+      end,
+    },
   },
   -- [Vim Helper]
-  { "tpope/vim-scriptease" },
+  {
+    { "tpope/vim-scriptease" },
+    { "tpope/vim-unimpaired", commit = "825a3ee64" },
+  },
   -- [Buffer | Window | Tab]
   {
     {
@@ -477,7 +484,13 @@ lvim.plugins = {
     end,
   },
   -- [Find]
-  -- {},
+  {
+    "windwp/nvim-spectre",
+    event = "BufRead",
+    config = function()
+      require("user.spectre").config()
+    end,
+  },
   -- [Terminal]
   -- {},
   -- [UI]
@@ -509,7 +522,7 @@ lvim.plugins = {
     },
   },
   -- [Git]
-  { "tpope/vim-fugitive", cmd = { "Git", "GBrowse" } },
+  { "tpope/vim-fugitive", cmd = { "Git", "GBrowse" }, ft = { "fugitive" } },
   -- [Write]
   {
     {
@@ -583,9 +596,17 @@ lvim.plugins = {
     {
       "folke/tokyonight.nvim",
       config = function()
-        vim.g.tokyonight_style = "day" -- storm, night, day
+        vim.g.tokyonight_style = "night" -- storm, night, day
         -- lvim.builtin.lualine.options.theme = "tokyonight"
       end,
+    },
+    {
+      "marko-cerovac/material.nvim",
+      config = function()
+        vim.g.material_style = "darker" -- darker, lighter, oceanic, palenight, deep ocean
+        -- lvim.builtin.lualine.options.theme = "material-nvim"
+      end,
+      disable = true,
     },
     {
       "Pocco81/Catppuccino.nvim",
