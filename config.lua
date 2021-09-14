@@ -165,7 +165,7 @@ lvim.builtin.which_key.mappings["r"] = {
 lvim.builtin.which_key.mappings.f = { "<cmd>lua require('lir.float').toggle()<cr>", "Files" }
 
 lvim.builtin.which_key.mappings.s.P = { "<cmd>Telescope projects<CR>", "Projects" }
-lvim.builtin.which_key.mappings.s.T = { "<cmd>TodoTelescope<CR>", "Projects" }
+lvim.builtin.which_key.mappings.s.T = { "<cmd>TodoTelescope<CR>", "Todo" }
 
 lvim.builtin.which_key.mappings.x = {
   name = "+Trouble",
@@ -178,6 +178,7 @@ lvim.builtin.which_key.mappings.x = {
   j = { "<cmd>Trouble telescope<cr>", "LocationList" },
   k = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  t = { "<cmd>TodoTrouble<cr>", "Todo" },
 }
 
 lvim.builtin.which_key.mappings.k = {
@@ -463,12 +464,14 @@ lvim.plugins = {
   {
     {
       "beauwilliams/focus.nvim",
-      event = "BufRead",
+      -- event = "BufRead",
       cmd = "FocusToggle",
       config = function()
         require("focus").setup {
-          hybridnumber = true,
+          signcolumn = false,
+          -- hybridnumber = true,
           excluded_filetypes = { "lir", "toggleterm" },
+          excluded_buftypes = { "nofile", "prompt", "help", "quickfix" },
         }
       end,
     },
@@ -553,7 +556,7 @@ lvim.plugins = {
     },
     {
       "folke/todo-comments.nvim",
-      cmd = { "TodoQuickFix", "TodoTelescope" },
+      cmd = { "TodoQuickFix", "TodoTelescope", "TodoTrouble" },
       config = function()
         require("todo-comments").setup {}
       end,
