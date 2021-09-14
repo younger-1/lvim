@@ -55,6 +55,7 @@ lvim.debug = false
 vim.opt.wrap = false
 vim.opt.clipboard = ""
 vim.opt.inccommand = "split"
+vim.opt.mouse = "nvi"
 
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
@@ -250,10 +251,10 @@ lvim.plugins = {
   -- },
   {
     "vuki656/package-info.nvim",
+    ft = "json",
     config = function()
       require "user.package-info"
     end,
-    ft = "json",
   },
   {
     "rcarriga/nvim-notify",
@@ -462,10 +463,13 @@ lvim.plugins = {
   {
     {
       "beauwilliams/focus.nvim",
+      event = "BufRead",
       cmd = "FocusToggle",
       config = function()
-        local focus = require "focus"
-        focus.hybridnumber = true
+        require("focus").setup {
+          hybridnumber = true,
+          excluded_filetypes = { "lir", "toggleterm" },
+        }
       end,
     },
     { "dhruvasagar/vim-zoom", keys = "<C-w>m" },
@@ -492,7 +496,7 @@ lvim.plugins = {
     end,
   },
   -- [Terminal]
-  -- {},
+  -- { "lambdalisue/guise.vim" },
   -- [UI]
   {
     {
@@ -556,7 +560,22 @@ lvim.plugins = {
     },
   },
   -- [Tools]
-  -- {},
+  {
+    "voldikss/vim-translator",
+    cmd = { "Translate", "TranslateW" },
+    setup = function()
+      vim.cmd [[
+        nmap <Leader>kk <Cmd>Translate<cr>
+        vmap <Leader>kk :Translate<cr>
+        " Display translation in a window
+        nmap <Leader>kj <Cmd>TranslateW<cr>
+        vmap <Leader>kj :TranslateW<cr>
+        " let g:translator_window_borderchars = ['─', '│', '─', '│', '┌', '┐', '┘', '└']
+        " let g:translator_window_type = 'preview'
+        " let g:translator_default_engines = ['bing', 'google', 'haici', 'youdao']
+    ]]
+    end,
+  },
   -- [Web]
   { "wakatime/vim-wakatime" },
   -- [LSP]
@@ -595,32 +614,47 @@ lvim.plugins = {
     { "lunarvim/colorschemes" },
     {
       "folke/tokyonight.nvim",
-      config = function()
+      setup = function()
         vim.g.tokyonight_style = "night" -- storm, night, day
         -- lvim.builtin.lualine.options.theme = "tokyonight"
       end,
     },
     {
       "marko-cerovac/material.nvim",
-      config = function()
+      setup = function()
         vim.g.material_style = "darker" -- darker, lighter, oceanic, palenight, deep ocean
         -- lvim.builtin.lualine.options.theme = "material-nvim"
       end,
-      disable = true,
     },
     {
-      "Pocco81/Catppuccino.nvim",
-      config = function()
+      "pocco81/catppuccino.nvim",
+      setup = function()
         require "theme.catppuccino"
       end,
     },
     {
       "shaunsingh/nord.nvim",
-      config = function()
+      setup = function()
         vim.g.nord_borders = true
       end,
     },
-    { "tanvirtin/monokai.nvim" },
+    {
+      "tanvirtin/monokai.nvim",
+      opt = true,
+      -- setup = function()
+      --   print "mono set"
+      -- end,
+      -- config = function()
+      --   print "mono cfg"
+      -- end,
+    },
+    {
+      "Mofiqul/vscode.nvim",
+      setup = function()
+        vim.g.vscode_style = "dark"
+        -- lvim.builtin.lualine.options.theme = "vscode"
+      end,
+    },
   },
 }
 

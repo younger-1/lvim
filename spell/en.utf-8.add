@@ -70,3 +70,10 @@ lunarvim
 dotfiles
 dmenu
 dwm
+#eno/!
+deno/!
+Vim8/!
+deno
+Vim8
+coc
+Kotlin
