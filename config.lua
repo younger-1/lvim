@@ -46,7 +46,7 @@ use {
 --]]
 
 require "theme.dash-pic"
--- general
+-- General
 lvim.format_on_save = true
 lvim.transparent_window = false
 -- lvim.colorscheme = "onedarker"
@@ -60,10 +60,9 @@ vim.opt.mouse = "nvi"
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 
--- keymappings
--- view all the defaults by pressing <leader>Lk
-lvim.leader = "space"
-
+-- Keymappings
+-- View all the defaults by pressing <leader>Lk
+-- lvim.leader = "space"
 lvim.keys.normal_mode["z<C-l>"] = "<cmd>nohlsearch<cr>"
 lvim.keys.normal_mode["Y"] = "y$"
 lvim.keys.visual_mode["Y"] = [["+y]]
@@ -109,11 +108,6 @@ endfunction
 command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
 ]]
 
--- for finding syntax ids for non TS enabled languages
-vim.cmd [[
-map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
-]]
-
 -- LSP
 lvim.lsp.diagnostics.virtual_text = false
 lvim.lsp.override = { "java" }
@@ -131,6 +125,32 @@ lvim.builtin.gitsigns.opts.keymaps["x ih"] = ':<C-U>lua require"gitsigns.actions
 -- if lvim.builtin.tabnine.active then
 --   lvim.builtin.compe.source.tabnine = { kind = " ﮧ ", priority = 150, max_reslts = 6 }
 -- end
+
+-- Treesitter
+lvim.builtin.treesitter.ensure_installed = "maintained"
+lvim.builtin.treesitter.ignore_install = { "haskell" }
+lvim.builtin.treesitter.autotag.enable = true
+lvim.builtin.treesitter.highlight.enabled = true
+lvim.builtin.treesitter.playground.enable = true
+lvim.builtin.treesitter.rainbow.enable = true
+-- for finding syntax ids for non TS enabled languages
+vim.cmd [[
+map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+]]
+
+-- Telescope
+-- tips: i_<C-t> to open file in new tab
+lvim.builtin.telescope.on_config_done = function()
+  local actions = require "telescope.actions"
+  -- for input mode
+  lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
+  lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
+  lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
+  lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
+  -- for normal mode
+  lvim.builtin.telescope.defaults.mappings.n["<C-n>"] = actions.cycle_history_next
+  lvim.builtin.telescope.defaults.mappings.n["<C-p>"] = actions.cycle_history_prev
+end
 
 -- Whichkey
 lvim.builtin.which_key.mappings.l.d = { "<cmd>TroubleToggle<cr>", "Diagnostics" }
@@ -187,27 +207,6 @@ lvim.builtin.which_key.mappings.k = {
   m = { "<cmd>MinimapToggle<cr>", "Minimap" },
   z = { "<cmd>FocusToggle<cr>", "AutoZoom" },
 }
-
--- Treesitter
-lvim.builtin.treesitter.ensure_installed = "maintained"
-lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.autotag.enable = true
-lvim.builtin.treesitter.highlight.enabled = true
-lvim.builtin.treesitter.playground.enable = true
-lvim.builtin.treesitter.rainbow.enable = true
-
--- Telescope
-lvim.builtin.telescope.on_config_done = function()
-  local actions = require "telescope.actions"
-  -- for input mode
-  lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
-  lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
-  lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
-  lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
-  -- for normal mode
-  lvim.builtin.telescope.defaults.mappings.n["<C-n>"] = actions.cycle_history_next
-  lvim.builtin.telescope.defaults.mappings.n["<C-p>"] = actions.cycle_history_prev
-end
 
 -- Additional Plugins
 lvim.plugins = {
@@ -658,7 +657,8 @@ lvim.plugins = {
     },
     {
       "pocco81/catppuccino.nvim",
-      setup = function()
+      setup = function() end,
+      config = function()
         require "theme.catppuccino"
       end,
     },
@@ -670,7 +670,7 @@ lvim.plugins = {
     },
     {
       "tanvirtin/monokai.nvim",
-      opt = true,
+      setup = function() end,
       -- setup = function()
       --   print "mono set"
       -- end,
