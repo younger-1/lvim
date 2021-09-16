@@ -62,7 +62,9 @@ An IDE layer for Neovim with sane defaults. Completely free and community driven
 ## Issues
 
 [[Feature]: Keymapping Tables](https://github.com/LunarVim/LunarVim/issues/1548)
+
 [[Feature]: Add installation script for Windows](https://github.com/LunarVim/LunarVim/pull/1261)
+
 [[Feature]: Windows setup](https://github.com/LunarVim/LunarVim/issues/804)
 
 ## Outline
@@ -187,3 +189,19 @@ output:
 
 :lua print(vim.inspect(lvim.builtin.telescope.defaults.mappings.i))
 ```
+
+## Testimonials
+
+> "I have the processing power of a potato with 4 gb of ram and LunarVim runs perfectly."
+> - @juanCortelezzi, LunarVim user.
+
+> "My minimal config with a good amount less code than LunarVim loads 40ms slower. Time to switch."
+> - @mvllow, Potential LunarVim user.
+
+<div align="center" id="madewithlua">
+	
+[![Lua](https://img.shields.io/badge/Made%20with%20Lua-blue.svg?style=for-the-badge&logo=lua)](#madewithlua)
+	
+</div>
+
+![LunarVim Demo](./utils/media/lunarvim_logo_dark_new.png)
