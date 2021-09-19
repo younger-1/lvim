@@ -140,7 +140,21 @@ map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
 ]]
 
 -- Telescope
--- tips: i_<C-t> to open file in new tab
+--[[ tips:
+  <C-t> to open file in new tab
+  <C-e> to put command to commandline, creates new file in current directory
+--]]
+lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
+  defaults = {
+    prompt_prefix = "   ",
+    selection_caret = " ",
+    layout_config = {
+      width = 0.90,
+      horizontal = { preview_width = 0.5 },
+    },
+  },
+})
+
 lvim.builtin.telescope.on_config_done = function()
   local actions = require "telescope.actions"
   -- for input mode
@@ -148,18 +162,19 @@ lvim.builtin.telescope.on_config_done = function()
   lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
   lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
   lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
+  lvim.builtin.telescope.defaults.mappings.i["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist
   -- for normal mode
   lvim.builtin.telescope.defaults.mappings.n["<C-n>"] = actions.cycle_history_next
   lvim.builtin.telescope.defaults.mappings.n["<C-p>"] = actions.cycle_history_prev
+  lvim.builtin.telescope.defaults.mappings.n["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist
 end
 
 -- Whichkey
-lvim.builtin.which_key.mappings.l.d = { "<cmd>TroubleToggle<cr>", "Diagnostics" }
-lvim.builtin.which_key.mappings.l.R = { "<cmd>TroubleToggle lsp_references<cr>", "References" }
 lvim.builtin.which_key.mappings.l.o = { "<cmd>SymbolsOutline<cr>", "Outline" }
 lvim.builtin.which_key.mappings.l.v = { "<cmd>Vista!!<cr>", "Vista" }
 lvim.builtin.which_key.mappings.T.h = { "<cmd>TSHighlightCapturesUnderCursor<cr>", "Highlight" }
 lvim.builtin.which_key.mappings.T.p = { "<cmd>TSPlaygroundToggle<cr>", "Playground" }
+lvim.builtin.which_key.mappings.T.t = { "<cmd>Telescope treesitter<CR>", "Telescope" }
 
 lvim.builtin.which_key.mappings.g['"'] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blames" }
 lvim.builtin.which_key.mappings.g["'"] = { "<cmd>Gitsigns toggle_linehl<cr>", "Highlight" }
@@ -185,6 +200,19 @@ lvim.builtin.which_key.mappings["r"] = {
 
 lvim.builtin.which_key.mappings.f = { "<cmd>lua require('lir.float').toggle()<cr>", "Files" }
 
+-- lvim.builtin.which_key.mappings["<"] = { "<cmd>Telescope<CR>", "🧙" }
+lvim.builtin.which_key.mappings.s["<tab>"] = { "<cmd>Telescope<CR>", "🧙" }
+lvim.builtin.which_key.mappings.s[" "] = { "<cmd>Telescope resume<CR>", "♻️" }
+lvim.builtin.which_key.mappings.s["'"] = { "<cmd>Telescope marks<CR>", "Marks" }
+lvim.builtin.which_key.mappings.s['"'] = { "<cmd>Telescope registers<CR>", "Registers" }
+lvim.builtin.which_key.mappings.s["/"] = { "<cmd>Telescope search_history<CR>", "Search History" }
+lvim.builtin.which_key.mappings.s[":"] = { "<cmd>Telescope command_history<CR>", "Command History" }
+lvim.builtin.which_key.mappings.s[">"] = { "<cmd>Telescope quickfix<CR>", "QuickList" }
+lvim.builtin.which_key.mappings.s["<"] = { "<cmd>Telescope loclist<CR>", "LocList F" }
+lvim.builtin.which_key.mappings.s["."] = { "<cmd>Telescope file_browser<CR>", "Browser" }
+lvim.builtin.which_key.mappings.s.a = { "<cmd>Telescope autocommands<CR>", "Autocommands" }
+lvim.builtin.which_key.mappings.s.s = { "<cmd>Telescope symbols<CR>", "Symbols" }
+lvim.builtin.which_key.mappings.s.S = { "<cmd>Telescope spell_suggest<CR>", "Spell" }
 lvim.builtin.which_key.mappings.s.P = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings.s.T = { "<cmd>TodoTelescope<CR>", "Todo" }
 
@@ -194,8 +222,8 @@ lvim.builtin.which_key.mappings.x = {
   r = { "<cmd>Trouble lsp_references<cr>", "Ref" },
   f = { "<cmd>Trouble lsp_definitions<cr>", "Def" },
   i = { "<cmd>Trouble lsp_implementations<cr>", "Impl" },
-  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnos" },
-  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnos[workspace]" },
+  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diag" },
+  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diag[workspace]" },
   j = { "<cmd>Trouble telescope<cr>", "LocationList" },
   k = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
@@ -207,6 +235,21 @@ lvim.builtin.which_key.mappings.k = {
   t = { "<cmd>TodoQuickFix<cr>", "Todo" },
   m = { "<cmd>MinimapToggle<cr>", "Minimap" },
   z = { "<cmd>FocusToggle<cr>", "AutoZoom" },
+}
+
+lvim.builtin.which_key.mappings.j = {
+  name = "+Justify",
+  s = {
+    b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Buffer String" },
+    F = { "<cmd>Telescope filetypes<CR>", "FileTypes" },
+    g = { "<cmd>Telescope grep_string<CR>", "Grep String" },
+    t = { "<cmd>Telescope current_buffer_tags<CR>", "Tags" },
+    T = { "<cmd>Telescope tags<CR>", "All Tags" },
+  },
+  g = {
+    s = { "<cmd>Telescope git_stash<CR>", "Stash" },
+    g = { "<cmd>Telescope git_files<CR>", "Files" },
+  },
 }
 
 -- Additional Plugins

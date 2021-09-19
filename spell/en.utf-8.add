@@ -76,3 +76,4 @@ cmd
 localhost
 WSL2
 exe
+statusline
