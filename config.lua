@@ -166,7 +166,7 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
   },
 })
 
-lvim.builtin.telescope.on_config_done = function()
+lvim.builtin.telescope.on_config_done = function(telescope)
   local actions = require "telescope.actions"
   -- for input mode
   lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
@@ -174,6 +174,7 @@ lvim.builtin.telescope.on_config_done = function()
   lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
   lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
   lvim.builtin.telescope.defaults.mappings.i["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist
+  lvim.builtin.telescope.defaults.mappings.i["<C-g>"] = actions.which_key
   -- for normal mode
   lvim.builtin.telescope.defaults.mappings.n["<C-n>"] = actions.cycle_history_next
   lvim.builtin.telescope.defaults.mappings.n["<C-p>"] = actions.cycle_history_prev
@@ -184,11 +185,8 @@ end
 lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.which_key.mappings, {
   f = { "<cmd>lua require('lir.float').toggle()<cr>", "Files" },
   g = {
-    ['"'] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blames" },
-    ["'"] = { "<cmd>Gitsigns toggle_linehl<cr>", "Highlight" },
-    q = { "<cmd>Gitsigns setqflist<cr>", "Quickfix" },
-    S = { "<cmd>Gitsigns stage_buffer<cr>", "Quickfix" },
-    ["G"] = {
+    -- ["<tab>"] = {},
+    [" "] = {
       name = "Gist",
       a = { "<cmd>Gist -b -a<cr>", "Create Anon" },
       d = { "<cmd>Gist -d<cr>", "Delete" },
@@ -197,6 +195,18 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
       l = { "<cmd>Gist -l<cr>", "List" },
       p = { "<cmd>Gist -b -p<cr>", "Create Private" },
     },
+    ["'"] = { "<cmd>Gitsigns toggle_linehl<cr>", "Highlight" },
+    ['"'] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blames" },
+    [">"] = {
+      name = "+quickfix",
+      [">"] = { "<cmd>Gitsigns setqflist<cr><cmd>copen<cr>", "Current Buffer" },
+      a = { "<cmd>Gitsigns setqflist 'all'<cr><cmd>copen<cr>", "All Git Files" },
+      b = { "<cmd>Gitsigns setqflist 'attached'<cr><cmd>copen<cr>", "Attached Buffers" },
+    },
+    ["<"] = { "<cmd>Gitsigns setloclist<cr><cmd>lopen<cr>", "LocList" },
+    a = { "<cmd>Telescope git_stash<CR>", "Stash" },
+    S = { "<cmd>Gitsigns stage_buffer<cr>", "Stage Buffer" },
+    f = { "<cmd>Telescope git_files<CR>", "Files" },
   },
   j = {
     name = "+Justify",
@@ -206,10 +216,6 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
       g = { "<cmd>Telescope grep_string<CR>", "Grep String" },
       t = { "<cmd>Telescope current_buffer_tags<CR>", "Tags" },
       T = { "<cmd>Telescope tags<CR>", "All Tags" },
-    },
-    g = {
-      s = { "<cmd>Telescope git_stash<CR>", "Stash" },
-      g = { "<cmd>Telescope git_files<CR>", "Files" },
     },
   },
   k = {
@@ -434,7 +440,7 @@ lvim.plugins = {
       event = "CursorMoved",
       setup = function()
         vim.cmd [[
-          " let g:wordmotion_prefix = ','
+          let g:wordmotion_prefix = ','
         ]]
       end,
     },
