@@ -157,8 +157,8 @@ map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
 --]]
 lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
   defaults = {
-    prompt_prefix = "   ",
-    selection_caret = " ",
+    -- prompt_prefix = "   ",
+    -- selection_caret = " ",
     layout_config = {
       width = 0.90,
       horizontal = { preview_width = 0.5 },
@@ -195,8 +195,6 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
       l = { "<cmd>Gist -l<cr>", "List" },
       p = { "<cmd>Gist -b -p<cr>", "Create Private" },
     },
-    ["'"] = { "<cmd>Gitsigns toggle_linehl<cr>", "Highlight" },
-    ['"'] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blames" },
     [">"] = {
       name = "+quickfix",
       [">"] = { "<cmd>Gitsigns setqflist<cr><cmd>copen<cr>", "Current Buffer" },
@@ -204,6 +202,8 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
       b = { "<cmd>Gitsigns setqflist 'attached'<cr><cmd>copen<cr>", "Attached Buffers" },
     },
     ["<"] = { "<cmd>Gitsigns setloclist<cr><cmd>lopen<cr>", "LocList" },
+    ["'"] = { "<cmd>Gitsigns toggle_linehl<cr>", "Highlight" },
+    ['"'] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blames" },
     a = { "<cmd>Telescope git_stash<CR>", "Stash" },
     S = { "<cmd>Gitsigns stage_buffer<cr>", "Stage Buffer" },
     f = { "<cmd>Telescope git_files<CR>", "Files" },
@@ -237,12 +237,12 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
   s = {
     ["<tab>"] = { "<cmd>Telescope<CR>", "🧙" },
     [" "] = { "<cmd>Telescope resume<CR>", "♻️" },
+    [">"] = { "<cmd>Telescope quickfix<CR>", "QuickList" },
+    ["<"] = { "<cmd>Telescope loclist<CR>", "LocList F" },
     ["'"] = { "<cmd>Telescope marks<CR>", "Marks" },
     ['"'] = { "<cmd>Telescope registers<CR>", "Registers" },
     ["/"] = { "<cmd>Telescope search_history<CR>", "Search History" },
     [":"] = { "<cmd>Telescope command_history<CR>", "Command History" },
-    [">"] = { "<cmd>Telescope quickfix<CR>", "QuickList" },
-    ["<"] = { "<cmd>Telescope loclist<CR>", "LocList F" },
     ["."] = { "<cmd>Telescope file_browser<CR>", "Browser" },
     a = { "<cmd>Telescope autocommands<CR>", "Autocommands" },
     s = { "<cmd>Telescope symbols<CR>", "Symbols" },
@@ -257,15 +257,15 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
   },
   x = {
     name = "+Trouble",
+    [">"] = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+    ["<"] = { "<cmd>Trouble loclist<cr>", "LocationList" },
+    ["."] = { "<cmd>Trouble telescope<cr>", "Telescope" },
     x = { "<cmd>TroubleToggle<cr>", "Open" },
     r = { "<cmd>Trouble lsp_references<cr>", "Ref" },
     f = { "<cmd>Trouble lsp_definitions<cr>", "Def" },
     i = { "<cmd>Trouble lsp_implementations<cr>", "Impl" },
     d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diag" },
     w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diag[workspace]" },
-    j = { "<cmd>Trouble telescope<cr>", "LocationList" },
-    k = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-    l = { "<cmd>Trouble loclist<cr>", "LocationList" },
     t = { "<cmd>TodoTrouble<cr>", "Todo" },
   },
   z = { "<cmd>ZenMode<cr>", "Zen" },
