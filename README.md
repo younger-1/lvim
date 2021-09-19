@@ -61,14 +61,15 @@ An IDE layer for Neovim with sane defaults. Completely free and community driven
 
 ## Issues
 
-[[Feature]: Keymapping Tables](https://github.com/LunarVim/LunarVim/issues/1548)
-
 [[Feature]: Add installation script for Windows](https://github.com/LunarVim/LunarVim/pull/1261)
 
 [[Feature]: Windows setup](https://github.com/LunarVim/LunarVim/issues/804)
 
+[[Feature]: Keymapping Tables](https://github.com/LunarVim/LunarVim/issues/1548)
+
 ## Outline
 
+Startup
 - require("bootstrap"):init()
   - update runtime-dir
   - require("impatient").setup()
@@ -104,6 +105,17 @@ An IDE layer for Neovim with sane defaults. Completely free and community driven
 - require("core.commands").load(commands.defaults)
 - require("lsp").global_setup()
 - require("keymappings").setup()
+
+Reload
+- require('utils').reload_lv_config()
+  - require("core.lualine").config()
+  - require("config"):load()
+  - require("keymappings").setup() -- this should be done before loading the plugins
+  - utils.toggle_autoformat()
+  - require("plugin-loader"):load { plugins, lvim.plugins }
+  - vim.cmd ":PackerCompile"
+  - vim.cmd ":PackerInstall"
+  - require("lsp.null-ls").setup(vim.bo.filetype, { force_reload = true })
 
 
 ## Insight

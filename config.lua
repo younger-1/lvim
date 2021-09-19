@@ -374,10 +374,12 @@ lvim.plugins = {
       after = { "nvim-cmp", "LuaSnip" }, -- if a completion plugin is using tabs load it before
     },
     {
-      "bkad/CamelCaseMotion",
-      -- TODO: c,w
-      config = function()
-        require "user.camelcase"
+      "chaoren/vim-wordmotion",
+      event = "CursorMoved",
+      setup = function()
+        vim.cmd [[
+          " let g:wordmotion_prefix = ','
+        ]]
       end,
     },
     {
