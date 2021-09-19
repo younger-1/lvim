@@ -72,7 +72,7 @@ lvim.keys = vim.tbl_deep_extend("keep", lvim.keys, {
   normal_mode = {
     ["Y"] = "y$",
     ["z<C-l>"] = "<cmd>nohlsearch<cr><C-l>",
-    ["z<C-q>"] = ":call LocListToggle()<CR>",
+    ["<C-a>"] = ":call LocListToggle()<CR>",
   },
   term_mode = {},
   visual_mode = {
@@ -168,19 +168,19 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
     },
     mappings = {
       i = {
-        ["<C-b>"] = actions.preview_scrolling_up,
-        ["<C-f>"] = actions.preview_scrolling_down,
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+        -- ["<C-b>"] = actions.preview_scrolling_up,
+        ["<C-f>"] = actions.preview_scrolling_down,
         ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
       },
       n = {
-        ["<C-b>"] = actions.preview_scrolling_up,
-        ["<C-f>"] = actions.preview_scrolling_down,
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
+        -- ["<C-b>"] = actions.preview_scrolling_up,
+        ["<C-f>"] = actions.preview_scrolling_down,
         ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
         -- ["<C-_>"] = actions.which_key -- Keys to produce <C-/>
         ["<C-_>"] = require("telescope.actions.generate").which_key {
@@ -231,13 +231,13 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
       l = { "<cmd>Gist -l<cr>", "List" },
       p = { "<cmd>Gist -b -p<cr>", "Create Private" },
     },
-    [">"] = {
+    ["<C-q>"] = {
       name = "+quickfix",
-      [">"] = { "<cmd>Gitsigns setqflist<cr><cmd>copen<cr>", "Current Buffer" },
-      a = { "<cmd>Gitsigns setqflist 'all'<cr><cmd>copen<cr>", "All Git Files" },
+      c = { "<cmd>Gitsigns setqflist<cr><cmd>copen<cr>", "Current Buffer" },
       b = { "<cmd>Gitsigns setqflist 'attached'<cr><cmd>copen<cr>", "Attached Buffers" },
+      a = { "<cmd>Gitsigns setqflist 'all'<cr><cmd>copen<cr>", "All Git Files" },
     },
-    ["<"] = { "<cmd>Gitsigns setloclist<cr><cmd>lopen<cr>", "LocList" },
+    ["<C-a>"] = { "<cmd>Gitsigns setloclist<cr><cmd>lopen<cr>", "LocList" },
     ["'"] = { "<cmd>Gitsigns toggle_linehl<cr>", "Highlight" },
     ['"'] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blames" },
     a = { "<cmd>Telescope git_stash<CR>", "Stash" },
@@ -262,7 +262,7 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     z = { "<cmd>FocusToggle<cr>", "AutoZoom" },
   },
   l = {
-    ["<"] = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "LocList" },
+    ["<C-a>"] = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "LocList" },
     o = { "<cmd>SymbolsOutline<cr>", "Outline" },
     v = { "<cmd>Vista!!<cr>", "Vista" },
     D = { "<cmd>Telescope lsp_definitions<cr>", "Def" },
@@ -280,8 +280,8 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
   s = {
     ["<tab>"] = { "<cmd>Telescope<CR>", "🧙" },
     [" "] = { "<cmd>Telescope resume<CR>", "♻️" },
-    [">"] = { "<cmd>Telescope quickfix<CR>", "QuickList" },
-    ["<"] = { "<cmd>Telescope loclist<CR>", "LocList Bug" },
+    ["<C-q>"] = { "<cmd>Telescope quickfix<CR>", "QuickList" },
+    ["<C-a>"] = { "<cmd>Telescope loclist<CR>", "LocList Bug" },
     ["'"] = { "<cmd>Telescope marks<CR>", "Marks" },
     ['"'] = { "<cmd>Telescope registers<CR>", "Registers" },
     ["/"] = { "<cmd>Telescope search_history<CR>", "Search History" },
@@ -313,8 +313,8 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
   },
   x = {
     name = "+Trouble",
-    [">"] = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-    ["<"] = { "<cmd>Trouble loclist<cr>", "LocationList" },
+    ["<C-q>"] = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+    ["<C-a>"] = { "<cmd>Trouble loclist<cr>", "LocList" },
     ["."] = { "<cmd>Trouble telescope<cr>", "Telescope" },
     x = { "<cmd>TroubleToggle<cr>", "Open" },
     D = { "<cmd>Trouble lsp_definitions<cr>", "Def" },
@@ -538,7 +538,7 @@ lvim.plugins = {
     {
       "karb94/neoscroll.nvim",
       config = function()
-        require("user.neoscroll").config()
+        require "user.neoscroll"
       end,
     },
   },
@@ -563,7 +563,7 @@ lvim.plugins = {
       "monaqa/dial.nvim",
       event = "BufRead",
       config = function()
-        require("user.dial").config()
+        require "user.dial"
       end,
     },
     {

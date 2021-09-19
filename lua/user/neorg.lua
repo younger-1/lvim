@@ -1,8 +1,3 @@
-local status_ok, lir = pcall(require, "lir")
-if not status_ok then
-  return
-end
-
 require("neorg").setup {
   -- Tell Neorg what modules to load
   load = {

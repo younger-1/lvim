@@ -1,7 +1,4 @@
-local status_ok, lir = pcall(require, "lir")
-if not status_ok then
-  return
-end
+local lir = require "lir"
 local actions = require "lir.actions"
 local mark_actions = require "lir.mark.actions"
 local clipboard_actions = require "lir.clipboard.actions"
