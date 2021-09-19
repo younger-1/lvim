@@ -64,7 +64,7 @@ vim.opt.guifont = "SauceCodePro NF"
 -- Keymappings
 -- View all the defaults by pressing <leader>Lk
 -- lvim.leader = "space"
-lvim.keys.normal_mode["z<C-l>"] = "<cmd>nohlsearch<cr>"
+lvim.keys.normal_mode["z<C-l>"] = "<cmd>nohlsearch<cr><C-l>"
 lvim.keys.normal_mode["Y"] = "y$"
 lvim.keys.visual_mode["Y"] = [["+y]]
 lvim.keys.visual_mode["d"] = [["_d]]
@@ -527,6 +527,8 @@ lvim.plugins = {
       require("user.spectre").config()
     end,
   },
+  -- [Telescope]
+  { "nvim-telescope/telescope-symbols.nvim" },
   -- [Terminal]
   -- { "lambdalisue/guise.vim" },
   -- [UI]
@@ -573,7 +575,6 @@ lvim.plugins = {
       config = function()
         require "user.neorg"
       end,
-      disabled = true,
     },
     {
       "kristijanhusak/orgmode.nvim",
@@ -581,7 +582,6 @@ lvim.plugins = {
       config = function()
         require("orgmode").setup {}
       end,
-      disabled = true,
     },
     {
       "folke/todo-comments.nvim",
@@ -603,6 +603,8 @@ lvim.plugins = {
         nmap <Leader>kj <Cmd>TranslateW<cr>
         vmap <Leader>kj :TranslateW<cr>
         " let g:translator_window_borderchars = ['─', '│', '─', '│', '┌', '┐', '┘', '└']
+        " let g:translator_window_borderchars = ['─', '│', '─', '│', '╭', '╮', '╯', '╰']
+        let g:translator_window_borderchars = ['═', '║', '═', '║', '╔', '╗', '╝', '╚']
         " let g:translator_window_type = 'preview'
         " let g:translator_default_engines = ['bing', 'google', 'haici', 'youdao']
     ]]
