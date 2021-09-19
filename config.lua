@@ -46,6 +46,8 @@ use {
 --]]
 
 require "theme.dash-pic"
+young = "Young"
+
 -- General
 lvim.format_on_save = true
 lvim.transparent_window = false
@@ -169,16 +171,27 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
 lvim.builtin.telescope.on_config_done = function(telescope)
   local actions = require "telescope.actions"
   -- for input mode
+  lvim.builtin.telescope.defaults.mappings.i["<C-b>"] = actions.preview_scrolling_up
+  lvim.builtin.telescope.defaults.mappings.i["<C-f>"] = actions.preview_scrolling_down
   lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
   lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
   lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
   lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
   lvim.builtin.telescope.defaults.mappings.i["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist
-  lvim.builtin.telescope.defaults.mappings.i["<C-g>"] = actions.which_key
   -- for normal mode
+  lvim.builtin.telescope.defaults.mappings.n["<C-b>"] = actions.preview_scrolling_up
+  lvim.builtin.telescope.defaults.mappings.n["<C-f>"] = actions.preview_scrolling_down
   lvim.builtin.telescope.defaults.mappings.n["<C-n>"] = actions.cycle_history_next
   lvim.builtin.telescope.defaults.mappings.n["<C-p>"] = actions.cycle_history_prev
   lvim.builtin.telescope.defaults.mappings.n["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist
+
+  -- lvim.builtin.telescope.defaults.mappings.n["<C-_>"] = actions.which_key -- keys from pressing <C-/>
+  lvim.builtin.telescope.defaults.mappings.n["<C-_>"] = require("telescope.actions.generate").which_key {
+    name_width = 20, -- typically leads to smaller floats
+    max_height = 0.2, -- increase potential maximum height
+    seperator = " ⇐ ", -- change sep between mode, keybind, and name
+    close_with_action = false, -- do not close float on action
+  }
 end
 
 -- Whichkey
@@ -214,6 +227,7 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
       b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Buffer String" },
       F = { "<cmd>Telescope filetypes<CR>", "FileTypes" },
       g = { "<cmd>Telescope grep_string<CR>", "Grep String" },
+      r = { "<cmd>Telescope reloader<CR>", "Reload Module" },
       t = { "<cmd>Telescope current_buffer_tags<CR>", "Tags" },
       T = { "<cmd>Telescope tags<CR>", "All Tags" },
     },
@@ -225,8 +239,14 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     z = { "<cmd>FocusToggle<cr>", "AutoZoom" },
   },
   l = {
+    ["<"] = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "LocList" },
     o = { "<cmd>SymbolsOutline<cr>", "Outline" },
     v = { "<cmd>Vista!!<cr>", "Vista" },
+    D = { "<cmd>Telescope lsp_definitions<cr>", "Def" },
+    I = { "<cmd>Telescope lsp_implementations<cr>", "Impl" },
+    R = { "<cmd>Telescope lsp_references<cr>", "Ref" },
+    c = { "<cmd>Telescope lsp_code_actions<cr>", "Code Action" },
+    C = { "<cmd>Telescope lsp_range_code_actions<cr>", "Range Action" },
   },
   r = {
     name = "Replace",
@@ -238,16 +258,28 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     ["<tab>"] = { "<cmd>Telescope<CR>", "🧙" },
     [" "] = { "<cmd>Telescope resume<CR>", "♻️" },
     [">"] = { "<cmd>Telescope quickfix<CR>", "QuickList" },
-    ["<"] = { "<cmd>Telescope loclist<CR>", "LocList F" },
+    ["<"] = { "<cmd>Telescope loclist<CR>", "LocList Bug" },
     ["'"] = { "<cmd>Telescope marks<CR>", "Marks" },
     ['"'] = { "<cmd>Telescope registers<CR>", "Registers" },
     ["/"] = { "<cmd>Telescope search_history<CR>", "Search History" },
     [":"] = { "<cmd>Telescope command_history<CR>", "Command History" },
     ["."] = { "<cmd>Telescope file_browser<CR>", "Browser" },
     a = { "<cmd>Telescope autocommands<CR>", "Autocommands" },
-    s = { "<cmd>Telescope symbols<CR>", "Symbols" },
+    c = {
+      "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
+      "Colorscheme with Preview",
+    },
+    p = { "<cmd>Telescope projects<CR>", "Projects" },
+    s = {
+      s = { "<cmd>Telescope symbols<CR>", "Symbols" },
+      e = { "<cmd>lua require'telescope.builtin'.symbols{ sources = {'emoji'} }<CR>", "Emoji" },
+      g = { "<cmd>lua require'telescope.builtin'.symbols{ sources = {'gitmoji'} }<CR>", "Git" },
+      j = { "<cmd>lua require'telescope.builtin'.symbols{ sources = {'julia'} }<CR>", "Julia" },
+      k = { "<cmd>lua require'telescope.builtin'.symbols{ sources = {'kaomoji'} }<CR>", "Kaomoji" },
+      m = { "<cmd>lua require'telescope.builtin'.symbols{ sources = {'math'} }<CR>", "Math" },
+      l = { "<cmd>lua require'telescope.builtin'.symbols{ sources = {'latex'} }<CR>", "LaTeX" },
+    },
     S = { "<cmd>Telescope spell_suggest<CR>", "Spell" },
-    P = { "<cmd>Telescope projects<CR>", "Projects" },
     T = { "<cmd>TodoTelescope<CR>", "Todo" },
   },
   T = {
@@ -261,9 +293,9 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     ["<"] = { "<cmd>Trouble loclist<cr>", "LocationList" },
     ["."] = { "<cmd>Trouble telescope<cr>", "Telescope" },
     x = { "<cmd>TroubleToggle<cr>", "Open" },
-    r = { "<cmd>Trouble lsp_references<cr>", "Ref" },
-    f = { "<cmd>Trouble lsp_definitions<cr>", "Def" },
-    i = { "<cmd>Trouble lsp_implementations<cr>", "Impl" },
+    D = { "<cmd>Trouble lsp_definitions<cr>", "Def" },
+    I = { "<cmd>Trouble lsp_implementations<cr>", "Impl" },
+    R = { "<cmd>Trouble lsp_references<cr>", "Ref" },
     d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diag" },
     w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diag[workspace]" },
     t = { "<cmd>TodoTrouble<cr>", "Todo" },
