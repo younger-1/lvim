@@ -181,88 +181,89 @@ lvim.builtin.telescope.on_config_done = function()
 end
 
 -- Whichkey
--- lvim.builtin.which_key.mappings = vim.tbl_deep_extend()
-lvim.builtin.which_key.mappings.l.o = { "<cmd>SymbolsOutline<cr>", "Outline" }
-lvim.builtin.which_key.mappings.l.v = { "<cmd>Vista!!<cr>", "Vista" }
-lvim.builtin.which_key.mappings.T.h = { "<cmd>TSHighlightCapturesUnderCursor<cr>", "Highlight" }
-lvim.builtin.which_key.mappings.T.p = { "<cmd>TSPlaygroundToggle<cr>", "Playground" }
-lvim.builtin.which_key.mappings.T.t = { "<cmd>Telescope treesitter<CR>", "Telescope" }
-
-lvim.builtin.which_key.mappings.g['"'] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blames" }
-lvim.builtin.which_key.mappings.g["'"] = { "<cmd>Gitsigns toggle_linehl<cr>", "Highlight" }
-lvim.builtin.which_key.mappings.g.q = { "<cmd>Gitsigns setqflist<cr>", "Quickfix" }
-lvim.builtin.which_key.mappings.g.S = { "<cmd>Gitsigns stage_buffer<cr>", "Quickfix" }
-lvim.builtin.which_key.mappings.g["G"] = {
-  name = "Gist",
-  a = { "<cmd>Gist -b -a<cr>", "Create Anon" },
-  d = { "<cmd>Gist -d<cr>", "Delete" },
-  f = { "<cmd>Gist -f<cr>", "Fork" },
-  g = { "<cmd>Gist -b<cr>", "Create" },
-  l = { "<cmd>Gist -l<cr>", "List" },
-  p = { "<cmd>Gist -b -p<cr>", "Create Private" },
-}
-
-lvim.builtin.which_key.mappings["z"] = { "<cmd>ZenMode<cr>", "Zen" }
-lvim.builtin.which_key.mappings["r"] = {
-  name = "Replace",
-  r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
-  w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
-  f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
-}
-
-lvim.builtin.which_key.mappings.f = { "<cmd>lua require('lir.float').toggle()<cr>", "Files" }
-
--- lvim.builtin.which_key.mappings["<"] = { "<cmd>Telescope<CR>", "🧙" }
-lvim.builtin.which_key.mappings.s["<tab>"] = { "<cmd>Telescope<CR>", "🧙" }
-lvim.builtin.which_key.mappings.s[" "] = { "<cmd>Telescope resume<CR>", "♻️" }
-lvim.builtin.which_key.mappings.s["'"] = { "<cmd>Telescope marks<CR>", "Marks" }
-lvim.builtin.which_key.mappings.s['"'] = { "<cmd>Telescope registers<CR>", "Registers" }
-lvim.builtin.which_key.mappings.s["/"] = { "<cmd>Telescope search_history<CR>", "Search History" }
-lvim.builtin.which_key.mappings.s[":"] = { "<cmd>Telescope command_history<CR>", "Command History" }
-lvim.builtin.which_key.mappings.s[">"] = { "<cmd>Telescope quickfix<CR>", "QuickList" }
-lvim.builtin.which_key.mappings.s["<"] = { "<cmd>Telescope loclist<CR>", "LocList F" }
-lvim.builtin.which_key.mappings.s["."] = { "<cmd>Telescope file_browser<CR>", "Browser" }
-lvim.builtin.which_key.mappings.s.a = { "<cmd>Telescope autocommands<CR>", "Autocommands" }
-lvim.builtin.which_key.mappings.s.s = { "<cmd>Telescope symbols<CR>", "Symbols" }
-lvim.builtin.which_key.mappings.s.S = { "<cmd>Telescope spell_suggest<CR>", "Spell" }
-lvim.builtin.which_key.mappings.s.P = { "<cmd>Telescope projects<CR>", "Projects" }
-lvim.builtin.which_key.mappings.s.T = { "<cmd>TodoTelescope<CR>", "Todo" }
-
-lvim.builtin.which_key.mappings.x = {
-  name = "+Trouble",
-  x = { "<cmd>TroubleToggle<cr>", "Open" },
-  r = { "<cmd>Trouble lsp_references<cr>", "Ref" },
-  f = { "<cmd>Trouble lsp_definitions<cr>", "Def" },
-  i = { "<cmd>Trouble lsp_implementations<cr>", "Impl" },
-  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diag" },
-  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diag[workspace]" },
-  j = { "<cmd>Trouble telescope<cr>", "LocationList" },
-  k = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  t = { "<cmd>TodoTrouble<cr>", "Todo" },
-}
-
-lvim.builtin.which_key.mappings.k = {
-  name = "+Kit",
-  t = { "<cmd>TodoQuickFix<cr>", "Todo" },
-  m = { "<cmd>MinimapToggle<cr>", "Minimap" },
-  z = { "<cmd>FocusToggle<cr>", "AutoZoom" },
-}
-
-lvim.builtin.which_key.mappings.j = {
-  name = "+Justify",
-  s = {
-    b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Buffer String" },
-    F = { "<cmd>Telescope filetypes<CR>", "FileTypes" },
-    g = { "<cmd>Telescope grep_string<CR>", "Grep String" },
-    t = { "<cmd>Telescope current_buffer_tags<CR>", "Tags" },
-    T = { "<cmd>Telescope tags<CR>", "All Tags" },
-  },
+lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.which_key.mappings, {
+  f = { "<cmd>lua require('lir.float').toggle()<cr>", "Files" },
   g = {
-    s = { "<cmd>Telescope git_stash<CR>", "Stash" },
-    g = { "<cmd>Telescope git_files<CR>", "Files" },
+    ['"'] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blames" },
+    ["'"] = { "<cmd>Gitsigns toggle_linehl<cr>", "Highlight" },
+    q = { "<cmd>Gitsigns setqflist<cr>", "Quickfix" },
+    S = { "<cmd>Gitsigns stage_buffer<cr>", "Quickfix" },
+    ["G"] = {
+      name = "Gist",
+      a = { "<cmd>Gist -b -a<cr>", "Create Anon" },
+      d = { "<cmd>Gist -d<cr>", "Delete" },
+      f = { "<cmd>Gist -f<cr>", "Fork" },
+      g = { "<cmd>Gist -b<cr>", "Create" },
+      l = { "<cmd>Gist -l<cr>", "List" },
+      p = { "<cmd>Gist -b -p<cr>", "Create Private" },
+    },
   },
-}
+  j = {
+    name = "+Justify",
+    s = {
+      b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Buffer String" },
+      F = { "<cmd>Telescope filetypes<CR>", "FileTypes" },
+      g = { "<cmd>Telescope grep_string<CR>", "Grep String" },
+      t = { "<cmd>Telescope current_buffer_tags<CR>", "Tags" },
+      T = { "<cmd>Telescope tags<CR>", "All Tags" },
+    },
+    g = {
+      s = { "<cmd>Telescope git_stash<CR>", "Stash" },
+      g = { "<cmd>Telescope git_files<CR>", "Files" },
+    },
+  },
+  k = {
+    name = "+Kit",
+    t = { "<cmd>TodoQuickFix<cr>", "Todo" },
+    m = { "<cmd>MinimapToggle<cr>", "Minimap" },
+    z = { "<cmd>FocusToggle<cr>", "AutoZoom" },
+  },
+  l = {
+    o = { "<cmd>SymbolsOutline<cr>", "Outline" },
+    v = { "<cmd>Vista!!<cr>", "Vista" },
+  },
+  r = {
+    name = "Replace",
+    r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
+    w = { "<cmd>lua require('spectre').open_visual({select_word=true})<cr>", "Replace Word" },
+    f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
+  },
+  s = {
+    ["<tab>"] = { "<cmd>Telescope<CR>", "🧙" },
+    [" "] = { "<cmd>Telescope resume<CR>", "♻️" },
+    ["'"] = { "<cmd>Telescope marks<CR>", "Marks" },
+    ['"'] = { "<cmd>Telescope registers<CR>", "Registers" },
+    ["/"] = { "<cmd>Telescope search_history<CR>", "Search History" },
+    [":"] = { "<cmd>Telescope command_history<CR>", "Command History" },
+    [">"] = { "<cmd>Telescope quickfix<CR>", "QuickList" },
+    ["<"] = { "<cmd>Telescope loclist<CR>", "LocList F" },
+    ["."] = { "<cmd>Telescope file_browser<CR>", "Browser" },
+    a = { "<cmd>Telescope autocommands<CR>", "Autocommands" },
+    s = { "<cmd>Telescope symbols<CR>", "Symbols" },
+    S = { "<cmd>Telescope spell_suggest<CR>", "Spell" },
+    P = { "<cmd>Telescope projects<CR>", "Projects" },
+    T = { "<cmd>TodoTelescope<CR>", "Todo" },
+  },
+  T = {
+    h = { "<cmd>TSHighlightCapturesUnderCursor<cr>", "Highlight" },
+    p = { "<cmd>TSPlaygroundToggle<cr>", "Playground" },
+    t = { "<cmd>Telescope treesitter<CR>", "Telescope" },
+  },
+  x = {
+    name = "+Trouble",
+    x = { "<cmd>TroubleToggle<cr>", "Open" },
+    r = { "<cmd>Trouble lsp_references<cr>", "Ref" },
+    f = { "<cmd>Trouble lsp_definitions<cr>", "Def" },
+    i = { "<cmd>Trouble lsp_implementations<cr>", "Impl" },
+    d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diag" },
+    w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diag[workspace]" },
+    j = { "<cmd>Trouble telescope<cr>", "LocationList" },
+    k = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+    l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+    t = { "<cmd>TodoTrouble<cr>", "Todo" },
+  },
+  z = { "<cmd>ZenMode<cr>", "Zen" },
+})
 
 -- Additional Plugins
 lvim.plugins = {
