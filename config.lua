@@ -64,11 +64,22 @@ vim.opt.guifont = "SauceCodePro NF"
 -- Keymappings
 -- View all the defaults by pressing <leader>Lk
 -- lvim.leader = "space"
-lvim.keys.normal_mode["z<C-l>"] = "<cmd>nohlsearch<cr><C-l>"
-lvim.keys.normal_mode["Y"] = "y$"
-lvim.keys.visual_mode["Y"] = [["+y]]
-lvim.keys.visual_mode["d"] = [["_d]]
-lvim.keys.visual_mode["X"] = [["+x]]
+lvim.keys = vim.tbl_deep_extend("keep", lvim.keys, {
+  insert_mode = {},
+  normal_mode = {
+    ["Y"] = "y$",
+    ["z<C-l>"] = "<cmd>nohlsearch<cr><C-l>",
+    ["z<C-q>"] = ":call LocListToggle()<CR>",
+  },
+  term_mode = {},
+  visual_mode = {
+    ["Y"] = [["+y]],
+    ["d"] = [["_d]],
+    ["X"] = [["+x]],
+  },
+  visual_block_mode = {},
+  command_mode = {},
+})
 
 vim.cmd [[
 " 朝闻道，金、木、水、火、土；【真香定律（王境泽）】；《静夜诗（李白）》。
@@ -170,6 +181,7 @@ lvim.builtin.telescope.on_config_done = function()
 end
 
 -- Whichkey
+-- lvim.builtin.which_key.mappings = vim.tbl_deep_extend()
 lvim.builtin.which_key.mappings.l.o = { "<cmd>SymbolsOutline<cr>", "Outline" }
 lvim.builtin.which_key.mappings.l.v = { "<cmd>Vista!!<cr>", "Vista" }
 lvim.builtin.which_key.mappings.T.h = { "<cmd>TSHighlightCapturesUnderCursor<cr>", "Highlight" }
