@@ -157,6 +157,7 @@ map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
   <C-t> to open file in new tab
   <C-e> to put command to commandline, creates new file in current directory
 --]]
+local actions = require "telescope.actions"
 lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
   defaults = {
     -- prompt_prefix = "   ",
@@ -165,34 +166,56 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
       width = 0.90,
       horizontal = { preview_width = 0.5 },
     },
+    mappings = {
+      i = {
+        ["<C-b>"] = actions.preview_scrolling_up,
+        ["<C-f>"] = actions.preview_scrolling_down,
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-n>"] = actions.cycle_history_next,
+        ["<C-p>"] = actions.cycle_history_prev,
+        ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
+      },
+      n = {
+        ["<C-b>"] = actions.preview_scrolling_up,
+        ["<C-f>"] = actions.preview_scrolling_down,
+        ["<C-n>"] = actions.cycle_history_next,
+        ["<C-p>"] = actions.cycle_history_prev,
+        ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
+        -- ["<C-_>"] = actions.which_key -- Keys to produce <C-/>
+        ["<C-_>"] = require("telescope.actions.generate").which_key {
+          name_width = 20, -- typically leads to smaller floats
+          max_height = 0.2, -- increase potential maximum height
+          seperator = " ⇐ ", -- change sep between mode, keybind, and name
+          close_with_action = false, -- do not close float on action
+        },
+      },
+    },
+  },
+  extensions = {
+    -- https://github.com/nvim-telescope/telescope-fzf-native.nvim
+    fzf = {
+      fuzzy = true, -- false will only do exact matching
+      override_generic_sorter = true, -- override the generic sorter
+      override_file_sorter = true, -- override the file sorter
+      case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+    },
   },
 })
 
 lvim.builtin.telescope.on_config_done = function(telescope)
-  local actions = require "telescope.actions"
-  -- for input mode
-  lvim.builtin.telescope.defaults.mappings.i["<C-b>"] = actions.preview_scrolling_up
-  lvim.builtin.telescope.defaults.mappings.i["<C-f>"] = actions.preview_scrolling_down
-  lvim.builtin.telescope.defaults.mappings.i["<C-j>"] = actions.move_selection_next
-  lvim.builtin.telescope.defaults.mappings.i["<C-k>"] = actions.move_selection_previous
-  lvim.builtin.telescope.defaults.mappings.i["<C-n>"] = actions.cycle_history_next
-  lvim.builtin.telescope.defaults.mappings.i["<C-p>"] = actions.cycle_history_prev
-  lvim.builtin.telescope.defaults.mappings.i["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist
-  -- for normal mode
-  lvim.builtin.telescope.defaults.mappings.n["<C-b>"] = actions.preview_scrolling_up
-  lvim.builtin.telescope.defaults.mappings.n["<C-f>"] = actions.preview_scrolling_down
-  lvim.builtin.telescope.defaults.mappings.n["<C-n>"] = actions.cycle_history_next
-  lvim.builtin.telescope.defaults.mappings.n["<C-p>"] = actions.cycle_history_prev
-  lvim.builtin.telescope.defaults.mappings.n["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist
-
-  -- lvim.builtin.telescope.defaults.mappings.n["<C-_>"] = actions.which_key -- keys from pressing <C-/>
-  lvim.builtin.telescope.defaults.mappings.n["<C-_>"] = require("telescope.actions.generate").which_key {
-    name_width = 20, -- typically leads to smaller floats
-    max_height = 0.2, -- increase potential maximum height
-    seperator = " ⇐ ", -- change sep between mode, keybind, and name
-    close_with_action = false, -- do not close float on action
-  }
+  -- require("telescope").load_extension "fzf"
+  -- require("telescope").load_extension "fzy_native"
 end
+
+-- Project
+lvim.builtin.project = vim.tbl_deep_extend("force", lvim.builtin.project, {
+  exclude_dirs = {},
+  -- Show hidden files in telescope
+  show_hidden = false,
+  -- When set to false, you will get a message when project.nvim changes your directory.
+  silent_chdir = false,
+})
 
 -- Whichkey
 lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.which_key.mappings, {
@@ -270,6 +293,7 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
       "Colorscheme with Preview",
     },
     p = { "<cmd>Telescope projects<CR>", "Projects" },
+    P = { "<cmd>Telescope pickers<CR>", "<Pickers>" },
     s = {
       s = { "<cmd>Telescope symbols<CR>", "Symbols" },
       e = { "<cmd>lua require'telescope.builtin'.symbols{ sources = {'emoji'} }<CR>", "Emoji" },
