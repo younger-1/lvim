@@ -58,6 +58,7 @@ vim.opt.wrap = false
 vim.opt.clipboard = ""
 vim.opt.inccommand = "split"
 vim.opt.mouse = "nvi"
+vim.opt.timeoutlen = 200
 vim.opt.guifont = "SauceCodePro NF"
 
 -- vim.g.loaded_netrw = 1
@@ -154,7 +155,6 @@ map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
 
 -- Telescope
 --[[ tips:
-  <C-t> to open file in new tab
   <C-e> to put command to commandline, creates new file in current directory
 --]]
 local actions = require "telescope.actions"
@@ -647,6 +647,22 @@ lvim.plugins = {
   },
   -- [Telescope]
   { "nvim-telescope/telescope-symbols.nvim" },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    run = "make",
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension "fzf"
+    end,
+  },
+  {
+    "nvim-telescope/telescope-frecency.nvim",
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension "frecency"
+    end,
+    requires = { "tami5/sqlite.lua" },
+  },
   -- [Terminal]
   -- { "lambdalisue/guise.vim" },
   -- [UI]
