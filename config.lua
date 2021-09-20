@@ -54,12 +54,13 @@ lvim.transparent_window = false
 -- lvim.colorscheme = "onedarker"
 -- lvim.log.level = "warn"
 lvim.debug = false
-vim.opt.wrap = false
 vim.opt.clipboard = ""
+vim.opt.cmdheight = 1
+vim.opt.guifont = "SauceCodePro NF"
 vim.opt.inccommand = "split"
 vim.opt.mouse = "nvi"
 vim.opt.timeoutlen = 200
-vim.opt.guifont = "SauceCodePro NF"
+vim.opt.wrap = false
 
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
@@ -67,21 +68,21 @@ vim.opt.guifont = "SauceCodePro NF"
 -- Keymappings
 -- View all the defaults by pressing <leader>Lk
 -- lvim.leader = "space"
-lvim.keys = vim.tbl_deep_extend("keep", lvim.keys, {
-  insert_mode = {},
+lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
+  -- insert_mode = {},
   normal_mode = {
     ["Y"] = "y$",
     ["z<C-l>"] = "<cmd>nohlsearch<cr><C-l>",
     ["<C-a>"] = ":call LocListToggle()<CR>",
   },
-  term_mode = {},
+  -- term_mode = {},
   visual_mode = {
     ["Y"] = [["+y]],
     ["d"] = [["_d]],
     ["X"] = [["+x]],
   },
-  visual_block_mode = {},
-  command_mode = {},
+  -- visual_block_mode = {},
+  -- command_mode = {},
 })
 
 vim.cmd [[
@@ -490,6 +491,7 @@ lvim.plugins = {
       end,
       wants = { "nvim-treesitter" }, -- or require if not used so far
       after = { "nvim-cmp", "LuaSnip" }, -- if a completion plugin is using tabs load it before
+      disable = true,
     },
     {
       "chaoren/vim-wordmotion",
