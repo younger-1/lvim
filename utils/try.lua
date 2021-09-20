@@ -9,13 +9,25 @@
 -- local a, b = unpack { 10, 20, 30 } -- a=10, b=20, 30 is discarded
 
 -- [select](https://stackoverflow.com/questions/6929117/what-does-it-do-for-i-1-select)
+-- print(select(1, "a", "b", "c")) --> a b c
+-- print(select(2, "a", "b", "c")) --> b c
+-- print(select(3, "a", "b", "c")) --> c
 -- print(select "#") --> 0
 -- print(select("#", { 1, 2, 3 })) --> 1 (single table as argument)
 -- print(select("#", 1, 2, 3)) --> 3
 -- print(select("#", { 1, 2, 3 }, 4, 5, { 6, 7, 8 })) --> 4 (a table, 2 numbers, another table)
 
--- [table]
+-- [ipairs]
+-- local f = function(...)
+--   local first, second = select(1, ...)
+--   local last = select(#{ ... }, ...)
+--   for _, value in ipairs { ... } do
+--     pp(value)
+--   end
+-- end
+-- f("a", 1, "b", 2)
 
+-- [[table]]
 ---@version >5.2, JIT
 -- local a = table.pack(4, 6, 5)
 
@@ -33,6 +45,14 @@
 --   c[k] = v
 -- end
 -- print(vim.inspect(c))
+
+-- [[string]]
+
+-- local s = "hello world"
+-- local ans = { string.find(s, "ll", 1, true) }
+-- pp(ans) -- { 3, 4 }
+-- local ans = { string.find(s, "^he") }
+-- pp(ans) -- { 1, 2 }
 
 --[[
   1. vim

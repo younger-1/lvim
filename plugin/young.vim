@@ -15,3 +15,24 @@ function! FirstCharOrFirstCol()
     normal 0
   endif
 endfunction
+
+" The following example lists user names to a Finger command >
+" com -complete=custom,ListUsers -nargs=1 Finger !finger <args>
+" fun ListUsers(A,L,P)
+"     return system("cut -d: -f1 /etc/passwd")
+" endfun
+
+" The following example completes filenames from the directories specified in the 'path' option: >
+" com -nargs=1 -bang -complete=customlist,EditFileComplete
+"  \ EditFile edit<bang> <args>
+" fun EditFileComplete(A,L,P)
+"     return split(globpath(&path, a:A), "\n")
+" endfun
+
+command -nargs=1 -range=% SaveIt :<line1>,<line2>write! <args>
+
+command! -nargs=+ -complete=expression Test :echo "<args>"
+
+" command! -nargs=* -complete=packadd RR lua rr(<f-args>)
+command! -nargs=* -complete=customlist,v:lua.require'tools'.rr_complete RR lua require'tools'.rr(<f-args>)
+
