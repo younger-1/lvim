@@ -209,8 +209,9 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
       workspaces = {
         -- [](https://github.com/nvim-telescope/telescope-frecency.nvim/issues/21)
         ["conf"] = vim.fn.expand "~/.config",
-        ["data"] = vim.fn.expand "~/.local/share/",
+        ["data"] = vim.fn.expand "~/.local/share",
         ["dot"] = vim.fn.expand "~/dotter",
+        ["beauty"] = vim.fn.expand "~/Beauty",
         ["project"] = vim.fn.expand "~/projects",
         ["wiki"] = vim.fn.expand "~/wiki",
       },
@@ -256,8 +257,16 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     ["'"] = { "<cmd>Gitsigns toggle_linehl<cr>", "Highlight" },
     ['"'] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blames" },
     a = { "<cmd>Telescope git_stash<CR>", "Stash" },
-    S = { "<cmd>Gitsigns stage_buffer<cr>", "Stage Buffer" },
     f = { "<cmd>Telescope git_files<CR>", "Files" },
+    h = {
+      -- :lua require('telescope').extensions.gh.issues()
+      -- [](https://github.com/nvim-telescope/telescope-github.nvim#options)
+      i = { "<cmd>Telescope gh issues<cr>", "Issues" },
+      p = { "<cmd>Telescope gh pull_request<cr>", "Pull_request" },
+      g = { "<cmd>Telescope gh gist<cr>", "Gist" },
+      r = { "<cmd>Telescope gh run<cr>", "Run" },
+    },
+    S = { "<cmd>Gitsigns stage_buffer<cr>", "Stage Buffer" },
   },
   j = {
     name = "+Justify",
@@ -684,6 +693,13 @@ lvim.plugins = {
       require("telescope").load_extension "frecency"
     end,
     requires = { "tami5/sqlite.lua" },
+  },
+  {
+    "nvim-telescope/telescope-github.nvim",
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension "gh"
+    end,
   },
   -- [Terminal]
   -- { "lambdalisue/guise.vim" },
