@@ -27,6 +27,16 @@
 -- end
 -- f("a", 1, "b", 2)
 
+-- [](https://stackoverflow.com/questions/41349526/how-to-iterate-lua-table-from-end)
+-- local mytable = { "a", "b", "c" }
+-- for i = 1, #mytable do
+--   print(mytable[#mytable + 1 - i])
+-- end
+-- for i = #mytable, 1, -1 do
+--   value = mytable[i]
+--   print(i .. ": " .. value)
+-- end
+
 -- [[table]]
 ---@version >5.2, JIT
 -- local a = table.pack(4, 6, 5)

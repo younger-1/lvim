@@ -19,4 +19,4 @@ require("lightspeed").setup {
   cycle_group_bwd_key = nil,
 }
 
-vim.cmd [[unmap x]]
+vim.cmd [[silent! unmap x]]

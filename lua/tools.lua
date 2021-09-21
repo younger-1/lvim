@@ -21,15 +21,7 @@ function tools.add_to_set(set1, set2)
   end
 end
 
-function tools.reload_file(pack)
-  local luacache = (_G.__luacache or {}).cache
-  package.loaded[pack] = nil
-  if luacache then
-    luacache[pack] = nil
-  end
-end
-
-local reload_module = function(module_name, starts_with_only)
+local unload_module = function(found, module_name, starts_with_only)
   -- TODO: Might need to handle cpath / compiled lua packages? Not sure.
   local matcher
   if not starts_with_only then
@@ -45,11 +37,12 @@ local reload_module = function(module_name, starts_with_only)
   -- Handle impatient.nvim automatically.
   local luacache = (_G.__luacache or {}).cache
 
-  pp "Start reload:"
+  print "Start unload:"
   for pack, _ in pairs(package.loaded) do
     if matcher(pack) then
-      pp(pack .. " is found")
+      print("    " .. pack .. " is found")
       package.loaded[pack] = nil
+      table.insert(found, pack)
 
       if luacache then
         luacache[pack] = nil
@@ -60,11 +53,44 @@ end
 
 -- For manual reload
 function tools.rr(...)
-  pp { ... }
-  for _, mod in ipairs { ... } do
-    -- require("plenary").reload.reload_module(mod)
-    reload_module(mod)
+  local mods = { ... }
+
+  -- Reload the current buffer
+  if #mods == 0 then
+    local bufpath = vim.api.nvim_buf_get_name(0)
+    -- local bufpath = "/home/.local/lua/start/packer.nvim/lua/packer/clean.lua"
+    bufpath = vim.split(bufpath, "/") -- { "", "home", ".local", "lua", "start", "packer.nvim", "lua", "packer", "clean.lua" }
+    local pack = { vim.split(bufpath[#bufpath], ".", true)[1] } -- "clean"
+    for i = #bufpath - 1, 1, -1 do
+      if i == 1 and bufpath[i] ~= "lua" then
+        print("Invalid pack path: " .. vim.api.nvim_buf_get_name(0))
+        return
+      end
+      if bufpath[i] == "lua" then
+        break
+      end
+      table.insert(pack, 1, bufpath[i])
+    end
+    pack = table.concat(pack, ".")
+    tools.reload_file(pack)
+    print("Reload: " .. pack)
+    require("utils").reload_lv_config()
+    return
   end
+
+  pp(mods)
+  local found = {}
+  for _, mod in ipairs(mods) do
+    -- require("plenary").reload.reload_module(mod)
+    unload_module(found, mod, true)
+  end
+
+  print "Reload:"
+  for _, pack in ipairs(found) do
+    require(pack)
+    print("    " .. pack .. " is updated")
+  end
+
   require("utils").reload_lv_config()
 end
 
@@ -81,7 +107,7 @@ end
 --   return completion_list
 -- end
 
-local loader_complete = function(lead, _, _)
+function tools.rr_complete(lead, _, _)
   local completion_list = {}
   for name, _ in pairs(_G.package.loaded) do
     if vim.startswith(name, lead) then
@@ -90,6 +116,14 @@ local loader_complete = function(lead, _, _)
   end
   table.sort(completion_list)
   return completion_list
+end
+
+function tools.reload_file(pack)
+  local luacache = (_G.__luacache or {}).cache
+  package.loaded[pack] = nil
+  if luacache then
+    luacache[pack] = nil
+  end
 end
 
 return tools
