@@ -335,6 +335,8 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     },
     S = { "<cmd>Telescope spell_suggest<CR>", "Spell" },
     T = { "<cmd>TodoTelescope<CR>", "Todo" },
+    z = { "<cmd>lua require'telescope'.extensions.zoxide.list{}<CR>", "Z" },
+    Z = { "<cmd>lua require'telescope'.extensions.z.list{ cmd = {'zoxide', 'query', '-ls'} }<CR>", "Z" },
   },
   T = {
     h = { "<cmd>TSHighlightCapturesUnderCursor<cr>", "Highlight" },
@@ -699,6 +701,33 @@ lvim.plugins = {
     after = "telescope.nvim",
     config = function()
       require("telescope").load_extension "gh"
+    end,
+  },
+  {
+    "nvim-telescope/telescope-z.nvim",
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension "z"
+    end,
+  },
+  {
+    "jvgrootveld/telescope-zoxide",
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension "zoxide"
+      -- config
+      local z_utils = require "telescope._extensions.zoxide.utils"
+      require("telescope._extensions.zoxide.config").setup {
+        prompt_title = "[ Z⏫ ]",
+        mappings = {
+          -- default = {
+          --   after_action = function(selection)
+          --     print("Update to (" .. selection.z_score .. ") " .. selection.path)
+          --   end,
+          -- },
+          -- ["<C-q>"] = { action = z_utils.create_basic_command "split" },
+        },
+      }
     end,
   },
   -- [Terminal]
