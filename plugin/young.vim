@@ -29,10 +29,17 @@ endfunction
 "     return split(globpath(&path, a:A), "\n")
 " endfun
 
-command -nargs=1 -range=% SaveIt :<line1>,<line2>write! <args>
+" command! -nargs=1 -range=% SaveIt :<line1>,<line2>write! <args>
 
-command! -nargs=+ -complete=expression Test :echo "<args>"
+" command! -nargs=+ -complete=expression Test :echo "<args>"
 
 " command! -nargs=* -complete=packadd RR lua rr(<f-args>)
 command! -nargs=* -complete=customlist,v:lua.require'tools'.rr_complete RR lua require'tools'.rr(<f-args>)
+
+" Replace a range with the contents of a file
+com -range -nargs=1 -complete=file Replace <line1>-pu_|<line1>,<line2>d|r <args>|<line1>d
+
+" Count the number of lines in the range
+com! -range -nargs=0 Lines  echo <line2> - <line1> + 1 "lines"
+
 

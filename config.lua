@@ -281,8 +281,9 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
   },
   k = {
     name = "+Kit",
-    t = { "<cmd>TodoQuickFix<cr>", "Todo" },
+    c = { "<cmd>Cheatsheet<cr>", "Cheat" },
     m = { "<cmd>MinimapToggle<cr>", "Minimap" },
+    t = { "<cmd>TodoQuickFix<cr>", "Todo" },
     z = { "<cmd>FocusToggle<cr>", "AutoZoom" },
   },
   l = {
@@ -294,6 +295,10 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     R = { "<cmd>Telescope lsp_references<cr>", "Ref" },
     c = { "<cmd>Telescope lsp_code_actions<cr>", "Code Action" },
     C = { "<cmd>Telescope lsp_range_code_actions<cr>", "Range Action" },
+  },
+  L = {
+    n = { "<cmd>LuaCacheLog<cr>", "LuaCacheLog" },
+    m = { "<cmd>LuaCacheProfile<cr>", "LuaCacheProfile" },
   },
   r = {
     name = "Replace",
@@ -735,6 +740,7 @@ lvim.plugins = {
     "AckslD/nvim-neoclip.lua",
     after = "telescope.nvim",
     config = function()
+      require("telescope").load_extension "neoclip"
       require("neoclip").setup {
         filter = nil,
         preview = true,
@@ -751,7 +757,6 @@ lvim.plugins = {
           },
         },
       }
-      require("telescope").load_extension "neoclip"
     end,
   },
   -- [Terminal]
@@ -833,6 +838,15 @@ lvim.plugins = {
         " let g:translator_window_type = 'preview'
         " let g:translator_default_engines = ['bing', 'google', 'haici', 'youdao']
     ]]
+    end,
+  },
+  {
+    "sudormrfbin/cheatsheet.nvim",
+    config = function()
+      require("cheatsheet").setup {
+        -- For bundled plugin cheatsheets, do not show a sheet if you don't have the plugin installed
+        include_only_installed_plugins = false,
+      }
     end,
   },
   -- [Web]
