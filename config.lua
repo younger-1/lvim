@@ -335,6 +335,7 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     },
     S = { "<cmd>Telescope spell_suggest<CR>", "Spell" },
     T = { "<cmd>TodoTelescope<CR>", "Todo" },
+    y = { "<cmd>Telescope neoclip<CR>", "Clip" },
     z = { "<cmd>lua require'telescope'.extensions.zoxide.list{}<CR>", "Z" },
     Z = { "<cmd>lua require'telescope'.extensions.z.list{ cmd = {'zoxide', 'query', '-ls'} }<CR>", "Z" },
   },
@@ -728,6 +729,29 @@ lvim.plugins = {
           -- ["<C-q>"] = { action = z_utils.create_basic_command "split" },
         },
       }
+    end,
+  },
+  {
+    "AckslD/nvim-neoclip.lua",
+    after = "telescope.nvim",
+    config = function()
+      require("neoclip").setup {
+        filter = nil,
+        preview = true,
+        default_register = '"',
+        content_spec_column = false,
+        on_paste = {
+          set_reg = false,
+        },
+        keys = {
+          i = {
+            select = "<cr>",
+            paste = "<c-p>",
+            paste_behind = "<c-b>",
+          },
+        },
+      }
+      require("telescope").load_extension "neoclip"
     end,
   },
   -- [Terminal]
