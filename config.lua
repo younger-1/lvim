@@ -849,6 +849,15 @@ lvim.plugins = {
       }
     end,
   },
+  {
+    "dbeniamine/cheat.sh-vim",
+    -- keys = "<leader>K",
+    cmd = "Cheat",
+    config = function()
+      vim.g.CheatDoNotReplaceKeywordPrg = 1
+      vim.g.CheatSheetDoNotMap = 1
+    end,
+  },
   -- [Web]
   { "wakatime/vim-wakatime" },
   -- [LSP]
