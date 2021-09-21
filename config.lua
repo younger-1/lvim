@@ -300,6 +300,9 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     n = { "<cmd>LuaCacheLog<cr>", "LuaCacheLog" },
     m = { "<cmd>LuaCacheProfile<cr>", "LuaCacheProfile" },
   },
+  p = {
+    p = { "<cmd>lua require('telescope').extensions.packer.plugins()<cr>", "Packer" },
+  },
   r = {
     name = "Replace",
     r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
@@ -686,6 +689,13 @@ lvim.plugins = {
   },
   -- [Telescope]
   { "nvim-telescope/telescope-symbols.nvim" },
+  {
+    "nvim-telescope/telescope-packer.nvim",
+    after = "telescope.nvim",
+    config = function()
+      require("telescope").load_extension "packer"
+    end,
+  },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
     run = "make",
