@@ -273,7 +273,6 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     s = {
       b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Buffer String" },
       F = { "<cmd>Telescope filetypes<CR>", "FileTypes" },
-      g = { "<cmd>Telescope grep_string<CR>", "Grep String" },
       r = { "<cmd>Telescope reloader<CR>", "Reload Module" },
       t = { "<cmd>Telescope current_buffer_tags<CR>", "Tags" },
       T = { "<cmd>Telescope tags<CR>", "All Tags" },
@@ -320,10 +319,9 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     [":"] = { "<cmd>Telescope command_history<CR>", "Command History" },
     ["."] = { "<cmd>Telescope file_browser<CR>", "Browser" },
     a = { "<cmd>Telescope autocommands<CR>", "Autocommands" },
-    c = {
-      "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
-      "Colorscheme with Preview",
-    },
+    c = { "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>", "Colorscheme" },
+    g = { "<cmd>Telescope live_grep <cr>", "Grep" },
+    G = { "<cmd>Telescope live_grep grep_open_files=v:true<cr>", "Text in opened buffer" },
     m = {
       -- :Telescope frecency frecency default_text=:project:
       c = { "<Cmd>lua require('telescope').extensions.frecency.frecency{ default_text = ':CWD:' }<CR>", "CWD" },
@@ -342,10 +340,11 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
       l = { "<cmd>lua require'telescope.builtin'.symbols{ sources = {'latex'} }<CR>", "LaTeX" },
     },
     S = { "<cmd>Telescope spell_suggest<CR>", "Spell" },
-    T = { "<cmd>TodoTelescope<CR>", "Todo" },
+    t = { "<cmd>TodoTelescope<CR>", "Todo" },
+    T = { "<cmd>Telescope grep_string<CR>", "Text under cursor" },
     y = { "<cmd>Telescope neoclip<CR>", "Clip" },
     z = { "<cmd>lua require'telescope'.extensions.zoxide.list{}<CR>", "Z" },
-    Z = { "<cmd>lua require'telescope'.extensions.z.list{ cmd = {'zoxide', 'query', '-ls'} }<CR>", "Z" },
+    -- z = { "<cmd>lua require'telescope'.extensions.z.list{ cmd = {'zoxide', 'query', '-ls'} }<CR>", "Z" },
   },
   T = {
     h = { "<cmd>TSHighlightCapturesUnderCursor<cr>", "Highlight" },
@@ -825,7 +824,8 @@ lvim.plugins = {
     },
     {
       "folke/todo-comments.nvim",
-      cmd = { "TodoQuickFix", "TodoTelescope", "TodoTrouble" },
+      -- cmd = { "TodoQuickFix", "TodoTelescope", "TodoTrouble" },
+      event = "BufRead",
       config = function()
         require("todo-comments").setup {}
       end,
