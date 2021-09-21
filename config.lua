@@ -73,7 +73,7 @@ lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
   normal_mode = {
     ["Y"] = "y$",
     ["z<C-l>"] = "<cmd>nohlsearch<cr><C-l>",
-    ["<C-a>"] = ":call LocListToggle()<CR>",
+    ["<C-e>"] = ":call LocListToggle()<CR>",
   },
   -- term_mode = {},
   visual_mode = {
@@ -175,14 +175,14 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
         ["<C-k>"] = actions.move_selection_previous,
         -- ["<C-b>"] = actions.preview_scrolling_up,
         ["<C-f>"] = actions.preview_scrolling_down,
-        ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
+        ["<C-e>"] = actions.smart_send_to_loclist + actions.open_loclist,
       },
       n = {
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
         -- ["<C-b>"] = actions.preview_scrolling_up,
         ["<C-f>"] = actions.preview_scrolling_down,
-        ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
+        ["<C-e>"] = actions.smart_send_to_loclist + actions.open_loclist,
         -- ["<C-_>"] = actions.which_key -- Keys to produce <C-/>
         ["<C-_>"] = require("telescope.actions.generate").which_key {
           name_width = 20, -- typically leads to smaller floats
@@ -200,6 +200,20 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
       override_generic_sorter = true, -- override the generic sorter
       override_file_sorter = true, -- override the file sorter
       case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+    },
+    frecency = {
+      -- db_root = "home/my_username/path/to/db_root",
+      show_scores = true,
+      show_unindexed = true,
+      ignore_patterns = { "*.git/*", "*/tmp/*" },
+      workspaces = {
+        -- [](https://github.com/nvim-telescope/telescope-frecency.nvim/issues/21)
+        ["conf"] = vim.fn.expand "~/.config",
+        ["data"] = vim.fn.expand "~/.local/share/",
+        ["dot"] = vim.fn.expand "~/dotter",
+        ["project"] = vim.fn.expand "~/projects",
+        ["wiki"] = vim.fn.expand "~/wiki",
+      },
     },
   },
 })
@@ -238,7 +252,7 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
       b = { "<cmd>Gitsigns setqflist 'attached'<cr><cmd>copen<cr>", "Attached Buffers" },
       a = { "<cmd>Gitsigns setqflist 'all'<cr><cmd>copen<cr>", "All Git Files" },
     },
-    ["<C-a>"] = { "<cmd>Gitsigns setloclist<cr><cmd>lopen<cr>", "LocList" },
+    ["<C-e>"] = { "<cmd>Gitsigns setloclist<cr><cmd>lopen<cr>", "LocList" },
     ["'"] = { "<cmd>Gitsigns toggle_linehl<cr>", "Highlight" },
     ['"'] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blames" },
     a = { "<cmd>Telescope git_stash<CR>", "Stash" },
@@ -263,7 +277,7 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     z = { "<cmd>FocusToggle<cr>", "AutoZoom" },
   },
   l = {
-    ["<C-a>"] = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "LocList" },
+    ["<C-e>"] = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "LocList" },
     o = { "<cmd>SymbolsOutline<cr>", "Outline" },
     v = { "<cmd>Vista!!<cr>", "Vista" },
     D = { "<cmd>Telescope lsp_definitions<cr>", "Def" },
@@ -282,7 +296,7 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     ["<tab>"] = { "<cmd>Telescope<CR>", "🧙" },
     [" "] = { "<cmd>Telescope resume<CR>", "♻️" },
     ["<C-q>"] = { "<cmd>Telescope quickfix<CR>", "QuickList" },
-    ["<C-a>"] = { "<cmd>Telescope loclist<CR>", "LocList Bug" },
+    ["<C-e>"] = { "<cmd>Telescope loclist<CR>", "LocList Bug" },
     ["'"] = { "<cmd>Telescope marks<CR>", "Marks" },
     ['"'] = { "<cmd>Telescope registers<CR>", "Registers" },
     ["/"] = { "<cmd>Telescope search_history<CR>", "Search History" },
@@ -292,6 +306,12 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     c = {
       "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
       "Colorscheme with Preview",
+    },
+    m = {
+      -- :Telescope frecency frecency default_text=:project:
+      c = { "<Cmd>lua require('telescope').extensions.frecency.frecency{ default_text = ':CWD:' }<CR>", "CWD" },
+      l = { "<Cmd>lua require('telescope').extensions.frecency.frecency{ default_text = ':LSP:' }<CR>", "LSP" },
+      m = { "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>", "Frecency" },
     },
     p = { "<cmd>Telescope projects<CR>", "Projects" },
     P = { "<cmd>Telescope pickers<CR>", "<Pickers>" },
@@ -315,7 +335,7 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
   x = {
     name = "+Trouble",
     ["<C-q>"] = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-    ["<C-a>"] = { "<cmd>Trouble loclist<cr>", "LocList" },
+    ["<C-e>"] = { "<cmd>Trouble loclist<cr>", "LocList" },
     ["."] = { "<cmd>Trouble telescope<cr>", "Telescope" },
     x = { "<cmd>TroubleToggle<cr>", "Open" },
     D = { "<cmd>Trouble lsp_definitions<cr>", "Def" },

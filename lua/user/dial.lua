@@ -1,10 +1,10 @@
 local dial = require "dial"
 vim.cmd [[
-  nmap <C-e> <Plug>(dial-increment)
+  nmap <C-a> <Plug>(dial-increment)
   nmap <C-x> <Plug>(dial-decrement)
-  vmap <C-e> <Plug>(dial-increment)
+  vmap <C-a> <Plug>(dial-increment)
   vmap <C-x> <Plug>(dial-decrement)
-  vmap g<C-e> <Plug>(dial-increment-additional)
+  vmap g<C-a> <Plug>(dial-increment-additional)
   vmap g<C-x> <Plug>(dial-decrement-additional)
 ]]
 
