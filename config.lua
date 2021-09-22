@@ -161,8 +161,12 @@ map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
 local actions = require "telescope.actions"
 lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
   defaults = {
+    -- 🔍
     -- prompt_prefix = "   ",
     -- selection_caret = " ",
+    entry_prefix = "  ",
+    -- horizontal, center, cursor, vertical, flex, bottom_pane
+    layout_strategy = "horizontal",
     layout_config = {
       width = 0.90,
       horizontal = { preview_width = 0.5 },
@@ -191,6 +195,32 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
           close_with_action = false, -- do not close float on action
         },
       },
+    },
+  },
+  -- require'telescope.themes'.get_cursor()
+  -- require'telescope.themes'.get_dropdown()
+  -- require'telescope.themes'.get_ivy()
+  pickers = {
+    -- find_files = require("telescope.themes").get_dropdown(),
+    find_files = {
+      -- theme = "dropdown",
+      -- {
+      --   border = true,
+      --   borderchars = {
+      --     preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+      --     prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+      --     results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+      --   },
+      --   layout_config = {
+      --     height = <function 2>,
+      --     preview_cutoff = 1,
+      --     width = <function 3>,
+      --     <metatable> = <table 1>
+      --   },
+      --   layout_strategy = "center",
+      --   preview_title = "Preview",
+      --   sorting_strategy = "ascending",
+      -- }
     },
   },
   extensions = {
@@ -234,6 +264,7 @@ lvim.builtin.project = vim.tbl_deep_extend("force", lvim.builtin.project, {
 })
 
 -- Whichkey
+-- :h keycodes
 lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.which_key.mappings, {
   f = { "<cmd>lua require('lir.float').toggle()<cr>", "Files" },
   g = {
@@ -317,10 +348,11 @@ lvim.builtin.which_key.mappings = vim.tbl_deep_extend("force", lvim.builtin.whic
     ['"'] = { "<cmd>Telescope registers<CR>", "Registers" },
     ["/"] = { "<cmd>Telescope search_history<CR>", "Search History" },
     [":"] = { "<cmd>Telescope command_history<CR>", "Command History" },
-    ["."] = { "<cmd>Telescope file_browser<CR>", "Browser" },
+    ["."] = { "<cmd>Telescope file_browser hidden=v:true<CR>", "Browser" },
     a = { "<cmd>Telescope autocommands<CR>", "Autocommands" },
     c = { "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>", "Colorscheme" },
     g = { "<cmd>Telescope live_grep <cr>", "Grep" },
+    -- f = { "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files <cr>", "Find files" },
     G = { "<cmd>Telescope live_grep grep_open_files=v:true<cr>", "Text in opened buffer" },
     m = {
       -- :Telescope frecency frecency default_text=:project:

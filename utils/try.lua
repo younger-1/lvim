@@ -63,6 +63,7 @@
 -- pp(ans) -- { 3, 4 }
 -- local ans = { string.find(s, "^he") }
 -- pp(ans) -- { 1, 2 }
+-- pp(s:sub(2):match "%s") -- " "
 
 --[[
   1. vim
