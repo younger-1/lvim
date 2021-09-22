@@ -159,6 +159,7 @@ map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
   <C-e> to put command to commandline, creates new file in current directory
 --]]
 local actions = require "telescope.actions"
+local trouble = require "trouble.providers.telescope"
 lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
   defaults = {
     -- 🔍
@@ -173,20 +174,10 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
     },
     mappings = {
       i = {
-        ["<C-n>"] = actions.cycle_history_next,
-        ["<C-p>"] = actions.cycle_history_prev,
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
-        -- ["<C-b>"] = actions.preview_scrolling_up,
-        ["<C-f>"] = actions.preview_scrolling_down,
-        ["<C-e>"] = actions.smart_send_to_loclist + actions.open_loclist,
-      },
-      n = {
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
-        -- ["<C-b>"] = actions.preview_scrolling_up,
-        ["<C-f>"] = actions.preview_scrolling_down,
-        ["<C-e>"] = actions.smart_send_to_loclist + actions.open_loclist,
         -- ["<C-_>"] = actions.which_key -- Keys to produce <C-/>
         ["<C-_>"] = require("telescope.actions.generate").which_key {
           name_width = 20, -- typically leads to smaller floats
@@ -194,6 +185,14 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
           seperator = " ⇐ ", -- change sep between mode, keybind, and name
           close_with_action = false, -- do not close float on action
         },
+        ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
+        ["<c-g>"] = trouble.open_with_trouble,
+      },
+      n = {
+        ["<C-n>"] = actions.cycle_history_next,
+        ["<C-p>"] = actions.cycle_history_prev,
+        ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
+        ["<c-g>"] = trouble.open_with_trouble,
       },
     },
   },
@@ -222,6 +221,16 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
       --   sorting_strategy = "ascending",
       -- }
     },
+    git_branches = {
+      mappings = {
+        i = {
+          ["<C-f>"] = actions.preview_scrolling_down,
+        },
+        n = {
+          ["<C-f>"] = actions.preview_scrolling_down,
+        },
+      },
+    },
   },
   extensions = {
     -- https://github.com/nvim-telescope/telescope-fzf-native.nvim
@@ -248,11 +257,6 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
     },
   },
 })
-
-lvim.builtin.telescope.on_config_done = function(telescope)
-  -- require("telescope").load_extension "fzf"
-  -- require("telescope").load_extension "fzy_native"
-end
 
 -- Project
 lvim.builtin.project = vim.tbl_deep_extend("force", lvim.builtin.project, {
@@ -540,10 +544,6 @@ lvim.plugins = {
     cmd = "Codi",
   },
   {
-    "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-  },
-  {
     "kevinhwang91/nvim-bqf",
     event = "BufRead",
   },
@@ -812,18 +812,17 @@ lvim.plugins = {
     after = "telescope.nvim",
     config = function()
       require("telescope").load_extension "zoxide"
-      -- config
-      local z_utils = require "telescope._extensions.zoxide.utils"
+      -- local z_utils = require "telescope._extensions.zoxide.utils"
       require("telescope._extensions.zoxide.config").setup {
         prompt_title = "[ Z⏫ ]",
-        mappings = {
-          -- default = {
-          --   after_action = function(selection)
-          --     print("Update to (" .. selection.z_score .. ") " .. selection.path)
-          --   end,
-          -- },
-          -- ["<C-q>"] = { action = z_utils.create_basic_command "split" },
-        },
+        -- mappings = {
+        -- default = {
+        --   after_action = function(selection)
+        --     print("Update to (" .. selection.z_score .. ") " .. selection.path)
+        --   end,
+        -- },
+        -- ["<C-q>"] = { action = z_utils.create_basic_command "split" },
+        -- },
       }
     end,
   },
@@ -877,6 +876,43 @@ lvim.plugins = {
         vim.cmd "let g:minimap_close_filetypes = ['startify', 'netrw', 'vim-plug', 'dashboard']"
         vim.cmd "let g:minimap_git_colors = 1"
         vim.cmd "let g:minimap_highlight_search = 1"
+      end,
+    },
+    {
+      "folke/trouble.nvim",
+      cmd = "TroubleToggle",
+      config = function()
+        require("trouble").setup {
+          height = 10,
+          mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
+          action_keys = {
+            -- map to {} to remove a mapping, for example: close = {},
+            close = "q", -- close the list
+            cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
+            refresh = "r", -- manually refresh
+            jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
+            open_split = { "<c-x>" }, -- open buffer in new split
+            open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
+            open_tab = { "<c-t>" }, -- open buffer in new tab
+            jump_close = { "o" }, -- jump to the diagnostic and close the list
+            toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
+            toggle_preview = "P", -- toggle auto_preview
+            hover = "K", -- opens a small popup with the full multiline message
+            preview = "p", -- preview the diagnostic location
+            close_folds = { "zM", "zm" }, -- close all folds
+            open_folds = { "zR", "zr" }, -- open all folds
+            toggle_fold = { "zA", "za" }, -- toggle fold of current file
+            previous = "k", -- preview item
+            next = "j", -- next item
+          },
+          signs = {
+            error = "",
+            warning = "",
+            hint = "",
+            information = "",
+            other = "﫠",
+          },
+        }
       end,
     },
   },
