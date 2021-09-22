@@ -37,6 +37,12 @@
 --   print(i .. ": " .. value)
 -- end
 
+-- [load]
+-- [](https://stackoverflow.com/questions/52230434/eval-function-in-lua-5-1)
+-- @return parses a string and returns a function that would execute that code
+-- :lua load "print(1,2,3)"()
+-- local fun = load "print(1,2,3)"
+
 -- [[table]]
 ---@version >5.2, JIT
 -- local a = table.pack(4, 6, 5)
@@ -64,6 +70,17 @@
 -- local ans = { string.find(s, "^he") }
 -- pp(ans) -- { 1, 2 }
 -- pp(s:sub(2):match "%s") -- " "
+
+-- [](https://www.codegrepper.com/code-examples/lua/parse+string+lua)
+-- local function split(s, delimiter)
+--   local result = {}
+--   for match in (s .. delimiter):gmatch("(.-)" .. delimiter) do
+--     table.insert(result, match)
+--   end
+--   return result
+-- end
+-- local split_string = split("Hello World!", " ")
+-- pp(split_string)
 
 --[[
   1. vim

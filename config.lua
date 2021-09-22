@@ -265,8 +265,25 @@ lvim.builtin.project = vim.tbl_deep_extend("force", lvim.builtin.project, {
 
 -- Whichkey
 -- :h keycodes
+-- [operators motions objects](https://github.com/folke/which-key.nvim/blob/main/lua/which-key/plugins/presets/init.lua)
+-- [g z nav windows](https://github.com/folke/which-key.nvim/blob/main/lua/which-key/plugins/presets/misc.lua)
+--[[
+:WhichKey " show all mappings
+:WhichKey <leader> " show all <leader> mappings
+:WhichKey <leader> v " show all <leader> mappings for VISUAL mode
+:WhichKey '' v " show ALL mappings for VISUAL mode
+--]]
 lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
   setup = {
+    plugins = {
+      -- The presets plugin, adds help for a bunch of default keybindings in Neovim
+      -- No actual key bindings are created
+      presets = {
+        operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+        motions = false, -- adds help for motions
+        text_objects = true, -- help for text objects triggered after entering an operator
+      },
+    },
     key_labels = {
       -- override the label used to display some keys. It doesn't effect WK in any other way.
       -- ["<space>"] = "<SPC>",
@@ -281,7 +298,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
     ["/"] = { ":CommentToggle<CR>", "Comment" },
     p = {
       name = "pack",
-      i = { 'y | echo @"<cr>' },
+      i = { 'y:lua pp(<C-r>")', "Inspect" },
     },
   },
 
@@ -300,11 +317,16 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       },
       ["<C-q>"] = {
         name = "quickfix",
-        c = { "<cmd>Gitsigns setqflist<cr><cmd>copen<cr>", "Current Buffer" },
-        b = { "<cmd>Gitsigns setqflist 'attached'<cr><cmd>copen<cr>", "Attached Buffers" },
-        a = { "<cmd>Gitsigns setqflist 'all'<cr><cmd>copen<cr>", "All Git Files" },
+        c = { "<cmd>Gitsigns setqflist<cr>", "Current" },
+        b = { "<cmd>lua require 'gitsigns'.setqflist('attached')<cr>", "Buffers" },
+        a = { "<cmd>lua require 'gitsigns'.setqflist('all')<cr>", "All Git" },
       },
-      ["<C-e>"] = { "<cmd>Gitsigns setloclist<cr><cmd>lopen<cr>", "LocList" },
+      ["<C-e>"] = {
+        name = "loclist",
+        c = { "<cmd>Gitsigns setloclist<cr>", "Current" },
+        b = { "<cmd>lua require 'gitsigns'.setloclist('attached')<cr>", "Buffers" },
+        a = { "<cmd>lua require 'gitsigns'.setloclist('all')<cr>", "All Git" },
+      },
       ["'"] = { "<cmd>Gitsigns toggle_linehl<cr>", "Highlight" },
       ['"'] = { "<cmd>Gitsigns toggle_current_line_blame<cr>", "Blames" },
       a = { "<cmd>Telescope git_stash<CR>", "Stash" },
@@ -356,6 +378,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       p = { "<cmd>lua require('telescope').extensions.packer.plugins()<cr>", "Packer" },
       -- FIXME:Search list of files of package(under cursor)
       -- o = { "", "Package Files" },
+      o = { ":lua pp()<left>", "Inspect" },
     },
     r = {
       name = "replace",
@@ -932,7 +955,7 @@ lvim.plugins = {
   -- [LSP]
   {
     "ray-x/lsp_signature.nvim",
-    event = "InsertEnter",
+    event = "BufRead",
     config = function()
       require("user.lsp_signature").config()
     end,
@@ -1006,6 +1029,10 @@ lvim.plugins = {
         vim.g.vscode_style = "dark"
         -- lvim.builtin.lualine.options.theme = "vscode"
       end,
+    },
+    {
+      "EdenEast/nightfox.nvim",
+      setup = function() end,
     },
   },
 }

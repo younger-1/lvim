@@ -16,6 +16,17 @@ function! FirstCharOrFirstCol()
   endif
 endfunction
 
+" [](https://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript)
+function! VirtualSelection()
+  try
+    let a_save = @a
+    normal! "ay
+    return @a
+  finally
+    let @a = a_save
+  endtry
+endfunction
+
 " The following example lists user names to a Finger command >
 " com -complete=custom,ListUsers -nargs=1 Finger !finger <args>
 " fun ListUsers(A,L,P)
