@@ -544,10 +544,6 @@ lvim.plugins = {
     cmd = "Codi",
   },
   {
-    "kevinhwang91/nvim-bqf",
-    event = "BufRead",
-  },
-  {
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
     ft = "markdown",
@@ -914,6 +910,39 @@ lvim.plugins = {
           },
         }
       end,
+    },
+  },
+  {
+    "kevinhwang91/nvim-bqf",
+    event = "BufRead",
+    -- lua pp((require('bqf.config'))
+    require("bqf").setup {
+      preview = {
+        win_height = 15,
+        win_vheight = 15,
+        border_chars = { "│", "│", "─", "─", "╭", "╮", "╰", "╯", "█" },
+        -- border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
+      },
+      func_map = {
+        stogglevm = "<Tab>", -- toggle multiple signs in visual mode
+        stogglebuf = "zb", -- "'<Tab>", -- toggle signs for same buffers under the cursor
+        sclear = "zc", -- "z<Tab>", -- clear the signs in current quickfix list
+        filter = "zn", -- create new list for signed items
+        filterr = "zN", -- create new list for non-signed items
+        tab = "t",
+        tabb = "T", -- like tab, but stay at quickfix window
+        prevfile = "K", -- "<C-p>", -- go to next file under the cursor
+        nextfile = "J", -- "<C-n>",
+        pscrollup = "<C-u>",
+        pscrolldown = "<C-d>",
+        pscrollorig = "zz", -- scroll back to original postion in preview window
+        ptogglemode = "zp", -- toggle preview window between normal and max size
+      },
+      filter = {
+        fzf = {
+          extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
+        },
+      },
     },
   },
   -- [Git]
