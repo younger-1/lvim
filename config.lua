@@ -371,15 +371,18 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       C = { "<cmd>Telescope lsp_range_code_actions<cr>", "Range Action" },
     },
     L = {
-      n = { "<cmd>LuaCacheLog<cr>", "LuaCacheLog" },
-      m = { "<cmd>LuaCacheProfile<cr>", "LuaCacheProfile" },
-      R = { "<cmd>LvimCacheReset<cr>", "LvimCacheReset" },
+      C = { "<cmd>LuaCacheClear<cr>", "LuaCache Clear" },
+      L = { "<cmd>LuaCacheLog<cr>", "LuaCache Log" },
+      P = { "<cmd>LuaCacheProfile<cr>", "LuaCache Profile" },
+      R = { "<cmd>LvimCacheReset<cr>", "LvimCache Reset" },
     },
     p = {
-      p = { "<cmd>lua require('telescope').extensions.packer.plugins()<cr>", "Packer" },
+      C = { "<cmd>PackerCompile profile=true<cr>", "Compile+" },
+      o = { ":lua pp()<left>", "Inspect" },
       -- FIXME:Search list of files of package(under cursor)
       -- o = { "", "Package Files" },
-      o = { ":lua pp()<left>", "Inspect" },
+      p = { "<cmd>PackerProfile<cr>", "Profile" },
+      t = { "<cmd>lua require('telescope').extensions.packer.plugins()<cr>", "Telescope Packer" },
     },
     r = {
       name = "replace",
@@ -765,7 +768,9 @@ lvim.plugins = {
   { "nvim-telescope/telescope-symbols.nvim" },
   {
     "nvim-telescope/telescope-packer.nvim",
-    after = "telescope.nvim",
+    opt = true,
+    -- after = "telescope.nvim",
+    -- module = "telescope",
     config = function()
       require("telescope").load_extension "packer"
     end,
