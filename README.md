@@ -25,7 +25,7 @@
 > <https://github.com/LunarVim/LunarVim>
 > <https://www.lunarvim.org/dev/#getting-started>
 
-An IDE layer for Neovim with sane defaults. Completely free and community driven.
+An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Completely free and community driven.
 
 ## Project Goals
 
@@ -67,6 +67,8 @@ An IDE layer for Neovim with sane defaults. Completely free and community driven
 [[Feature]: Windows setup](https://github.com/LunarVim/LunarVim/issues/804)
 
 [[Feature]: Keymapping Tables](https://github.com/LunarVim/LunarVim/issues/1548)
+
+[[Bug]: Remove nlsp-settings from LunarVim](https://github.com/LunarVim/LunarVim/issues/1392)
 
 ## TODO
 

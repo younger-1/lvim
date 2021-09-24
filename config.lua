@@ -178,7 +178,6 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
         ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
-        -- ["<C-_>"] = actions.which_key -- Keys to produce <C-/>
         -- ["<C-_>"] = require("telescope.actions.generate").which_key {
         --   name_width = 20, -- typically leads to smaller floats
         --   max_height = 0.2, -- increase potential maximum height
@@ -190,6 +189,7 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
         ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
+        ["<C-_>"] = actions.which_key, -- Keys to produce <C-/>
       },
     },
   },
@@ -370,6 +370,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       ["<C-e>"] = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "LocList" },
       o = { "<cmd>SymbolsOutline<cr>", "Outline" },
       v = { "<cmd>Vista!!<cr>", "Vista" },
+      n = { "<cmd>NullLsInfo<cr>", "Null LS" },
       D = { "<cmd>Telescope lsp_definitions<cr>", "Def" },
       I = { "<cmd>Telescope lsp_implementations<cr>", "Impl" },
       R = { "<cmd>Telescope lsp_references<cr>", "Ref" },
@@ -503,6 +504,7 @@ lvim.plugins = {
   {
     "vuki656/package-info.nvim",
     ft = "json",
+    requires = "MunifTanjim/nui.nvim",
     config = function()
       require "user.package-info"
     end,
@@ -793,10 +795,10 @@ lvim.plugins = {
   {
     "nvim-telescope/telescope-frecency.nvim",
     after = "telescope.nvim",
+    requires = { "tami5/sqlite.lua" },
     config = function()
       require("telescope").load_extension "frecency"
     end,
-    requires = { "tami5/sqlite.lua" },
   },
   {
     "nvim-telescope/telescope-github.nvim",
