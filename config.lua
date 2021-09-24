@@ -177,6 +177,7 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
+        ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
         -- ["<C-_>"] = actions.which_key -- Keys to produce <C-/>
         -- ["<C-_>"] = require("telescope.actions.generate").which_key {
         --   name_width = 20, -- typically leads to smaller floats
@@ -184,7 +185,6 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
         --   seperator = " ⇐ ", -- change sep between mode, keybind, and name
         --   close_with_action = false, -- do not close float on action
         -- },
-        ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
       },
       n = {
         ["<C-n>"] = actions.cycle_history_next,
@@ -254,6 +254,12 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
     },
   },
 })
+
+lvim.builtin.telescope.on_config_done = function()
+  local trouble = require "trouble.providers.telescope"
+  lvim.builtin.telescope.defaults.mappings.i["<c-g>"] = trouble.open_with_trouble
+  lvim.builtin.telescope.defaults.mappings.n["<c-g>"] = trouble.open_with_trouble
+end
 
 -- Project
 lvim.builtin.project = vim.tbl_deep_extend("force", lvim.builtin.project, {
@@ -766,6 +772,7 @@ lvim.plugins = {
   },
   -- [Telescope]
   { "nvim-telescope/telescope-symbols.nvim" },
+  -- BUG: fuck
   {
     "nvim-telescope/telescope-packer.nvim",
     opt = true,
