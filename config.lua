@@ -159,7 +159,6 @@ map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
   <C-e> to put command to commandline, creates new file in current directory
 --]]
 local actions = require "telescope.actions"
-local trouble = require "trouble.providers.telescope"
 lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
   defaults = {
     -- 🔍
@@ -179,20 +178,18 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
         -- ["<C-_>"] = actions.which_key -- Keys to produce <C-/>
-        ["<C-_>"] = require("telescope.actions.generate").which_key {
-          name_width = 20, -- typically leads to smaller floats
-          max_height = 0.2, -- increase potential maximum height
-          seperator = " ⇐ ", -- change sep between mode, keybind, and name
-          close_with_action = false, -- do not close float on action
-        },
+        -- ["<C-_>"] = require("telescope.actions.generate").which_key {
+        --   name_width = 20, -- typically leads to smaller floats
+        --   max_height = 0.2, -- increase potential maximum height
+        --   seperator = " ⇐ ", -- change sep between mode, keybind, and name
+        --   close_with_action = false, -- do not close float on action
+        -- },
         ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
-        ["<c-g>"] = trouble.open_with_trouble,
       },
       n = {
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
         ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
-        ["<c-g>"] = trouble.open_with_trouble,
       },
     },
   },
@@ -201,26 +198,26 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
   -- require'telescope.themes'.get_ivy()
   pickers = {
     -- find_files = require("telescope.themes").get_dropdown(),
-    find_files = {
-      -- theme = "dropdown",
-      -- {
-      --   border = true,
-      --   borderchars = {
-      --     preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-      --     prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
-      --     results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
-      --   },
-      --   layout_config = {
-      --     height = <function 2>,
-      --     preview_cutoff = 1,
-      --     width = <function 3>,
-      --     <metatable> = <table 1>
-      --   },
-      --   layout_strategy = "center",
-      --   preview_title = "Preview",
-      --   sorting_strategy = "ascending",
-      -- }
-    },
+    -- find_files = {
+    -- theme = "dropdown",
+    -- {
+    --   border = true,
+    --   borderchars = {
+    --     preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+    --     prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
+    --     results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+    --   },
+    --   layout_config = {
+    --     height = <function 2>,
+    --     preview_cutoff = 1,
+    --     width = <function 3>,
+    --     <metatable> = <table 1>
+    --   },
+    --   layout_strategy = "center",
+    --   preview_title = "Preview",
+    --   sorting_strategy = "ascending",
+    -- }
+    -- },
     git_branches = {
       mappings = {
         i = {
@@ -877,6 +874,7 @@ lvim.plugins = {
     {
       "folke/trouble.nvim",
       cmd = "TroubleToggle",
+      module = "trouble",
       config = function()
         require("trouble").setup {
           height = 10,
@@ -916,34 +914,36 @@ lvim.plugins = {
     "kevinhwang91/nvim-bqf",
     event = "BufRead",
     -- lua pp((require('bqf.config'))
-    require("bqf").setup {
-      preview = {
-        win_height = 15,
-        win_vheight = 15,
-        border_chars = { "│", "│", "─", "─", "╭", "╮", "╰", "╯", "█" },
-        -- border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
-      },
-      func_map = {
-        stogglevm = "<Tab>", -- toggle multiple signs in visual mode
-        stogglebuf = "zb", -- "'<Tab>", -- toggle signs for same buffers under the cursor
-        sclear = "zc", -- "z<Tab>", -- clear the signs in current quickfix list
-        filter = "zn", -- create new list for signed items
-        filterr = "zN", -- create new list for non-signed items
-        tab = "t",
-        tabb = "T", -- like tab, but stay at quickfix window
-        prevfile = "K", -- "<C-p>", -- go to next file under the cursor
-        nextfile = "J", -- "<C-n>",
-        pscrollup = "<C-u>",
-        pscrolldown = "<C-d>",
-        pscrollorig = "zz", -- scroll back to original postion in preview window
-        ptogglemode = "zp", -- toggle preview window between normal and max size
-      },
-      filter = {
-        fzf = {
-          extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
+    config = function()
+      require("bqf").setup {
+        preview = {
+          win_height = 15,
+          win_vheight = 15,
+          border_chars = { "│", "│", "─", "─", "╭", "╮", "╰", "╯", "█" },
+          -- border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
         },
-      },
-    },
+        func_map = {
+          stogglevm = "<Tab>", -- toggle multiple signs in visual mode
+          stogglebuf = "zb", -- "'<Tab>", -- toggle signs for same buffers under the cursor
+          sclear = "zc", -- "z<Tab>", -- clear the signs in current quickfix list
+          filter = "zn", -- create new list for signed items
+          filterr = "zN", -- create new list for non-signed items
+          tab = "t",
+          tabb = "T", -- like tab, but stay at quickfix window
+          prevfile = "K", -- "<C-p>", -- go to next file under the cursor
+          nextfile = "J", -- "<C-n>",
+          pscrollup = "<C-u>",
+          pscrolldown = "<C-d>",
+          pscrollorig = "zz", -- scroll back to original postion in preview window
+          ptogglemode = "zp", -- toggle preview window between normal and max size
+        },
+        filter = {
+          fzf = {
+            extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
+          },
+        },
+      }
+    end,
   },
   -- [Git]
   { "tpope/vim-fugitive", cmd = { "Git", "GBrowse" }, ft = { "fugitive" } },

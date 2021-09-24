@@ -23,6 +23,7 @@
 
 > <https://www.lunarvim.org/>
 > <https://github.com/LunarVim/LunarVim>
+> <https://www.lunarvim.org/dev/#getting-started>
 
 An IDE layer for Neovim with sane defaults. Completely free and community driven.
 
@@ -66,6 +67,13 @@ An IDE layer for Neovim with sane defaults. Completely free and community driven
 [[Feature]: Windows setup](https://github.com/LunarVim/LunarVim/issues/804)
 
 [[Feature]: Keymapping Tables](https://github.com/LunarVim/LunarVim/issues/1548)
+
+## TODO
+
+- [] add some common library or plugin path to lsp runtime path by `lvim.lang.lua.lsp.setup`
+- [] move all uncommon plugins' mappings to buffer-mappings by condition or `ftplugin` or `ftdetect` 
+- [] more support for clangd lsp feature like auto-import
+- [] understand [](https://github.com/LunarVim/LunarVim/issues/1600#issuecomment-925027298)
 
 ## Outline
 
