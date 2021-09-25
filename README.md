@@ -62,20 +62,28 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 
 ## Issues
 
+- [ ]  [[Feature]: Windows setup](https://github.com/LunarVim/LunarVim/issues/804)
+- [ ]  [[Feature]: Keymapping Tables](https://github.com/LunarVim/LunarVim/issues/1548)
+- [ ]  [[Bug]: Remove nlsp-settings from LunarVim](https://github.com/LunarVim/LunarVim/issues/1392)
+- [x] @me [[Bug]: can't get gd to work properly in lua projects](https://github.com/LunarVim/LunarVim/issues/1602)
+- [ ] @me [[Bug]: can't not use nvim-telescope/telescope-packer.nvim](https://github.com/LunarVim/LunarVim/issues/1609)
+- [ ]  [[Bug]: Can't set markdown linters](https://github.com/LunarVim/LunarVim/issues/1554)
+- [ ]  [[Bug]: Can't set up write-good linter for markdown](https://github.com/LunarVim/LunarVim/issues/1249)
+
+
+## Pull requests
+
 [[Feature]: Add installation script for Windows](https://github.com/LunarVim/LunarVim/pull/1261)
 
-[[Feature]: Windows setup](https://github.com/LunarVim/LunarVim/issues/804)
 
-[[Feature]: Keymapping Tables](https://github.com/LunarVim/LunarVim/issues/1548)
-
-[[Bug]: Remove nlsp-settings from LunarVim](https://github.com/LunarVim/LunarVim/issues/1392)
 
 ## TODO
 
-- [] add some common library or plugin path to lsp runtime path by `lvim.lang.lua.lsp.setup`
-- [] move all uncommon plugins' mappings to buffer-mappings by condition or `ftplugin` or `ftdetect` 
-- [] more support for clangd lsp feature like auto-import
-- [] understand [](https://github.com/LunarVim/LunarVim/issues/1600#issuecomment-925027298)
+- [ ] add some common library or plugin path to lsp runtime path by `lvim.lang.lua.lsp.setup`
+- [ ] move all uncommon plugins' mappings to buffer-mappings by condition or `ftplugin` or `ftdetect` 
+- [ ] more support for clangd lsp feature like auto-import
+- [ ] understand [](https://github.com/LunarVim/LunarVim/issues/1600#issuecomment-925027298)
+- [ ] lsp for save without formatting(:h :autoformat :formatting) [](https://github.com/LunarVim/LunarVim/issues/1600#issuecomment-925027298)
 
 ## Outline
 
@@ -210,6 +218,75 @@ output:
 :lua print(vim.inspect(require'lspconfig/configs'))
 
 :lua print(vim.inspect(lvim.builtin.telescope.defaults.mappings.i))
+```
+
+
+## LSP
+
+
+```lua
+:h vim.lsp.client
+:lua pp(vim.lsp.get_client_by_id(1).server_capabilities)
+:lua pp(vim.lsp.get_client_by_id(1).resolved_capabilities)
+```
+
+```lua
+:h vim.lsp.start_client
+```
+
+- From `:h lsp-config`
+
+```lua
+local custom_lsp_attach = function(client)
+  -- See `:help nvim_buf_set_keymap()` for more information
+  vim.api.nvim_buf_set_keymap(0, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', {noremap = true})
+  vim.api.nvim_buf_set_keymap(0, 'n', '<c-]>', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
+  -- ... and other keymappings for LSP
+
+  -- Use LSP as the handler for omnifunc.
+  --    See `:help omnifunc` and `:help ins-completion` for more information.
+  vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- For plugins with an `on_attach` callback, call them here. For example:
+  -- require('completion').on_attach()
+end
+
+-- An example of configuring for `sumneko_lua`,
+--  a language server for Lua.
+
+-- set the path to the sumneko installation
+local system_name = "Linux" -- (Linux, macOS, or Windows)
+local sumneko_root_path = '/path/to/lua-language-server'
+local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
+
+require('lspconfig').sumneko_lua.setup({
+  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+  -- An example of settings for an LSP server.
+  --    For more options, see nvim-lspconfig
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = vim.split(package.path, ';'),
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = {
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+        },
+      },
+    }
+  },
+
+  on_attach = custom_lsp_attach
+})
 ```
 
 ## Testimonials

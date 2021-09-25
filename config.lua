@@ -65,65 +65,6 @@ vim.opt.wrap = false
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 
--- Keymappings
--- View all the defaults by pressing <leader>Lk
--- lvim.leader = "space"
-lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
-  -- insert_mode = {},
-  normal_mode = {
-    ["Y"] = "y$",
-    ["z<C-l>"] = "<cmd>nohlsearch<cr><C-l>",
-    ["<C-e>"] = ":call LocListToggle()<CR>",
-  },
-  -- term_mode = {},
-  visual_mode = {
-    ["Y"] = [["+y]],
-    ["d"] = [["_d]],
-    ["X"] = [["+x]],
-  },
-  -- visual_block_mode = {},
-  -- command_mode = {},
-})
-
-vim.cmd [[
-" 朝闻道，金、木、水、火、土；【真香定律（王境泽）】；《静夜诗（李白）》。
-" 唐僧问道：‘泼猴，若我救你出来，你该如何报答我？’ 悟空：“你若放我出来，我定会送你上西天！”
-set matchpairs+=【:】,（:）,《:》,‘:’,“:”,；:。,，:。
-set listchars=space:·,eol:↲,trail:~,tab:>-,extends:>,precedes:<,nbsp:+
-
-cnoremap <C-V> <C-R>+
-inoremap <C-V> <C-G>u<C-R><C-O>+
-onoremap H ^
-vnoremap H ^
-onoremap L $
-vnoremap L $
-" g. z.
-cnoremap <C-a> <HOME>
-inoremap <C-U> <C-G>u<C-U>
-inoremap <C-W> <C-G>u<C-W>
-
-" Open in VSCode from Vim
-command! OpenInVSCode exe '!code --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
-" Open in VSCode from Vim and preserve the working directory
-command! OpenCwdInVSCode exe 'silent !code "' . getcwd() . '" --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
-
-function! TabMessage(cmd)
-  redir => message
-  silent execute a:cmd
-  redir END
-  if empty(message)
-    echoerr "This command do NOT have output"
-  else
-    " Use "new" instead of "tabnew" below if you prefer split windows instead of tabs
-    tabnew
-    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
-    silent put=message
-  endif
-endfunction
-
-command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
-]]
-
 -- LSP
 lvim.lsp.diagnostics.virtual_text = false
 lvim.lsp.override = { "java" }
@@ -269,6 +210,65 @@ lvim.builtin.project = vim.tbl_deep_extend("force", lvim.builtin.project, {
   -- When set to false, you will get a message when project.nvim changes your directory.
   silent_chdir = false,
 })
+
+-- Keymappings
+-- View all the defaults by pressing <leader>Lk
+-- lvim.leader = "space"
+lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
+  -- insert_mode = {},
+  normal_mode = {
+    ["Y"] = "y$",
+    ["z<C-l>"] = "<cmd>nohlsearch<cr><C-l>",
+    ["<C-e>"] = ":call LocListToggle()<CR>",
+  },
+  -- term_mode = {},
+  visual_mode = {
+    ["Y"] = [["+y]],
+    ["d"] = [["_d]],
+    ["X"] = [["+x]],
+  },
+  -- visual_block_mode = {},
+  -- command_mode = {},
+})
+
+vim.cmd [[
+" 朝闻道，金、木、水、火、土；【真香定律（王境泽）】；《静夜诗（李白）》。
+" 唐僧问道：‘泼猴，若我救你出来，你该如何报答我？’ 悟空：“你若放我出来，我定会送你上西天！”
+set matchpairs+=【:】,（:）,《:》,‘:’,“:”,；:。,，:。
+set listchars=space:·,eol:↲,trail:~,tab:>-,extends:>,precedes:<,nbsp:+
+
+cnoremap <C-V> <C-R>+
+inoremap <C-V> <C-G>u<C-R><C-O>+
+onoremap H ^
+vnoremap H ^
+onoremap L $
+vnoremap L $
+" g. z.
+cnoremap <C-a> <HOME>
+inoremap <C-U> <C-G>u<C-U>
+inoremap <C-W> <C-G>u<C-W>
+
+" Open in VSCode from Vim
+command! OpenInVSCode exe '!code --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
+" Open in VSCode from Vim and preserve the working directory
+command! OpenCwdInVSCode exe 'silent !code "' . getcwd() . '" --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
+
+function! TabMessage(cmd)
+  redir => message
+  silent execute a:cmd
+  redir END
+  if empty(message)
+    echoerr "This command do NOT have output"
+  else
+    " Use "new" instead of "tabnew" below if you prefer split windows instead of tabs
+    tabnew
+    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
+    silent put=message
+  endif
+endfunction
+
+command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
+]]
 
 -- Whichkey
 -- :h keycodes
