@@ -49,7 +49,7 @@ require "theme.dash-pic"
 young = "Young"
 
 -- General
-lvim.format_on_save = true
+lvim.format_on_save = false
 lvim.transparent_window = false
 -- lvim.colorscheme = "onedarker"
 -- lvim.log.level = "warn"
