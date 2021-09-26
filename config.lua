@@ -286,16 +286,19 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       -- The presets plugin, adds help for a bunch of default keybindings in Neovim
       -- No actual key bindings are created
       presets = {
-        operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-        motions = false, -- adds help for motions
+        operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+        motions = true, -- adds help for motions
         text_objects = true, -- help for text objects triggered after entering an operator
       },
     },
+    -- add operators that will trigger motion and text object completion
+    -- to enable all native operators, set the preset / operators plugin above
+    operators = { gc = "Comments" },
     key_labels = {
       -- override the label used to display some keys. It doesn't effect WK in any other way.
       -- ["<space>"] = "<SPC>",
+      -- ["<cr>"] = "<RET>",
       -- ["<Tab>"] = "<TAB>",
-      -- ["<cr>"] = "RET",
     },
     ignore_missing = false,
   },
@@ -306,6 +309,10 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
     p = {
       name = "pack",
       i = { 'y:lua pp(<C-r>")', "Inspect" },
+    },
+    l = {
+      name = "lsp",
+      f = { "<Cmd>vim.lsp.buf.range_formatting()<CR>", "Format" },
     },
   },
 
@@ -371,7 +378,14 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       d = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Diagnostics" },
       -- w = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
       -- f = { "<cmd>silent FormatWrite<cr>", "Format" },
-      f = { "<cmd>lua vim.lsp.buf.formatting()<cr><cr>", "Format" },
+      -- f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+      f = {
+        function()
+          vim.lsp.buf.formatting_sync()
+          vim.cmd "write"
+        end,
+        "Format",
+      },
       i = { "<cmd>LspInfo<cr>", "Info" },
       j = {
         "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
@@ -446,8 +460,9 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       a = { "<cmd>Telescope autocommands<CR>", "Autocommands" },
       c = { "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>", "Colorscheme" },
       g = { "<cmd>Telescope live_grep <cr>", "Grep" },
+      -- TODO:
       -- f = { "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files <cr>", "Find files" },
-      G = { "<cmd>Telescope live_grep grep_open_files=v:true<cr>", "Text in opened buffer" },
+      G = { "<cmd>Telescope live_grep grep_open_files=v:true<cr>", "Grep in opened buffer" },
       m = {
         name = "MRU",
         -- :Telescope frecency frecency default_text=:project:

@@ -69,6 +69,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ] @me [[Bug]: can't not use nvim-telescope/telescope-packer.nvim](https://github.com/LunarVim/LunarVim/issues/1609)
 - [ ]  [[Bug]: Can't set markdown linters](https://github.com/LunarVim/LunarVim/issues/1554)
 - [ ]  [[Bug]: Can't set up write-good linter for markdown](https://github.com/LunarVim/LunarVim/issues/1249)
+- [ ]  [[Feature]: Add save without formatting](https://github.com/LunarVim/LunarVim/issues/897)
 
 
 ## Pull requests
@@ -84,6 +85,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ] more support for clangd lsp feature like auto-import
 - [ ] understand [](https://github.com/LunarVim/LunarVim/issues/1600#issuecomment-925027298)
 - [ ] lsp for save without formatting(:h :autoformat :formatting) [](https://github.com/LunarVim/LunarVim/issues/1600#issuecomment-925027298)
+- [ ] use lua-dev [](https://github.com/mvllow/dots/blob/main/.config/nvim/init.lua#L184)
 
 ## Outline
 
@@ -228,6 +230,8 @@ output:
 :h vim.lsp.client
 :lua pp(vim.lsp.get_client_by_id(1).server_capabilities)
 :lua pp(vim.lsp.get_client_by_id(1).resolved_capabilities)
+
+:lua pp(require("lsp").get_ls_capabilities())
 ```
 
 ```lua
