@@ -98,14 +98,58 @@ map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
 -- Telescope
 --[[ tips:
   <C-e> to put command to commandline, creates new file in current directory
+  <C-q> to send all results to quickfix and <M-q> to send selected items
+  -- TODO:
+  https://github.com/rafamadriz/NeoCode/blob/main/lua/modules/plugins/telescope.lua
 --]]
 local actions = require "telescope.actions"
 lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
   defaults = {
     -- 🔍
-    -- prompt_prefix = "   ",
+    -- prompt_prefix = "  ",
     -- selection_caret = " ",
+    -- selection_caret = "❯ ",
     entry_prefix = "  ",
+    vimgrep_arguments = {
+      "rg",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--hidden",
+    },
+    file_ignore_patterns = {
+      "node_modules",
+      "package.json",
+      "package-lock.json",
+      ".git/",
+      ".mkv",
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".pdf",
+      ".mp3",
+      ".mp4",
+      ".m4a",
+      ".opus",
+      ".flac",
+      ".doc",
+      ".zip",
+      ".odt",
+      ".ots",
+      ".docx",
+      ".xlsx",
+      ".xls",
+      ".pptx",
+      ".dxvk",
+      ".rpf",
+      ".dll",
+      ".kdbx",
+      ".exe",
+      ".iso",
+    },
     -- horizontal, center, cursor, vertical, flex, bottom_pane
     layout_strategy = "horizontal",
     layout_config = {

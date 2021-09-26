@@ -75,6 +75,8 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 ## Pull requests
 
 [[Feature]: Add installation script for Windows](https://github.com/LunarVim/LunarVim/pull/1261)
+[[Feature]: Add save without formatting](https://github.com/LunarVim/LunarVim/pull/898)
+[[Feature]: Add support for saving a file without formatting](https://github.com/LunarVim/LunarVim/pull/1153)
 
 
 
