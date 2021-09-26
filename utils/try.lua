@@ -109,6 +109,13 @@ t1 = vim.tbl_map(function(value)
 end, t)
 -- print(vim.inspect(t1)) -- { "x0", "y0", "10", "20", "d0" }
 
+local m1 = vim.tbl_deep_extend("force", m, {
+  b = { 6, 7 },
+})
+m1 = vim.tbl_deep_extend("force", m1, {
+  b = { "hi", bb = { 8, 9 } },
+})
+
 --[[
   2. plenary
 --]]
