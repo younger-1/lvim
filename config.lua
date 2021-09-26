@@ -375,7 +375,8 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
     },
     l = {
       a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-      d = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Diagnostics" },
+      d = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Diagnostics" },
+      D = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Diagnostics LocList" },
       -- w = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
       -- f = { "<cmd>silent FormatWrite<cr>", "Format" },
       -- f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },

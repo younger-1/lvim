@@ -150,8 +150,8 @@ nvim-comment  nvim-compe  nvim-lspinstall  nvim-toggleterm.lua  vim-vsnip  which
 ```
 
 ```viml
-:lua print(vim.inspect(lvim.lang.lua))
-:echo luaeval("vim.inspect(lvim.lang.lua)")
+lua print(vim.inspect(lvim.lang.lua))
+echo luaeval("vim.inspect(lvim.lang.lua)")
 
 output:
 {
@@ -188,7 +188,7 @@ output:
 
 
 ```viml
-:lua print(vim.inspect(lvim.lang.lua.lsp.setup.capabilities.textDocument.completion))
+lua print(vim.inspect(lvim.lang.lua.lsp.setup.capabilities.textDocument.completion))
 
 output:
 {
@@ -212,14 +212,14 @@ output:
 
 
 ```viml
-:lua print(vim.inspect(require"lspinstall/util".extract_config("sumneko_lua")))
-:lua print(vim.inspect(require'lspconfig'["sumneko_lua"].document_config))
+lua print(vim.inspect(require"lspinstall/util".extract_config("sumneko_lua")))
+lua print(vim.inspect(require'lspconfig'["sumneko_lua"].document_config))
 
-:lua print(vim.inspect(require'lspinstall/servers'.lua))
+lua print(vim.inspect(require'lspinstall/servers'.lua))
 
-:lua print(vim.inspect(require'lspconfig/configs'))
+lua print(vim.inspect(require'lspconfig/configs'))
 
-:lua print(vim.inspect(lvim.builtin.telescope.defaults.mappings.i))
+lua print(vim.inspect(lvim.builtin.telescope.defaults.mappings.i))
 ```
 
 
@@ -228,14 +228,15 @@ output:
 
 ```lua
 :h vim.lsp.client
-:lua pp(vim.lsp.get_client_by_id(1).server_capabilities)
-:lua pp(vim.lsp.get_client_by_id(1).resolved_capabilities)
+lua pp(vim.lsp.get_client_by_id(1).server_capabilities)
+lua pp(vim.lsp.get_client_by_id(1).resolved_capabilities)
 
-:lua pp(require("lsp").get_ls_capabilities())
-```
+lua pp(require("lsp").get_ls_capabilities())
 
-```lua
 :h vim.lsp.start_client
+
+lua pp(vim.lsp.diagnostic.get_line_diagnostics())
+
 ```
 
 - From `:h lsp-config`
