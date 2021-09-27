@@ -45,6 +45,7 @@ use {
 }
 --]]
 
+require "user.cfg.global"
 require "user.theme.dash-pic"
 young = "Young"
 
@@ -62,9 +63,6 @@ vim.opt.mouse = "nvi"
 vim.opt.timeoutlen = 200
 vim.opt.wrap = false
 
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
 -- LSP
 lvim.lsp.diagnostics.virtual_text = false
 lvim.lsp.override = { "java" }
@@ -74,21 +72,15 @@ require("user.json_schemas").setup()
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.dap.active = true
-lvim.builtin.bufferline.active = true
 lvim.builtin.gitsigns.opts.numhl = true
 lvim.builtin.gitsigns.opts.keymaps["x ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
 -- lvim.builtin.lualine.options.theme = "tokyonight"
--- lvim.builtin.tabnine = { active = true } -- only use for solidity and other langs that I don't have a langserver for
--- if lvim.builtin.tabnine.active then
---   lvim.builtin.compe.source.tabnine = { kind = " ﮧ ", priority = 150, max_reslts = 6 }
--- end
 
 -- Treesitter
 lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.autotag.enable = true
-lvim.builtin.treesitter.highlight.enabled = true
-lvim.builtin.treesitter.playground.enable = true
+-- lvim.builtin.treesitter.playground.enable = true
 lvim.builtin.treesitter.rainbow.enable = true
 -- for finding syntax ids for non TS enabled languages
 vim.cmd [[
@@ -555,15 +547,16 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
     z = { "<cmd>ZenMode<cr>", "Zen" },
   },
 })
-lvim.builtin.which_key.on_config_done = function ()
+
+lvim.builtin.which_key.on_config_done = function()
   local which_key = require "which-key"
   local opts = {
-      mode = "n", -- NORMAL mode
-      prefix = ",",
-      buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-      silent = true, -- use `silent` when creating keymaps
-      noremap = true, -- use `noremap` when creating keymaps
-      nowait = true, -- use `nowait` when creating keymaps
+    mode = "n", -- NORMAL mode
+    prefix = ",",
+    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = true, -- use `nowait` when creating keymaps
   }
   local mappings = {
     f = {
@@ -617,7 +610,7 @@ lvim.plugins = {
     -- [github]
     --   user = ChristianChiarulli
     "mattn/vim-gist",
-    requires = "mattn/webapi-vim",
+    requires = { "mattn/webapi-vim" },
     config = function()
       vim.g.gist_open_browser_after_post = 1
     end,
@@ -632,7 +625,7 @@ lvim.plugins = {
   {
     "vuki656/package-info.nvim",
     ft = "json",
-    requires = "MunifTanjim/nui.nvim",
+    requires = { "MunifTanjim/nui.nvim" },
     config = function()
       require "user.package-info"
     end,
