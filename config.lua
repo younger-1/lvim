@@ -45,7 +45,7 @@ use {
 }
 --]]
 
-require "theme.dash-pic"
+require "user.theme.dash-pic"
 young = "Young"
 
 -- General
@@ -1218,7 +1218,7 @@ lvim.plugins = {
       "pocco81/catppuccino.nvim",
       setup = function() end,
       config = function()
-        require "theme.catppuccino"
+        require "user.theme.catppuccino"
       end,
     },
     {

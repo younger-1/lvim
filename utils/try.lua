@@ -157,7 +157,7 @@ print(vim.inspect(m2)) -- { "rust:b", "go:c", "python:a" }
 --[[
   3. my tools
 --]]
-local to = require "tools"
+local to = require "user.tools"
 local m3 = to.apply_defaults(m, { a = "lua", d = "zig" })
 print(vim.inspect(m3)) -- { a = "python", b = "rust", c = "go", d = "zig" }
 

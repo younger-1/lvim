@@ -45,7 +45,7 @@ endfunction
 " command! -nargs=+ -complete=expression Test :echo "<args>"
 
 " command! -nargs=* -complete=packadd RR lua rr(<f-args>)
-command! -nargs=* -complete=customlist,v:lua.require'tools'.rr_complete RR lua require'tools'.rr(<f-args>)
+command! -nargs=* -complete=customlist,v:lua.require'user.tools'.rr_complete RR lua require'user.tools'.rr(<f-args>)
 
 " Replace a range with the contents of a file
 com -range -nargs=1 -complete=file Replace <line1>-pu_|<line1>,<line2>d|r <args>|<line1>d
