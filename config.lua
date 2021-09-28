@@ -903,13 +903,8 @@ lvim.plugins = {
   { "nvim-telescope/telescope-symbols.nvim" },
   -- BUG: fuck
   {
-    "nvim-telescope/telescope-packer.nvim",
-    opt = true,
-    -- after = "telescope.nvim",
-    -- module = "telescope",
-    config = function()
-      require("telescope").load_extension "packer"
-    end,
+    "younger-1/telescope-packer.nvim",
+    after = "telescope.nvim",
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
