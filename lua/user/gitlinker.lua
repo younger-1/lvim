@@ -5,22 +5,19 @@ M.config = function()
   if not status_ok then
     return
   end
-  lvim.builtin.which_key.mappings["gy"] = "Link"
   gitlinker.setup {
     opts = {
-      callbacks = {
-        ["git.comcast.com"] = require("gitlinker.hosts").get_github_type_url,
-      },
-      -- remote = 'github', -- force the use of a specific remote
+      remote = nil, -- force the use of a specific remote
       -- adds current line nr in the url for normal mode
       add_current_line_on_normal_mode = true,
       -- callback for what to do with the url
-      action_callback = require("gitlinker.actions").open_in_browser,
+      action_callback = require("gitlinker.actions").copy_to_clipboard,
+      -- action_callback = require("gitlinker.actions").open_in_browser,
       -- print the url after performing the action
-      print_url = false,
-      -- mapping to call url generation
-      mappings = "<leader>gy",
+      print_url = true,
     },
+    -- default mapping to call url generation with action_callback
+    -- mappings = "<leader>gy",
   }
 end
 

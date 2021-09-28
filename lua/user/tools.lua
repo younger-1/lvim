@@ -1,4 +1,5 @@
 local tools = {}
+local Log = require "core.log"
 
 --- Returns a table with the default values that are missing.
 --- either paramter can be empty.
@@ -127,7 +128,7 @@ function tools.rr_complete(lead, _, _)
   return completion_list
 end
 
-local Log = require "core.log"
+-- [DoomUpdate](https://github.com/NTBBloodbath/doom-nvim/blob/a033ddec6e53cf154306b7c0391166f753d519be/lua/doom/core/functions/init.lua#L332)
 tools.update_lunarvim = function()
   -- save_backup_hashes()
   Log:info "Pulling LunarVim remote changes ..."

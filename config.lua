@@ -349,6 +349,10 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       name = "lsp",
       f = { "<Cmd>vim.lsp.buf.range_formatting()<CR>", "Format" },
     },
+    g = {
+      name = "git",
+      y = "Link"
+    }
   },
 
   mappings = {
@@ -390,6 +394,8 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
         r = { "<cmd>Telescope gh run<cr>", "Run" },
       },
       S = { "<cmd>Gitsigns stage_buffer<cr>", "Stage Buffer" },
+      y = "Link",
+      Y = { "<cmd>lua require'gitlinker'.get_repo_url()<cr>", "Link(Repo)" },
     },
     j = {
       name = "justify",
@@ -469,7 +475,10 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       P = { "<cmd>LuaCacheProfile<cr>", "LuaCache Profile" },
       R = { "<cmd>LvimCacheReset<cr>", "LvimCache Reset" },
       u = { "<cmd>lua require'user.tools'.update_lunarvim()<cr>", "Update LunarVim" },
-      g = { "<cmd>lua require('telescope.builtin').git_commits { cwd = _G.get_runtime_dir() .. '/lvim' }<cr>", "LunarVim Git" },
+      g = {
+        "<cmd>lua require('telescope.builtin').git_commits { cwd = _G.get_runtime_dir() .. '/lvim' }<cr>",
+        "LunarVim Git",
+      },
     },
     p = {
       C = { "<cmd>PackerCompile profile=true<cr>", "Compile+" },
@@ -593,13 +602,6 @@ lvim.plugins = {
       require("user.octo").config()
     end,
     disable = true,
-  },
-  {
-    "ruifm/gitlinker.nvim",
-    event = "BufRead",
-    config = function()
-      require("user.gitlinker").config()
-    end,
   },
   {
     -- Note for this to work you need to create a pat and put it in `~/.gist-vim` as <token XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX>
@@ -1085,6 +1087,13 @@ lvim.plugins = {
   },
   -- [Git]
   { "tpope/vim-fugitive", cmd = { "Git", "GBrowse" }, ft = { "fugitive" } },
+  {
+    "ruifm/gitlinker.nvim",
+    event = "BufRead",
+    config = function()
+      require("user.gitlinker").config()
+    end,
+  },
   -- [Write]
   {
     {

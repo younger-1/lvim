@@ -74,10 +74,12 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 
 ## Pull requests
 
-[[Feature]: Add installation script for Windows](https://github.com/LunarVim/LunarVim/pull/1261)
 [[Feature]: Add save without formatting](https://github.com/LunarVim/LunarVim/pull/898)
 [[Feature]: Add support for saving a file without formatting](https://github.com/LunarVim/LunarVim/pull/1153)
-
+[[Feature]: Add installation script for Windows](https://github.com/LunarVim/LunarVim/pull/1261)
+[[Feature]: Add lunarvim binary for windows 10](https://github.com/LunarVim/LunarVim/pull/1515)
+[refactor: auto-generate language configuration](https://github.com/LunarVim/LunarVim/pull/1584)
+[feat: add prelimenary LvimUpdate command](https://github.com/LunarVim/LunarVim/pull/1634)
 
 
 ## TODO
@@ -88,12 +90,14 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ] understand [](https://github.com/LunarVim/LunarVim/issues/1600#issuecomment-925027298)
 - [ ] lsp for save without formatting(:h :autoformat :formatting) [](https://github.com/LunarVim/LunarVim/issues/1600#issuecomment-925027298)
 - [ ] use lua-dev [](https://github.com/mvllow/dots/blob/main/.config/nvim/init.lua#L184)
-- [ ] refactor plugins' configuration in `user` fold
+- [ ] refactor plugins' configuration in `user` fold, perhaps using `require` to generate `lvim.plugins`
+- [ ] modes.nvim, filetype.nvim, better-escape, startup-time
 - [ ] auto-session
 - [ ] sudo lvim
 - [ ] lua require('focus').focus_toggle()
 - [ ] update `lunarvim` and show difference
 - [ ] add keymappings to convert between floating-window
+
 
 ## Outline
 
