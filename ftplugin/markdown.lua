@@ -1,5 +1,3 @@
-require("lsp.null-ls").setup "markdown"
-
 lvim.lang.markdown = {
   formatters = {
     {
@@ -12,3 +10,5 @@ lvim.lang.markdown = {
     },
   },
 }
+
+require("lsp.null-ls").setup "markdown"
