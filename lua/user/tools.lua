@@ -21,6 +21,7 @@ function tools.add_to_set(set1, set2)
   end
 end
 
+-- From: <https://github.com/nvim-lua/plenary.nvim/blob/8c6cc07a68b65eb707be44598f0084647d495978/lua/plenary/reload.lua#L3>
 local unload_module = function(found, module_name, starts_with_only)
   -- TODO: Might need to handle cpath / compiled lua packages? Not sure.
   local matcher
@@ -48,6 +49,14 @@ local unload_module = function(found, module_name, starts_with_only)
         luacache[pack] = nil
       end
     end
+  end
+end
+
+function tools.reload_file(pack)
+  local luacache = (_G.__luacache or {}).cache
+  package.loaded[pack] = nil
+  if luacache then
+    luacache[pack] = nil
   end
 end
 
@@ -118,12 +127,21 @@ function tools.rr_complete(lead, _, _)
   return completion_list
 end
 
-function tools.reload_file(pack)
-  local luacache = (_G.__luacache or {}).cache
-  package.loaded[pack] = nil
-  if luacache then
-    luacache[pack] = nil
-  end
+local Log = require "core.log"
+tools.update_lunarvim = function()
+  -- save_backup_hashes()
+  Log:info "Pulling LunarVim remote changes ..."
+
+  -- local updated_lunarvim, update_err = pcall(function()
+  os.execute("git -C " .. require("bootstrap").runtime_dir .. "/lvim" .. " pull -q")
+  -- end)
+
+  -- if not updated_lunarvim then
+  --   Log:error("Error while updating Doom. Traceback:\n" .. update_err)
+  -- end
+  -- Run syntax_on event to fix UI if it's broke after the git pull
+  -- vim.cmd "syntax on"
+  Log:info "Successfully updated Lunarvim, please restart"
 end
 
 return tools

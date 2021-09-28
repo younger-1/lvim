@@ -468,6 +468,8 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       L = { "<cmd>LuaCacheLog<cr>", "LuaCache Log" },
       P = { "<cmd>LuaCacheProfile<cr>", "LuaCache Profile" },
       R = { "<cmd>LvimCacheReset<cr>", "LvimCache Reset" },
+      u = { "<cmd>lua require'user.tools'.update_lunarvim()<cr>", "Update LunarVim" },
+      g = { "<cmd>lua require('telescope.builtin').git_commits { cwd = _G.get_runtime_dir() .. '/lvim' }<cr>", "LunarVim Git" },
     },
     p = {
       C = { "<cmd>PackerCompile profile=true<cr>", "Compile+" },

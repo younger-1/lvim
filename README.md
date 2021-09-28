@@ -66,7 +66,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ]  [[Feature]: Keymapping Tables](https://github.com/LunarVim/LunarVim/issues/1548)
 - [ ]  [[Bug]: Remove nlsp-settings from LunarVim](https://github.com/LunarVim/LunarVim/issues/1392)
 - [x] @me [[Bug]: can't get gd to work properly in lua projects](https://github.com/LunarVim/LunarVim/issues/1602)
-- [ ] @me [[Bug]: can't not use nvim-telescope/telescope-packer.nvim](https://github.com/LunarVim/LunarVim/issues/1609)
+- [x] @me [[Bug]: can't not use nvim-telescope/telescope-packer.nvim](https://github.com/LunarVim/LunarVim/issues/1610)
 - [ ]  [[Bug]: Can't set markdown linters](https://github.com/LunarVim/LunarVim/issues/1554)
 - [ ]  [[Bug]: Can't set up write-good linter for markdown](https://github.com/LunarVim/LunarVim/issues/1249)
 - [ ]  [[Feature]: Add save without formatting](https://github.com/LunarVim/LunarVim/issues/897)
@@ -92,6 +92,8 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ] auto-session
 - [ ] sudo lvim
 - [ ] lua require('focus').focus_toggle()
+- [ ] update `lunarvim` and show difference
+- [ ] add keymappings to convert between floating-window
 
 ## Outline
 
