@@ -16,32 +16,31 @@ use {
   -- The following keys are all optional
   disable = boolean,           -- Mark a plugin as inactive
   as = string,                 -- Specifies an alias under which to install the plugin
-  installer = function,        -- Specifies custom installer. See "custom installers" below.
-  updater = function,          -- Specifies custom updater. See "custom installers" below.
-  after = string or list,      -- Specifies plugins to load before this plugin. See "sequencing" below
+  installer = function,        -- Specifies custom installer. See |packer-custom-installers|
+  updater = function,          -- Specifies custom updater. See |packer-custom-installers|
+  after = string or list,      -- Specifies plugins to load before this plugin.
   rtp = string,                -- Specifies a subdirectory of the plugin to add to runtimepath.
   opt = boolean,               -- Manually marks a plugin as optional.
   branch = string,             -- Specifies a git branch to use
   tag = string,                -- Specifies a git tag to use
   commit = string,             -- Specifies a git commit to use
   lock = boolean,              -- Skip this plugin in updates/syncs
-  run = string, function, or table, -- Post-update/install hook. See "update/install hooks".
-  requires = string or list,   -- Specifies plugin dependencies. See "dependencies".
-  rocks = string or list,      -- Specifies Luarocks dependencies for the plugin
+  run = string, function, or table  -- Post-update/install hook. See |packer-plugin-hooks|
+  requires = string or list    -- Specifies plugin dependencies. See |packer-plugin-dependencies|
   config = string or function, -- Specifies code to run after this plugin is loaded.
-  -- The setup key implies opt = true
-  setup = string or function,  -- Specifies code to run before this plugin is loaded.
-  -- The following keys all imply lazy-loading and imply opt = true
-  cmd = string or list,        -- Specifies commands which load this plugin. Can be an autocmd pattern.
+  rocks = string or list,      -- Specifies Luarocks dependencies for the plugin
+  -- The following keys all imply lazy-loading
+  cmd = string or list,        -- Specifies commands which load this plugin.  Can be an autocmd pattern.
   ft = string or list,         -- Specifies filetypes which load this plugin.
-  keys = string or list,       -- Specifies maps which load this plugin. See "Keybindings".
+  keys = string or list,       -- Specifies maps which load this plugin. See |packer-plugin-keybindings|
   event = string or list,      -- Specifies autocommand events which load this plugin.
   fn = string or list          -- Specifies functions which load this plugin.
   cond = string, function, or list of strings/functions,   -- Specifies a conditional test to load this plugin
+  setup = string or function,  -- Specifies code to run before this plugin is loaded.
   module = string or list      -- Specifies Lua module names for require. When requiring a string which starts
                                -- with one of these module names, the plugin will be loaded.
-  module_pattern = string/list -- Specifies Lua pattern of Lua module names for require. When
-  requiring a string which matches one of these patterns, the plugin will be loaded.
+  module_pattern = string/list -- Specifies Lua pattern of Lua module names for require. When requiring a string
+                               -- which matches one of these patterns, the plugin will be loaded.
 }
 --]]
 
@@ -610,7 +609,7 @@ lvim.plugins = {
     -- [github]
     --   user = ChristianChiarulli
     "mattn/vim-gist",
-    requires = { "mattn/webapi-vim" },
+    requires = "mattn/webapi-vim",
     config = function()
       vim.g.gist_open_browser_after_post = 1
     end,
@@ -625,7 +624,7 @@ lvim.plugins = {
   {
     "vuki656/package-info.nvim",
     ft = "json",
-    requires = { "MunifTanjim/nui.nvim" },
+    requires = { { "MunifTanjim/nui.nvim", module = "nui" } },
     config = function()
       require "user.package-info"
     end,
@@ -895,7 +894,7 @@ lvim.plugins = {
   },
   {
     "ibhagwan/fzf-lua",
-    requires = { "vijaymarupudi/nvim-fzf" },
+    requires = "vijaymarupudi/nvim-fzf",
     config = function()
       require "user.fzf"
     end,
@@ -922,8 +921,8 @@ lvim.plugins = {
   },
   {
     "nvim-telescope/telescope-frecency.nvim",
-    after = "telescope.nvim",
-    requires = { "tami5/sqlite.lua" },
+    after = { "telescope.nvim" },
+    requires = { { "tami5/sqlite.lua", module = "sqlite" } },
     config = function()
       require("telescope").load_extension "frecency"
     end,

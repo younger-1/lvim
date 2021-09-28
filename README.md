@@ -90,6 +90,8 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ] use lua-dev [](https://github.com/mvllow/dots/blob/main/.config/nvim/init.lua#L184)
 - [ ] refactor plugins' configuration in `user` fold
 - [ ] auto-session
+- [ ] sudo lvim
+- [ ] lua require('focus').focus_toggle()
 
 ## Outline
 
