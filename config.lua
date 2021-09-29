@@ -341,17 +341,21 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
   -- see https://neovim.io/doc/user/map.html#:map-cmd
   vmappings = {
     ["/"] = { ":CommentToggle<CR>", "Comment" },
-    p = {
-      name = "pack",
-      i = { 'y:lua pp(<C-r>")', "Inspect" },
+    g = {
+      name = "git",
+      y = "Link",
     },
     l = {
       name = "lsp",
       f = { "<Cmd>vim.lsp.buf.range_formatting()<CR>", "Format" },
     },
-    g = {
-      name = "git",
-      y = "Link",
+    p = {
+      name = "pack",
+      i = { 'y:lua pp(<C-r>")', "Inspect" },
+    },
+    s = {
+      name = "Search",
+      y = { "dh<cmd>Telescope neoclip<CR>", "Clipboard" },
     },
   },
 
@@ -519,7 +523,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       S = { "<cmd>Telescope spell_suggest<CR>", "Spell" },
       t = { "<cmd>TodoTelescope<CR>", "Todo" },
       T = { "<cmd>Telescope grep_string<CR>", "Text under cursor" },
-      y = { "<cmd>Telescope neoclip<CR>", "Clip" },
+      y = { "<cmd>Telescope neoclip<CR>", "Clipboard" },
       z = { "<cmd>lua require'telescope'.extensions.zoxide.list{}<CR>", "Z" },
       -- z = { "<cmd>lua require'telescope'.extensions.z.list{ cmd = {'zoxide', 'query', '-ls'} }<CR>", "Z" },
     },
@@ -827,7 +831,7 @@ lvim.plugins = {
           timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
           -- keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
           keys = function()
-            return vim.fn.col '.' - 2 >= 1 and '<esc>l' or '<esc>'
+            return vim.fn.col "." - 2 >= 1 and "<esc>l" or "<esc>"
           end,
         }
       end,
@@ -977,8 +981,8 @@ lvim.plugins = {
         keys = {
           i = {
             select = "<cr>",
-            paste = "<c-p>",
-            paste_behind = "<c-b>",
+            paste = "<c-l>",
+            paste_behind = "<c-h>",
           },
         },
       }
