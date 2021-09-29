@@ -416,7 +416,6 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       c = { "<cmd>Cheatsheet<cr>", "Cheat" },
       m = { "<cmd>MinimapToggle<cr>", "Minimap" },
       t = { "<cmd>TodoQuickFix<cr>", "Todo" },
-      z = { "<cmd>FocusToggle<cr>", "AutoZoom" },
     },
     l = {
       -- d = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Diagnostics" },
@@ -548,33 +547,38 @@ lvim.builtin.which_key.on_config_done = function()
   local which_key = require "which-key"
   local opts = {
     mode = "n", -- NORMAL mode
-    prefix = ",",
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
     silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
     nowait = true, -- use `nowait` when creating keymaps
   }
-  local mappings = {
-    f = {
-      name = "fzf",
-      [" "] = { "<cmd>lua require('fzf-lua').live_grep_resume()<CR>", "Grep" },
-      ["<C-q>"] = { "<cmd>lua require('fzf-lua').quickfix()<CR>", "Quickfix" },
-      ["<C-e>"] = { "<cmd>lua require('fzf-lua').loclist()<CR>", "Loclist" },
-      f = { "<cmd>lua require('fzf-lua').files()<CR>", "Files" },
-      b = { "<cmd>lua require('fzf-lua').buffers()<CR>", "Buffers" },
-      r = { "<cmd>lua require('fzf-lua').files_resume()<CR>", "Resume" },
-      m = { "<cmd>lua require('fzf-lua').oldfiles()<CR>", "MRU" },
-      l = { "<cmd>lua require('fzf-lua').blines()<CR>", "Lines" },
-      L = { "<cmd>lua require('fzf-lua').lines()<CR>", "Lines" },
-      T = { "<cmd>lua require('fzf-lua').tab()<CR>", "Tab" },
-      g = { "<cmd>lua require('fzf-lua').live_grep()<CR>", "Grep" },
-      s = { "<cmd>lua require('fzf-lua').grep()<CR>", "Grep" },
-      o = { "<cmd>lua require('fzf-lua').git_status()<CR>", "Git Status" },
-      c = { "<cmd>lua require('fzf-lua').git_commits()<CR>", "Commits" },
-      p = { "<cmd>lua require('fzf-lua').colorschemes()<CR>", "Colorschemes" },
+  local mymappings = {
+    ["<C-w>"] = {
+      m = "Zoom",
+      [" "] = { "<cmd>lua require('focus').focus_toggle()<cr>", "FocusToggle" },
+    },
+    [","] = {
+      f = {
+        name = "fzf",
+        [" "] = { "<cmd>lua require('fzf-lua').live_grep_resume()<CR>", "Grep" },
+        ["<C-q>"] = { "<cmd>lua require('fzf-lua').quickfix()<CR>", "Quickfix" },
+        ["<C-e>"] = { "<cmd>lua require('fzf-lua').loclist()<CR>", "Loclist" },
+        f = { "<cmd>lua require('fzf-lua').files()<CR>", "Files" },
+        b = { "<cmd>lua require('fzf-lua').buffers()<CR>", "Buffers" },
+        r = { "<cmd>lua require('fzf-lua').files_resume()<CR>", "Resume" },
+        m = { "<cmd>lua require('fzf-lua').oldfiles()<CR>", "MRU" },
+        l = { "<cmd>lua require('fzf-lua').blines()<CR>", "Lines" },
+        L = { "<cmd>lua require('fzf-lua').lines()<CR>", "Lines" },
+        T = { "<cmd>lua require('fzf-lua').tab()<CR>", "Tab" },
+        g = { "<cmd>lua require('fzf-lua').live_grep()<CR>", "Grep" },
+        s = { "<cmd>lua require('fzf-lua').grep()<CR>", "Grep" },
+        o = { "<cmd>lua require('fzf-lua').git_status()<CR>", "Git Status" },
+        c = { "<cmd>lua require('fzf-lua').git_commits()<CR>", "Commits" },
+        p = { "<cmd>lua require('fzf-lua').colorschemes()<CR>", "Colorschemes" },
+      },
     },
   }
-  which_key.register(mappings, opts)
+  which_key.register(mymappings, opts)
 end
 
 -- Additional Plugins
@@ -873,14 +877,22 @@ lvim.plugins = {
     {
       "beauwilliams/focus.nvim",
       -- event = "BufRead",
-      cmd = "FocusToggle",
+      -- cmd = "FocusToggle",
+      module = "focus",
       config = function()
         require("focus").setup {
           signcolumn = false,
+          -- number = false,
+          -- relativenumber = true,
           -- hybridnumber = true,
           excluded_filetypes = { "lir", "toggleterm" },
           excluded_buftypes = { "nofile", "prompt", "help", "quickfix" },
         }
+        require("focus").focus_toggle()
+        vim.api.nvim_set_keymap("n", "<C-h>", ":lua require'focus'.split_command('h')<CR>", { silent = true })
+        vim.api.nvim_set_keymap("n", "<C-j>", ":lua require'focus'.split_command('j')<CR>", { silent = true })
+        vim.api.nvim_set_keymap("n", "<C-k>", ":lua require'focus'.split_command('k')<CR>", { silent = true })
+        vim.api.nvim_set_keymap("n", "<C-l>", ":lua require'focus'.split_command('l')<CR>", { silent = true })
       end,
     },
     { "dhruvasagar/vim-zoom", keys = "<C-w>m" },
@@ -1295,6 +1307,12 @@ lvim.autocommands.custom_groups = {
     "BufWinEnter",
     "*",
     [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
+  },
+  -- [gopass: vim on Linux](https://github.com/gopasspw/gopass/blob/master/docs/setup.md)
+  {
+    "BufNewFile,BufRead",
+    "/dev/shm/gopass.*,/run/shm/gopass.*",
+    [[setlocal noswapfile nobackup noundofile]],
   },
 }
 -- way to get os name
