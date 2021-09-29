@@ -50,8 +50,6 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
     - Video series on how to configure LunarVim as an IDE for each lang
 7. Valhalla
 
-
-
 ## Config
 
 - <https://github.com/ChristianChiarulli/lvim>
@@ -71,7 +69,6 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ]  [[Bug]: Can't set up write-good linter for markdown](https://github.com/LunarVim/LunarVim/issues/1249)
 - [ ]  [[Feature]: Add save without formatting](https://github.com/LunarVim/LunarVim/issues/897)
 
-
 ## Pull requests
 
 [[Feature]: Add save without formatting](https://github.com/LunarVim/LunarVim/pull/898)
@@ -80,7 +77,6 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 [[Feature]: Add lunarvim binary for windows 10](https://github.com/LunarVim/LunarVim/pull/1515)
 [refactor: auto-generate language configuration](https://github.com/LunarVim/LunarVim/pull/1584)
 [feat: add prelimenary LvimUpdate command](https://github.com/LunarVim/LunarVim/pull/1634)
-
 
 ## TODO
 
@@ -91,7 +87,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ] lsp for save without formatting(:h :autoformat :formatting) [](https://github.com/LunarVim/LunarVim/issues/1600#issuecomment-925027298)
 - [ ] use lua-dev [](https://github.com/mvllow/dots/blob/main/.config/nvim/init.lua#L184)
 - [ ] refactor plugins' configuration in `user` fold, perhaps using `require` to generate `lvim.plugins`
-- [ ] modes.nvim, filetype.nvim, better-escape, startup-time
+- [ ] <C-w> for zoom, modes.nvim, filetype.nvim, better-escape, startup-time
 - [ ] auto-session
 - [ ] sudo lvim
 - [ ] lua require('focus').focus_toggle()

@@ -4,6 +4,11 @@ local M = {}
 M.setup = function()
   local schemas = {
     {
+      description = "Markdownlint configuration schema",
+      fileMatch = { ".markdownlint.json" },
+      url = "https://json.schemastore.org/markdownlint.json",
+    },
+    {
       description = "Package JSON file",
       fileMatch = { "package.json" },
       url = "https://json.schemastore.org/package.json",
