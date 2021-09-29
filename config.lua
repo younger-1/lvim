@@ -824,6 +824,13 @@ lvim.plugins = {
       end,
     },
     {
+      "nathom/filetype.nvim",
+      -- Do not source the default filetype.vim
+      setup = function()
+        vim.g.did_load_filetypes = 1
+      end,
+    },
+    {
       "max397574/better-escape.nvim",
       setup = function()
         vim.cmd [[
