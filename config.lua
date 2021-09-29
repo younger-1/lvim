@@ -351,8 +351,8 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
     },
     g = {
       name = "git",
-      y = "Link"
-    }
+      y = "Link",
+    },
   },
 
   mappings = {
@@ -462,9 +462,9 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       P = { "<cmd>LuaCacheProfile<cr>", "LuaCache Profile" },
       R = { "<cmd>LvimCacheReset<cr>", "LvimCache Reset" },
       u = { "<cmd>lua require'user.tools'.update_lunarvim()<cr>", "Update LunarVim" },
-      g = {
+      b = {
         "<cmd>lua require('telescope.builtin').git_commits { cwd = _G.get_runtime_dir() .. '/lvim' }<cr>",
-        "LunarVim Git",
+        "LunarVim Git Branch",
       },
     },
     p = {
@@ -812,6 +812,26 @@ lvim.plugins = {
   {
     { "tpope/vim-scriptease" },
     { "tpope/vim-unimpaired", commit = "825a3ee64" },
+    {
+      "max397574/better-escape.nvim",
+      setup = function()
+        vim.cmd [[
+          silent! iunmap jk
+          silent! iunmap kj
+          silent! iunmap jj
+        ]]
+      end,
+      config = function()
+        require("better_escape").setup {
+          mapping = { "jk", "jj" }, -- a table with mappings to use
+          timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
+          -- keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
+          keys = function()
+            return vim.fn.col '.' - 2 >= 1 and '<esc>l' or '<esc>'
+          end,
+        }
+      end,
+    },
   },
   -- [Buffer | Window | Tab]
   {
