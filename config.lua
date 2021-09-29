@@ -817,6 +817,13 @@ lvim.plugins = {
     { "tpope/vim-scriptease" },
     { "tpope/vim-unimpaired", commit = "825a3ee64" },
     {
+      "dstein64/vim-startuptime",
+      cmd = "StartupTime",
+      setup = function()
+        vim.g.startuptime_use_blocks = 0
+      end,
+    },
+    {
       "max397574/better-escape.nvim",
       setup = function()
         vim.cmd [[
