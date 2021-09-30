@@ -67,6 +67,11 @@ lvim.lsp.diagnostics.virtual_text = false
 lvim.lsp.override = { "java" }
 require("user.json_schemas").setup()
 
+-- [](https://github.com/LunarVim/LunarVim/issues/1639)
+-- [jsonls](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#jsonls)
+-- merely add `require("lsp").setup "json"` to `ftplugin/jsonc.lua` doesn't work
+lvim.lang.json.lsp.setup.filetypes = { "json", "jsonc" }
+
 -- Builtins
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
@@ -498,7 +503,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       c = { "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>", "Colorscheme" },
       g = { "<cmd>Telescope live_grep <cr>", "Grep" },
       -- TODO:
-      -- f = { "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files <cr>", "Find files" },
+      f = { "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files <cr>", "Find files" },
       G = { "<cmd>Telescope live_grep grep_open_files=v:true<cr>", "Grep in opened buffer" },
       m = {
         name = "MRU",
