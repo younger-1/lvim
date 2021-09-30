@@ -713,17 +713,18 @@ lvim.plugins = {
   },
   {
     "mvllow/modes.nvim",
-    event = "BufRead", -- optional lazy loading
+    opt = true,
+    -- event = "BufRead",
     config = function()
       vim.opt.cursorline = true
       require("modes").setup {
         colors = {
-          copy = "#f5c359",
-          delete = "#c75c6a",
           insert = "#78ccc5",
-          visual = "#9745be",
+          visual = "#f5c359",
+          delete = "#c75c6a",
+          copy = "#9745be",
         },
-        line_opacity = 0.3,
+        line_opacity = 0.2,
         focus_only = false,
       }
     end,
