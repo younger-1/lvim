@@ -43,15 +43,13 @@
 -- :lua load "print(1,2,3)"()
 -- local fun = load "print(1,2,3)"
 
--- [pcall]
--- local status_ok, mod = pcall(require, "gitlinkerhg")
--- local status_ok, mod = pcall(function()
---   os.execute "echos 3"
---   return 5
--- end)
+-- [pcall](https://www.lua.org/pil/8.4.html)
+-- local status_ok, res = pcall(require, "gitlinker")
 -- pp(status_ok)
 -- pp "--"
--- pp(mod)
+-- pp(res)
+-- local status, err = pcall(function() error { code = 121 } end)
+-- print(err.code) -->  121
 
 -- [[table]]
 ---@version >5.2, JIT
