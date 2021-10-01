@@ -337,6 +337,42 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
   },
 
   mappings = {
+    ["?"] = {
+      name = "Vim",
+      ["?"] = { ":h reference_toc<CR>", "❓" },
+      i = { ":h index<CR>", "Index" },
+      I = { ":h insert-index<CR>", "Insert Index" },
+      n = { ":viu<CR>", "Normal Index" },
+      t = { ":h objects<CR>", "Text objects" },
+      w = { ":h ctrl-w<CR>", "Windows Index" },
+      y = { ":h [<CR>", "[ ] Index" },
+      g = { ":h g<CR>", "g Index" },
+      z = { ":h z<CR>", "z Index" },
+      x = { ":h visual-index<CR>", "Visual Index" },
+      e = { ":exu<CR>", "Ex-cmd Index" },
+      E = { ":h ex-edit-index<CR>", "Ex-edit Index" },
+      [' '] = { ":h api<CR>", "Api" },
+      h = { ":h help-tags<CR>", "Help tags" },
+      H = { ":h help-summary<CR>", "Help" },
+      N = { ":h notation<CR>", "Notation" },
+      k = { ":h key-codes<CR>", "Key Codes" },
+      u = { ":h user-manual<CR>", "User Manual" },
+      s = { ":h startup<CR>", "Startup" },
+      o = { ":options<CR>", "Options" },
+      v = { ":h option-list<CR>", "View Options" },
+      q = { ":h quickref<CR>", "Quick Reference" },
+      f = { ":h vim-function<CR>", "Vim Function" },
+      m = { ":h vim-modes<CR>", "Modes" },
+      M = { ":h map-modes<CR>", "Map Modes" },
+      V = { ":h vim-variable<CR>", "Vim Variable" },
+      a = { ":h vim-arguments<CR>", "Vim Arguments" },
+      A = { ":h vim-additions<CR>", "Vim Additions" },
+      d = { ":h nvim-defaults<CR>", "Defaults" },
+      p = { ":h local-additions<CR>", "Plugin" },
+      T = { ":h tips<CR>", "Tips" },
+      l = { ":h lua<CR>", "Lua" },
+      L = { ":h lsp<CR>", "LSP" },
+    },
     f = { "<cmd>lua require('lir.float').toggle()<cr>", "Files" },
     g = {
       -- ["<tab>"] = {},
@@ -390,7 +426,6 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
     },
     k = {
       name = "kit",
-      c = { "<cmd>Cheatsheet<cr>", "Cheat" },
       m = { "<cmd>MinimapToggle<cr>", "Minimap" },
       t = { "<cmd>TodoQuickFix<cr>", "Todo" },
     },
@@ -462,21 +497,23 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
     },
     s = {
-      ["<tab>"] = { "<cmd>Telescope<CR>", "🧙" },
       [" "] = { "<cmd>Telescope resume<CR>", "♻️" },
+      ["<tab>"] = { "<cmd>Telescope<CR>", "🧙" },
       ["<C-q>"] = { "<cmd>Telescope quickfix<CR>", "QuickList" },
       ["<C-e>"] = { "<cmd>Telescope loclist<CR>", "LocList Bug" },
       ["'"] = { "<cmd>Telescope marks<CR>", "Marks" },
       ['"'] = { "<cmd>Telescope registers<CR>", "Registers" },
       ["/"] = { "<cmd>Telescope search_history<CR>", "Search History" },
+      ["?"] = { "<cmd>Telescope help_tags<CR>", "Help" },
       [":"] = { "<cmd>Telescope command_history<CR>", "Command History" },
       ["."] = { "<cmd>Telescope file_browser hidden=v:true<CR>", "Browser" },
       a = { "<cmd>Telescope autocommands<CR>", "Autocommands" },
       c = { "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>", "Colorscheme" },
-      g = { "<cmd>Telescope live_grep <cr>", "Grep" },
       -- TODO:
       f = { "<cmd>Telescope find_files find_command=rg,--files <cr>", "Find files" },
+      g = { "<cmd>Telescope live_grep <cr>", "Grep" },
       G = { "<cmd>Telescope live_grep grep_open_files=v:true<cr>", "Grep in opened buffer" },
+      H = { "<cmd>Telescope highlights<cr>", "Highlights" },
       m = {
         name = "MRU",
         -- :Telescope frecency frecency default_text=:project:
@@ -552,6 +589,11 @@ lvim.builtin.which_key.on_config_done = function()
         o = { "<cmd>lua require('fzf-lua').git_status()<CR>", "Git Status" },
         c = { "<cmd>lua require('fzf-lua').git_commits()<CR>", "Commits" },
         p = { "<cmd>lua require('fzf-lua').colorschemes()<CR>", "Colorschemes" },
+      },
+      s = {
+        name = "seek",
+        c = { "<cmd>Telescope cheat fd<cr>", "Cheatsheet" },
+        v = { "<cmd>Cheatsheet<cr>", "Vim Cheatsheet" },
       },
     },
   }
@@ -968,6 +1010,14 @@ lvim.plugins = {
     end,
   },
   {
+    "nvim-telescope/telescope-cheat.nvim",
+    after = "telescope.nvim",
+    requires = { { "tami5/sqlite.lua", module = "sqlite" } },
+    config = function()
+      require("telescope").load_extension "cheat"
+    end,
+  },
+  {
     "jvgrootveld/telescope-zoxide",
     after = "telescope.nvim",
     config = function()
@@ -1175,7 +1225,6 @@ lvim.plugins = {
     "sudormrfbin/cheatsheet.nvim",
     config = function()
       require("cheatsheet").setup {
-        -- For bundled plugin cheatsheets, do not show a sheet if you don't have the plugin installed
         include_only_installed_plugins = false,
       }
     end,
