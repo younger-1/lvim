@@ -11,9 +11,6 @@
 ---[[--------------------------------------------]]---
 
 --[[
-use {
-  'myusername/example',        -- The plugin location string
-  -- The following keys are all optional
   disable = boolean,           -- Mark a plugin as inactive
   as = string,                 -- Specifies an alias under which to install the plugin
   installer = function,        -- Specifies custom installer. See |packer-custom-installers|
@@ -41,26 +38,27 @@ use {
                                -- with one of these module names, the plugin will be loaded.
   module_pattern = string/list -- Specifies Lua pattern of Lua module names for require. When requiring a string
                                -- which matches one of these patterns, the plugin will be loaded.
-}
 --]]
 
 require "user.cfg.global"
+require "user.cfg.option"
 require "user.theme.dash-pic"
+
 young = "Young"
 
 -- General
 lvim.format_on_save = false
 lvim.transparent_window = false
--- lvim.colorscheme = "onedarker"
--- lvim.log.level = "warn"
-lvim.debug = false
-vim.opt.clipboard = ""
-vim.opt.cmdheight = 1
-vim.opt.guifont = "SauceCodePro NF"
-vim.opt.inccommand = "split"
-vim.opt.mouse = "nvi"
-vim.opt.timeoutlen = 200
-vim.opt.wrap = false
+lvim.colorscheme = "onedarker"
+lvim.log.level = "info"
+
+lvim.builtin.dashboard.active = true
+lvim.builtin.terminal.active = true
+lvim.builtin.dap.active = true
+lvim.builtin.gitsigns.opts.numhl = true
+lvim.builtin.gitsigns.opts.keymaps["x ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
+lvim.builtin.cmp.confirm_opts.select = false
+lvim.builtin.lualine.options.theme = "onedarker"
 
 -- LSP
 lvim.lsp.diagnostics.virtual_text = false
@@ -72,19 +70,11 @@ require("user.json_schemas").setup()
 -- merely add `require("lsp").setup "json"` to `ftplugin/jsonc.lua` doesn't work
 lvim.lang.json.lsp.setup.filetypes = { "json", "jsonc" }
 
--- Builtins
-lvim.builtin.dashboard.active = true
-lvim.builtin.terminal.active = true
-lvim.builtin.dap.active = true
-lvim.builtin.gitsigns.opts.numhl = true
-lvim.builtin.gitsigns.opts.keymaps["x ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
--- lvim.builtin.lualine.options.theme = "tokyonight"
-
 -- Treesitter
 lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.autotag.enable = true
--- lvim.builtin.treesitter.playground.enable = true
+lvim.builtin.treesitter.playground.enable = true
 lvim.builtin.treesitter.rainbow.enable = true
 -- for finding syntax ids for non TS enabled languages
 vim.cmd [[
@@ -508,7 +498,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Buffer String" },
       c = { "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", "Colorscheme" },
       -- TODO:
-      f = { "<cmd>Telescope find_files<cr>", "Find files" },
+      f = { "<cmd>Telescope find_files hidden=v:true no_ignore=v:true<cr>", "Find files" },
       g = { "<cmd>Telescope live_grep <cr>", "Grep" },
       G = { "<cmd>Telescope live_grep grep_open_files=v:true<cr>", "Grep in opened buffer" },
       H = { "<cmd>Telescope highlights<cr>", "Highlights" },
