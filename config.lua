@@ -219,17 +219,26 @@ lvim.builtin.project = vim.tbl_deep_extend("force", lvim.builtin.project, {
 -- View all the defaults by pressing <leader>Lk
 -- lvim.leader = "space"
 lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
-  -- insert_mode = {},
+  -- <https://github.com/mskar/setup/blob/main/config.lua>
+  insert_mode = {
+    ["<C-a>"] = "<Home>",
+    ["<C-e>"] = "<End>",
+    -- ["<C-b>"] = "<Left>",
+    -- ["<C-f>"] = "<Right>",
+  },
   normal_mode = {
-    ["Y"] = "y$",
+    Y = "y$",
+    ZA = ":wqa<CR>",
     ["z<C-l>"] = "<cmd>nohlsearch<cr><C-l>",
     ["<C-e>"] = ":call LocListToggle()<CR>",
   },
-  -- term_mode = {},
+  term_mode = {
+    JJ = "<C-\\><C-N>",
+  },
   visual_mode = {
-    ["Y"] = [["+y]],
-    ["d"] = [["_d]],
-    ["X"] = [["+x]],
+    Y = [["+y]],
+    d = [["_d]],
+    X = [["+x]],
   },
   -- visual_block_mode = {},
   -- command_mode = {},
@@ -565,6 +574,20 @@ lvim.builtin.which_key.on_config_done = function()
     nowait = true, -- use `nowait` when creating keymaps
   }
   local mymappings = {
+    ["]"] = {
+      d = {
+        "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
+        "Next Diagnostic",
+      },
+      g = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+    },
+    ["["] = {
+      d = {
+        "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
+        "Prev Diagnostic",
+      },
+      g = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+    },
     ["<C-w>"] = {
       m = "Zoom",
       [" "] = { "<cmd>lua require('focus').focus_toggle()<cr>", "FocusToggle" },

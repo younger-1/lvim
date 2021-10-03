@@ -93,6 +93,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ] lua require('focus').focus_toggle()
 - [ ] update `lunarvim` and show difference
 - [ ] add keymappings to convert between floating-window
+- [ ] use [feat: add trim_newlines formatter](https://github.com/jose-elias-alvarez/null-ls.nvim/commit/f9ca1200102655b21d0d6cc7648917e054d3e123)
 
 
 ## Outline
