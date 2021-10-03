@@ -13,6 +13,7 @@ lvim.lang.markdown = {
 }
 require("lsp.null-ls").setup "markdown"
 
+-- <https://github.com/jose-elias-alvarez/null-ls.nvim/commit/d0fbe058a8286f4e73b9240f4f8e7b39881fc36b>
 -- [manually setup]
 -- local null_ls = require "null-ls"
 -- local markdownlint = {

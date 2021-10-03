@@ -426,6 +426,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       ["<C-e>"] = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Diagnostics LocList" },
       a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
       -- f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+      W = { "<cmd>lua pp(vim.lsp.buf.list_workspace_folders())<cr>", "Workspace folders" },
       f = {
         function()
           vim.lsp.buf.formatting_sync()
@@ -863,10 +864,8 @@ lvim.plugins = {
     },
     {
       "nathom/filetype.nvim",
-      -- Do not source the default filetype.vim
-      setup = function()
-        vim.g.did_load_filetypes = 1
-      end,
+      -- opt = true,
+      setup = function() end,
     },
     {
       "max397574/better-escape.nvim",
@@ -881,10 +880,7 @@ lvim.plugins = {
         require("better_escape").setup {
           mapping = { "jk", "jj" }, -- a table with mappings to use
           timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
-          -- keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
-          keys = function()
-            return vim.fn.col "." - 2 >= 1 and "<esc>l" or "<esc>"
-          end,
+          keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
         }
       end,
     },
@@ -1256,6 +1252,7 @@ lvim.plugins = {
   -- [Languages]
   {
     "sheerun/vim-polyglot",
+    opt = true,
     setup = function()
       vim.g.polyglot_disabled = { "markdown" }
     end,

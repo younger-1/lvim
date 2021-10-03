@@ -1,5 +1,5 @@
 -- <https://github.com/ayamir/nvimdots/blob/cbe59f051b4a913fcdc014664ce32b37c3b0f577/lua/core/init.lua#L23>
-local disable_distribution_plugins = function()
+local disable_distribution = function()
   vim.g.loaded_2html_plugin = 1
   vim.g.loaded_getscript = 1
   vim.g.loaded_getscriptPlugin = 1
@@ -32,6 +32,10 @@ local disable_distribution_plugins = function()
   -- Disable node provider
   -- vim.g.loaded_node_provider = 0
   -- vim.g.loaded_remote_plugins = false
+
+  -- [](https://github.com/nathom/filetype.nvim/issues/12)
+  -- Do not source the default filetype.vim
+  vim.g.did_load_filetypes = 1
 end
 
 local neovide_config = function()
@@ -48,5 +52,5 @@ local neovide_config = function()
   vim.g.neovide_cursor_vfx_particle_density = 5.0
 end
 
-disable_distribution_plugins()
+disable_distribution()
 -- neovide_config()
