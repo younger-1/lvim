@@ -99,7 +99,16 @@ map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<
   https://github.com/rafamadriz/NeoCode/blob/main/lua/modules/plugins/telescope.lua
 --]]
 local actions = require "telescope.actions"
+local vertical_layout = {
+  layout_strategy = "vertical",
+  layout_config = {
+    height = 0.99,
+    preview_height = 0.6,
+    preview_cutoff = 30,
+  },
+}
 lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
+  -- require('telescope.config').values
   defaults = {
     -- 🔍
     -- prompt_prefix = "  ",
@@ -121,9 +130,11 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
     -- horizontal, center, cursor, vertical, flex, bottom_pane
     layout_strategy = "horizontal",
     layout_config = {
-      width = 0.90,
-      horizontal = { preview_width = 0.5 },
+      width = 0.8,
+      horizontal = { mirror = false, preview_width = 0.6 },
+      vertical = { mirror = false },
     },
+    winblend = 25,
     mappings = {
       i = {
         ["<C-j>"] = actions.move_selection_next,
@@ -146,31 +157,22 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
       },
     },
   },
-  -- require'telescope.themes'.get_cursor()
-  -- require'telescope.themes'.get_dropdown()
-  -- require'telescope.themes'.get_ivy()
+  -- [feat: theme setting apply to all pickers](https://github.com/nvim-telescope/telescope.nvim/issues/938)
   pickers = {
-    -- find_files = require("telescope.themes").get_dropdown(),
-    -- find_files = {
-    -- theme = "dropdown",
-    -- {
-    --   border = true,
-    --   borderchars = {
-    --     preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-    --     prompt = { "─", "│", " ", "│", "╭", "╮", "│", "│" },
-    --     results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
-    --   },
-    --   layout_config = {
-    --     height = <function 2>,
-    --     preview_cutoff = 1,
-    --     width = <function 3>,
-    --     <metatable> = <table 1>
-    --   },
-    --   layout_strategy = "center",
-    --   preview_title = "Preview",
-    --   sorting_strategy = "ascending",
-    -- }
-    -- },
+    -- get_cursor() get_dropdown() get_ivy()
+    -- find_files = require("telescope.themes").get_ivy(),
+    -- find_files = { theme = "ivy", prompt_title = "~ Younger ~" },
+    find_files = vertical_layout,
+    grep_string = { theme = "ivy" },
+    buffers = { theme = "ivy" },
+    oldfiles = vertical_layout,
+    commands = { theme = "ivy" },
+    colorscheme = { layout_config = { preview_width = 0.8 } },
+    lsp_code_actions = { theme = "cursor" },
+    lsp_range_code_actions = { theme = "cursor" },
+    git_commits = { layout_config = { prompt_position = "top" }, sorting_strategy = "ascending" },
+    git_bcommits = { layout_config = { prompt_position = "top" }, sorting_strategy = "ascending" },
+    git_status = vertical_layout,
     git_branches = {
       mappings = {
         i = {
@@ -328,10 +330,12 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
     },
     p = {
       name = "pack",
-      i = { 'y:lua pp(<C-r>")', "Inspect" },
+      I = { 'y:lua pp(<C-r>")', "Inspect" },
     },
     s = {
-      name = "Search",
+      name = "search",
+      f = { 'y<cmd>Telescope fd<CR><C-r>"', "Find files" },
+      g = { 'y<cmd>Telescope live_grep<CR><C-r>"', "Grep" },
       y = { "dh<cmd>Telescope neoclip<CR>", "Clipboard" },
     },
   },
@@ -351,7 +355,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       x = { ":h visual-index<CR>", "Visual Index" },
       e = { ":exu<CR>", "Ex-cmd Index" },
       E = { ":h ex-edit-index<CR>", "Ex-edit Index" },
-      [' '] = { ":h api<CR>", "Api" },
+      [" "] = { ":h api<CR>", "Api" },
       h = { ":h help-tags<CR>", "Help tags" },
       H = { ":h help-summary<CR>", "Help" },
       N = { ":h notation<CR>", "Notation" },
@@ -416,13 +420,6 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
     },
     j = {
       name = "justify",
-      s = {
-        b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Buffer String" },
-        F = { "<cmd>Telescope filetypes<CR>", "FileTypes" },
-        r = { "<cmd>Telescope reloader<CR>", "Reload Module" },
-        t = { "<cmd>Telescope current_buffer_tags<CR>", "Tags" },
-        T = { "<cmd>Telescope tags<CR>", "All Tags" },
-      },
     },
     k = {
       name = "kit",
@@ -484,7 +481,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
     },
     p = {
       C = { "<cmd>PackerCompile profile=true<cr>", "Compile+" },
-      o = { ":lua pp()<left>", "Inspect" },
+      I = { ":lua pp()<left>", "Inspect" },
       -- FIXME:Search list of files of package(under cursor)
       -- o = { "", "Package Files" },
       p = { "<cmd>PackerProfile<cr>", "Profile" },
@@ -506,11 +503,12 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       ["/"] = { "<cmd>Telescope search_history<CR>", "Search History" },
       ["?"] = { "<cmd>Telescope help_tags<CR>", "Help" },
       [":"] = { "<cmd>Telescope command_history<CR>", "Command History" },
-      ["."] = { "<cmd>Telescope file_browser hidden=v:true<CR>", "Browser" },
+      ["."] = { "<cmd>Telescope file_browser hidden=v:true no-ignore=v:true<CR>", "Browser" },
       a = { "<cmd>Telescope autocommands<CR>", "Autocommands" },
-      c = { "<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>", "Colorscheme" },
+      b = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Buffer String" },
+      c = { "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<cr>", "Colorscheme" },
       -- TODO:
-      f = { "<cmd>Telescope find_files find_command=rg,--files <cr>", "Find files" },
+      f = { "<cmd>Telescope find_files<cr>", "Find files" },
       g = { "<cmd>Telescope live_grep <cr>", "Grep" },
       G = { "<cmd>Telescope live_grep grep_open_files=v:true<cr>", "Grep in opened buffer" },
       H = { "<cmd>Telescope highlights<cr>", "Highlights" },
@@ -523,6 +521,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       },
       p = { "<cmd>Telescope projects<CR>", "Projects" },
       P = { "<cmd>Telescope pickers<CR>", "<Pickers>" },
+      R = { "<cmd>Telescope reloader<CR>", "Reload Module" },
       s = {
         name = "symbol",
         s = { "<cmd>Telescope symbols<CR>", "Symbols" },
@@ -534,6 +533,14 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
         l = { "<cmd>lua require'telescope.builtin'.symbols{ sources = {'latex'} }<CR>", "LaTeX" },
       },
       S = { "<cmd>Telescope spell_suggest<CR>", "Spell" },
+      v = {
+        name = "vim",
+        c = { "<cmd>Telescope commands<cr>", "Commands" },
+        o = { "<cmd>Telescope vim_options<CR>", "Options" },
+        f = { "<cmd>Telescope filetypes<CR>", "FileTypes" },
+        t = { "<cmd>Telescope current_buffer_tags<CR>", "Tags" },
+        T = { "<cmd>Telescope tags<CR>", "All Tags" },
+      },
       t = { "<cmd>TodoTelescope<CR>", "Todo" },
       T = { "<cmd>Telescope grep_string<CR>", "Text under cursor" },
       y = { "<cmd>Telescope neoclip<CR>", "Clipboard" },
