@@ -2,12 +2,14 @@
 lvim.lang.markdown = {
   formatters = {
     {
-      exe = "prettier",
+      exe = "markdownlint",
+      args = { "--config", vim.fn.expand "~/dotter/markdownlint.jsonc" },
     },
   },
   linters = {
     {
       exe = "markdownlint",
+      args = { "--config", vim.fn.expand "~/dotter/markdownlint.jsonc" },
     },
   },
 }
@@ -29,7 +31,9 @@ require("lsp.null-ls").setup "markdown"
 --   },
 -- }
 -- null_ls.register(markdownlint)
--- null_ls.register(require("null-ls").builtins.diagnostics.markdownlint)
+-- null_ls.register(require("null-ls").builtins.diagnostics.markdownlint.with {
+--   diagnostics_format = "[#{c}] #{m} (#{s})",
+-- })
 
 -- [which-key]
 -- If not `pcall`, it will go wrong because "which-key" is lazy-load with 'BufWinEnter' event

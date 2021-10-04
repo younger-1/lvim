@@ -18,7 +18,6 @@
     </a>
 </p> </div>
 
-
 ## LunarVim
 
 > <https://www.lunarvim.org/>
@@ -35,14 +34,14 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
     - Debugging
     - Treesitter
     - Colorschemes
-2. Be as fast and lean as possible 
+2. Be as fast and lean as possible
     - Lazy loading
     - Not a single extra plugin
     - User configurable lang/feature enable/disable
-3. Provide a [simple and easy](https://github.com/LunarVim/LunarVimCommunity) way for users to share their own configuration or use others. 
+3. Provide a [simple and easy](https://github.com/LunarVim/LunarVimCommunity) way for users to share their own configuration or use others.
 4. Hot reload of configurations
     - Hot install of lsp/treesitter/formatter required upon openning a filetype for the first time
-5. Provide a stable & maintainable error free configuration layer over neovim 
+5. Provide a stable & maintainable error free configuration layer over neovim
     - With the help of the community behind it
     - Github workflow testing
     - Freezing plugin versions
@@ -56,7 +55,6 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - <https://github.com/abzcoding/lvim>
 - <https://github.com/rebuilt/lvim>
 - <https://github.com/jimcornmell/lvim>
-
 
 ## Issues
 
@@ -77,11 +75,12 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 [[Feature]: Add lunarvim binary for windows 10](https://github.com/LunarVim/LunarVim/pull/1515)
 [refactor: auto-generate language configuration](https://github.com/LunarVim/LunarVim/pull/1584)
 [feat: add prelimenary LvimUpdate command](https://github.com/LunarVim/LunarVim/pull/1634)
+[WIP: lua keymaps and docs](https://github.com/neovim/neovim/pull/13823)
 
 ## TODO
 
 - [ ] add some common library or plugin path to lsp runtime path by `lvim.lang.lua.lsp.setup`
-- [ ] move all uncommon plugins' mappings to buffer-mappings by condition or `ftplugin` or `ftdetect` 
+- [ ] move all uncommon plugins' mappings to buffer-mappings by condition or `ftplugin` or `ftdetect`
 - [ ] more support for clangd lsp feature like auto-import
 - [ ] understand [](https://github.com/LunarVim/LunarVim/issues/1600#issuecomment-925027298)
 - [ ] lsp for save without formatting(:h :autoformat :formatting) [](https://github.com/LunarVim/LunarVim/issues/1600#issuecomment-925027298)
@@ -94,11 +93,15 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ] update `lunarvim` and show difference
 - [ ] add keymappings to convert between floating-window
 - [ ] use [feat: add trim_newlines formatter](https://github.com/jose-elias-alvarez/null-ls.nvim/commit/f9ca1200102655b21d0d6cc7648917e054d3e123)
-
+- [ ]  [Workspace search and replace](https://github.com/nvim-telescope/telescope.nvim/issues/875)
+- [ ]  [Search and replace across multiply files](https://github.com/nvim-lua/wishlist/issues/18)
+- [ ]  [Code coverage in editor](https://github.com/nvim-lua/wishlist/issues/31)
+- [ ]  [Edit git commit and git rebase -i inside neovim](https://github.com/nvim-lua/wishlist/issues/29)
 
 ## Outline
 
 Startup
+
 - require("bootstrap"):init()
   - update runtime-dir
   - require("impatient").setup()
@@ -136,6 +139,7 @@ Startup
 - require("keymappings").setup()
 
 Reload
+
 - require('utils').reload_lv_config()
   - require("core.lualine").config()
   - require("config"):load()
@@ -145,7 +149,6 @@ Reload
   - vim.cmd ":PackerCompile"
   - vim.cmd ":PackerInstall"
   - require("lsp.null-ls").setup(vim.bo.filetype, { force_reload = true })
-
 
 ## Insight
 
@@ -195,7 +198,6 @@ output:
 }
 ```
 
-
 ```viml
 lua print(vim.inspect(lvim.lang.lua.lsp.setup.capabilities.textDocument.completion))
 
@@ -219,7 +221,6 @@ output:
 }
 ```
 
-
 ```viml
 lua print(vim.inspect(require"lspinstall/util".extract_config("sumneko_lua")))
 lua print(vim.inspect(require'lspconfig'["sumneko_lua"].document_config))
@@ -231,9 +232,7 @@ lua print(vim.inspect(require'lspconfig/configs'))
 lua print(vim.inspect(lvim.builtin.telescope.defaults.mappings.i))
 ```
 
-
 ## LSP
-
 
 ```lua
 :h vim.lsp.client
@@ -306,15 +305,17 @@ require('lspconfig').sumneko_lua.setup({
 ## Testimonials
 
 > "I have the processing power of a potato with 4 gb of ram and LunarVim runs perfectly."
+>
 > - @juanCortelezzi, LunarVim user.
 
 > "My minimal config with a good amount less code than LunarVim loads 40ms slower. Time to switch."
+>
 > - @mvllow, Potential LunarVim user.
 
 <div align="center" id="madewithlua">
-	
+
 [![Lua](https://img.shields.io/badge/Made%20with%20Lua-blue.svg?style=for-the-badge&logo=lua)](#madewithlua)
-	
+
 </div>
 
 ![LunarVim Demo](./utils/media/lunarvim_logo_dark_new.png)
