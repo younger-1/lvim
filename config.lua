@@ -413,6 +413,13 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
         g = { "<cmd>Telescope gh gist<cr>", "Gist" },
         r = { "<cmd>Telescope gh run<cr>", "Run" },
       },
+      n  = {
+        name = "neogit",
+        n = { "<cmd>Neogit<cr>", "♐" },
+        c = { "<cmd>lua require('neogit').open({ 'commit' })<cr>", "Commit" },
+        s = { "<cmd>lua require('neogit').open({ kind = 'split' })<cr>", "Commit" },
+        v = { "<cmd>lua require('neogit').open({ kind = 'vsplit' })<cr>", "Commit" },
+      },
       S = { "<cmd>Gitsigns stage_buffer<cr>", "Stage Buffer" },
       y = "Link",
       Y = { "<cmd>lua require'gitlinker'.get_repo_url()<cr>", "Link(Repo)" },
@@ -843,6 +850,7 @@ lvim.plugins = {
   },
   -- [Change]
   {
+    -- TODO:use { "machakann/vim-sandwich" } because `vim-surround` occupies `d` which cause `dz%` doesn't work
     { "tpope/vim-surround" },
     { "tpope/vim-repeat" },
     { "AndrewRadev/splitjoin.vim", keys = { "gS", "gJ" } },
@@ -1185,6 +1193,14 @@ lvim.plugins = {
     event = "BufRead",
     config = function()
       require("user.gitlinker").config()
+    end,
+  },
+  {
+    "TimUntersberger/neogit",
+    cmd = "Neogit",
+    module = "neogit",
+    config = function()
+      require("neogit").setup {}
     end,
   },
   -- [Write]
