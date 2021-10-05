@@ -234,6 +234,7 @@ lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
   },
   term_mode = {
     JJ = "<C-\\><C-N>",
+    JK = "<C-\\><C-N>",
   },
   visual_mode = {
     Y = [["+y]],
@@ -413,7 +414,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
         g = { "<cmd>Telescope gh gist<cr>", "Gist" },
         r = { "<cmd>Telescope gh run<cr>", "Run" },
       },
-      n  = {
+      n = {
         name = "neogit",
         n = { "<cmd>Neogit<cr>", "♐" },
         c = { "<cmd>lua require('neogit').open({ 'commit' })<cr>", "Commit" },
@@ -802,7 +803,7 @@ lvim.plugins = {
       event = "CursorMoved",
       setup = function()
         vim.cmd [[
-          let g:wordmotion_prefix = ','
+          let g:wordmotion_prefix = ';'
         ]]
       end,
     },
@@ -897,6 +898,13 @@ lvim.plugins = {
       "nathom/filetype.nvim",
       -- opt = true,
       setup = function() end,
+    },
+    {
+      "sheerun/vim-polyglot",
+      opt = true,
+      setup = function()
+        vim.g.polyglot_disabled = { "markdown" }
+      end,
     },
     {
       "max397574/better-escape.nvim",
@@ -1289,13 +1297,6 @@ lvim.plugins = {
     end,
   },
   -- [Languages]
-  {
-    "sheerun/vim-polyglot",
-    opt = true,
-    setup = function()
-      vim.g.polyglot_disabled = { "markdown" }
-    end,
-  },
   {
     -- vim colorschemes
     "sainnhe/sonokai",

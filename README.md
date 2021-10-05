@@ -97,6 +97,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ]  [Search and replace across multiply files](https://github.com/nvim-lua/wishlist/issues/18)
 - [ ]  [Code coverage in editor](https://github.com/nvim-lua/wishlist/issues/31)
 - [ ]  [Edit git commit and git rebase -i inside neovim](https://github.com/nvim-lua/wishlist/issues/29)
+- [ ] diff unsaved file with saved file like vscode
 
 ## Outline
 
