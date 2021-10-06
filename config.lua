@@ -898,12 +898,15 @@ lvim.plugins = {
       "nathom/filetype.nvim",
       -- opt = true,
       setup = function() end,
+      config = function()
+        require "user.filetype"
+      end,
     },
     {
       "sheerun/vim-polyglot",
       opt = true,
       setup = function()
-        vim.g.polyglot_disabled = { "markdown" }
+        vim.g.polyglot_disabled = { "autoindent", "ftdetect", "markdown" }
       end,
     },
     {
