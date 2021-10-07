@@ -131,7 +131,7 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
-        ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
+        ["<C-r>"] = actions.smart_send_to_loclist + actions.open_loclist,
         -- ["<C-_>"] = require("telescope.actions.generate").which_key {
         --   name_width = 20, -- typically leads to smaller floats
         --   max_height = 0.2, -- increase potential maximum height
@@ -142,7 +142,7 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
       n = {
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
-        ["<C-a>"] = actions.smart_send_to_loclist + actions.open_loclist,
+        ["<C-r>"] = actions.smart_send_to_loclist + actions.open_loclist,
         ["<C-_>"] = actions.which_key, -- Keys to produce <C-/>
       },
     },
@@ -230,6 +230,8 @@ lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
     Y = "y$",
     ZA = ":wqa<CR>",
     ["z<C-l>"] = "<cmd>nohlsearch<cr><C-l>",
+    ["]e"] = ":lnext<CR>",
+    ["[e"] = ":lprev<CR>",
     ["<C-e>"] = ":call LocListToggle()<CR>",
   },
   term_mode = {
@@ -588,6 +590,7 @@ lvim.builtin.which_key.on_config_done = function()
         "Next Diagnostic",
       },
       g = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+      x = { [[<cmd>lua require('trouble').next({skip_groups=true, jump=true})<CR>]], "Next Trouble" },
     },
     ["["] = {
       d = {
@@ -595,6 +598,7 @@ lvim.builtin.which_key.on_config_done = function()
         "Prev Diagnostic",
       },
       g = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+      x = { [[<cmd>lua require('trouble').previous({skip_groups=true, jump=true})<CR>]], "Prev Trouble" },
     },
     ["<C-w>"] = {
       m = "Zoom",
@@ -886,7 +890,7 @@ lvim.plugins = {
   -- [Vim Helper]
   {
     { "tpope/vim-scriptease" },
-    { "tpope/vim-unimpaired", commit = "825a3ee64" },
+    { "tpope/vim-unimpaired", commit = "825a3ee64", opt = true },
     {
       "dstein64/vim-startuptime",
       cmd = "StartupTime",
@@ -1359,6 +1363,22 @@ lvim.plugins = {
     {
       "EdenEast/nightfox.nvim",
       setup = function() end,
+    },
+    {
+      "olimorris/onedark.nvim",
+      setup = function() end,
+      config = function()
+        require("onedark").setup {
+          -- italic, bold, underline and NONE are possible configuration options.
+          styles = {
+            comments = "italic",
+            functions = "bold",
+            keywords = "bold,italic",
+            strings = "NONE",
+            variables = "NONE",
+          },
+        }
+      end,
     },
   },
 }

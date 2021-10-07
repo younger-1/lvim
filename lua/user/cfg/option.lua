@@ -6,3 +6,4 @@ vim.opt.mouse = "nvi"
 vim.opt.timeoutlen = 200
 vim.opt.titlestring = '%t%( %M%)%( (%{expand("%:~:.:h")})%)%( %a%) - LunarVim'
 vim.opt.wrap = false
+vim.opt.scrolloff = 4
