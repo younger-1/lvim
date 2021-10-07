@@ -911,6 +911,7 @@ lvim.plugins = {
     },
     {
       "max397574/better-escape.nvim",
+      event = "InsertEnter",
       setup = function()
         vim.cmd [[
           silent! iunmap jk
