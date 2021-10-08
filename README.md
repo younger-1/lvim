@@ -66,6 +66,8 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ]  [[Bug]: Can't set markdown linters](https://github.com/LunarVim/LunarVim/issues/1554)
 - [ ]  [[Bug]: Can't set up write-good linter for markdown](https://github.com/LunarVim/LunarVim/issues/1249)
 - [ ]  [[Feature]: Add save without formatting](https://github.com/LunarVim/LunarVim/issues/897)
+- [ ]  [[Bug]: Automatic config reload does not always work](https://github.com/LunarVim/LunarVim/issues/1644)
+- [ ]  [Formatters/linters in .config/lvim/ftplugin not recognized](https://github.com/LunarVim/LunarVim/issues/1667)
 
 ## Pull requests
 
@@ -98,6 +100,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ]  [Code coverage in editor](https://github.com/nvim-lua/wishlist/issues/31)
 - [ ]  [Edit git commit and git rebase -i inside neovim](https://github.com/nvim-lua/wishlist/issues/29)
 - [ ] diff unsaved file with saved file like vscode
+- [ ] plugin: open word under cursor with `devdocs` in browser
 
 ## Outline
 

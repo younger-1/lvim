@@ -432,8 +432,6 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
     },
     k = {
       name = "kit",
-      m = { "<cmd>MinimapToggle<cr>", "Minimap" },
-      t = { "<cmd>TodoQuickFix<cr>", "Todo" },
     },
     l = {
       -- d = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", "Diagnostics" },
@@ -556,6 +554,11 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       y = { "<cmd>Telescope neoclip<CR>", "Clipboard" },
       z = { "<cmd>lua require'telescope'.extensions.zoxide.list{}<CR>", "Z" },
       -- z = { "<cmd>lua require'telescope'.extensions.z.list{ cmd = {'zoxide', 'query', '-ls'} }<CR>", "Z" },
+    },
+    t = {
+      name = "tog",
+      m = { "<cmd>MinimapToggle<cr>", "Minimap" },
+      t = { "<cmd>TodoQuickFix<cr>", "Todo" },
     },
     T = {
       h = { "<cmd>TSHighlightCapturesUnderCursor<cr>", "Highlight" },
@@ -722,6 +725,7 @@ lvim.plugins = {
     run = "cd app && npm install",
     ft = "markdown",
   },
+  { "ellisonleao/glow.nvim", cmd = "Glow" },
   {
     "nvim-treesitter/playground",
     event = "BufRead",
@@ -1284,6 +1288,15 @@ lvim.plugins = {
     config = function()
       vim.g.CheatDoNotReplaceKeywordPrg = 1
       vim.g.CheatSheetDoNotMap = 1
+    end,
+  },
+  {
+    "romainl/vim-devdocs",
+    cmd = "DD",
+    setup = function()
+      vim.cmd [[
+        nnoremap <Leader>kd <Cmd>DD<cr>
+      ]]
     end,
   },
   -- [Web]
