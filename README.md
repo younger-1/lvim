@@ -82,7 +82,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 
 ## TODO
 
-- [ ] add some common library or plugin path to lsp runtime path by `lvim.lang.lua.lsp.setup`
+- [x] add some common library or plugin path to lsp runtime path by `lvim.lang.lua.lsp.setup`
 - [ ] move all uncommon plugins' mappings to buffer-mappings by condition or `ftplugin` or `ftdetect`
 - [ ] more support for clangd lsp feature like auto-import
 - [ ] understand [](https://github.com/LunarVim/LunarVim/issues/1600#issuecomment-925027298)
@@ -250,6 +250,7 @@ lua pp(require("lsp").get_ls_capabilities())
 
 lua pp(vim.lsp.diagnostic.get_line_diagnostics())
 
+lua pp(vim.lsp.get_active_clients()[1].config.settings)
 ```
 
 - From `:h lsp-config`
