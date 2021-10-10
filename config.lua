@@ -527,6 +527,10 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
         l = { "<Cmd>lua require('telescope').extensions.frecency.frecency{ default_text = ':LSP:' }<CR>", "LSP" },
         m = { "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>", "Frecency" },
       },
+      o = {
+        [[<cmd>Telescope sessions layout_strategy=bottom_pane layout_config={"prompt_position":"top"}<CR>]],
+        "Sessions",
+      },
       p = { "<cmd>Telescope projects<CR>", "Projects" },
       P = { "<cmd>Telescope pickers<CR>", "<Pickers>" },
       R = { "<cmd>Telescope reloader<CR>", "Reload Module" },
@@ -999,6 +1003,19 @@ lvim.plugins = {
     "tamago324/lir.nvim",
     config = function()
       require "user.lir"
+    end,
+  },
+  {
+    "Shatur/neovim-session-manager",
+    event = "BufRead",
+    config = function()
+      require("telescope").load_extension "sessions"
+      require("session_manager").setup {
+        sessions_dir = vim.fn.stdpath "data" .. "/sessions", -- The directory where the session files will be saved.
+        autoload_last_session = true, -- Automatically load last session on startup is started without arguments.
+        autosave_last_session = true, -- Automatically save last session on exit.
+        autosave_ignore_paths = { "~" }, -- Folders to ignore when autosaving a session.
+      }
     end,
   },
   -- [Find]
