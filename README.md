@@ -68,6 +68,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ]  [[Feature]: Add save without formatting](https://github.com/LunarVim/LunarVim/issues/897)
 - [ ]  [[Bug]: Automatic config reload does not always work](https://github.com/LunarVim/LunarVim/issues/1644)
 - [ ]  [Formatters/linters in .config/lvim/ftplugin not recognized](https://github.com/LunarVim/LunarVim/issues/1667)
+- [ ]  [[Feature]: Show line diagnostics only for line during CursorHold](https://github.com/LunarVim/LunarVim/issues/1712)
 
 ## Pull requests
 

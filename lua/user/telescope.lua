@@ -10,26 +10,53 @@ M.project_files = function()
 end
 
 -- [Disable highlighting for certain files](https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#disable-highlighting-for-certain-files)
--- local previewers = require "telescope.previewers"
 
--- local _bad = { ".*%.csv", ".*%.txt" } -- Put all filetypes that slow you down in this array
--- local bad_files = function(filepath)
---   for _, v in ipairs(_bad) do
---     if filepath:match(v) then
---       return false
---     end
---   end
+-- 1.horizontal
+M.h1 = {
+  layout_strategy = "horizontal",
+  layout_config = { preview_width = 0.5 },
+}
 
---   return true
--- end
+M.h2 = {
+  layout_strategy = "horizontal",
+  layout_config = { preview_width = 0.5, prompt_position = "top" },
+  sorting_strategy = "ascending",
+}
 
--- local new_maker = function(filepath, bufnr, opts)
---   opts = opts or {}
---   if opts.use_ft_detect == nil then
---     opts.use_ft_detect = true
---   end
---   opts.use_ft_detect = opts.use_ft_detect == false and false or bad_files(filepath)
---   previewers.buffer_previewer_maker(filepath, bufnr, opts)
--- end
+M.h3 = {
+  layout_strategy = "horizontal",
+  layout_config = { preview_width = 0.6, prompt_position = "top" },
+  sorting_strategy = "ascending",
+}
+
+M.h4 = {
+  layout_strategy = "horizontal",
+  layout_config = { preview_width = 0.8, prompt_position = "top" },
+  sorting_strategy = "ascending",
+}
+
+-- 2.vertical
+M.v1 = {
+  layout_strategy = "vertical",
+  layout_config = { preview_cutoff = 30, height = 0.99, preview_height = 0.6 },
+}
+
+M.v2 = {
+  layout_strategy = "vertical",
+  layout_config = { prompt_position = "top" },
+  sorting_strategy = "ascending",
+}
+
+M.v3 = {
+  layout_strategy = "vertical",
+  layout_config = { preview_cutoff = 30, height = 0.99, preview_height = 0.6, prompt_position = "top" },
+  sorting_strategy = "ascending",
+}
+
+M.v4 = {
+  layout_strategy = "vertical",
+  layout_config = { preview_cutoff = 30, height = 0.99, preview_height = 0.6, prompt_position = "top", mirror = true },
+  sorting_strategy = "ascending",
+}
 
 return M
