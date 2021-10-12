@@ -441,9 +441,10 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       I = { "<cmd>Trouble lsp_implementations<cr>", "Impl" },
       R = { "<cmd>Trouble lsp_references<cr>", "Ref" },
       ["<C-e>"] = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Diagnostics LocList" },
-      a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-      -- f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+      -- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+      a = { "<cmd>CodeActionMenu<cr>", "Code Action" },
       W = { "<cmd>lua pp(vim.lsp.buf.list_workspace_folders())<cr>", "Workspace folders" },
+      -- f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
       f = {
         function()
           vim.lsp.buf.formatting_sync()
@@ -1328,6 +1329,17 @@ lvim.plugins = {
     event = "BufRead",
     config = function()
       require("user.lsp_signature").config()
+    end,
+  },
+  {
+    "weilbith/nvim-code-action-menu",
+    cmd = "CodeActionMenu",
+  },
+  {
+    "kosayoda/nvim-lightbulb",
+    event = "BufRead",
+    config = function()
+      vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
     end,
   },
   -- [Spell]
