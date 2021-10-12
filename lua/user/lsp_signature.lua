@@ -6,7 +6,17 @@ M.config = function()
     return
   end
 
-  lsp_signature.on_attach()
+  lsp_signature.setup {
+    -- floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
+    -- hint_enable = true, -- virtual hint enable
+    -- hint_prefix = "🐼 ", -- Panda for parameter
+    -- use_lspsaga = false, -- set to true if you want to use lspsaga popup
+    -- handler_opts = {
+    --   border = "single",   -- double, single, shadow, none
+    -- },
+    transpancy = 20,
+    toggle_key = "<C-l>",
+  }
 end
 
 return M
