@@ -650,14 +650,6 @@ lvim.plugins = {
   { "mfussenegger/nvim-jdtls" },
   -- { "ChristianChiarulli/vim-solidity" },
   {
-    "pwntester/octo.nvim",
-    event = "BufRead",
-    config = function()
-      require("user.octo").config()
-    end,
-    disable = true,
-  },
-  {
     -- Note for this to work you need to create a pat and put it in `~/.gist-vim` as <token XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX>
     -- You will also need to set github username like:
     --
@@ -1262,6 +1254,13 @@ lvim.plugins = {
     module = "neogit",
     config = function()
       require("neogit").setup {}
+    end,
+  },
+  {
+    "pwntester/octo.nvim",
+    event = "BufRead",
+    config = function()
+      require("user.octo").config()
     end,
   },
   -- [Write]
