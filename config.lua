@@ -945,6 +945,25 @@ lvim.plugins = {
       end,
     },
   },
+  {
+    "folke/lua-dev.nvim",
+    opt = true,
+    -- ft = "lua",
+    config = function()
+      local luadev = require("lua-dev").setup {
+        -- options that will be merged in the final lsp config
+        lspconfig = lvim.lang.lua.lsp.setup,
+        library = {
+          vimruntime = false, -- runtime path
+          types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+          -- plugins = true, -- installed opt or start plugins in packpath
+          -- you can also specify the list of plugins to make available as a workspace library
+          plugins = { "nvim-treesitter", "focus.nvim", "telescope.nvim" },
+        },
+      }
+      require("lspconfig").sumneko_lua.setup(luadev)
+    end,
+  },
   -- [Buffer | Window | Tab]
   {
     {
