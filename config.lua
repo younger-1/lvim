@@ -735,10 +735,6 @@ lvim.plugins = {
     "windwp/nvim-ts-autotag",
     event = "InsertEnter",
   },
-  {
-    "sindrets/diffview.nvim",
-    event = "BufRead",
-  },
   -- younger
   -- { "gelguy/wilder.nvim", run = ":UpdateRemotePlugins", event = "CmdlineEnter", config = require "user.wilder" },
   {
@@ -1254,6 +1250,13 @@ lvim.plugins = {
     module = "neogit",
     config = function()
       require("neogit").setup {}
+    end,
+  },
+  {
+    "sindrets/diffview.nvim",
+    event = "BufRead",
+    config = function()
+      require("user.diffview")
     end,
   },
   {
