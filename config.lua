@@ -1256,7 +1256,7 @@ lvim.plugins = {
     "sindrets/diffview.nvim",
     event = "BufRead",
     config = function()
-      require("user.diffview")
+      require "user.diffview"
     end,
   },
   {
