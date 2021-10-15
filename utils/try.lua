@@ -70,6 +70,9 @@
 -- end
 -- print(vim.inspect(c))
 
+-- a.name = "small"
+-- pp(table.getn(a))
+
 -- [[string]]
 
 -- local s = "hello world"

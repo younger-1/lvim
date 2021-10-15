@@ -1,5 +1,6 @@
 {
   "Lua.workspace.library": {
+    "/home/young/.local/share/lunarvim/site/pack/packer/opt/lua-dev.nvim/types": true,
     "/home/young/.local/share/lunarvim/site/pack/packer/start/telescope.nvim": true,
     "/home/young/.local/share/lunarvim/site/pack/packer/start/packer.nvim": true,
     "/home/young/.local/share/lunarvim/site/pack/packer/start/fzf-lua": true,

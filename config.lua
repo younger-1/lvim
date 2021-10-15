@@ -616,6 +616,13 @@ lvim.builtin.which_key.on_config_done = function()
       m = "Zoom",
       [" "] = { "<cmd>lua require('focus').focus_toggle()<cr>", "FocusToggle" },
     },
+    y = {
+      c = {
+        name = "colorscheme",
+        m = { "<cmd>lua require('material.functions').toggle_style()<cr>", "Material" },
+        c = { "<cmd>lua require('user.theme').toggle_style()<cr>", "Style" },
+      },
+    },
     [","] = {
       f = {
         name = "fzf",
@@ -1047,9 +1054,8 @@ lvim.plugins = {
   },
   -- [Telescope]
   { "nvim-telescope/telescope-symbols.nvim" },
-  -- BUG: fuck
   {
-    "younger-1/telescope-packer.nvim",
+    "nvim-telescope/telescope-packer.nvim",
     after = "telescope.nvim",
   },
   {
@@ -1432,20 +1438,8 @@ lvim.plugins = {
       setup = function() end,
     },
     {
-      "olimorris/onedark.nvim",
+      "ful1e5/onedark.nvim",
       setup = function() end,
-      config = function()
-        require("onedark").setup {
-          -- italic, bold, underline and NONE are possible configuration options.
-          styles = {
-            comments = "italic",
-            functions = "bold",
-            keywords = "bold,italic",
-            strings = "NONE",
-            variables = "NONE",
-          },
-        }
-      end,
     },
   },
 }

@@ -22,11 +22,11 @@ catppuccino.setup {
         information = "italic",
       },
     },
-    lsp_trouble = false,
+    lsp_trouble = true,
     lsp_saga = false,
     gitgutter = false,
     gitsigns = false,
-    telescope = false,
+    telescope = true,
     nvimtree = {
       enabled = false,
       show_root = false,
