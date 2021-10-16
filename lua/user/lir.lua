@@ -30,9 +30,13 @@ require("lir").setup {
     ["x"] = clipboard_actions.cut,
     ["p"] = clipboard_actions.paste,
 
-    [" "] = function()
+    ["m"] = function()
       mark_actions.toggle_mark()
       vim.cmd "normal! j"
+    end,
+    ["M"] = function()
+      mark_actions.toggle_mark()
+      vim.cmd "normal! k"
     end,
   },
   hide_cursor = false,
@@ -75,7 +79,7 @@ function _G.LirSettings()
   vim.api.nvim_buf_set_keymap(
     0,
     "x",
-    " ",
+    "m",
     ':<C-u>lua require"lir.mark.actions".toggle_mark("v")<CR>',
     { noremap = true, silent = true }
   )

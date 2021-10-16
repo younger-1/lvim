@@ -70,6 +70,8 @@ require("user.json_schemas").setup()
 -- merely add `require("lsp").setup "json"` to `ftplugin/jsonc.lua` doesn't work
 lvim.lang.json.lsp.setup.filetypes = { "json", "jsonc" }
 
+lvim.lang.yaml.formatters = { { exe = "prettier" } }
+
 -- Treesitter
 lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -621,6 +623,19 @@ lvim.builtin.which_key.on_config_done = function()
         name = "colorscheme",
         m = { "<cmd>lua require('material.functions').toggle_style()<cr>", "Material" },
         c = { "<cmd>lua require('user.theme').toggle_style()<cr>", "Style" },
+      },
+      o = {
+        name = "options",
+        n = { "<cmd>setlocal number!<cr>", "number" },
+        r = { "<cmd>setlocal relativenumber!<cr>", "relativenumber" },
+        ["|"] = { "<cmd>setlocal cursorcolumn!<cr>", "column" },
+        ["-"] = { "<cmd>setlocal cursorline!<cr>", "line" },
+        l = { "<cmd>setlocal list!<cr>", "list" },
+        s = { "<cmd>setlocal spell!<cr>", "spell" },
+        w = { "<cmd>setlocal wrap!<cr>", "wrap" },
+        h = { "<cmd>set hls!<cr>", "hightlight" },
+        b = { [[:set background=<C-R>=&background == "dark" ? "light" : "dark"<CR><cr>]], "background" },
+        m = { [[:set mouse=<C-R>=&mouse == "a" ? "" : "a"<CR><cr>]], "mouse" },
       },
     },
     [","] = {
