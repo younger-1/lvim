@@ -909,6 +909,12 @@ lvim.plugins = {
         vim.g.table_mode_map_prefix = ",t"
       end,
     },
+    {
+      "arthurxavierx/vim-caser",
+      setup = function()
+        vim.g.caser_prefix = ";c"
+      end,
+    },
   },
   -- [Vim Helper]
   {
