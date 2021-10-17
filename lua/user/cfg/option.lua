@@ -7,3 +7,6 @@ vim.opt.timeoutlen = 200
 vim.opt.titlestring = '%t%( %M%)%( (%{expand("%:~:.:h")})%)%( %a%) - LunarVim'
 vim.opt.wrap = false
 vim.opt.scrolloff = 4
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'

@@ -73,15 +73,59 @@ lvim.lang.json.lsp.setup.filetypes = { "json", "jsonc" }
 lvim.lang.yaml.formatters = { { exe = "prettier" } }
 
 -- Treesitter
-lvim.builtin.treesitter.ensure_installed = "maintained"
-lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.autotag.enable = true
-lvim.builtin.treesitter.playground.enable = true
-lvim.builtin.treesitter.rainbow.enable = true
 -- for finding syntax ids for non TS enabled languages
 vim.cmd [[
 map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 ]]
+
+lvim.builtin.treesitter = vim.tbl_deep_extend("force", lvim.builtin.treesitter, {
+  ensure_installed = "maintained",
+  ignore_install = { "haskell" },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = ";;",
+      node_incremental = ";j",
+      node_decremental = ";k",
+      scope_incremental = ";u",
+      scope_decremental = ";i",
+    },
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      -- Automatically jump forward to textobj, similar to targets.vim
+      lookahead = true,
+      -- keymaps = textobj_sel_keymaps,
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+        -- Or you can define your own textobjects like this
+        ["iF"] = {
+          python = "(function_definition) @function",
+          cpp = "(function_definition) @function",
+          c = "(function_definition) @function",
+          java = "(method_declaration) @function",
+        },
+      },
+    },
+    swap = {
+      enable = true,
+      -- swap_next = textobj_swap_keymaps,
+    },
+    -- move = textobj_move_keymaps,
+  },
+  textsubjects = {
+    enable = false,
+    keymaps = { ["."] = "textsubjects-smart", [";"] = "textsubjects-big" },
+  },
+  autotag = { enable = true },
+  playground = { enable = true },
+  rainbow = { enable = true, max_file_lines = 3000 },
+})
 
 -- Telescope
 --[[ tips:
@@ -367,12 +411,13 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       u = { ":h user-manual<CR>", "User Manual" },
       s = { ":h startup<CR>", "Startup" },
       o = { ":options<CR>", "Options" },
-      v = { ":h option-list<CR>", "View Options" },
+      O = { ":h option-list<CR>", "Option List" },
       q = { ":h quickref<CR>", "Quick Reference" },
-      f = { ":h vim-function<CR>", "Vim Function" },
+      f = { ":h vim-function<CR>", "Functions" },
+      F = { ":h function-list<CR>", "Function List" },
       m = { ":h vim-modes<CR>", "Modes" },
       M = { ":h map-modes<CR>", "Map Modes" },
-      V = { ":h vim-variable<CR>", "Vim Variable" },
+      v = { ":h vim-variable<CR>", "Vim Variable" },
       a = { ":h vim-arguments<CR>", "Vim Arguments" },
       A = { ":h vim-additions<CR>", "Vim Additions" },
       d = { ":h nvim-defaults<CR>", "Defaults" },
@@ -572,9 +617,12 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       t = { "<cmd>TodoQuickFix<cr>", "Todo" },
     },
     T = {
-      h = { "<cmd>TSHighlightCapturesUnderCursor<cr>", "Highlight" },
-      p = { "<cmd>TSPlaygroundToggle<cr>", "Playground" },
       t = { "<cmd>Telescope treesitter<CR>", "Telescope" },
+      T = { "<cmd>TSHighlightCapturesUnderCursor<cr>", "Highlight" },
+      I = { ":TSModuleInfo<CR>", "Telescope" },
+      p = { ":TSPlaygroundToggle<cr>", "Playground" },
+      r = { ":TSBufToggle rainbow<CR>", "Toggle Rainbow" },
+      h = { ":TSBufToggle highlight<CR>", "Toggle Highlight(Buffer)" },
     },
     x = {
       name = "trouble",
