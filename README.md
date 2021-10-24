@@ -53,8 +53,13 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 
 - <https://github.com/ChristianChiarulli/lvim>
 - <https://github.com/abzcoding/lvim>
+- <https://github.com/PasiBergman/lvim>
+- <https://github.com/kylo252/lvim>
+
 - <https://github.com/rebuilt/lvim>
 - <https://github.com/jimcornmell/lvim>
+- <https://github.com/ssbanerje/dotfiles/tree/master/editors/lvim-config>
+- <https://github.com/bob3000/dotfiles/blob/linux/conf/lv-config.lua>
 
 ## Issues
 
@@ -69,6 +74,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ]  [[Bug]: Automatic config reload does not always work](https://github.com/LunarVim/LunarVim/issues/1644)
 - [ ]  [Formatters/linters in .config/lvim/ftplugin not recognized](https://github.com/LunarVim/LunarVim/issues/1667)
 - [ ]  [[Feature]: Show line diagnostics only for line during CursorHold](https://github.com/LunarVim/LunarVim/issues/1712)
+- [ ]  [[Bug]: illegal character encoding in string literal (Chinese)](https://github.com/LunarVim/LunarVim/issues/1792)
 
 ## Pull requests
 
@@ -91,6 +97,8 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ] <C-w> for zoom, modes.nvim, filetype.nvim, better-escape, startup-time
 - [ ] auto-session
 - [ ] sudo lvim
+- [ ] entire object: vae vie
+- [ ] go to next/previous symbols like vscode's editor.action.wordHighlight.next
 - [ ] lua require('focus').focus_toggle()
 - [ ] update `lunarvim` and show difference
 - [ ] add keymappings to convert between floating-window

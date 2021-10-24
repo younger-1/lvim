@@ -264,21 +264,31 @@ lvim.builtin.project = vim.tbl_deep_extend("force", lvim.builtin.project, {
 -- Keymappings
 -- View all the defaults by pressing <leader>Lk
 -- lvim.leader = "space"
-lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
+require("keymappings").append_to_defaults {
   -- <https://github.com/mskar/setup/blob/main/config.lua>
   insert_mode = {
+    ["<C-U>"] = "<C-G>u<C-U>",
+    ["<C-W>"] = "<C-G>u<C-W>",
+    ["<C-V>"] = "<C-G>u<C-R><C-O>+",
     ["<C-a>"] = "<Home>",
     ["<C-e>"] = "<End>",
     -- ["<C-b>"] = "<Left>",
     -- ["<C-f>"] = "<Right>",
   },
+  command_mode = {
+    ["<C-V>"] = "<C-R>+",
+    ["<C-a>"] = "<Home>",
+  },
   normal_mode = {
     Y = "y$",
     ZA = ":wqa<CR>",
-    ["z<C-l>"] = "<cmd>nohlsearch<cr><C-l>",
+    ["g<C-l>"] = "<cmd>nohlsearch<cr><C-l>",
     ["]e"] = ":lnext<CR>",
     ["[e"] = ":lprev<CR>",
     ["<C-e>"] = ":call LocListToggle()<CR>",
+    ["+"] = ":SymbolsOutline<cr>",
+    k = { "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true } },
+    j = { "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true } },
   },
   term_mode = {
     JJ = "<C-\\><C-N>",
@@ -290,25 +300,14 @@ lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
     X = [["+x]],
   },
   -- visual_block_mode = {},
-  -- command_mode = {},
-})
+}
 
 vim.cmd [[
-" 朝闻道，金、木、水、火、土；【真香定律（王境泽）】；《静夜诗（李白）》。
-" 唐僧问道：‘泼猴，若我救你出来，你该如何报答我？’ 悟空：“你若放我出来，我定会送你上西天！”
-set matchpairs+=【:】,（:）,《:》,‘:’,“:”,；:。,，:。
-set listchars=space:·,eol:↲,trail:~,tab:>-,extends:>,precedes:<,nbsp:+
-
-cnoremap <C-V> <C-R>+
-inoremap <C-V> <C-G>u<C-R><C-O>+
+" g. z.
 onoremap H ^
 vnoremap H ^
 onoremap L $
 vnoremap L $
-" g. z.
-cnoremap <C-a> <HOME>
-inoremap <C-U> <C-G>u<C-U>
-inoremap <C-W> <C-G>u<C-W>
 
 " Open in VSCode from Vim
 command! OpenInVSCode exe '!code --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!

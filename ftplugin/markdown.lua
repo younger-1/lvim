@@ -40,8 +40,11 @@ require("lsp.null-ls").setup "markdown"
 -- So what happen here? Is pcall async?
 local status_ok, wk = pcall(require, "which-key")
 if not status_ok then
+  -- print("1: which-key return from markdown ft")
   return
 end
+
+-- print("2: do which-key in markdown ft")
 local keys = {
   -- ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
   -- ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
