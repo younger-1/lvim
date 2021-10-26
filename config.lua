@@ -303,7 +303,6 @@ require("keymappings").append_to_defaults {
 }
 
 vim.cmd [[
-" g. z.
 onoremap H ^
 vnoremap H ^
 onoremap L $
@@ -425,6 +424,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       l = { ":h lua<CR>", "Lua" },
       L = { ":h lsp<CR>", "LSP" },
     },
+    C = { ":call OpenLastClosed()<CR>", "which_key_ignore" },
     f = { "<cmd>lua require('lir.float').toggle()<cr>", "Files" },
     g = {
       -- ["<tab>"] = {},
@@ -470,9 +470,11 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
         v = { "<cmd>lua require('neogit').open({ kind = 'vsplit' })<cr>", "Commit" },
       },
       S = { "<cmd>Gitsigns stage_buffer<cr>", "Stage Buffer" },
+      U = { "<cmd>Gitsigns reset_buffer_index<cr>", "Reset Buffer Index" },
       y = "Link",
       Y = { "<cmd>lua require'gitlinker'.get_repo_url()<cr>", "Link(Repo)" },
     },
+    h = { ":nohlsearch<CR>", "which_key_ignore" },
     j = {
       name = "justify",
     },
@@ -537,6 +539,8 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
     p = {
       C = { "<cmd>PackerCompile profile=true<cr>", "Compile+" },
       I = { ":lua pp()<left>", "Inspect" },
+      s = { "<cmd>PackerStatus<cr>", "Status" },
+      S = { "<cmd>PackerSync<cr>", "Sync" },
       -- FIXME:Search list of files of package(under cursor)
       -- o = { "", "Package Files" },
       p = {
@@ -545,6 +549,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       },
       P = { "<cmd>PackerProfile<cr>", "Profile" },
     },
+    Q = { ":tabclose<CR>", "which_key_ignore" },
     r = {
       name = "replace",
       r = { "<cmd>lua require('spectre').open()<cr>", "Replace" },
@@ -650,7 +655,7 @@ lvim.builtin.which_key.on_config_done = function()
         "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
         "Next Diagnostic",
       },
-      g = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+      c = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
       x = { [[<cmd>lua require('trouble').next({skip_groups=true, jump=true})<CR>]], "Next Trouble" },
     },
     ["["] = {
@@ -658,13 +663,28 @@ lvim.builtin.which_key.on_config_done = function()
         "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
         "Prev Diagnostic",
       },
-      g = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+      c = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
       x = { [[<cmd>lua require('trouble').previous({skip_groups=true, jump=true})<CR>]], "Prev Trouble" },
     },
     ["<C-w>"] = {
       m = "Zoom",
       [" "] = { "<cmd>lua require('focus').focus_toggle()<cr>", "FocusToggle" },
+      -- e = "",
+      -- t = "",
+      -- b = "",
+      -- a = "",
+      -- d = "",
     },
+    ["<C-y>"] = {},
+    ["<C-p>"] = {},
+    ["<C-s>"] = {},
+    -- Must
+    ["<C-z>"] = {},
+    -- ["<C-a>"] = {},
+    -- ["<C-x>"] = {},
+    -- ["<C-f>"] = {},
+    -- ["<C-b>"] = {},
+    -- ["<C-n>"] = {},
     y = {
       c = {
         name = "colorscheme",
