@@ -876,9 +876,7 @@ lvim.plugins = {
       "chaoren/vim-wordmotion",
       event = "CursorMoved",
       setup = function()
-        vim.cmd [[
-          let g:wordmotion_prefix = ';'
-        ]]
+        vim.g.wordmotion_prefix = ';'
       end,
     },
     {
@@ -1103,6 +1101,13 @@ lvim.plugins = {
         autosave_last_session = true, -- Automatically save last session on exit.
         autosave_ignore_paths = { "~" }, -- Folders to ignore when autosaving a session.
       }
+    end,
+  },
+  {
+    "ZSaberLv0/ZFVimDirDiff",
+    keys = { "ZFDirDiff", "ZFDirDiffMark" },
+    setup = function()
+      vim.g.ZFDirDiffUI_dirExpandable = "+"
     end,
   },
   -- [Find]
