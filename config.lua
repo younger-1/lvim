@@ -1214,6 +1214,9 @@ lvim.plugins = {
       end,
     },
   },
+  -- [Code Tools]
+  { "hrsh7th/cmp-emoji" },
+  { "hrsh7th/cmp-calc" },
   -- [Files]
   {
     "kevinhwang91/rnvimr",
