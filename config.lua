@@ -85,13 +85,58 @@ lvim.builtin.treesitter = vim.tbl_deep_extend("force", lvim.builtin.treesitter, 
     enable = true,
     keymaps = {
       init_selection = ";;",
-      node_incremental = ";j",
-      node_decremental = ";k",
-      scope_incremental = ";u",
-      scope_decremental = ";i",
+      node_incremental = ";i",
+      node_decremental = ";d",
+      scope_incremental = ";I",
     },
   },
   textobjects = {
+    move = {
+      enable = true,
+      set_jumps = false, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        ["]1"] = "@block.inner",
+        ["]2"] = "@block.outer",
+        ["]-"] = "@call.inner",
+        ["]="] = "@call.outer",
+        ["]3"] = "@class.inner",
+        ["]4"] = "@class.outer",
+        ["]k"] = "@comment.outer",
+        ["]7"] = "@conditional.inner",
+        ["]8"] = "@conditional.outer",
+        ["]f"] = "@function.outer",
+        ["]m"] = "@function.inner",
+        ["]9"] = "@loop.inner",
+        ["]0"] = "@loop.outer",
+        ["],"] = "@parameter.inner",
+        ["]."] = "@parameter.outer",
+      },
+      -- goto_next_end = {
+      --   [";]F"] = "@function.outer",
+      --   [";]C"] = "@class.outer",
+      -- },
+      goto_previous_start = {
+        ["[1"] = "@block.inner",
+        ["[2"] = "@block.outer",
+        ["[-"] = "@call.inner",
+        ["[="] = "@call.outer",
+        ["[3"] = "@class.inner",
+        ["[4"] = "@class.outer",
+        ["[k"] = "@comment.outer",
+        ["[7"] = "@conditional.inner",
+        ["[8"] = "@conditional.outer",
+        ["[f"] = "@function.outer",
+        ["[m"] = "@function.inner",
+        ["[9"] = "@loop.inner",
+        ["[0"] = "@loop.outer",
+        ["[,"] = "@parameter.inner",
+        ["[."] = "@parameter.outer",
+      },
+      -- goto_previous_end = {
+      --   [";[F"] = "@function.outer",
+      --   [";[C"] = "@class.outer",
+      -- },
+    },
     select = {
       enable = true,
       -- Automatically jump forward to textobj, similar to targets.vim
@@ -99,32 +144,73 @@ lvim.builtin.treesitter = vim.tbl_deep_extend("force", lvim.builtin.treesitter, 
       -- keymaps = textobj_sel_keymaps,
       keymaps = {
         -- You can use the capture groups defined in textobjects.scm
-        ["af"] = "@function.outer",
+        ["i1"] = "@block.inner",
+        ["a1"] = "@block.outer",
+        ["i-"] = "@call.inner",
+        ["a-"] = "@call.outer",
+        ["i3"] = "@class.inner",
+        ["a3"] = "@class.outer",
+        ["ak"] = "@comment.outer",
+        ["i7"] = "@conditional.inner",
+        ["a7"] = "@conditional.outer",
         ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
-        -- Or you can define your own textobjects like this
-        ["iF"] = {
-          python = "(function_definition) @function",
-          cpp = "(function_definition) @function",
-          c = "(function_definition) @function",
-          java = "(method_declaration) @function",
-        },
+        ["af"] = "@function.outer",
+        ["i9"] = "@loop.inner",
+        ["a9"] = "@loop.outer",
+        ["i,"] = "@parameter.inner",
+        ["a."] = "@parameter.outer",
       },
     },
     swap = {
       enable = true,
-      -- swap_next = textobj_swap_keymaps,
+      swap_next = {
+        [";s"] = "@parameter.inner",
+        -- [";nc"] = "@comment.outer",
+        -- [";nd"] = "@conditional.outer",
+        -- [";nb"] = "@conditional.inner",
+      },
+      swap_previous = {
+        [";S"] = "@parameter.inner",
+        -- [";pc"] = "@comment.outer",
+        -- [";pd"] = "@conditional.outer",
+        -- [";pb"] = "@conditional.inner",
+      },
     },
-    -- move = textobj_move_keymaps,
+    lsp_interop = {
+      enable = true,
+      border = "none",
+      peek_definition_code = {
+        [";f"] = "@function.outer",
+        [";F"] = "@class.outer",
+      },
+    },
+  },
+  refactor = {
+    highlight_definitions = { enable = false },
+    highlight_current_scope = { enable = true },
+    smart_rename = {
+      enable = true,
+      keymaps = {
+        smart_rename = ";r",
+      },
+    },
   },
   textsubjects = {
     enable = false,
     keymaps = { ["."] = "textsubjects-smart", [";"] = "textsubjects-big" },
   },
-  autotag = { enable = true },
   playground = { enable = true },
-  rainbow = { enable = true, max_file_lines = 3000 },
+  autotag = { -- windwp/nvim-ts-autotag
+    enable = true,
+    filetypes = { "html", "xml" },
+  },
+  autopairs = { -- windwp/nvim-autopairs
+    enable = true,
+  },
+  rainbow = { -- p00f/nvim-ts-rainbow
+    enable = true,
+    max_file_lines = 3000,
+  },
 })
 
 -- Telescope
@@ -817,25 +903,11 @@ lvim.plugins = {
   },
   { "ellisonleao/glow.nvim", cmd = "Glow" },
   {
-    "nvim-treesitter/playground",
-    event = "BufRead",
-  },
-  {
     "windwp/nvim-ts-autotag",
     event = "InsertEnter",
   },
   -- younger
   -- { "gelguy/wilder.nvim", run = ":UpdateRemotePlugins", event = "CmdlineEnter", config = require "user.wilder" },
-  {
-    "romgrk/nvim-treesitter-context",
-    cmd = "TSContextToggle",
-    config = function()
-      require("treesitter-context").setup {
-        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-        throttle = true, -- Throttles plugin updates (may improve performance)
-      }
-    end,
-  },
   -- [Appearance]
   {
     {
@@ -871,6 +943,51 @@ lvim.plugins = {
       }
     end,
   },
+  -- [Treesitter]
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "0.5-compat",
+    event = "BufRead",
+  },
+  {
+    "nvim-treesitter/playground",
+    event = "BufRead",
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-refactor",
+    event = "BufRead",
+  },
+  {
+    "romgrk/nvim-treesitter-context",
+    cmd = "TSContextToggle",
+    config = function()
+      require("treesitter-context").setup {
+        enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        throttle = true, -- Throttles plugin updates (may improve performance)
+        max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+        patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
+          -- For all filetypes
+          -- Note that setting an entry here replaces all other patterns for this entry.
+          -- By setting the 'default' entry below, you can control which nodes you want to
+          -- appear in the context window.
+          default = {
+            "class",
+            "function",
+            "method",
+            -- 'for', -- These won't appear in the context
+            -- 'while',
+            -- 'if',
+            -- 'switch',
+            -- 'case',
+          },
+          -- Example for a specific filetype.
+          --   rust = {
+          --       'impl_item',
+          --   },
+        },
+      }
+    end,
+  },
   -- [Text Object]
   -- {},
   -- [Motion]
@@ -896,7 +1013,7 @@ lvim.plugins = {
       "chaoren/vim-wordmotion",
       event = "CursorMoved",
       setup = function()
-        vim.g.wordmotion_prefix = ';'
+        vim.g.wordmotion_prefix = ";"
       end,
     },
     {
