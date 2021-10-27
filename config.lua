@@ -84,13 +84,13 @@ lvim.builtin.treesitter = vim.tbl_deep_extend("force", lvim.builtin.treesitter, 
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = ";;",
-      node_incremental = ";i",
-      node_decremental = ";d",
-      scope_incremental = ";I",
+      -- init_selection = ";;",
+      node_incremental = "]s",
+      node_decremental = "[s",
+      scope_incremental = "]S",
     },
   },
-  textobjects = {
+  textobjects = { -- <https://github.com/nvim-treesitter/nvim-treesitter-textobjects>
     move = {
       enable = true,
       set_jumps = false, -- whether to set jumps in the jumplist
@@ -180,36 +180,53 @@ lvim.builtin.treesitter = vim.tbl_deep_extend("force", lvim.builtin.treesitter, 
       enable = true,
       border = "none",
       peek_definition_code = {
-        [";f"] = "@function.outer",
-        [";F"] = "@class.outer",
+        ["gmf"] = "@function.outer",
+        ["gmF"] = "@class.outer",
       },
     },
   },
-  refactor = {
+  refactor = { -- <https://github.com/nvim-treesitter/nvim-treesitter-refactor>
     highlight_definitions = { enable = false },
     highlight_current_scope = { enable = false },
     smart_rename = {
       enable = true,
       keymaps = {
-        smart_rename = ";r",
+        smart_rename = "gmr",
       },
     },
     navigation = {
       enable = true,
       keymaps = {
-        goto_definition = ";d",
-        list_definitions = ";D",
-        list_definitions_toc = ";o",
+        goto_definition = "gmd",
+        list_definitions = "gmD",
+        list_definitions_toc = "gmo",
         goto_next_usage = "]v",
         goto_previous_usage = "[v",
       },
     },
   },
-  textsubjects = {
-    enable = false,
-    keymaps = { ["."] = "textsubjects-smart", [";"] = "textsubjects-big" },
+  playground = { -- <https://github.com/nvim-treesitter/playground>
+    enable = true,
+    keybindings = {
+      toggle_query_editor = "o",
+      toggle_hl_groups = "i",
+      toggle_injected_languages = "t",
+      toggle_anonymous_nodes = "a",
+      toggle_language_display = "I",
+      focus_language = "f",
+      unfocus_language = "F",
+      update = "R",
+      goto_node = "<cr>",
+      show_help = "?",
+    },
   },
-  playground = { enable = true },
+  tree_docs = { -- <https://github.com/nvim-treesitter/nvim-tree-docs>
+    enable = false,
+  },
+  textsubjects = { -- <https://github.com/RRethy/nvim-treesitter-textsubjects>
+    enable = true,
+    keymaps = { ["."] = "textsubjects-smart", [","] = "textsubjects-container-outer" },
+  },
   autotag = { -- windwp/nvim-ts-autotag
     enable = true,
     filetypes = { "html", "xml" },
@@ -965,6 +982,10 @@ lvim.plugins = {
   },
   {
     "nvim-treesitter/nvim-treesitter-refactor",
+    event = "BufRead",
+  },
+  {
+    "RRethy/nvim-treesitter-textsubjects",
     event = "BufRead",
   },
   {

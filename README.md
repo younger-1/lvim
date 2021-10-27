@@ -109,6 +109,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ]  [Edit git commit and git rebase -i inside neovim](https://github.com/nvim-lua/wishlist/issues/29)
 - [ ] diff unsaved file with saved file like vscode
 - [ ] plugin: open word under cursor with `devdocs` in browser
+- [ ] `q` for quit: tsplayground
 
 ## Keymapping
 
