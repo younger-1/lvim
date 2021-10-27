@@ -110,6 +110,45 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ] diff unsaved file with saved file like vscode
 - [ ] plugin: open word under cursor with `devdocs` in browser
 
+## Keymapping
+
+```
+["<C-z>"] = {},
+
+["<C-y>"] = {},
+["<C-p>"] = {},
+["<C-s>"] = {},
+
+-- ["<C-a>"] = {},
+-- ["<C-x>"] = {},
+-- ["<C-f>"] = {},
+-- ["<C-b>"] = {},
+-- ["<C-n>"] = {},
+
+<BS>
+<ESC>
+M
+;
+,
+
+g. g<CR> 
+z. z<CR> 
+
+yo yc yd
+co cd 
+do dc 
+
+t<C->
+f<C->
+T<C->
+F<C->
+
+Q
+W
+E
+B
+```
+
 ## Outline
 
 Startup
@@ -135,7 +174,6 @@ Startup
 
 - require("config"):load()
   - local autocmds = require("core.autocmds")
-    - lvim.autocommands
   - luafile config_path
   - autocmds.define_augroups(lvim.autocommands)
   - require("config.settings").load_commands()
