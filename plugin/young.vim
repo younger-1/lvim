@@ -53,4 +53,24 @@ com -range -nargs=1 -complete=file Replace <line1>-pu_|<line1>,<line2>d|r <args>
 " Count the number of lines in the range
 com! -range -nargs=0 Lines  echo <line2> - <line1> + 1 "lines"
 
+function! OpenLastClosed()
+    let last_buf = bufname('#')
+
+    if empty(last_buf)
+        echo "No recently closed buffer found"
+        return
+    endif
+    let result = input("Open ". last_buf . " in (n)ormal (v)split, (t)ab or (s)plit ? (n/v/t/s) : ")
+    if empty(result) || (result !=# 'v' && result !=# 't' && result !=# 's' && result !=# 'n')
+        return
+    endif
+    if result ==# 't'
+        execute 'tabnew'
+    elseif result ==# 'v'
+        execute "vsplit"
+    elseif result ==# 's'
+        execute "split"
+    endif
+    execute 'e ' . last_buf
+endfunction
 
