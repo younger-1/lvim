@@ -154,6 +154,60 @@ B
 
 Startup
 
+- require("lvim.bootstrap"):init(base_dir)
+  - update runtime-dir
+  - require("lvim.impatient").setup()
+  - require("lvim.config"):init()
+    - require("lvim.config.defaults")
+      :lvim
+    :lvim.vsnip_dir
+    :lvim.database
+    - require("lvim.core.builtins").config()
+      - require("lvim.keymappings").config()
+      - require("lvim.core.which-key").config()
+      - require("lvim.core.gitsigns").config()
+      - require("lvim.core.cmp").config()
+      - require("lvim.core.dashboard").config()
+      - require("lvim.core.dap").config()
+      - ...
+    - require("lvim.config.settings").load_options()
+    :lvim.autocommands
+    :lvim.lsp
+    :lvim.lang[entry] = { formatters = {}, linters = {}, lsp = {} }
+  - require("lvim.plugin-loader"):init()
+
+- require("lvim.config"):load()
+  - dofile config.lua
+  - handle_deprecated_settings()
+  - require("lvim.core.autocmds").autocmds.define_augroups(lvim.autocommands)
+  - require("lvim.config.settings").load_commands()
+
+- local plugins = require("lvim.plugins")
+  - { config = require("lvim.core.[]").setup() }
+- require("lvim.plugin-loader"):load { plugins, lvim.plugins }
+
+- require("lvim.core.log")
+
+- vim.cmd("colorscheme " .. lvim.colorscheme)
+
+- require("lvim.core.commands").load(commands.defaults)
+  - vim functions:
+    QuickFixToggle
+  - vim commands:
+    LvimInfo, LvimCacheReset, LvimUpdate
+
+- require("lvim.keymappings").setup()
+
+- require("lvim.lsp").setup()
+  - require("lvim.lsp.handlers").setup()
+  - require("lvim.lsp.templates").generate_templates()
+  - require("lvim.lsp.null-ls").setup()
+  - require("lvim.utils").toggle_autoformat()
+
+## Outline Old
+
+Startup
+
 - require("bootstrap"):init()
   - update runtime-dir
   - require("impatient").setup()

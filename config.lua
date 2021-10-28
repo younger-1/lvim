@@ -62,13 +62,13 @@ lvim.builtin.lualine.options.theme = "onedarker"
 
 -- LSP
 lvim.lsp.diagnostics.virtual_text = false
-lvim.lsp.override = { "java" }
+vim.list_extend(lvim.lsp.override, { "java" })
 require("user.json_schemas").setup()
 
 -- [](https://github.com/LunarVim/LunarVim/issues/1639)
 -- [jsonls](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#jsonls)
 -- merely add `require("lsp").setup "json"` to `ftplugin/jsonc.lua` doesn't work
-lvim.lang.json.lsp.setup.filetypes = { "json", "jsonc" }
+-- lvim.lang.json.lsp.setup.filetypes = { "json", "jsonc" }
 
 lvim.lang.yaml.formatters = { { exe = "prettier" } }
 
@@ -377,7 +377,7 @@ lvim.builtin.project = vim.tbl_deep_extend("force", lvim.builtin.project, {
 -- Keymappings
 -- View all the defaults by pressing <leader>Lk
 -- lvim.leader = "space"
-require("keymappings").append_to_defaults {
+require("lvim.keymappings").append_to_defaults {
   -- <https://github.com/mskar/setup/blob/main/config.lua>
   insert_mode = {
     ["<C-U>"] = "<C-G>u<C-U>",
@@ -617,7 +617,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       S = { "<Cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "Workspace Symbols" },
       O = { "<Cmd>lua vim.lsp.buf.outgoing_calls()<CR>", "Outgoing Calls" },
       -- I = { "<Cmd>lua vim.lsp.buf.incoming_calls()<CR>", "Incoming Calls" },
-      l = {
+      [" "] = {
         name = "Telescope",
         -- DIR
         D = { "<cmd>Telescope lsp_definitions<cr>", "Def" },
@@ -643,7 +643,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       L = { "<cmd>LuaCacheLog<cr>", "LuaCache Log" },
       P = { "<cmd>LuaCacheProfile<cr>", "LuaCache Profile" },
       R = { "<cmd>LvimCacheReset<cr>", "LvimCache Reset" },
-      u = { "<cmd>lua require'user.tools'.update_lunarvim()<cr>", "Update LunarVim" },
+      -- u = { "<cmd>lua require'user.tools'.update_lunarvim()<cr>", "Update LunarVim" },
       b = {
         "<cmd>lua require('telescope.builtin').git_commits { cwd = _G.get_runtime_dir() .. '/lvim' }<cr>",
         "LunarVim Git Branch",
@@ -881,13 +881,13 @@ lvim.plugins = {
       require "user.package-info"
     end,
   },
-  {
-    "rcarriga/nvim-notify",
-    event = "BufRead",
-    config = function()
-      require("user.notify").config()
-    end,
-  },
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   event = "BufRead",
+  --   config = function()
+  --     require("user.notify").config()
+  --   end,
+  -- },
   -- TODO: maybe oneday
   -- { "gelguy/wilder.nvim",
   --   config = function ()
@@ -1302,14 +1302,14 @@ lvim.plugins = {
     "nvim-telescope/telescope-packer.nvim",
     after = "telescope.nvim",
   },
-  {
+  --[[ {
     "nvim-telescope/telescope-fzf-native.nvim",
     run = "make",
     after = "telescope.nvim",
     config = function()
       require("telescope").load_extension "fzf"
     end,
-  },
+  }, ]]
   {
     "nvim-telescope/telescope-frecency.nvim",
     after = { "telescope.nvim" },

@@ -64,11 +64,11 @@ M.setup = function()
 
   local extended_schemas = extend(schemas, require("nlspsettings.jsonls").get_default_schemas())
 
-  lvim.lang.json.lsp.setup.settings = {
-    json = {
-      schemas = extended_schemas,
-    },
-  }
+  -- lvim.lang.json.lsp.setup.settings = {
+  --   json = {
+  --     schemas = extended_schemas,
+  --   },
+  -- }
 end
 
 return M

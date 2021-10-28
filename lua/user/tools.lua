@@ -1,5 +1,5 @@
 local tools = {}
-local Log = require "core.log"
+local Log = require "lvim.core.log"
 
 --- Returns a table with the default values that are missing.
 --- either paramter can be empty.
