@@ -69,8 +69,15 @@ require("user.json_schemas").setup()
 -- [jsonls](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#jsonls)
 -- merely add `require("lsp").setup "json"` to `ftplugin/jsonc.lua` doesn't work
 -- lvim.lang.json.lsp.setup.filetypes = { "json", "jsonc" }
-
-lvim.lang.yaml.formatters = { { exe = "prettier" } }
+require("lvim.lsp.null-ls.formatters").setup {
+  { exe = "stylua" },
+  { exe = "clang_format", filetypes = {"cpp"} },
+  { exe = "markdownlint" },
+  { exe = "prettier", filetypes = { "yaml" } },
+}
+require("lvim.lsp.null-ls.linters").setup {
+  { exe = "markdownlint" },
+}
 
 -- Treesitter
 -- for finding syntax ids for non TS enabled languages
@@ -1276,7 +1283,7 @@ lvim.plugins = {
   },
   {
     "ZSaberLv0/ZFVimDirDiff",
-    keys = { "ZFDirDiff", "ZFDirDiffMark" },
+    cmd = { "ZFDirDiff", "ZFDirDiffMark" },
     setup = function()
       vim.g.ZFDirDiffUI_dirExpandable = "+"
     end,

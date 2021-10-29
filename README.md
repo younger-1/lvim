@@ -85,6 +85,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 [refactor: auto-generate language configuration](https://github.com/LunarVim/LunarVim/pull/1584)
 [feat: add prelimenary LvimUpdate command](https://github.com/LunarVim/LunarVim/pull/1634)
 [WIP: lua keymaps and docs](https://github.com/neovim/neovim/pull/13823)
+[fix(lsp): install templates and configure overrides for custom providers](https://github.com/LunarVim/LunarVim/pull/1859)
 
 ## TODO
 
