@@ -75,6 +75,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ]  [Formatters/linters in .config/lvim/ftplugin not recognized](https://github.com/LunarVim/LunarVim/issues/1667)
 - [ ]  [[Feature]: Show line diagnostics only for line during CursorHold](https://github.com/LunarVim/LunarVim/issues/1712)
 - [ ]  [[Bug]: illegal character encoding in string literal (Chinese)](https://github.com/LunarVim/LunarVim/issues/1792)
+- [ ]  [[Feature]: GitHub Copilot](https://github.com/LunarVim/LunarVim/issues/1856)
 
 ## Pull requests
 
@@ -86,6 +87,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 [feat: add prelimenary LvimUpdate command](https://github.com/LunarVim/LunarVim/pull/1634)
 [WIP: lua keymaps and docs](https://github.com/neovim/neovim/pull/13823)
 [fix(lsp): install templates and configure overrides for custom providers](https://github.com/LunarVim/LunarVim/pull/1859)
+[fix: register null-ls providers per filetype](https://github.com/LunarVim/LunarVim/pull/1709)
 
 ## TODO
 

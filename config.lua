@@ -61,23 +61,28 @@ lvim.builtin.cmp.confirm_opts.select = false
 lvim.builtin.lualine.options.theme = "onedarker"
 
 -- LSP
+lvim.lsp.automatic_servers_installation = false
 lvim.lsp.diagnostics.virtual_text = false
-vim.list_extend(lvim.lsp.override, { "java" })
-require("user.json_schemas").setup()
 
+---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
+vim.list_extend(lvim.lsp.override, { "jdtls" })
+
+require("user.json_schemas").setup()
 -- [](https://github.com/LunarVim/LunarVim/issues/1639)
 -- [jsonls](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#jsonls)
 -- merely add `require("lsp").setup "json"` to `ftplugin/jsonc.lua` doesn't work
 -- lvim.lang.json.lsp.setup.filetypes = { "json", "jsonc" }
+
 require("lvim.lsp.null-ls.formatters").setup {
   { exe = "stylua" },
-  { exe = "clang_format", filetypes = {"cpp"} },
-  { exe = "markdownlint" },
+  { exe = "markdownlint", args = { "--config", vim.fn.expand "~/dotter/markdownlint.jsonc" } },
   { exe = "prettier", filetypes = { "yaml" } },
+  { exe = "clang_format", filetypes = { "cpp" } },
 }
 require("lvim.lsp.null-ls.linters").setup {
-  { exe = "markdownlint" },
   -- { exe = "selene" },
+  { exe = "markdownlint", args = { "--config", vim.fn.expand "~/dotter/markdownlint.jsonc" } },
+  -- { exe = "cppcheck" },
 }
 
 -- Treesitter
@@ -386,7 +391,7 @@ lvim.builtin.project = vim.tbl_deep_extend("force", lvim.builtin.project, {
 -- View all the defaults by pressing <leader>Lk
 -- lvim.leader = "space"
 lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
--- require("lvim.keymappings").append_to_defaults {
+  -- require("lvim.keymappings").append_to_defaults {
   -- <https://github.com/mskar/setup/blob/main/config.lua>
   insert_mode = {
     ["<C-U>"] = "<C-G>u<C-U>",
@@ -429,6 +434,8 @@ onoremap H ^
 vnoremap H ^
 onoremap L $
 vnoremap L $
+
+nnoremap & :<c-u>/g<home>%s/<c-r><c-w>/
 
 " Open in VSCode from Vim
 command! OpenInVSCode exe '!code --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
@@ -639,6 +646,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
         },
       },
       o = { "<cmd>SymbolsOutline<cr>", "Outline" },
+      q = { "", "which_key_ignore" },
       v = { "<cmd>Vista!!<cr>", "Vista" },
       n = { "<cmd>NullLsInfo<cr>", "Null LS" },
     },
