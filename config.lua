@@ -77,6 +77,7 @@ require("lvim.lsp.null-ls.formatters").setup {
 }
 require("lvim.lsp.null-ls.linters").setup {
   { exe = "markdownlint" },
+  -- { exe = "selene" },
 }
 
 -- Treesitter
@@ -384,7 +385,8 @@ lvim.builtin.project = vim.tbl_deep_extend("force", lvim.builtin.project, {
 -- Keymappings
 -- View all the defaults by pressing <leader>Lk
 -- lvim.leader = "space"
-require("lvim.keymappings").append_to_defaults {
+lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
+-- require("lvim.keymappings").append_to_defaults {
   -- <https://github.com/mskar/setup/blob/main/config.lua>
   insert_mode = {
     ["<C-U>"] = "<C-G>u<C-U>",
@@ -420,7 +422,7 @@ require("lvim.keymappings").append_to_defaults {
     X = [["+x]],
   },
   -- visual_block_mode = {},
-}
+})
 
 vim.cmd [[
 onoremap H ^
@@ -602,18 +604,13 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       name = "kit",
     },
     l = {
+      -- c = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+      c = { "<cmd>CodeActionMenu<cr>", "Code Action" },
       -- d = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics{ show_header = false, border = 'single' }<cr>", "Diagnostics" },
-      d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
-      w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
-      D = { "<cmd>Trouble lsp_definitions<cr>", "Def" },
-      I = { "<cmd>Trouble lsp_implementations<cr>", "Impl" },
-      R = { "<cmd>Trouble lsp_references<cr>", "Ref" },
       ["<C-e>"] = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Diagnostics LocList" },
-      -- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-      a = { "<cmd>CodeActionMenu<cr>", "Code Action" },
       W = { "<cmd>lua pp(vim.lsp.buf.list_workspace_folders())<cr>", "Workspace folders" },
       -- f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
-      f = {
+      F = {
         function()
           vim.lsp.buf.formatting_sync()
           vim.cmd "write"
@@ -754,6 +751,12 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       ["<C-e>"] = { "<cmd>Trouble loclist<cr>", "LocList" },
       ["."] = { "<cmd>Trouble telescope<cr>", "Telescope" },
       x = { "<cmd>TroubleToggle<cr>", "Open" },
+      -- DIR
+      D = { "<cmd>Trouble lsp_definitions<cr>", "Def" },
+      I = { "<cmd>Trouble lsp_implementations<cr>", "Impl" },
+      R = { "<cmd>Trouble lsp_references<cr>", "Ref" },
+      d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
+      w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
       t = { "<cmd>TodoTrouble<cr>", "Todo" },
     },
     z = { "<cmd>ZenMode<cr>", "Zen" },
