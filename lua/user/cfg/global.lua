@@ -61,3 +61,8 @@ end
 
 disable_distribution()
 -- neovide_config()
+
+if vim.loop.os_uname().sysname == 'Windows_NT' then
+  vim.g.sqlite_clib_path = join_paths(os.getenv 'SCOOP', 'apps', 'sqlite3dll', 'current', 'sqlite3.dll')
+end
+

@@ -67,7 +67,7 @@ lvim.lsp.diagnostics.virtual_text = false
 ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- vim.list_extend(lvim.lsp.override, { "jdtls" })
 
-require("user.json_schemas").setup()
+-- require("user.json_schemas").setup()
 -- [](https://github.com/LunarVim/LunarVim/issues/1639)
 -- [jsonls](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#jsonls)
 -- merely add `require("lsp").setup "json"` to `ftplugin/jsonc.lua` doesn't work
@@ -279,7 +279,7 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
     },
     file_ignore_patterns = {
       "node_modules",
-      ".git/",
+      ".git[/\\]",
     },
     -- horizontal, center, cursor, vertical, flex, bottom_pane
     layout_strategy = "horizontal",
