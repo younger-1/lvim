@@ -207,6 +207,20 @@ Startup
   - require("lvim.lsp.null-ls").setup()
   - require("lvim.utils").toggle_autoformat()
 
+LvimReload
+
+- require('lvim.config'):reload()
+  - require("lvim.config"):init()
+  - require("lvim.config"):load()
+  - require("lvim.keymappings").setup() -- this should be done before loading the plugins
+  - require("lvim.utils").toggle_autoformat()
+  - plugin_loader = require "lvim.plugin-loader"
+    - plugin_loader:cache_reset()
+    - plugin_loader:load { plugins, lvim.plugins }
+  - :PackerInstall
+  - :PackerCompile
+  - require("lvim.lsp").setup()
+
 ## Outline Old
 
 Startup
@@ -246,7 +260,7 @@ Startup
 - require("lsp").global_setup()
 - require("keymappings").setup()
 
-Reload
+LvimReload
 
 - require('utils').reload_lv_config()
   - require("core.lualine").config()
