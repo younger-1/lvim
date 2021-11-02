@@ -60,10 +60,11 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - <https://github.com/jimcornmell/lvim>
 - <https://github.com/ssbanerje/dotfiles/tree/master/editors/lvim-config>
 - <https://github.com/bob3000/dotfiles/blob/linux/conf/lv-config.lua>
+- <https://github.com/maxxnino/lvim>
 
 ## Issues
 
-- [ ]  [[Feature]: Windows setup](https://github.com/LunarVim/LunarVim/issues/804)
+- [x]  [[Feature]: Windows setup](https://github.com/LunarVim/LunarVim/issues/804)
 - [ ]  [[Feature]: Keymapping Tables](https://github.com/LunarVim/LunarVim/issues/1548)
 - [ ]  [[Bug]: Remove nlsp-settings from LunarVim](https://github.com/LunarVim/LunarVim/issues/1392)
 - [x] @me [[Bug]: can't get gd to work properly in lua projects](https://github.com/LunarVim/LunarVim/issues/1602)
