@@ -93,6 +93,23 @@
 -- local split_string = split("Hello World!", " ")
 -- pp(split_string)
 
+-- [[os]]
+
+-- <https://www.jianshu.com/p/c3c70d046bfc>
+local ret = os.execute()
+if ret ~= 0 then
+  print("the system shell is available, ret = " .. ret .. "\n\n")
+else
+  print("the system shell is not available, ret = " .. ret .. "\n\n")
+end
+
+-- [[io]]
+
+local openPop = assert(io.popen("ls -la", "r"))
+local output = openPop:read "*all"
+openPop:close()
+print(output)
+
 --[[
   1. vim
 --]]
@@ -126,6 +143,10 @@ local m1 = vim.tbl_deep_extend("force", m, {
 m1 = vim.tbl_deep_extend("force", m1, {
   b = { "hi", bb = { 8, 9 } },
 })
+
+-- [[vim.loop]]
+local uv =  vim.loop
+print(uv.cwd())
 
 --[[
   2. plenary

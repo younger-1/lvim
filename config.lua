@@ -58,7 +58,27 @@ lvim.builtin.dap.active = true
 lvim.builtin.gitsigns.opts.numhl = true
 lvim.builtin.gitsigns.opts.keymaps["x ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
 lvim.builtin.cmp.confirm_opts.select = false
-lvim.builtin.lualine.options.theme = "onedarker"
+
+-- [lualine](https://github.com/nvim-lualine/lualine.nvim/wiki/Introduction)
+-- <https://github.com/jimcornmell/lvim/blob/main/lua/user/lualine.lua>
+
+lvim.builtin.lualine.style = "lvim" -- or "default", "lvim", "none"
+
+-- local custom_gruvbox = require "lualine.themes.gruvbox_dark"
+-- custom_gruvbox.insert.b = { fg = custom_gruvbox.insert.a.bg, gui = "bold" }
+-- custom_gruvbox.visual.b = { fg = custom_gruvbox.visual.a.bg, gui = "bold" }
+-- custom_gruvbox.replace.b = { fg = custom_gruvbox.replace.a.bg, gui = "bold" }
+-- custom_gruvbox.command.b = { fg = custom_gruvbox.command.a.bg, gui = "bold" }
+-- lvim.builtin.lualine.options.theme = custom_gruvbox -- or "auto", "onedarker", "gruvbox"
+
+-- local components = require "lvim.core.lualine.components"
+-- lvim.builtin.lualine.sections.lualine_a = { "mode" }
+-- lvim.builtin.lualine.sections.lualine_c[3] = { 'lsp_progress' }
+-- lvim.builtin.lualine.sections.lualine_c = { "diff" }
+-- lvim.builtin.lualine.sections.lualine_z = {
+--   components.spaces,
+--   components.location,
+-- }
 
 -- LSP
 lvim.lsp.automatic_servers_installation = false
@@ -945,12 +965,6 @@ lvim.plugins = {
     cmd = "Codi",
   },
   {
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    ft = "markdown",
-  },
-  { "ellisonleao/glow.nvim", cmd = "Glow" },
-  {
     "windwp/nvim-ts-autotag",
     event = "InsertEnter",
   },
@@ -1537,6 +1551,13 @@ lvim.plugins = {
       require("user.octo").config()
     end,
   },
+  -- [Markdown]
+  {
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    ft = "markdown",
+  },
+  { "ellisonleao/glow.nvim", cmd = "Glow" },
   -- [Write]
   {
     {
@@ -1634,6 +1655,7 @@ lvim.plugins = {
       vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
     end,
   },
+  { "arkav/lualine-lsp-progress" },
   -- [Spell]
   {
     "kamykn/spelunker.vim",
@@ -1710,9 +1732,10 @@ lvim.plugins = {
 }
 
 -- TODO: q quits in spectr_panel ft
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
+-- [Autocommands](https://neovim.io/doc/user/autocmd.html)
+-- [events](https://tech.saigonist.com/b/code/list-all-vim-script-events.html)
 lvim.autocommands.custom_groups = {
-  -- { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
+  -- { Event, filetype, command } run a command at a given event for the given filetype
   -- Return to last edit position when opening files (You want this!)
   {
     "BufWinEnter",
@@ -1725,6 +1748,8 @@ lvim.autocommands.custom_groups = {
     "/dev/shm/gopass.*,/run/shm/gopass.*",
     [[setlocal noswapfile nobackup noundofile]],
   },
+  { "InsertEnter", "*", ":normal! zz" },
+  -- { "CursorHold", "*", ":normal! ga" },
 }
 -- way to get os name
 -- print(vim.loop.os_uname().sysname)
