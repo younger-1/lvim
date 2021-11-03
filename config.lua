@@ -73,12 +73,29 @@ lvim.builtin.lualine.style = "lvim" -- or "default", "lvim", "none"
 
 -- local components = require "lvim.core.lualine.components"
 -- lvim.builtin.lualine.sections.lualine_a = { "mode" }
--- lvim.builtin.lualine.sections.lualine_c[3] = { 'lsp_progress' }
 -- lvim.builtin.lualine.sections.lualine_c = { "diff" }
 -- lvim.builtin.lualine.sections.lualine_z = {
 --   components.spaces,
 --   components.location,
 -- }
+
+lvim.builtin.lualine.on_config_done = function(lualine)
+  local config = lualine.get_config()
+  local components = require "lvim.core.lualine.components"
+  local trailing_white = function()
+    return vim.fn.search([[\s\+$]], "nw") ~= 0 and "TW" or ""
+  end
+  table.insert(config.sections.lualine_c, "lsp_progress")
+  config.sections.lualine_y = {
+    -- components.location,
+    -- components.progress,
+    components.spaces,
+    -- components.encoding,
+    "fileformat",
+    trailing_white,
+  }
+  lualine.setup(config)
+end
 
 -- LSP
 lvim.lsp.automatic_servers_installation = false
