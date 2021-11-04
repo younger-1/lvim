@@ -56,7 +56,7 @@ lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.dap.active = true
 lvim.builtin.notify.active = true
-vim.notify = require("notify")
+require "user.notify".config()
 lvim.builtin.gitsigns.opts.numhl = true
 lvim.builtin.gitsigns.opts.keymaps["x ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
 lvim.builtin.cmp.confirm_opts.select = false
