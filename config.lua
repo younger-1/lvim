@@ -55,6 +55,8 @@ lvim.log.level = "info"
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.dap.active = true
+lvim.builtin.notify.active = true
+vim.notify = require("notify")
 lvim.builtin.gitsigns.opts.numhl = true
 lvim.builtin.gitsigns.opts.keymaps["x ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
 lvim.builtin.cmp.confirm_opts.select = false
@@ -745,6 +747,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
         l = { "<Cmd>lua require('telescope').extensions.frecency.frecency{ default_text = ':LSP:' }<CR>", "LSP" },
         m = { "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>", "Frecency" },
       },
+      n = { "<cmd>Telescope notify<cr>", "Notify" },
       o = {
         [[<cmd>Telescope sessions layout_strategy=bottom_pane layout_config={"prompt_position":"top"}<CR>]],
         "Sessions",
