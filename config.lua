@@ -44,7 +44,7 @@ require "user.cfg.global"
 require "user.cfg.option"
 
 require "user.dashboard"
-require "user.lualine"
+require("user.lualine").arrow()
 require "user.treesitter"
 require "user.telescope"
 require "user.whichkey"
@@ -65,14 +65,7 @@ lvim.builtin.notify.active = true
 lvim.builtin.gitsigns.opts.numhl = true
 lvim.builtin.gitsigns.opts.keymaps["x ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
 lvim.builtin.cmp.confirm_opts.select = false
-lvim.builtin.project = vim.tbl_deep_extend("force", lvim.builtin.project, {
-  exclude_dirs = {},
-  -- Show hidden files in telescope
-  show_hidden = false,
-  -- When set to false, you will get a message when project.nvim changes your directory.
-  silent_chdir = false,
-})
-
+lvim.builtin.project.silent_chdir = false
 
 -- LSP
 lvim.lsp.automatic_servers_installation = false
