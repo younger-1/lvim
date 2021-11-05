@@ -1074,6 +1074,13 @@ lvim.plugins = {
       }
     end,
   },
+  {
+    "code-biscuits/nvim-biscuits",
+      event = "BufRead",
+      config = function()
+        require "user.biscuits"
+      end,
+  },
   -- [Text Object]
   -- {},
   -- [Motion]
