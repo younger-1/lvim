@@ -44,7 +44,7 @@ require "user.cfg.global"
 require "user.cfg.option"
 
 require "user.dashboard"
-require("user.lualine").blank()
+require("user.lualine").bubbles()
 require "user.treesitter"
 require "user.telescope"
 require "user.whichkey"

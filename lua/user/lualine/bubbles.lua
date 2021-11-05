@@ -32,11 +32,9 @@ local bubbles_theme = {
   },
 }
 
-require("lualine").setup {
+return {
   options = {
     theme = bubbles_theme,
-    component_separators = "|",
-    -- component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
   },
   sections = {
@@ -44,8 +42,8 @@ require("lualine").setup {
       { "mode", separator = { left = "" }, right_padding = 2 },
     },
     lualine_b = { "filename", "branch" },
-    lualine_c = { "fileformat" },
-    lualine_x = {},
+    lualine_c = { "diff" },
+    lualine_x = { "diagnostics" },
     lualine_y = { "filetype", "progress" },
     lualine_z = {
       { "location", separator = { right = "" }, left_padding = 2 },

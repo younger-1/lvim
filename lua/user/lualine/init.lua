@@ -90,4 +90,10 @@ M.arc = function()
   lvim.builtin.lualine = vim.tbl_deep_extend("force", lvim.builtin.lualine, line)
 end
 
+M.bubbles = function()
+  local line = require "user.lualine.bubbles"
+  line.options.component_separators = { left = "│", right = "│" }
+  lvim.builtin.lualine = vim.tbl_deep_extend("force", lvim.builtin.lualine, line)
+end
+
 return M
