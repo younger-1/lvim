@@ -103,19 +103,17 @@ M.tab_space = {
   end,
   cond = conditions.hide_in_width,
   color = {},
-  padding = { left = 1, right = 0 },
+  -- padding = { left = 0, right = 1 },
 }
 
 M.fileformat = {
   "fileformat",
   cond = conditions.hide_in_width,
-  padding = { left = 1, right = 0 },
 }
 
 M.filesize = {
   "filesize",
   cond = conditions.hide_in_width,
-  padding = { left = 1, right = 0 },
 }
 
 M.encoding = {
@@ -123,20 +121,17 @@ M.encoding = {
   fmt = string.upper,
   color = {},
   cond = conditions.hide_in_width,
-  padding = { left = 1, right = 0 },
 }
 
 M.trailing_white = {
   function()
     return vim.fn.search([[\s\+$]], "nw") ~= 0 and "TW" or ""
   end,
-  padding = { left = 1, right = 0 },
 }
 
 M.location = {
   "location",
   cond = conditions.hide_in_width,
-  padding = { left = 1, right = 0 },
   color = {},
 }
 

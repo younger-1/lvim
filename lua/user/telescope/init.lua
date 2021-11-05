@@ -16,11 +16,13 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
     entry_prefix = "  ",
     vimgrep_arguments = {
       "rg",
+      "--color=never",
       "--no-heading",
       "--with-filename",
       "--line-number",
       "--column",
       "--smart-case",
+      "--hidden",
     },
     file_ignore_patterns = {
       "node_modules",
@@ -122,4 +124,3 @@ lvim.builtin.telescope.on_config_done = function()
   lvim.builtin.telescope.defaults.mappings.i["<c-g>"] = trouble.open_with_trouble
   lvim.builtin.telescope.defaults.mappings.n["<c-g>"] = trouble.open_with_trouble
 end
-

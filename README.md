@@ -89,6 +89,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 [WIP: lua keymaps and docs](https://github.com/neovim/neovim/pull/13823)
 [fix(lsp): install templates and configure overrides for custom providers](https://github.com/LunarVim/LunarVim/pull/1859)
 [fix: register null-ls providers per filetype](https://github.com/LunarVim/LunarVim/pull/1709)
+[feat(cmp): expose lunarvim's cmp helper methods](https://github.com/LunarVim/LunarVim/pull/1844)
 
 ## TODO
 

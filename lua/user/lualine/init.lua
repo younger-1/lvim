@@ -59,8 +59,35 @@ M.config = function()
 end
 
 M.arrow = function()
-  local lualine_config = require "user.lualine.arrow"
-  lvim.builtin.lualine = vim.tbl_deep_extend("force", lvim.builtin.lualine, lualine_config)
+  local line = require "user.lualine.arrow"
+  lvim.builtin.lualine = vim.tbl_deep_extend("force", lvim.builtin.lualine, line)
+end
+
+M.pencil = function()
+  local line = require "user.lualine.arrow"
+  line.options.component_separators = { left = "│", right = "│" }
+  lvim.builtin.lualine = vim.tbl_deep_extend("force", lvim.builtin.lualine, line)
+end
+
+M.blank = function()
+  local line = require "user.lualine.arrow"
+  line.options.component_separators = { left = "", right = "" }
+  line.options.section_separators = { left = "", right = "" }
+  lvim.builtin.lualine = vim.tbl_deep_extend("force", lvim.builtin.lualine, line)
+end
+
+M.block = function()
+  local line = require "user.lualine.arrow"
+  line.options.component_separators = { left = "│", right = "│" }
+  line.options.section_separators = { left = "", right = "" }
+  lvim.builtin.lualine = vim.tbl_deep_extend("force", lvim.builtin.lualine, line)
+end
+
+M.arc = function()
+  local line = require "user.lualine.arrow"
+  line.options.component_separators = { left = "", right = "" }
+  line.options.section_separators = { left = "", right = "" }
+  lvim.builtin.lualine = vim.tbl_deep_extend("force", lvim.builtin.lualine, line)
 end
 
 return M
