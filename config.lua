@@ -85,6 +85,7 @@ require("lvim.lsp.null-ls.formatters").setup {
   { exe = "markdownlint", args = { "--config", vim.fn.expand "~/dotter/markdownlint.jsonc" } },
   { exe = "prettier", filetypes = { "yaml" } },
   { exe = "clang_format", filetypes = { "cpp" } },
+  { exe = "fixjson" },
 }
 
 require("lvim.lsp.null-ls.linters").setup {
@@ -336,10 +337,10 @@ lvim.plugins = {
   },
   {
     "code-biscuits/nvim-biscuits",
-      event = "BufRead",
-      config = function()
-        require "user.biscuits"
-      end,
+    event = "BufRead",
+    config = function()
+      require "user.biscuits"
+    end,
   },
   -- [Text Object]
   -- {},
