@@ -3,15 +3,17 @@ local components = require "lvim.core.lualine.components"
 
 -- stylua: ignore start
 local colors = {
-  yellow   = "#ECBE7B",
-  cyan     = "#008080",
-  darkblue = "#081633",
-  green    = "#98be65",
-  orange   = "#FF8800",
-  violet   = "#a9a1e1",
-  magenta  = "#c678dd",
-  blue     = "#51afef",
-  red      = "#ec5f67",
+  bg         = "#202328",
+  fg         = "#bbc2cf",
+  yellow     = "#ECBE7B",
+  cyan       = "#008080",
+  darkblue   = "#081633",
+  green      = "#98be65",
+  orange     = "#FF8800",
+  violet     = "#a9a1e1",
+  magenta    = "#c678dd",
+  blue       = "#51afef",
+  red        = "#ec5f67",
 }
 -- stylua: ignore end
 
@@ -20,14 +22,19 @@ local config = {
   options = {
     icons_enabled = true,
     -- theme = "gruvbox",
-    -- component_separators = "|",
-    component_separators = { left = "", right = "" },
-    section_separators = { left = "", right = "" },
+    -- component_separators = {left = "║", right = "║"},
+    -- component_separators = {left = "│", right = "│"},
+    -- component_separators = { left = "", right = "" },
+    -- component_separators = { left = "", right = "" },
+    -- section_separators = { left = "", right = "" },
+    -- section_separators = { left = "", right = "" },
     disabled_filetypes = { "dashboard", "Outline" },
   },
   sections = {
     lualine_a = {
       components.mode,
+      utils.lock,
+      -- color = { fg = "#88c0d0", bg = "#bf616a" },
     },
     lualine_b = {
       components.branch,
@@ -45,9 +52,10 @@ local config = {
     },
     lualine_y = {},
     lualine_z = {
-      components.encoding,
+      utils.tab_space,
       utils.fileformat,
       utils.filesize,
+      components.encoding,
       components.location,
       components.scrollbar,
     },
@@ -72,15 +80,14 @@ local function ins_right(component)
   table.insert(config.sections.lualine_x, component)
 end
 
+-- <https://github.com/arkav/lualine-lsp-progress>
 ins_left {
   "lsp_progress",
-  display_components = { "lsp_client_name", { "title", "percentage", "message" } },
-  -- With spinner
-  -- display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage', 'message' }},
+  display_components = { "lsp_client_name", "spinner", { "title", "percentage", "message" } },
   colors = {
-    percentage = colors.cyan,
-    title = colors.cyan,
-    message = colors.cyan,
+    percentage = colors.orange,
+    title = colors.blue,
+    message = colors.green,
     spinner = colors.cyan,
     lsp_client_name = colors.magenta,
     use = true,

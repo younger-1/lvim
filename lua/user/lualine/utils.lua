@@ -2,18 +2,34 @@ local conditions = require "lvim.core.lualine.conditions"
 
 local M = {}
 
+M.lock = {
+  separator = { left = "", right = "" },
+  padding = 0,
+  function()
+    if not vim.o.modifiable then
+      return ""
+    elseif vim.o.readonly then
+      return ""
+    else
+      return ""
+    end
+  end,
+}
+
 M.fileformat = { "fileformat", cond = conditions.hide_in_width }
+
 M.filesize = { "filesize", cond = conditions.hide_in_width }
-M.spaces = {
+
+M.tab_space = {
   function()
     if not vim.api.nvim_buf_get_option(0, "expandtab") then
-      return "Tab size: " .. vim.api.nvim_buf_get_option(0, "tabstop") .. " "
+      return "TAB: " .. vim.api.nvim_buf_get_option(0, "tabstop")
     end
     local size = vim.api.nvim_buf_get_option(0, "shiftwidth")
     if size == 0 then
       size = vim.api.nvim_buf_get_option(0, "tabstop")
     end
-    return "Spaces: " .. size .. " "
+    return "SPC: " .. size
   end,
   cond = conditions.hide_in_width,
   color = {},
