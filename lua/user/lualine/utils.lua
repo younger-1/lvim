@@ -135,6 +135,12 @@ M.location = {
   color = {},
 }
 
+M.progress = {
+  "progress",
+  -- cond = conditions.hide_in_width,
+  color = {},
+}
+
 M.scrollbar = {
   function()
     local current_line = vim.fn.line "."

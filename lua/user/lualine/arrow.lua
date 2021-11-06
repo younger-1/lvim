@@ -47,17 +47,19 @@ local config = {
       utils.diagnostics,
       utils.treesitter,
       components.lsp,
-      utils.filetype,
     },
-    lualine_y = {},
-    lualine_z = {
-      utils.tab_space,
+    lualine_y = {
+      utils.filetype,
       utils.fileformat,
+      utils.tab_space,
+    },
+    lualine_z = {
       utils.filesize,
-      utils.encoding,
+      -- utils.encoding,
       utils.trailing_white,
       utils.location,
-      utils.scrollbar,
+      utils.progress,
+      -- utils.scrollbar,
     },
   },
   inactive_sections = {
