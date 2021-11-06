@@ -101,4 +101,9 @@ M.bubbles = function()
   lvim.builtin.lualine = vim.tbl_deep_extend("force", lvim.builtin.lualine, line)
 end
 
+M.evil = function()
+  local line = require "user.lualine.evil"
+  lvim.builtin.lualine = vim.tbl_deep_extend("force", lvim.builtin.lualine, line)
+end
+
 return M

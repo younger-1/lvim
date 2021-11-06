@@ -18,6 +18,7 @@ M.lock = {
     if not vim.o.modifiable then
       return ""
     elseif vim.o.readonly then
+      -- vim.api.nvim_command("hi! LualineLock guifg=" .. "#88c0d0" .. " guibg=" .. colors.bg)
       return ""
     else
       return ""
@@ -26,6 +27,7 @@ M.lock = {
   -- padding = 0,
   padding = { left = 0, right = 1 },
   -- color = { fg = "#88c0d0", bg = "#bf616a" },
+  -- color = "LualineLock",
 }
 
 M.branch = {

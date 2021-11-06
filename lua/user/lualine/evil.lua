@@ -1,9 +1,6 @@
 -- Eviline config for lualine
 -- Author: shadmansaleh
 -- Credit: glepnir
-local lualine = require "lualine"
-
--- Color table for highlights
 
 -- stylua: ignore start
 local colors = {
@@ -35,19 +32,22 @@ local conditions = {
   end,
 }
 
+local evil_theme = {
+  -- We are going to use lualine_c an lualine_x as left and
+  -- right section. Both are highlighted by c theme .  So we
+  -- are just setting default looks o statusline
+  normal = { c = { fg = colors.fg, bg = colors.bg } },
+  inactive = { c = { fg = colors.fg, bg = colors.bg } },
+}
+
 -- Config
 local config = {
   options = {
     -- Disable sections and component separators
-    component_separators = "",
-    section_separators = "",
-    theme = {
-      -- We are going to use lualine_c an lualine_x as left and
-      -- right section. Both are highlighted by c theme .  So we
-      -- are just setting default looks o statusline
-      normal = { c = { fg = colors.fg, bg = colors.bg } },
-      inactive = { c = { fg = colors.fg, bg = colors.bg } },
-    },
+    component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
+    theme = evil_theme,
+    -- theme = "auto",
   },
   sections = {
     -- these are to remove the defaults
@@ -218,5 +218,4 @@ ins_right {
   padding = { left = 1 },
 }
 
--- Now don't forget to initialize lualine
-lualine.setup(config)
+return config
