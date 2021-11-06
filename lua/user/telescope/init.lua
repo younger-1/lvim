@@ -35,7 +35,7 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
       horizontal = { mirror = false, preview_width = 0.6 },
       vertical = { mirror = false },
     },
-    winblend = 25,
+    winblend = 15,
     dynamic_preview_title = true,
     path_display = { truncate = 5 },
     mappings = {

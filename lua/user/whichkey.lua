@@ -8,6 +8,9 @@
 :WhichKey <leader> v " show all <leader> mappings for VISUAL mode
 :WhichKey '' v " show ALL mappings for VISUAL mode
 --]]
+
+local icon = require "user.theme.icons"
+
 lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
   setup = {
     plugins = {
@@ -92,6 +95,22 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       l = { ":h lua<CR>", "Lua" },
       L = { ":h lsp<CR>", "LSP" },
     },
+    b = {
+      -- ["1"] = { "<cmd>BufferGoto 1<cr>", icon.numbers.a[1] },
+      -- ["2"] = { "<cmd>BufferGoto 2<cr>", icon.numbers.a[2] },
+      -- ["3"] = { "<cmd>BufferGoto 3<cr>", icon.numbers.a[3] },
+      a = { "<cmd>BufferGoto 1<cr>", "First" },
+      l = { "<cmd>BufferLast<cr>", "Last" },
+      p = { "<cmd>BufferPin<cr>", "Pin" },
+      B = {
+        "<cmd>BufferOrderByBufferNumber<cr>",
+        "Sort by BufferNumber",
+      },
+      W = {
+        "<cmd>BufferOrderByWindowNumber<cr>",
+        "Sort by WindowNumber",
+      },
+    },
     C = { ":call OpenLastClosed()<CR>", "which_key_ignore" },
     f = { "<cmd>lua require('lir.float').toggle()<cr>", "Files" },
     g = {
@@ -150,7 +169,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       name = "kit",
     },
     l = {
-      -- c = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+      -- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
       c = { "<cmd>CodeActionMenu<cr>", "Code Action" },
       -- d = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics{ show_header = false, border = 'single' }<cr>", "Diagnostics" },
       ["<C-e>"] = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Diagnostics LocList" },
@@ -225,6 +244,8 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       ["<tab>"] = { "<cmd>Telescope<CR>", "🧙" },
       ["<C-q>"] = { "<cmd>Telescope quickfix<CR>", "QuickList" },
       ["<C-e>"] = { "<cmd>Telescope loclist<CR>", "LocList Bug" },
+      -- ["<lt>"] = { "<cmd>Telescope quickfix<CR>", "QuickList" },
+      -- ["<gt>"] = { "<cmd>Telescope loclist<CR>", "LocList" },
       ["'"] = { "<cmd>Telescope marks<CR>", "Marks" },
       ['"'] = { "<cmd>Telescope registers<CR>", "Registers" },
       ["/"] = { "<cmd>Telescope search_history<CR>", "Search History" },
@@ -404,4 +425,3 @@ lvim.builtin.which_key.on_config_done = function()
   }
   which_key.register(mymappings, opts)
 end
-

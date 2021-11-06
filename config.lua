@@ -43,12 +43,13 @@
 require "user.cfg.global"
 require "user.cfg.option"
 
-require "user.dashboard"
+require("user.notify").config()
 require("user.lualine").bubbles()
+require "user.dashboard"
 require "user.treesitter"
 require "user.telescope"
 require "user.whichkey"
-require("user.notify").config()
+require "user.barbar"
 
 young = "Young"
 
