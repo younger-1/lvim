@@ -23,7 +23,8 @@ M.lock = {
       return ""
     end
   end,
-  padding = 0,
+  -- padding = 0,
+  padding = { left = 0, right = 1 },
   -- color = { fg = "#88c0d0", bg = "#bf616a" },
 }
 

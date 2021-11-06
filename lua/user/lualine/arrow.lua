@@ -17,6 +17,18 @@ local colors = {
 }
 -- stylua: ignore end
 
+-- stylua: ignore start
+local bubble_colors = {
+  blue   = '#80a0ff',
+  cyan   = '#79dac8',
+  black  = '#080808',
+  white  = '#c6c6c6',
+  red    = '#ff5189',
+  violet = '#d183e8',
+  grey   = '#303030',
+}
+-- stylua: ignore end
+
 local config = {
   extensions = { "nvim-tree", "quickfix", "fugitive", "toggleterm", utils.trouble },
   options = {
@@ -45,19 +57,19 @@ local config = {
     },
     lualine_x = {
       utils.diagnostics,
-      utils.treesitter,
       components.lsp,
+      utils.treesitter,
     },
     lualine_y = {
       utils.filetype,
       utils.fileformat,
       utils.tab_space,
+      utils.trailing_white,
     },
     lualine_z = {
       utils.filesize,
       -- utils.encoding,
-      utils.trailing_white,
-      utils.location,
+      -- utils.location,
       utils.progress,
       -- utils.scrollbar,
     },

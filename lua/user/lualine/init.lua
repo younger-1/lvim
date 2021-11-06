@@ -21,7 +21,7 @@
 
 local M = {}
 
-M.config = function()
+M.lvim = function()
   -- <https://www.lunarvim.org/configuration/06-statusline.html>
   -- <https://github.com/jimcornmell/lvim/blob/main/lua/user/lualine.lua>
 
@@ -94,11 +94,10 @@ M.bubbles = function()
   local line = require "user.lualine.arrow"
   line.options.component_separators = { left = "│", right = "│" }
   line.options.section_separators = { left = "", right = "" }
-  -- line.sections.lualine_a[1].seperator = { left = "" }
-  -- line.sections.lualine_a[1].padding = { left = 1, right = 3 }
-  line.sections.lualine_a = {
-    { "mode", separator = { left = "" }, padding = { left = 0, right = 0 } },
-  }
+  local a = line.sections.lualine_a
+  a[1].separator = { left = "", right = "" }
+  local z = line.sections.lualine_z
+  z[#z].separator = { left = "", right = "" }
   lvim.builtin.lualine = vim.tbl_deep_extend("force", lvim.builtin.lualine, line)
 end
 
