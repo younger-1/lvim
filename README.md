@@ -448,4 +448,4 @@ require('lspconfig').sumneko_lua.setup({
 
 </div>
 
-![LunarVim Demo](./utils/media/lunarvim_logo_dark_new.png)
+![LunarVim Demo](./others/media/lunarvim_logo_dark_new.png)
