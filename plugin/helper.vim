@@ -40,7 +40,7 @@ endfunction
 command! -nargs=* -complete=customlist,v:lua.require'user.tools'.rr_complete RR lua require'user.tools'.rr(<f-args>)
 
 " Replace a range with the contents of a file
-com -range -nargs=1 -complete=file Replace <line1>-pu_|<line1>,<line2>d|r <args>|<line1>d
+com! -range -nargs=1 -complete=file Replace <line1>-pu_|<line1>,<line2>d|r <args>|<line1>d
 
 " Count the number of lines in the range
 com! -range -nargs=0 Lines  echo <line2> - <line1> + 1 "lines"
@@ -50,18 +50,11 @@ command! OpenInVSCode exe '!code --goto "' . expand('%') . ':' . line('.') . ':'
 " Open in VSCode from Vim and preserve the working directory
 command! OpenCwdInVSCode exe 'silent !code "' . getcwd() . '" --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
 
-function! TabMessage(cmd)
-  redir => message
-  silent execute a:cmd
-  redir END
-  if empty(message)
-    echoerr "This command do NOT have output"
-  else
-    " Use "new" instead of "tabnew" below if you prefer split windows instead of tabs
-    tabnew
-    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
-    silent put=message
-  endif
-endfunction
+" Here are some examples of their use:
+"   :BufMessage registers
+"   :WinMessage ls
+"   :TabMessage echo "Key mappings for Control+A:" | map <C-A>
+command! -nargs=+ -complete=command BufMessage call redir#Messages(<q-args>, ''       )
+command! -nargs=+ -complete=command WinMessage call redir#Messages(<q-args>, 'new'    )
+command! -nargs=+ -complete=command TabMessage call redir#Messages(<q-args>, 'tabnew' )
 
-command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
