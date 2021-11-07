@@ -1,7 +1,19 @@
 local M = {}
 
 -- stylua: ignore start
-M.icons = {
+
+M.action = {
+  close   = "",
+  close_v = "",
+  left    = "",
+  right   = "",
+}
+
+M.state = {
+  problem = "",
+}
+
+M.dev = {
   bracketleft       = '',
   bracketright      = '',
   vim               = '',
@@ -156,6 +168,11 @@ M.brackets = {
   angle = { "❮", "❯" },
   angle_v = { "❰", "❱" },
   curly = { "❴", "❵" },
+}
+
+M.emoji = {
+  dinosaur = "🦕",
+  robot = "🤖",
 }
 
 return M

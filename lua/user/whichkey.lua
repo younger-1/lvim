@@ -169,10 +169,29 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       name = "kit",
     },
     l = {
-      -- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-      c = { "<cmd>CodeActionMenu<cr>", "Code Action" },
-      -- d = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics{ show_header = false, border = 'single' }<cr>", "Diagnostics" },
       ["<C-e>"] = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Diagnostics LocList" },
+      ["]"] = { "<Cmd>lua vim.lsp.buf.outgoing_calls()<CR>", "Outgoing Calls" },
+      ["["] = { "<Cmd>lua vim.lsp.buf.incoming_calls()<CR>", "Incoming Calls" },
+      -- s = { "<Cmd>lua vim.lsp.buf.document_symbol()<CR>", "Document Symbols" },
+      -- S = { "<Cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "Workspace Symbols" },
+      -- ["'"] = {
+      --   "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics{ show_header = false, border = 'single' }<cr>",
+      --   "Diagnostics",
+      -- },
+      [" "] = {
+        name = "Telescope",
+        -- DIR
+        d = { "<cmd>Telescope lsp_definitions<cr>", "Def" },
+        i = { "<cmd>Telescope lsp_implementations<cr>", "Impl" },
+        r = { "<cmd>Telescope lsp_references<cr>", "Ref" },
+        --
+      },
+      -- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+      a = { "<cmd>Telescope lsp_code_actions<cr>", "Code Action" },
+      A = { "<cmd>Telescope lsp_range_code_actions<cr>", "Range Action" },
+      c = { "<cmd>CodeActionMenu<cr>", "Code Action" },
+      d = { "<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics" },
+      w = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
       W = { "<cmd>lua pp(vim.lsp.buf.list_workspace_folders())<cr>", "Workspace folders" },
       -- f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
       F = {
@@ -180,28 +199,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
           vim.lsp.buf.formatting_sync()
           vim.cmd "write"
         end,
-        "Format",
-      },
-      s = { "<Cmd>lua vim.lsp.buf.document_symbol()<CR>", "Document Symbols" },
-      S = { "<Cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "Workspace Symbols" },
-      O = { "<Cmd>lua vim.lsp.buf.outgoing_calls()<CR>", "Outgoing Calls" },
-      -- I = { "<Cmd>lua vim.lsp.buf.incoming_calls()<CR>", "Incoming Calls" },
-      [" "] = {
-        name = "Telescope",
-        -- DIR
-        D = { "<cmd>Telescope lsp_definitions<cr>", "Def" },
-        I = { "<cmd>Telescope lsp_implementations<cr>", "Impl" },
-        R = { "<cmd>Telescope lsp_references<cr>", "Ref" },
-        --
-        a = { "<cmd>Telescope lsp_code_actions<cr>", "Code Action" },
-        A = { "<cmd>Telescope lsp_range_code_actions<cr>", "Range Action" },
-        d = { "<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics" },
-        w = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
-        s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-        S = {
-          "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-          "Workspace Symbols",
-        },
+        "Format & Save",
       },
       o = { "<cmd>SymbolsOutline<cr>", "Outline" },
       q = { "", "which_key_ignore" },
