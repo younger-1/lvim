@@ -40,7 +40,7 @@
                                -- which matches one of these patterns, the plugin will be loaded.
 --]]
 
-require "user.tools.functions"
+require "user.utils.global"
 
 require "user.cfg.global"
 require "user.cfg.option"

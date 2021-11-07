@@ -1,26 +1,5 @@
-local tools = {}
-local Log = require "lvim.core.log"
-
---- Returns a table with the default values that are missing.
---- either paramter can be empty.
---@param config (table) table containing entries that take priority over defaults
---@param default_config (table) table contatining default values if found
-function tools.apply_defaults(config, default_config)
-  config = config or {}
-  default_config = default_config or {}
-  local new_config = vim.tbl_deep_extend("keep", vim.empty_dict(), config)
-  new_config = vim.tbl_deep_extend("keep", new_config, default_config)
-  return new_config
-end
-
---@param set1: set to be modified
-function tools.add_to_set(set1, set2)
-  for _, v in ipairs(set2) do
-    if not vim.tbl_contains(set1, v) then
-      table.insert(set1, v)
-    end
-  end
-end
+local M = {}
+-- local Log = require "lvim.core.log"
 
 -- From: <https://github.com/nvim-lua/plenary.nvim/blob/8c6cc07a68b65eb707be44598f0084647d495978/lua/plenary/reload.lua#L3>
 local unload_module = function(found, module_name, starts_with_only)
@@ -53,7 +32,7 @@ local unload_module = function(found, module_name, starts_with_only)
   end
 end
 
-function tools.reload_file(pack)
+function M.reload_file(pack)
   local luacache = (_G.__luacache or {}).cache
   package.loaded[pack] = nil
   if luacache then
@@ -62,7 +41,7 @@ function tools.reload_file(pack)
 end
 
 -- For manual reload
-function tools.rr(...)
+function M.rr(...)
   local mods = { ... }
 
   -- Reload the current buffer
@@ -82,7 +61,7 @@ function tools.rr(...)
       table.insert(pack, 1, bufpath[i])
     end
     pack = table.concat(pack, ".")
-    tools.reload_file(pack)
+    M.reload_file(pack)
     print("Reload: " .. pack)
     require("utils").reload_lv_config()
     return
@@ -117,7 +96,7 @@ end
 --   return completion_list
 -- end
 
-function tools.rr_complete(lead, _, _)
+function M.rr_complete(lead, _, _)
   local completion_list = {}
   for name, _ in pairs(_G.package.loaded) do
     if vim.startswith(name, lead) then
@@ -129,20 +108,20 @@ function tools.rr_complete(lead, _, _)
 end
 
 -- [DoomUpdate](https://github.com/NTBBloodbath/doom-nvim/blob/a033ddec6e53cf154306b7c0391166f753d519be/lua/doom/core/functions/init.lua#L332)
-tools.update_lunarvim = function()
-  -- save_backup_hashes()
-  Log:info "Pulling LunarVim remote changes ..."
+-- M.update_lunarvim = function()
+--   -- save_backup_hashes()
+--   Log:info "Pulling LunarVim remote changes ..."
 
-  -- local updated_lunarvim, update_err = pcall(function()
-  os.execute("git -C " .. require("bootstrap").runtime_dir .. "/lvim" .. " pull -q")
-  -- end)
+--   -- local updated_lunarvim, update_err = pcall(function()
+--   os.execute("git -C " .. require("bootstrap").runtime_dir .. "/lvim" .. " pull -q")
+--   -- end)
 
-  -- if not updated_lunarvim then
-  --   Log:error("Error while updating Doom. Traceback:\n" .. update_err)
-  -- end
-  -- Run syntax_on event to fix UI if it's broke after the git pull
-  -- vim.cmd "syntax on"
-  Log:info "Successfully updated Lunarvim, please restart"
-end
+--   -- if not updated_lunarvim then
+--   --   Log:error("Error while updating Doom. Traceback:\n" .. update_err)
+--   -- end
+--   -- Run syntax_on event to fix UI if it's broke after the git pull
+--   -- vim.cmd "syntax on"
+--   Log:info "Successfully updated Lunarvim, please restart"
+-- end
 
-return tools
+return M

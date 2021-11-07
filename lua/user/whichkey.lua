@@ -393,6 +393,7 @@ lvim.builtin.which_key.on_config_done = function()
         h = { "<cmd>set hls!<cr>", "hightlight" },
         b = { [[:set background=<C-R>=&background == "dark" ? "light" : "dark"<CR><cr>]], "background" },
         m = { [[:set mouse=<C-R>=&mouse == "a" ? "" : "a"<CR><cr>]], "mouse" },
+        M = { ":lua ToggleMouse()<cr>", "mouse+" },
         f = { ":call FoldTextToggle()<cr>", "hightlight" },
       },
     },

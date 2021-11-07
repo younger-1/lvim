@@ -187,12 +187,12 @@ m2 = it
 print(vim.inspect(m2)) -- { "rust:b", "go:c", "python:a" }
 
 --[[
-  3. my tools
+  3. my utils
 --]]
-local to = require "user.tools"
-local m3 = to.apply_defaults(m, { a = "lua", d = "zig" })
+local ut = require "user.utils"
+local m3 = ut.apply_defaults(m, { a = "lua", d = "zig" })
 print(vim.inspect(m3)) -- { a = "python", b = "rust", c = "go", d = "zig" }
 
 local t3 = vim.deepcopy(t)
-to.add_to_set(t3, { "x", 3, "x" })
+ut.add_to_set(t3, { "x", 3, "x" })
 print(vim.inspect(t3))
