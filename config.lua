@@ -40,6 +40,8 @@
                                -- which matches one of these patterns, the plugin will be loaded.
 --]]
 
+require "young"
+
 require "user.cfg.global"
 require "user.cfg.option"
 
@@ -144,27 +146,6 @@ onoremap L $
 vnoremap L $
 
 nnoremap & :<c-u>/g<home>%s/<c-r><c-w>/
-
-" Open in VSCode from Vim
-command! OpenInVSCode exe '!code --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
-" Open in VSCode from Vim and preserve the working directory
-command! OpenCwdInVSCode exe 'silent !code "' . getcwd() . '" --goto "' . expand('%') . ':' . line('.') . ':' . col('.') . '"' | redraw!
-
-function! TabMessage(cmd)
-  redir => message
-  silent execute a:cmd
-  redir END
-  if empty(message)
-    echoerr "This command do NOT have output"
-  else
-    " Use "new" instead of "tabnew" below if you prefer split windows instead of tabs
-    tabnew
-    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
-    silent put=message
-  endif
-endfunction
-
-command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
 ]]
 
 -- Additional Plugins
