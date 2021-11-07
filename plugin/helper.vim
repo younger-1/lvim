@@ -74,3 +74,11 @@ function! OpenLastClosed()
     execute 'e ' . last_buf
 endfunction
 
+
+function! FoldTextToggle()
+  if &foldtext == "foldtext()"
+    set foldtext=fold#Text()
+  else
+    set foldtext=foldtext()
+  endif
+endfunction
