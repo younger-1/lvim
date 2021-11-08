@@ -17,3 +17,5 @@ require("nvim-biscuits").setup {
     },
   },
 }
+
+-- require('nvim-biscuits').toggle_biscuits()

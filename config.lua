@@ -549,6 +549,13 @@ lvim.plugins = {
         }
       end,
     },
+    {
+      "kdheepak/tabline.nvim",
+      config = function()
+        require("user.tabline").config()
+      end,
+      requires = { "hoob3rt/lualine.nvim", "kyazdani42/nvim-web-devicons" },
+    },
   },
   -- [Code Tools]
   { "hrsh7th/cmp-emoji" },

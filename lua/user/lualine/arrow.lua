@@ -15,9 +15,7 @@ local colors = {
   blue       = "#51afef",
   red        = "#ec5f67",
 }
--- stylua: ignore end
 
--- stylua: ignore start
 local bubble_colors = {
   blue   = '#80a0ff',
   cyan   = '#79dac8',

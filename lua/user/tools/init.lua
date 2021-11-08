@@ -124,4 +124,27 @@ end
 --   Log:info "Successfully updated Lunarvim, please restart"
 -- end
 
+local bar_flag = true
+function M.tabline_toggle()
+  if bar_flag then
+    vim.cmd "BarbarDisable"
+    require("user.tabline").config()
+    require("lvim.keymappings").load {
+      normal_mode = {
+        ["<S-l>"] = ":TablineBufferNext<CR>",
+        ["<S-h>"] = ":TablineBufferPrevious<CR>",
+      },
+    }
+  else
+    vim.cmd "BarbarEnable"
+    require("lvim.keymappings").load {
+      normal_mode = {
+        ["<S-l>"] = ":BufferNext<CR>",
+        ["<S-h>"] = ":BufferPrevious<CR>",
+      },
+    }
+  end
+  bar_flag = not bar_flag
+end
+
 return M

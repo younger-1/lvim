@@ -99,7 +99,6 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       -- ["1"] = { "<cmd>BufferGoto 1<cr>", icon.numbers.a[1] },
       -- ["2"] = { "<cmd>BufferGoto 2<cr>", icon.numbers.a[2] },
       -- ["3"] = { "<cmd>BufferGoto 3<cr>", icon.numbers.a[3] },
-      a = { "<cmd>BufferGoto 1<cr>", "First" },
       l = { "<cmd>BufferLast<cr>", "Last" },
       p = { "<cmd>BufferPin<cr>", "Pin" },
       B = {
@@ -110,6 +109,13 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
         "<cmd>BufferOrderByWindowNumber<cr>",
         "Sort by WindowNumber",
       },
+      -- Tabline
+      a = { ":TablineToggleShowAllBuffers<cr>", "Tabline Toggle All" },
+      t = { ":TablineTabNew ", "Tabline New" },
+      T = { ":TablineCustom ", "Tabline+" },
+      d = { ":TablineBuffersBind ", "Tabline Bound" },
+      u = { ":TablineBuffersClearBind<cr>", "Tabline Unbound" },
+      r = { ":TablineTabRename ", "Tabline Rename" },
     },
     C = { ":call OpenLastClosed()<CR>", "which_key_ignore" },
     f = { "<cmd>lua require('lir.float').toggle()<cr>", "Files" },
@@ -303,6 +309,8 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       name = "tog",
       m = { "<cmd>MinimapToggle<cr>", "Minimap" },
       t = { "<cmd>TodoQuickFix<cr>", "Todo" },
+      b = "Biscuits",
+      l = { ":lua require('user.tools').tabline_toggle()<cr>", "Tabline" },
     },
     T = {
       t = { "<cmd>Telescope treesitter<CR>", "Telescope" },

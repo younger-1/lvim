@@ -13,17 +13,21 @@ M.mode = {
 }
 
 M.lock = {
-  separator = { left = "", right = "" },
   function()
+    local ret = ""
+    local back = colors.bg
     if not vim.o.modifiable then
-      return ""
+      ret = ""
+      back = colors.red
     elseif vim.o.readonly then
-      -- vim.api.nvim_command("hi! LualineLock guifg=" .. "#88c0d0" .. " guibg=" .. colors.bg)
-      return ""
-    else
-      return ""
+      ret = ""
+      back = colors.yellow
     end
+    -- vim.cmd("hi! LualineLock guifg=" .. "#88c0d0" .. " guibg=" .. colors.bg)
+    vim.cmd("hi! LualineLock guibg=" .. back)
+    return ret
   end,
+  -- separator = { left = "", right = "" },
   -- padding = 0,
   padding = { left = 0, right = 1 },
   -- color = { fg = "#88c0d0", bg = "#bf616a" },
@@ -41,6 +45,20 @@ M.filename = {
   "filename",
   color = {},
   cond = nil,
+}
+
+M.filename_v = {
+  function()
+    local back = colors.bg -- not modified
+    if vim.bo.modified then
+      back = colors.red -- unsaved
+    elseif not vim.bo.modifiable then
+      back = colors.yellow
+    end -- readonly
+    vim.cmd("hi! lualine_filename_status guibg=" .. back)
+    return "%t %m"
+  end,
+  color = "lualine_filename_status",
 }
 
 local function diff_source()
