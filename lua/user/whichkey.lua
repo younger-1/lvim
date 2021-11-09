@@ -36,7 +36,6 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
   -- NOTE: Prefer using : over <cmd> as the latter avoids going back in normal-mode.
   -- see https://neovim.io/doc/user/map.html#:map-cmd
   vmappings = {
-    ["/"] = { ":CommentToggle<CR>", "Comment" },
     g = {
       name = "git",
       y = "Link",

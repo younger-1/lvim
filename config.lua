@@ -107,25 +107,45 @@ lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
     ["<C-U>"] = "<C-G>u<C-U>",
     ["<C-W>"] = "<C-G>u<C-W>",
     ["<C-V>"] = "<C-G>u<C-R><C-O>+",
+    --
     ["<C-a>"] = "<Home>",
     ["<C-e>"] = "<End>",
+    --
+    ["<A-f>"] = "<S-Right>",
+    ["<A-b>"] = "<S-Left>",
+    --
     -- ["<C-b>"] = "<Left>",
     -- ["<C-f>"] = "<Right>",
+    --
+    -- Move line in insert mode
+    ["<C-Up>"] = "<C-o>:m .-2<CR>",
+    ["<C-Down>"] = "<C-o>:m .+1<CR>",
   },
   command_mode = {
     ["<C-V>"] = "<C-R>+",
+    --
     ["<C-a>"] = "<Home>",
+    ["<C-e>"] = "<End>",
+    --
+    ["<A-f>"] = "<S-Right>",
+    ["<A-b>"] = "<S-Left>",
+    --
+    -- ["<C-b>"] = "<Left>",
+    -- ["<C-f>"] = "<Right>",
+    --
   },
   normal_mode = {
-    Y = "y$",
-    ZA = ":wqa<CR>",
-    ["g<C-l>"] = "<cmd>nohlsearch<cr><C-l>",
     ["]e"] = ":lnext<CR>",
     ["[e"] = ":lprev<CR>",
     ["<C-e>"] = ":call LocListToggle()<CR>",
-    ["+"] = ":SymbolsOutline<cr>",
+    -- Remap for dealing with word wrap
     k = { "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true } },
     j = { "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true } },
+    --
+    Y = "y$",
+    ZA = ":wqa<CR>",
+    ["g<C-l>"] = "<cmd>nohlsearch<cr><C-l>",
+    ["+"] = ":SymbolsOutline<cr>",
   },
   term_mode = {
     JJ = "<C-\\><C-N>",

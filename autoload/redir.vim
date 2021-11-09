@@ -11,7 +11,6 @@
 "     silent put=message
 "   endif
 " endfunction
-
 " command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
 
 " Inspired by the TabMessage function/command combo found
@@ -75,10 +74,12 @@ function! redir#Messages(msgcmd, destcmd)
         silent execute a:destcmd
     endif
 
-    setlocal bufhidden=wipe noswapfile nobuflisted nomodified
+    " setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nomodified
 
     " Place the messages in the destination buffer.
     "
     silent put=message
+
+    1,2d_
 
 endfunction
