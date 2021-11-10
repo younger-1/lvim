@@ -1,63 +1,78 @@
+-- v: variant
+-- s: special
+
 local M = {}
 
 -- stylua: ignore start
-
-M.action = {
+M.action  = {
   close   = "",
   close_v = "",
   left    = "",
   right   = "",
+  add     = "",
+  add_v   = "",
+  mod     = "柳",
+  mod_v   = "",
+  del     = "",
+  save    = "",
+  save_v  = "",
+  check   = "☑",
 }
 
-M.state = {
-  problem = "",
+M.ui = {
+  camera    = "",
+  bookmark  = "",
+  label     = "",
+  label_v   = "",
+  tree      = "",
+  car       = "",
+  car_v     = "",
+  recycle   = "",
+  recycle_v = "",
+  telescope = "",
+  home      = "",
+  stats     = "⅑",
+}
+
+M.key = {
+  space = "⯀",
+  tab   = "⯈",
+}
+
+M.code = {
+  lsp      = "",
+  lsp_v    = "",
+  error    = "",
+  error_v  = "",
+  warn     = "",
+  warn_v   = "",
+  info     = "",
+  info_v   = "",
+  info_s   = "",
+  hint     = "",
+  hint_v   = "",
+  bug      = "",
+  problem  = "",
+  unlock   = "",
+  unlock_v = "",
+  lock     = "",
+  lock_v   = "",
+  encode   = "",
 }
 
 M.dev = {
-  bracketleft       = '',
-  bracketright      = '',
-  vim               = '',
-  -- vim            = '',
-  git               = '',
-  -- git            = '',
-  github            = '',
-  gitlab            = '',
-  gitbitbucket      = '',
-  hg                = '',
-  gitadd            = ' ',
-  -- gitadd         = ' ',
-  gitmod            = ' ',
-  -- gitmod         = '柳',
-  gitdel            = ' ',
-  -- gitdel         = ' ',
-  -- lsp               = '',
-  lsp               = '',
-  lspdiagerror      = ' ',
-  -- lspdiagerror   = ' ',
-  lspdiagwarning    = ' ',
-  -- lspdiagwarning = ' ',
-  lspdiaginfo       = ' ',
-  -- lspdiaginfo    = ' ',
-  lspdiaghint       = ' ',
-  -- lspdiaghint    = ' ',
-  dos               = '',
-  unix              = '',
-  -- unix           = '',
-  mac               = '',
-  typewriteable     = '',
-  -- typewriteable  = '',
-  -- typewriteable  = '',
-  typereadonly      = '',
-  typesize          = '',
-  -- typesize       = '',
-  typeenc           = '',
-  stats             = '⅑',
-  -- statsvert      = '⇳',
-  statsvert         = '⬍',
-  -- statshoriz     = '⇔',
-  statshoriz        = '⬌',
-  statsspace        = '⯀',
-  statstab          = '⯈',
+  vim          = "",
+  vim_v        = "",
+  git          = "",
+  git_v        = "",
+  github       = "",
+  gitlab       = "",
+  gitbitbucket = "",
+  hg           = "",
+  dos          = "",
+  unix         = "",
+  unix_V       = "",
+  mac          = "",
 }
 
 M.lsp = {
@@ -102,20 +117,73 @@ M.lsp = {
   Variable_v    = "",
 }
 
--- stylua: ignore end
+M.arrow = {
+  updown      = "⇳",
+  updown_v    = "⬍",
+  leftright   = "⇔",
+  leftright_v = "⬌",
+}
 
 M.bar = {
-  mid = "│",
-  middle = "┃",
-  full = "█",
-  left_seven_eighth = "▉",
+  mid                = "│",
+  middle             = "┃",
+  full               = "█",
+  left_seven_eighth  = "▉",
   left_three_quarter = "▊",
-  left_five_eighth = "▋",
-  left_half = "▌",
-  left_three_eighth = "▍",
-  left_one_quarter = "▎",
-  left = "▏",
-  right_half = "▐",
+  left_five_eighth   = "▋",
+  left_half          = "▌",
+  left_three_eighth  = "▍",
+  left_one_quarter   = "▎",
+  left               = "▏",
+  right_half         = "▐",
+}
+
+M.separator = {
+  bracketleft  = "",
+  bracketright = "",
+}
+-- stylua: ignore end
+
+M.num = {
+  round = {
+    [0] = "⓪",
+    [1] = "①",
+    [2] = "②",
+    [3] = "③",
+    [4] = "④",
+    [5] = "⑤",
+    [6] = "⑥",
+    [7] = "⑦",
+    [8] = "⑧",
+    [9] = "⑨",
+  },
+  round_v = {
+    [0] = "⓿",
+    [1] = "❶",
+    [2] = "❷",
+    [3] = "❸",
+    [4] = "❹",
+    [5] = "❺",
+    [6] = "❻",
+    [7] = "❼",
+    [8] = "❽",
+    [9] = "❾",
+    [10] = "❿",
+    [11] = "⓫",
+  },
+  clock = {
+    [1] = "🕐",
+    [2] = "🕑",
+    [3] = "🕒",
+  },
+}
+
+M.alpha = {
+  a = "Ⓐ",
+  b = "Ⓑ",
+  c = "Ⓒ",
+  d = "Ⓓ",
+  d = "Ⓔ",
 }
 
 M.borders = {
@@ -133,37 +201,9 @@ M.dot = {
   "●",
   "⚉",
   "⚇",
-  "⏺",
-  "⚫",
-  "⚪",
 }
 
-M.numbers = {
-  a = {
-    [1] = "❶",
-    [2] = "❷",
-    [3] = "❸",
-    [4] = "❹",
-    [5] = "❺",
-    [6] = "❻",
-    [7] = "❼",
-    [8] = "❽",
-    [9] = "❾",
-    [10] = "❿",
-  },
-  b = {
-    [1] = "①",
-    [2] = "②",
-    [3] = "③",
-  },
-  c = {
-    [1] = "🕐",
-    [2] = "🕑",
-    [3] = "🕒",
-  },
-}
-
-M.brackets = {
+M.bracket = {
   round = { "❪", "❫" },
   angle = { "❮", "❯" },
   angle_v = { "❰", "❱" },
@@ -171,8 +211,11 @@ M.brackets = {
 }
 
 M.emoji = {
-  dinosaur = "🦕",
+  sauropod = "🦕",
   robot = "🤖",
+  search = "🔍",
+  telescope = "🔭",
+  check = "✅",
 }
 
 return M

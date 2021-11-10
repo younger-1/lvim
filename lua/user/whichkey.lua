@@ -243,8 +243,8 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       f = { "<cmd>lua require('spectre').open_file_search()<cr>", "Replace Buffer" },
     },
     s = {
-      [" "] = { "<cmd>Telescope resume<CR>", "♻️" },
-      ["<tab>"] = { "<cmd>Telescope<CR>", "🧙" },
+      [" "] = { "<cmd>Telescope resume<CR>", "" },
+      ["<tab>"] = { "<cmd>Telescope<CR>", "" },
       ["<C-q>"] = { "<cmd>Telescope quickfix<CR>", "QuickList" },
       ["<C-e>"] = { "<cmd>Telescope loclist<CR>", "LocList Bug" },
       -- ["<lt>"] = { "<cmd>Telescope quickfix<CR>", "QuickList" },

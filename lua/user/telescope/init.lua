@@ -109,10 +109,11 @@ lvim.builtin.telescope = vim.tbl_deep_extend("force", lvim.builtin.telescope, {
       workspaces = {
         -- [](https://github.com/nvim-telescope/telescope-frecency.nvim/issues/21)
         ["conf"] = vim.fn.expand "~/.config",
-        ["data"] = vim.fn.expand "~/.local/share",
+        ["share"] = vim.fn.expand "~/.local/share",
         ["dot"] = vim.fn.expand "~/dotter",
         ["beauty"] = vim.fn.expand "~/Beauty",
         ["project"] = vim.fn.expand "~/projects",
+        ["source"] = vim.fn.expand "~/source",
         ["wiki"] = vim.fn.expand "~/wiki",
       },
     },

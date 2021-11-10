@@ -74,6 +74,7 @@
 -- pp(table.getn(a))
 
 -- [[string]]
+-- <https://somedudesays.com/2019/12/lua-string-operations/>
 
 -- local s = "hello world"
 -- local ans = { string.find(s, "ll", 1, true) }
@@ -92,6 +93,9 @@
 -- end
 -- local split_string = split("Hello World!", " ")
 -- pp(split_string)
+
+pp(string.char(97, 98))
+pp(string.byte("ab"))
 
 -- [[os]]
 
