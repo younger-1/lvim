@@ -130,6 +130,7 @@ local function set_mappings()
     ['['] = 'update_view(-1)',
     [']'] = 'update_view(1)',
     ['<cr>'] = 'open_file()',
+    ['<C-c>'] = 'close_window()',
     h = 'update_view(-1)',
     l = 'update_view(1)',
     q = 'close_window()',
@@ -137,7 +138,7 @@ local function set_mappings()
   }
 
   for k, v in pairs(mappings) do
-    api.nvim_buf_set_keymap(buf, 'n', k, ':lua require"whid".' .. v .. '<cr>', {
+    api.nvim_buf_set_keymap(buf, 'n', k, ':lua require"pack.whid".' .. v .. '<cr>', {
       nowait = true,
       noremap = true,
       silent = true,
@@ -148,7 +149,6 @@ local function set_mappings()
   local other_chars = {
     'a',
     'b',
-    'c',
     'd',
     'e',
     'f',
