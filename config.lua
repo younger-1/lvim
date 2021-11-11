@@ -575,7 +575,7 @@ lvim.plugins = {
     {
       "kdheepak/tabline.nvim",
       config = function()
-        require("user.tabline").config()
+        require("young.mod.tabline").done()
       end,
       requires = { "hoob3rt/lualine.nvim", "kyazdani42/nvim-web-devicons" },
     },
