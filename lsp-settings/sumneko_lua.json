@@ -8,6 +8,7 @@
     "/home/young/.local/share/lunarvim/site/pack/packer/start/null-ls.nvim": true,
     "/home/young/.local/share/lunarvim/site/pack/packer/start/nvim-lspconfig": true,
     "/home/young/.local/share/lunarvim/site/pack/packer/opt/filetype.nvim": true,
-    "/home/young/.local/share/lunarvim/site/pack/packer/opt/trouble.nvim": true
+    "/home/young/.local/share/lunarvim/site/pack/packer/opt/trouble.nvim": true,
+    "/home/young/.config/nvim": true
   }
 }

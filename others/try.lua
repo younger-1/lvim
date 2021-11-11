@@ -114,6 +114,10 @@ local output = openPop:read "*all"
 openPop:close()
 print(output)
 
+-- [[debug]]
+local init_path = debug.getinfo(1, "S").source:sub(2)
+print("[debug]: " .. init_path)
+
 --[[
   1. vim
 --]]

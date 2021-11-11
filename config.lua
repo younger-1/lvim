@@ -171,6 +171,9 @@ nnoremap & :<c-u>/g<home>%s/<c-r><c-w>/
 -- Additional Plugins
 lvim.plugins = {
   {
+    '~/.config/nvim'
+  },
+  {
     "mfussenegger/nvim-jdtls",
     module = "jdtls",
   },
