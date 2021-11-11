@@ -18,17 +18,17 @@ end
 
 -- Toggle to disable mouse mode and indentlines for easier paste
 ToggleMouse = function()
-  if vim.o.mouse == 'nvi' then
-    -- vim.cmd[[IndentBlanklineDisable]]
-    vim.wo.signcolumn = 'no'
-    vim.o.mouse = ''
-    vim.wo.number = false
-    print 'Mouse disabled'
-  else
+  if vim.o.mouse == '' then
     -- vim.cmd[[IndentBlanklineEnable]]
-    vim.wo.signcolumn = 'yes'
     vim.o.mouse = 'nvi'
-    vim.wo.number = true
+    -- vim.wo.signcolumn = 'yes'
+    -- vim.wo.number = true
     print 'Mouse enabled'
+  else
+    -- vim.cmd[[IndentBlanklineDisable]]
+    vim.o.mouse = ''
+    -- vim.wo.signcolumn = 'no'
+    -- vim.wo.number = false
+    print 'Mouse disabled'
   end
 end
