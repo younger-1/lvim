@@ -40,7 +40,7 @@
                                -- which matches one of these patterns, the plugin will be loaded.
 --]]
 
-require "user.utils.global"
+require "young.utils.global"
 
 require "user.cfg.global"
 require "user.cfg.option"
