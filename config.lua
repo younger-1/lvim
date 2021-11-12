@@ -42,8 +42,13 @@
 
 require "young.utils.global"
 
-require "user.cfg.global"
-require "user.cfg.option"
+require "young.cfg.global"
+require "young.cfg.option"
+
+vim.opt.clipboard = ""
+vim.opt.cmdheight = 1
+vim.opt.mouse = ""
+vim.opt.scrolloff = 4
 
 require("user.notify").config()
 require("user.lualine").bubbles()
@@ -171,7 +176,7 @@ nnoremap & :<c-u>/g<home>%s/<c-r><c-w>/
 -- Additional Plugins
 lvim.plugins = {
   {
-    '~/.config/nvim'
+    "~/.config/nvim",
   },
   {
     "mfussenegger/nvim-jdtls",
@@ -473,7 +478,7 @@ lvim.plugins = {
       -- opt = true,
       setup = function() end,
       config = function()
-        require "user.filetype"
+        require "young.mod.filetype".done()
       end,
     },
     {

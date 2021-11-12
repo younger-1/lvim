@@ -95,7 +95,7 @@
 -- pp(split_string)
 
 pp(string.char(97, 98))
-pp(string.byte("ab"))
+pp(string.byte "ab")
 
 -- [[os]]
 
@@ -126,6 +126,7 @@ local m = { b = "rust", c = "go", a = "python" }
 vim.list_extend(t, { "c", "d" })
 -- print(vim.inspect(t)) -- { "a", "b", "c", "c", "d" }
 -- print(vim.inspect(vim.tbl_keys(t))) -- { 1, 2, 3, 4, 5 }
+-- print(vim.inspect(vim.tbl_keys(m))) -- { "b", "c", "a" }
 -- print(vim.inspect(vim.tbl_values(t))) -- { "a", "b", "c", "c", "d" }
 
 t = vim.tbl_extend("force", t, { "x", "y", 1, 2 })
@@ -153,7 +154,7 @@ m1 = vim.tbl_deep_extend("force", m1, {
 })
 
 -- [[vim.loop]]
-local uv =  vim.loop
+local uv = vim.loop
 print(uv.cwd())
 
 --[[
