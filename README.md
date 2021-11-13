@@ -67,8 +67,8 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [x]  [[Feature]: Windows setup](https://github.com/LunarVim/LunarVim/issues/804)
 - [ ]  [[Feature]: Keymapping Tables](https://github.com/LunarVim/LunarVim/issues/1548)
 - [ ]  [[Bug]: Remove nlsp-settings from LunarVim](https://github.com/LunarVim/LunarVim/issues/1392)
-- [x] @me [[Bug]: can't get gd to work properly in lua projects](https://github.com/LunarVim/LunarVim/issues/1602)
-- [x] @me [[Bug]: can't not use nvim-telescope/telescope-packer.nvim](https://github.com/LunarVim/LunarVim/issues/1610)
+- [x]  @me [[Bug]: can't get gd to work properly in lua projects](https://github.com/LunarVim/LunarVim/issues/1602)
+- [x]  @me [[Bug]: can't not use nvim-telescope/telescope-packer.nvim](https://github.com/LunarVim/LunarVim/issues/1610)
 - [ ]  [[Bug]: Can't set markdown linters](https://github.com/LunarVim/LunarVim/issues/1554)
 - [ ]  [[Bug]: Can't set up write-good linter for markdown](https://github.com/LunarVim/LunarVim/issues/1249)
 - [ ]  [[Feature]: Add save without formatting](https://github.com/LunarVim/LunarVim/issues/897)
@@ -80,16 +80,16 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 
 ## Pull requests
 
-[[Feature]: Add save without formatting](https://github.com/LunarVim/LunarVim/pull/898)
-[[Feature]: Add support for saving a file without formatting](https://github.com/LunarVim/LunarVim/pull/1153)
-[[Feature]: Add installation script for Windows](https://github.com/LunarVim/LunarVim/pull/1261)
-[[Feature]: Add lunarvim binary for windows 10](https://github.com/LunarVim/LunarVim/pull/1515)
-[refactor: auto-generate language configuration](https://github.com/LunarVim/LunarVim/pull/1584)
-[feat: add prelimenary LvimUpdate command](https://github.com/LunarVim/LunarVim/pull/1634)
-[WIP: lua keymaps and docs](https://github.com/neovim/neovim/pull/13823)
-[fix(lsp): install templates and configure overrides for custom providers](https://github.com/LunarVim/LunarVim/pull/1859)
-[fix: register null-ls providers per filetype](https://github.com/LunarVim/LunarVim/pull/1709)
-[feat(cmp): expose lunarvim's cmp helper methods](https://github.com/LunarVim/LunarVim/pull/1844)
+- [ ]  [[Feature]: Add save without formatting](https://github.com/LunarVim/LunarVim/pull/898)
+- [ ]  [[Feature]: Add support for saving a file without formatting](https://github.com/LunarVim/LunarVim/pull/1153)
+- [ ]  [[Feature]: Add installation script for Windows](https://github.com/LunarVim/LunarVim/pull/1261)
+- [ ]  [[Feature]: Add lunarvim binary for windows 10](https://github.com/LunarVim/LunarVim/pull/1515)
+- [ ]  [refactor: auto-generate language configuration](https://github.com/LunarVim/LunarVim/pull/1584)
+- [ ]  [feat: add prelimenary LvimUpdate command](https://github.com/LunarVim/LunarVim/pull/1634)
+- [ ]  [WIP: lua keymaps and docs](https://github.com/neovim/neovim/pull/13823)
+- [ ]  [fix(lsp): install templates and configure overrides for custom providers](https://github.com/LunarVim/LunarVim/pull/1859)
+- [ ]  [fix: register null-ls providers per filetype](https://github.com/LunarVim/LunarVim/pull/1709)
+- [ ]  [feat(cmp): expose lunarvim's cmp helper methods](https://github.com/LunarVim/LunarVim/pull/1844)
 
 ## TODO
 
