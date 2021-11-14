@@ -55,12 +55,22 @@
 
 local cmp = require "cmp"
 
+lvim.builtin.cmp.mapping["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" })
+lvim.builtin.cmp.mapping["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" })
+-- lvim.builtin.cmp.mapping["<C-e>"] = cmp.mapping(cmp.mapping.abort(), { "i", "c" })
+-- lvim.builtin.cmp.mapping["<C-e>"] = cmp.mapping {
+--   i = cmp.mapping.abort(),
+--   c = cmp.mapping.close(),
+-- }
+
 lvim.builtin.cmp = vim.tbl_deep_extend("force", lvim.builtin.cmp, {
   -- mapping = {
-  --   ["<C-e>"] = cmp.mapping {
-  --     i = cmp.mapping.abort(),
-  --     c = cmp.mapping.close(),
-  --   },
+  -- ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+  -- ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+  -- ["<C-e>"] = cmp.mapping {
+  --   i = cmp.mapping.abort(),
+  --   c = cmp.mapping.close(),
+  -- },
   -- },
   sources = {
     { name = "nvim_lsp" },

@@ -137,9 +137,6 @@ lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
     --
     -- ["<C-b>"] = "<Left>",
     -- ["<C-f>"] = "<Right>",
-    --
-    ["<C-j>"] = "",
-    ["<C-k>"] = "",
   },
   normal_mode = {
     ["]e"] = ":lnext<CR>",
