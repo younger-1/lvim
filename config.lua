@@ -176,7 +176,8 @@ nnoremap & :<c-u>/g<home>%s/<c-r><c-w>/
 -- Additional Plugins
 lvim.plugins = {
   {
-    "~/.config/nvim",
+    vim.fn.stdpath "config",
+    as = "younger-1",
   },
   {
     "mfussenegger/nvim-jdtls",
@@ -478,7 +479,7 @@ lvim.plugins = {
       -- opt = true,
       setup = function() end,
       config = function()
-        require "young.mod.filetype".done()
+        require("young.mod.filetype").done()
       end,
     },
     {

@@ -133,6 +133,9 @@ t = vim.tbl_extend("force", t, { "x", "y", 1, 2 })
 print(vim.inspect(t)) -- { "x", "y", 1, 2, "d" }
 -- print(vim.tbl_islist(t)) -- true
 
+-- m = vim.tbl_extend("force", m, { b = "GG" })
+-- pp(m)
+
 local t1 = vim.list_slice(t, 2, 3)
 -- print(vim.inspect(t1)) -- { "y", "1" }
 
