@@ -40,10 +40,9 @@
                                -- which matches one of these patterns, the plugin will be loaded.
 --]]
 
-require "young.utils.global"
-
-require "young.cfg.global"
-require "young.cfg.option"
+pcall(require, "young.utils.global")
+pcall(require, "young.cfg.global")
+pcall(require, "young.cfg.option")
 
 vim.opt.clipboard = ""
 vim.opt.cmdheight = 1
@@ -997,10 +996,11 @@ lvim.plugins = {
       end,
     },
     {
-      "pocco81/catppuccino.nvim",
+      "catppuccin/nvim",
+      as = "Catppuccin",
       setup = function() end,
       config = function()
-        require "user.theme.catppuccino"
+        require "user.theme.catppuccin"
       end,
     },
     {
