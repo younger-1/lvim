@@ -56,6 +56,7 @@ require "user.treesitter"
 require "user.telescope"
 require "user.whichkey"
 require "user.barbar"
+require "user.cmp"
 
 young = "Young"
 
@@ -137,6 +138,8 @@ lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
     -- ["<C-b>"] = "<Left>",
     -- ["<C-f>"] = "<Right>",
     --
+    ["<C-j>"] = "",
+    ["<C-k>"] = "",
   },
   normal_mode = {
     ["]e"] = ":lnext<CR>",
@@ -588,6 +591,7 @@ lvim.plugins = {
   -- [Code Tools]
   { "hrsh7th/cmp-emoji" },
   { "hrsh7th/cmp-calc" },
+  { "hrsh7th/cmp-cmdline" },
   -- [Files]
   {
     "kevinhwang91/rnvimr",
