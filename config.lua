@@ -589,6 +589,8 @@ lvim.plugins = {
   { "hrsh7th/cmp-emoji" },
   { "hrsh7th/cmp-calc" },
   { "hrsh7th/cmp-cmdline" },
+  -- { "hrsh7th/cmp-copilot" },
+  -- { "github/copilot.vim" },
   -- [Files]
   {
     "kevinhwang91/rnvimr",

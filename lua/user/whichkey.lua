@@ -195,6 +195,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       a = { "<cmd>Telescope lsp_code_actions<cr>", "Code Action" },
       A = { "<cmd>Telescope lsp_range_code_actions<cr>", "Range Action" },
       c = { "<cmd>CodeActionMenu<cr>", "Code Action" },
+      C = { "<cmd>CmpStatus<cr>", "Code Action" },
       d = { "<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics" },
       w = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
       W = { "<cmd>lua pp(vim.lsp.buf.list_workspace_folders())<cr>", "Workspace folders" },
