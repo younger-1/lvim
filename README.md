@@ -115,7 +115,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ] diff unsaved file with saved file like vscode
 - [ ] plugin: open word under cursor with `devdocs` in browser
 - [ ] `q` for quit: tsplayground
-- [ ] self mode for moving buffer by `<` and `>`
+- [ ] self mode for moving bufferline by `<` and `>`
 
 ## Keymapping
 

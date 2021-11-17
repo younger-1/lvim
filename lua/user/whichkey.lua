@@ -248,8 +248,8 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       ["<tab>"] = { "<cmd>Telescope<CR>", "" },
       ["<C-q>"] = { "<cmd>Telescope quickfix<CR>", "QuickList" },
       ["<C-e>"] = { "<cmd>Telescope loclist<CR>", "LocList Bug" },
-      -- ["<lt>"] = { "<cmd>Telescope quickfix<CR>", "QuickList" },
-      -- ["<gt>"] = { "<cmd>Telescope loclist<CR>", "LocList" },
+      -- ["<lt>"] = { "<cmd>Telescope quickfix<CR>", "QuickList" }, -- <https://github.com/folke/which-key.nvim/issues/173>
+      -- [">"] = { "<cmd>Telescope loclist<CR>", "LocList" },
       ["'"] = { "<cmd>Telescope marks<CR>", "Marks" },
       ['"'] = { "<cmd>Telescope registers<CR>", "Registers" },
       ["/"] = { "<cmd>Telescope search_history<CR>", "Search History" },
@@ -353,7 +353,6 @@ lvim.builtin.which_key.on_config_done = function()
         "<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
         "Next Diagnostic",
       },
-      c = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
       x = { [[<cmd>lua require('trouble').next({skip_groups=true, jump=true})<CR>]], "Next Trouble" },
     },
     ["["] = {
@@ -361,7 +360,6 @@ lvim.builtin.which_key.on_config_done = function()
         "<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<cr>",
         "Prev Diagnostic",
       },
-      c = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
       x = { [[<cmd>lua require('trouble').previous({skip_groups=true, jump=true})<CR>]], "Prev Trouble" },
     },
     ["<C-w>"] = {

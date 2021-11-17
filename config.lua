@@ -38,7 +38,7 @@
                                -- with one of these module names, the plugin will be loaded.
   module_pattern = string/list -- Specifies Lua pattern of Lua module names for require. When requiring a string
                                -- which matches one of these patterns, the plugin will be loaded.
---]]
+]]
 
 pcall(require, "young.utils.global")
 pcall(require, "young.cfg.global")
