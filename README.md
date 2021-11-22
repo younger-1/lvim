@@ -51,6 +51,8 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 
 ## Config
 
+- <https://github.com/ViktorBusk/LunarChad>
+
 - <https://github.com/ChristianChiarulli/lvim>
 - <https://github.com/abzcoding/lvim>
 - <https://github.com/PasiBergman/lvim>
