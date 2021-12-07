@@ -350,11 +350,7 @@ output:
 
 ```viml
 lua print(vim.inspect(require"lspinstall/util".extract_config("sumneko_lua")))
-lua print(vim.inspect(require'lspconfig'["sumneko_lua"].document_config))
-
 lua print(vim.inspect(require'lspinstall/servers'.lua))
-
-lua print(vim.inspect(require'lspconfig/configs'))
 
 lua print(vim.inspect(lvim.builtin.telescope.defaults.mappings.i))
 ```
@@ -362,6 +358,10 @@ lua print(vim.inspect(lvim.builtin.telescope.defaults.mappings.i))
 ## LSP
 
 ```lua
+lua print(vim.inspect(require'lspconfig'["sumneko_lua"]))
+lua print(vim.inspect(require'lspconfig.configs'.sumneko_lua))
+lua print(vim.inspect(require'lspconfig/configs'.sumneko_lua))
+
 :h vim.lsp.client
 lua pp(vim.lsp.get_client_by_id(1).server_capabilities)
 lua pp(vim.lsp.get_client_by_id(1).resolved_capabilities)

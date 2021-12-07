@@ -27,6 +27,12 @@
 -- end
 -- f("a", 1, "b", 2)
 
+-- [pairs]
+-- local tt = { "c", name = "May", "a", "z" }
+-- for k, v in pairs(tt) do
+--   print(k, v)
+-- end
+
 -- [](https://stackoverflow.com/questions/41349526/how-to-iterate-lua-table-from-end)
 -- local mytable = { "a", "b", "c" }
 -- for i = 1, #mytable do
