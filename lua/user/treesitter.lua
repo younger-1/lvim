@@ -151,7 +151,10 @@ lvim.builtin.treesitter = vim.tbl_deep_extend("force", lvim.builtin.treesitter, 
   },
   textsubjects = { -- <https://github.com/RRethy/nvim-treesitter-textsubjects>
     enable = true,
-    keymaps = { ["."] = "textsubjects-smart", [","] = "textsubjects-container-outer" },
+    keymaps = {
+      ["<cr>"] = "textsubjects-smart",
+      ["+"] = "textsubjects-container-outer",
+    },
   },
   autotag = { -- windwp/nvim-ts-autotag
     enable = true,
@@ -165,4 +168,3 @@ lvim.builtin.treesitter = vim.tbl_deep_extend("force", lvim.builtin.treesitter, 
     max_file_lines = 3000,
   },
 })
-

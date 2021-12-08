@@ -49,8 +49,8 @@ vim.opt.cmdheight = 1
 vim.opt.mouse = ""
 vim.opt.scrolloff = 4
 
-require("user.notify").config()
-require("user.lualine").bubbles()
+-- require("user.notify").config()
+-- require("user.lualine").bubbles()
 require "user.dashboard"
 require "user.treesitter"
 require "user.telescope"
@@ -73,7 +73,7 @@ lvim.builtin.notify.active = true
 lvim.builtin.gitsigns.opts.numhl = true
 lvim.builtin.gitsigns.opts.keymaps["x ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
 lvim.builtin.cmp.confirm_opts.select = false
-lvim.builtin.project.silent_chdir = false
+-- lvim.builtin.project.silent_chdir = false
 
 -- LSP
 lvim.lsp.automatic_servers_installation = false
@@ -149,7 +149,6 @@ lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
     Y = "y$",
     ZA = ":wqa<CR>",
     ["g<C-l>"] = "<cmd>nohlsearch<cr><C-l>",
-    ["+"] = ":SymbolsOutline<cr>",
   },
   term_mode = {
     JJ = "<C-\\><C-N>",
@@ -183,21 +182,21 @@ lvim.plugins = {
     module = "jdtls",
   },
   -- { "ChristianChiarulli/vim-solidity" },
-  {
-    -- Note for this to work you need to create a pat and put it in `~/.gist-vim` as <token XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX>
-    -- You will also need to set github username like:
-    --
-    -- [user]
-    --	 email = chris.machine@pm.me
-    --   name = Christian Chiarulli
-    -- [github]
-    --   user = ChristianChiarulli
-    "mattn/vim-gist",
-    requires = "mattn/webapi-vim",
-    config = function()
-      vim.g.gist_open_browser_after_post = 1
-    end,
-  },
+  -- {
+  --   -- Note for this to work you need to create a pat and put it in `~/.gist-vim` as <token XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX>
+  --   -- You will also need to set github username like:
+  --   --
+  --   -- [user]
+  --   --	 email = chris.machine@pm.me
+  --   --   name = Christian Chiarulli
+  --   -- [github]
+  --   --   user = ChristianChiarulli
+  --   "mattn/vim-gist",
+  --   requires = "mattn/webapi-vim",
+  --   config = function()
+  --     vim.g.gist_open_browser_after_post = 1
+  --   end,
+  -- },
   -- {
   --   "nvim-telescope/telescope-project.nvim",
   --   event = "BufWinEnter",
@@ -213,13 +212,6 @@ lvim.plugins = {
       require "user.package-info"
     end,
   },
-  -- {
-  --   "rcarriga/nvim-notify",
-  --   event = "BufRead",
-  --   config = function()
-  --     require("user.notify").config()
-  --   end,
-  -- },
   -- TODO: maybe oneday
   -- { "gelguy/wilder.nvim",
   --   config = function ()
@@ -247,14 +239,6 @@ lvim.plugins = {
   --   run = "./install.sh",
   --   requires = "hrsh7th/nvim-cmp",
   -- },
-  {
-    "dccsillag/magma-nvim",
-    disable = true,
-  },
-  {
-    "metakirby5/codi.vim",
-    cmd = "Codi",
-  },
   {
     "windwp/nvim-ts-autotag",
     event = "InsertEnter",
@@ -299,7 +283,7 @@ lvim.plugins = {
   -- [Treesitter]
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    branch = "0.5-compat",
+    branch = vim.fn.has "nvim-0.6" == 1 and "master" or "0.5-compat",
     event = "BufRead",
   },
   {
@@ -356,23 +340,21 @@ lvim.plugins = {
   -- {},
   -- [Motion]
   {
-    {
-      "unblevable/quick-scope",
-      event = "BufRead",
-      config = function()
-        require "user.quickscope"
-      end,
-      disable = true,
-    },
-    {
-      "abecodes/tabout.nvim",
-      config = function()
-        require("user.tabout").config()
-      end,
-      wants = { "nvim-treesitter" }, -- or require if not used so far
-      after = { "nvim-cmp", "LuaSnip" }, -- if a completion plugin is using tabs load it before
-      disable = true,
-    },
+    -- {
+    --   "unblevable/quick-scope",
+    --   event = "BufRead",
+    --   config = function()
+    --     require "user.quickscope"
+    --   end,
+    -- },
+    -- {
+    --   "abecodes/tabout.nvim",
+    --   config = function()
+    --     require("user.tabout").config()
+    --   end,
+    --   wants = { "nvim-treesitter" }, -- or require if not used so far
+    --   after = { "nvim-cmp", "LuaSnip" }, -- if a completion plugin is using tabs load it before
+    -- },
     {
       "chaoren/vim-wordmotion",
       event = "CursorMoved",
@@ -393,14 +375,13 @@ lvim.plugins = {
         require "user.asterisk"
       end,
     },
-    {
-      "phaazon/hop.nvim",
-      event = "BufRead",
-      config = function()
-        require("user.hop").config()
-      end,
-      disable = true,
-    },
+    -- {
+    --   "phaazon/hop.nvim",
+    --   event = "BufRead",
+    --   config = function()
+    --     require("user.hop").config()
+    --   end,
+    -- },
     {
       "ggandor/lightspeed.nvim",
       event = "BufRead",
@@ -597,6 +578,7 @@ lvim.plugins = {
     config = function()
       require "user.rnvimr"
     end,
+    disable = is_windows,
   },
   {
     "tamago324/lir.nvim",
@@ -635,9 +617,11 @@ lvim.plugins = {
   {
     "ibhagwan/fzf-lua",
     requires = "vijaymarupudi/nvim-fzf",
+    module = 'fzf-lua',
     config = function()
       require "user.fzf"
     end,
+    disable = is_windows,
   },
   -- [Telescope]
   { "nvim-telescope/telescope-symbols.nvim" },
@@ -999,14 +983,6 @@ lvim.plugins = {
       end,
     },
     {
-      "catppuccin/nvim",
-      as = "Catppuccin",
-      setup = function() end,
-      config = function()
-        require "user.theme.catppuccin"
-      end,
-    },
-    {
       "shaunsingh/nord.nvim",
       setup = function()
         vim.g.nord_borders = true
@@ -1060,15 +1036,13 @@ lvim.autocommands.custom_groups = {
   { "InsertEnter", "*", ":normal! zz" },
   -- { "CursorHold", "*", ":normal! ga" },
 }
--- way to get os name
--- print(vim.loop.os_uname().sysname)
 
 -- *Must* be *S*olidity not solidity
-require("nvim-treesitter.parsers").get_parser_configs().solidity = {
-  install_info = {
-    url = "https://github.com/JoranHonig/tree-sitter-solidity",
-    files = { "src/parser.c" },
-    requires_generate_from_grammar = true,
-  },
-  filetype = "solidity",
-}
+-- require("nvim-treesitter.parsers").get_parser_configs().solidity = {
+--   install_info = {
+--     url = "https://github.com/JoranHonig/tree-sitter-solidity",
+--     files = { "src/parser.c" },
+--     requires_generate_from_grammar = true,
+--   },
+--   filetype = "solidity",
+-- }
