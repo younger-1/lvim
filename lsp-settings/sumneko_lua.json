@@ -1,14 +1,11 @@
 {
-  "Lua.workspace.library": {
-    "/home/young/.local/share/lunarvim/site/pack/packer/opt/lua-dev.nvim/types": true,
-    "/home/young/.local/share/lunarvim/site/pack/packer/start/telescope.nvim": true,
-    "/home/young/.local/share/lunarvim/site/pack/packer/start/packer.nvim": true,
-    "/home/young/.local/share/lunarvim/site/pack/packer/start/fzf-lua": true,
-    "/home/young/.local/share/lunarvim/site/pack/packer/start/plenary.nvim": true,
-    "/home/young/.local/share/lunarvim/site/pack/packer/start/null-ls.nvim": true,
-    "/home/young/.local/share/lunarvim/site/pack/packer/start/nvim-lspconfig": true,
-    "/home/young/.local/share/lunarvim/site/pack/packer/opt/filetype.nvim": true,
-    "/home/young/.local/share/lunarvim/site/pack/packer/opt/trouble.nvim": true,
-    "/home/young/.config/nvim": true
-  }
+  "Lua.workspace.library": [
+    "/home/young/.local/share/lunarvim/site/pack/packer/opt/lua-dev.nvim/types",
+    "/home/young/.local/share/lunarvim/site/pack/packer/start/telescope.nvim",
+    "/home/young/.local/share/lunarvim/site/pack/packer/start/packer.nvim",
+    "/home/young/.local/share/lunarvim/site/pack/packer/start/plenary.nvim",
+    "/home/young/.local/share/lunarvim/site/pack/packer/start/null-ls.nvim",
+    "/home/young/.local/share/lunarvim/site/pack/packer/start/nvim-lspconfig",
+    "/home/young/.config/nvim"
+  ]
 }

@@ -8,6 +8,16 @@
 -- print(unpack { 10, 20, 30 }) --> 10   20   30
 -- local a, b = unpack { 10, 20, 30 } -- a=10, b=20, 30 is discarded
 
+local function fup(x)
+  local ta = {}
+  while #ta ~= x do
+    ta[#ta + 1] = #ta + 1
+  end
+  return unpack(ta)
+end
+-- pp { fup(3), fup(2), fup(1) }
+-- pp { unpack { 2, 3, 4 }, unpack { 5, 6, 7 } }
+
 -- [select](https://stackoverflow.com/questions/6929117/what-does-it-do-for-i-1-select)
 -- print(select(1, "a", "b", "c")) --> a b c
 -- print(select(2, "a", "b", "c")) --> b c

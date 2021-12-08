@@ -862,7 +862,7 @@ lvim.plugins = {
   -- [Markdown]
   {
     "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
+    run = "cd app && yarn install",
     ft = "markdown",
   },
   { "ellisonleao/glow.nvim", cmd = "Glow" },
