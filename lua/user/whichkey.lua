@@ -231,7 +231,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       -- FIXME:Search list of files of package(under cursor)
       -- o = { "", "Package Files" },
       p = {
-        "<cmd>lua require('telescope').extensions.packer.plugins { layout_config = { preview_width = 0.5} }<cr>",
+        "<cmd>lua require('telescope').extensions.packer.packer { layout_config = { preview_width = 0.5} }<cr>",
         "Telescope Packer",
       },
       P = { "<cmd>PackerProfile<cr>", "Profile" },

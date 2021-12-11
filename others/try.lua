@@ -19,9 +19,10 @@ end
 -- pp { unpack { 2, 3, 4 }, unpack { 5, 6, 7 } }
 
 -- [select](https://stackoverflow.com/questions/6929117/what-does-it-do-for-i-1-select)
--- print(select(1, "a", "b", "c")) --> a b c
--- print(select(2, "a", "b", "c")) --> b c
--- print(select(3, "a", "b", "c")) --> c
+-- print(select(1, "a", "b", "c"))  --> a b c
+-- print(select(2, "a", "b", "c"))  --> b c
+-- print(select(3, "a", "b", "c"))  --> c
+-- print(select(-1, "a", "b", "c")) --> c
 -- print(select "#") --> 0
 -- print(select("#", { 1, 2, 3 })) --> 1 (single table as argument)
 -- print(select("#", 1, 2, 3)) --> 3

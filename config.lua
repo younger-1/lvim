@@ -501,7 +501,7 @@ lvim.plugins = {
           types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
           -- plugins = true, -- installed opt or start plugins in packpath
           -- you can also specify the list of plugins to make available as a workspace library
-          plugins = { "nvim-treesitter", "focus.nvim", "telescope.nvim" },
+          plugins = { "plenary.nvim", "telescope.nvim" },
         },
       }
       require("lspconfig").sumneko_lua.setup(luadev)
@@ -745,7 +745,7 @@ lvim.plugins = {
       config = function()
         require("trouble").setup {
           height = 10,
-          mode = "lsp_workspace_diagnostics", -- "lsp_workspace_diagnostics", "lsp_document_diagnostics", "quickfix", "lsp_references", "loclist"
+          mode = "document_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
           action_keys = {
             -- map to {} to remove a mapping, for example: close = {},
             close = "q", -- close the list
