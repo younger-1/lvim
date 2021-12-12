@@ -1,4 +1,4 @@
-![LunarVim Demo](./utils/media/lunarvim_logo_dark.png)
+![LunarVim Demo](./others/media/lunarvim_logo_dark.png)
 
 <div align="center"> <p>
     <a href="https://github.com/lunarvim/LunarVim/releases/latest">
@@ -18,11 +18,9 @@
     </a>
 </p> </div>
 
-## LunarVim
+## [LunarVim](https://github.com/LunarVim/LunarVim)
 
 > <https://www.lunarvim.org/>
-> <https://github.com/LunarVim/LunarVim>
-> <https://www.lunarvim.org/dev/#getting-started>
 
 An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Completely free and community driven.
 
