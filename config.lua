@@ -40,9 +40,20 @@
                                -- which matches one of these patterns, the plugin will be loaded.
 ]]
 
-pcall(require, "young.utils.global")
-pcall(require, "young.cfg.global")
-pcall(require, "young.cfg.option")
+local ok_young = pcall(function()
+  require "young.utils.global"
+  require "young.cfg.global"
+  require "young.cfg.option"
+end)
+
+if not ok_young then
+  vim.notify("[Young]: configuring fail", vim.log.levels.WARN)
+  -- In startup, nvim do not have colorscheme, so Highlight group 'Normal' has no background highlight
+  -- FIXME: use async or timer
+  -- require("notify")("configuring fail", "warn", {
+  --   title = "Young"
+  -- })
+end
 
 vim.opt.clipboard = ""
 vim.opt.cmdheight = 1
