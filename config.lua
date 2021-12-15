@@ -627,19 +627,16 @@ lvim.plugins = {
   { "nvim-telescope/telescope-symbols.nvim" },
   {
     "nvim-telescope/telescope-packer.nvim",
-    after = "telescope.nvim",
   },
   --[[ {
     "nvim-telescope/telescope-fzf-native.nvim",
     run = "make",
-    after = "telescope.nvim",
     config = function()
       require("telescope").load_extension "fzf"
     end,
   }, ]]
   {
     "nvim-telescope/telescope-frecency.nvim",
-    after = { "telescope.nvim" },
     requires = { { "tami5/sqlite.lua", module = "sqlite" } },
     config = function()
       require("telescope").load_extension "frecency"
@@ -647,21 +644,18 @@ lvim.plugins = {
   },
   {
     "nvim-telescope/telescope-github.nvim",
-    after = "telescope.nvim",
     config = function()
       require("telescope").load_extension "gh"
     end,
   },
   {
     "nvim-telescope/telescope-z.nvim",
-    after = "telescope.nvim",
     config = function()
       require("telescope").load_extension "z"
     end,
   },
   {
     "nvim-telescope/telescope-cheat.nvim",
-    after = "telescope.nvim",
     requires = { { "tami5/sqlite.lua", module = "sqlite" } },
     config = function()
       require("telescope").load_extension "cheat"
@@ -669,7 +663,6 @@ lvim.plugins = {
   },
   {
     "jvgrootveld/telescope-zoxide",
-    after = "telescope.nvim",
     config = function()
       require("telescope").load_extension "zoxide"
       -- local z_utils = require "telescope._extensions.zoxide.utils"
@@ -688,7 +681,6 @@ lvim.plugins = {
   },
   {
     "AckslD/nvim-neoclip.lua",
-    after = "telescope.nvim",
     config = function()
       require("telescope").load_extension "neoclip"
       require("neoclip").setup {

@@ -1,7 +1,5 @@
 -- Telescope
---[[ tips:
-  <C-e> to put command to commandline, creates new file in current directory
-  <C-q> to send all results to quickfix and <M-q> to send selected items
+--[[
   -- TODO:
   https://github.com/rafamadriz/NeoCode/blob/main/lua/modules/plugins/telescope.lua
 --]]
