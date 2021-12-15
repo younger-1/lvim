@@ -41,6 +41,7 @@
 ]]
 
 local ok_young = pcall(function()
+  require("young.mod.notify").done()
   require "young.utils.global"
   require "young.cfg.global"
   require "young.cfg.option"
@@ -60,7 +61,6 @@ vim.opt.cmdheight = 1
 vim.opt.mouse = ""
 vim.opt.scrolloff = 4
 
--- require("user.notify").config()
 -- require("user.lualine").bubbles()
 require "user.dashboard"
 require "user.treesitter"
@@ -429,7 +429,7 @@ lvim.plugins = {
     {
       "junegunn/vim-easy-align",
       config = function()
-        require "user.easy-align"
+        require "young.mod.easy-align"
       end,
     },
     {
@@ -627,8 +627,7 @@ lvim.plugins = {
   },
   {
     "ibhagwan/fzf-lua",
-    requires = "vijaymarupudi/nvim-fzf",
-    module = 'fzf-lua',
+    module = "fzf-lua",
     config = function()
       require "user.fzf"
     end,

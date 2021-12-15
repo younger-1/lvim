@@ -3,6 +3,16 @@
   [](http://www.lua.org/manual/5.1/manual.html#5.1)
 --]]
 
+local function p(...)
+  print(...)
+  print(..., "hi")
+  print("hi", ...)
+end
+-- p(1,2,3)
+-- 1 2 3
+-- 1 hi
+-- hi 1 2 3
+
 -- [unpack](https://www.lua.org/pil/5.1.html)
 ---@returns all elements from the array, starting from index 1
 -- print(unpack { 10, 20, 30 }) --> 10   20   30
