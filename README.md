@@ -77,6 +77,8 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ]  [[Feature]: Show line diagnostics only for line during CursorHold](https://github.com/LunarVim/LunarVim/issues/1712)
 - [ ]  [[Bug]: illegal character encoding in string literal (Chinese)](https://github.com/LunarVim/LunarVim/issues/1792)
 - [ ]  [[Feature]: GitHub Copilot](https://github.com/LunarVim/LunarVim/issues/1856)
+- [ ]  [Support offline Installation](https://github.com/LunarVim/LunarVim/issues/2122)
+- [ ]  [sumneko_lua override issues](https://github.com/LunarVim/LunarVim/issues/2115)
 
 ## Pull requests
 
@@ -131,14 +133,16 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 -- ["<C-f>"] = {},
 -- ["<C-b>"] = {},
 -- ["<C-n>"] = {},
+-- ["<C-g>"] = {},
 
 <BS>
 <ESC>
+-
 M
 ;
 ,
 
-g. g<CR> 
+g. g<CR> gh gb gj gk
 z. z<CR> 
 
 yo yc yd
@@ -150,6 +154,7 @@ f<C->
 T<C->
 F<C->
 
+q. q, q[ q] q\ q' q;
 Q
 W
 E

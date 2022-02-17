@@ -40,8 +40,10 @@
                                -- which matches one of these patterns, the plugin will be loaded.
 ]]
 
+vim.cmd [[packadd! filetype.nvim]]
+
 local ok_young = pcall(function()
-  require("young.mod.notify").done()
+  -- require("young.mod.notify").done()
   require "young.utils.global"
   require "young.cfg.global"
   require "young.cfg.option"
@@ -87,7 +89,7 @@ lvim.builtin.cmp.confirm_opts.select = false
 -- lvim.builtin.project.silent_chdir = false
 
 -- LSP
-lvim.lsp.automatic_servers_installation = false
+lvim.lsp.automatic_servers_installation = true
 lvim.lsp.diagnostics.virtual_text = false
 
 ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
@@ -100,17 +102,17 @@ lvim.lsp.diagnostics.virtual_text = false
 -- lvim.lang.json.lsp.setup.filetypes = { "json", "jsonc" }
 
 require("lvim.lsp.null-ls.formatters").setup {
-  { exe = "stylua" },
-  { exe = "markdownlint", args = { "--config", vim.fn.expand "~/dotter/markdownlint.jsonc" } },
-  { exe = "prettier", filetypes = { "yaml" } },
-  { exe = "clang_format", filetypes = { "cpp" } },
-  { exe = "fixjson" },
+  { command = "stylua" },
+  { command = "markdownlint", args = { "--config", vim.fn.expand "~/dotter/markdownlint.jsonc" } },
+  { command = "prettier", filetypes = { "yaml" } },
+  { command = "clang_format", filetypes = { "cpp" } },
+  { command = "fixjson" },
 }
 
 require("lvim.lsp.null-ls.linters").setup {
-  -- { exe = "selene" },
-  { exe = "markdownlint", args = { "--config", vim.fn.expand "~/dotter/markdownlint.jsonc" } },
-  -- { exe = "cppcheck" },
+  -- { command = "selene" },
+  { command = "markdownlint", args = { "--config", vim.fn.expand "~/dotter/markdownlint.jsonc" } },
+  -- { command = "cppcheck" },
 }
 
 -- Keymappings
@@ -397,7 +399,7 @@ lvim.plugins = {
       "ggandor/lightspeed.nvim",
       event = "BufRead",
       config = function()
-        require "user.lightspeed"
+        require "young.mod.lightspeed"
       end,
     },
     {
@@ -499,25 +501,25 @@ lvim.plugins = {
       end,
     },
   },
-  {
-    "folke/lua-dev.nvim",
-    opt = true,
-    -- ft = "lua",
-    config = function()
-      local luadev = require("lua-dev").setup {
-        -- options that will be merged in the final lsp config
-        lspconfig = lvim.lang.lua.lsp.setup,
-        library = {
-          vimruntime = false, -- runtime path
-          types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
-          -- plugins = true, -- installed opt or start plugins in packpath
-          -- you can also specify the list of plugins to make available as a workspace library
-          plugins = { "plenary.nvim", "telescope.nvim" },
-        },
-      }
-      require("lspconfig").sumneko_lua.setup(luadev)
-    end,
-  },
+  -- {
+  --   "folke/lua-dev.nvim",
+  --   opt = true,
+  --   -- ft = "lua",
+  --   config = function()
+  --     local luadev = require("lua-dev").setup {
+  --       -- options that will be merged in the final lsp config
+  --       lspconfig = lvim.lang.lua.lsp.setup,
+  --       library = {
+  --         vimruntime = false, -- runtime path
+  --         types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+  --         -- plugins = true, -- installed opt or start plugins in packpath
+  --         -- you can also specify the list of plugins to make available as a workspace library
+  --         plugins = { "plenary.nvim", "telescope.nvim" },
+  --       },
+  --     }
+  --     require("lspconfig").sumneko_lua.setup(luadev)
+  --   end,
+  -- },
   -- [Buffer | Window | Tab]
   {
     {
@@ -601,13 +603,7 @@ lvim.plugins = {
     "Shatur/neovim-session-manager",
     event = "BufRead",
     config = function()
-      require("telescope").load_extension "sessions"
-      require("session_manager").setup {
-        sessions_dir = vim.fn.stdpath "data" .. "/sessions", -- The directory where the session files will be saved.
-        autoload_last_session = true, -- Automatically load last session on startup is started without arguments.
-        autosave_last_session = true, -- Automatically save last session on exit.
-        autosave_ignore_paths = { "~" }, -- Folders to ignore when autosaving a session.
-      }
+      require "young.mod.session-manager"
     end,
   },
   {
@@ -691,24 +687,9 @@ lvim.plugins = {
   },
   {
     "AckslD/nvim-neoclip.lua",
+    requires = { { "tami5/sqlite.lua", module = "sqlite" } },
     config = function()
-      require("telescope").load_extension "neoclip"
-      require("neoclip").setup {
-        filter = nil,
-        preview = true,
-        default_register = '"',
-        content_spec_column = false,
-        on_paste = {
-          set_reg = false,
-        },
-        keys = {
-          i = {
-            select = "<cr>",
-            paste = "<c-l>",
-            paste_behind = "<c-h>",
-          },
-        },
-      }
+      require "young.mod.neoclip"
     end,
   },
   -- [Terminal]
