@@ -47,20 +47,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
     - Video series on how to configure LunarVim as an IDE for each lang
 7. Valhalla
 
-## Config
 
-- <https://github.com/ViktorBusk/LunarChad>
-
-- <https://github.com/ChristianChiarulli/lvim>
-- <https://github.com/abzcoding/lvim>
-- <https://github.com/PasiBergman/lvim>
-- <https://github.com/kylo252/lvim>
-
-- <https://github.com/rebuilt/lvim>
-- <https://github.com/jimcornmell/lvim>
-- <https://github.com/ssbanerje/dotfiles/tree/master/editors/lvim-config>
-- <https://github.com/bob3000/dotfiles/blob/linux/conf/lv-config.lua>
-- <https://github.com/maxxnino/lvim>
 
 ## Issues
 

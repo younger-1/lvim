@@ -1,8 +1,5 @@
--- TODO: lunarvim lua-dev
-
 local opts = require("young.lsp.lua").opts
 opts = vim.tbl_deep_extend('force', opts, {
-  lvim_provider = false,
   settings = {
     Lua = {
       workspace = {
@@ -22,10 +19,11 @@ opts = vim.tbl_deep_extend('force', opts, {
   },
 })
 
-local servers = require "nvim-lsp-installer.servers"
-local server_available, requested_server = servers.get_server "sumneko_lua"
-if server_available then
-  opts.cmd_env = requested_server:get_default_options().cmd_env
-end
+-- local servers = require "nvim-lsp-installer.servers"
+-- local server_available, requested_server = servers.get_server "sumneko_lua"
+-- if server_available then
+--   opts.cmd_env = requested_server:get_default_options().cmd_env
+-- end
+-- require("lvim.lsp.manager").setup("sumneko_lua", opts)
 
-require("lvim.lsp.manager").setup("sumneko_lua", opts)
+return opts
