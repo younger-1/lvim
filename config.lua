@@ -57,6 +57,7 @@ lvim.lsp.diagnostics.virtual_text = false
 
 ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- vim.list_extend(lvim.lsp.override, { "jdtls" })
+vim.list_extend(lvim.lsp.override, { "sumneko_lua" })
 
 -- require("user.json_schemas").setup()
 -- [](https://github.com/LunarVim/LunarVim/issues/1639)

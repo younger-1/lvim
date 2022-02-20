@@ -1,25 +1,31 @@
 -- TODO: lunarvim lua-dev
--- require("lvim.lsp.manager").setup("sumneko_lua", {
---   settings = {
---     Lua = {
---       runtime = {
---         version = "LuaJIT",
---         path = {
---           "lua/?.lua",
---           "lua/?/init.lua",
---         },
---       },
---       workspace = {
---         library = {
---           [vim.fn.expand "$VIMRUNTIME"] = true,
---           [vim.fn.stdpath "config"] = true,
---           [_G.packer_plugins["lua-dev.nvim"].path] = true,
---           [_G.packer_plugins["plenary.nvim"].path] = true,
---           [_G.packer_plugins["telescope.nvim"].path] = true,
---         },
---         maxPreload = 2000,
---         preloadFileSize = 200,
---       },
---     },
---   },
--- })
+
+local opts = require("young.lsp.lua").opts
+opts = vim.tbl_deep_extend('force', opts, {
+  lvim_provider = false,
+  settings = {
+    Lua = {
+      workspace = {
+        library = {
+          [vim.fn.stdpath "config"] = true,
+          [require("lvim.utils").join_paths(get_runtime_dir(), "lvim")] = true,
+          -- [_G.packer_plugins["telescope.nvim"].path] = true,
+        },
+      },
+      diagnostics = {
+        globals = {
+          'lvim',
+          'vim',
+        },
+      },
+    },
+  },
+})
+
+local servers = require "nvim-lsp-installer.servers"
+local server_available, requested_server = servers.get_server "sumneko_lua"
+if server_available then
+  opts.cmd_env = requested_server:get_default_options().cmd_env
+end
+
+require("lvim.lsp.manager").setup("sumneko_lua", opts)
