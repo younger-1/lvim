@@ -840,7 +840,7 @@ lvim.plugins = {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
     config = function()
-      require("user.lsp_signature").config()
+      require("young.mod.lsp-signature").done()
     end,
   },
   {
