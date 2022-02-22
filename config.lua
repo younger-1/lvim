@@ -106,11 +106,11 @@ lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
   command_mode = {
     ["<C-V>"] = "<C-R>+",
     --
-    ["<C-a>"] = "<Home>",
-    ["<C-e>"] = "<End>",
+    ["<C-a>"] = { "<Home>", { silent = false } },
+    ["<C-e>"] = { "<End>", { silent = false } },
     --
-    ["<A-f>"] = "<S-Right>",
-    ["<A-b>"] = "<S-Left>",
+    ["<A-f>"] = { "<S-Right>", { silent = false } },
+    ["<A-b>"] = { "<S-Left> ", { silent = false } },
     --
     -- ["<C-b>"] = "<Left>",
     -- ["<C-f>"] = "<Right>",
@@ -120,8 +120,8 @@ lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
     ["[e"] = ":lprev<CR>",
     ["<C-e>"] = ":call LocListToggle()<CR>",
     -- Remap for dealing with word wrap
-    k = { "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true } },
-    j = { "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true } },
+    k = { "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true } },
+    j = { "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true } },
     --
     Y = "y$",
     ZA = ":wqa<CR>",
@@ -132,11 +132,10 @@ lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
     JK = "<C-\\><C-N>",
   },
   visual_mode = {
-    Y = [["+y]],
-    d = [["_d]],
-    X = [["+x]],
+    d = [["_d]], -- Use `x` to cut
+    X = [["+x]], -- Use `X` for system-cut
+    Y = [["+y]], -- Use `Y` for system-copy
   },
-  -- visual_block_mode = {},
 })
 
 vim.cmd [[
@@ -145,7 +144,11 @@ vnoremap H ^
 onoremap L $
 vnoremap L $
 
+" replace word under cursor
 nnoremap & :<c-u>/g<home>%s/<c-r><c-w>/
+
+" for finding syntax ids for non TS enabled languages
+map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
 ]]
 
 lvim.plugins = {
@@ -642,7 +645,7 @@ lvim.plugins = {
       "wfxr/minimap.vim",
       cmd = { "MinimapToggle" },
       config = function()
-        require("young.mod.minimap")
+        require "young.mod.minimap"
       end,
     },
     {
@@ -840,7 +843,7 @@ lvim.plugins = {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
     config = function()
-      require("young.mod.lsp-signature").done()
+      require "young.mod.lsp-signature"
     end,
   },
   {
@@ -942,6 +945,8 @@ lvim.autocommands.custom_groups = {
   },
   { "InsertEnter", "*", ":normal! zz" },
   -- { "CursorHold", "*", ":normal! ga" },
+  { 'VimLeave', '*', 'set guicursor=a:ver25' },
+  { 'User', 'PackerCompileDone', ":lua require('young.mod.notify').yntf('🎴 PackerCompile done')" },
 }
 
 -- *Must* be *S*olidity not solidity
