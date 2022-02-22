@@ -1,5 +1,3 @@
--- Treesitter
-
 lvim.builtin.treesitter = vim.tbl_deep_extend("force", lvim.builtin.treesitter, {
   ensure_installed = "maintained",
   ignore_install = { "haskell" },
@@ -162,5 +160,10 @@ lvim.builtin.treesitter = vim.tbl_deep_extend("force", lvim.builtin.treesitter, 
   rainbow = { -- p00f/nvim-ts-rainbow
     enable = true,
     max_file_lines = 3000,
+  },
+  -- <https://github.com/andymass/vim-matchup>
+  matchup = {
+    enable = true, -- mandatory, false will disable the whole extension
+    -- disable = { "c", "ruby" },  -- optional, list of language that will be disabled
   },
 })

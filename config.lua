@@ -309,7 +309,7 @@ lvim.plugins = {
       "andymass/vim-matchup",
       event = "CursorMoved",
       config = function()
-        require "user.matchup"
+        require "young.mod.matchup"
       end,
     },
     {
