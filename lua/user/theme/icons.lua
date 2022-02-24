@@ -27,6 +27,7 @@ M.action  = {
   save_v  = "",
   check   = "☑",
   good    = "✓",
+  good_v  = "✔",
   wrong   = "✗",
   close   = "",
   close_v = "",
@@ -161,6 +162,9 @@ M.ui = {
   close         = "",
   close         = "",
   close         = "",
+  timer         = "﨟",
+  chart         = "蘭",
+
 }
 
 M.shape = {

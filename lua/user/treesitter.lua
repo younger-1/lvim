@@ -1,5 +1,13 @@
 lvim.builtin.treesitter = vim.tbl_deep_extend("force", lvim.builtin.treesitter, {
-  ensure_installed = "maintained",
+  ensure_installed = {
+    'cpp',
+    'go',
+    'java',
+    'lua',
+    'python',
+    'rust',
+    'vim',
+  },
   ignore_install = { "haskell" },
   incremental_selection = {
     enable = true,
