@@ -114,6 +114,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 ["<C-y>"] = {},
 ["<C-p>"] = {},
 ["<C-s>"] = {},
+["<C-\>"] = {},
 
 -- ["<C-a>"] = {},
 -- ["<C-x>"] = {},

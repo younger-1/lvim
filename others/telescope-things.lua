@@ -226,3 +226,9 @@ require("telescope.themes").get_cursor {
   vim_options = <function 52>
 }
 --]]
+
+for name, plug in pairs(_G.packer_plugins) do
+  if not plug.path then
+    print(name)
+  end
+end

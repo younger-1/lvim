@@ -367,6 +367,7 @@ lvim.plugins = {
     {
       "monaqa/dial.nvim",
       event = "BufRead",
+      commit = "3b70b2a",
       config = function()
         require "user.dial"
       end,
@@ -837,7 +838,10 @@ lvim.plugins = {
     end,
   },
   -- [Web]
-  { "wakatime/vim-wakatime" },
+  {
+    "wakatime/vim-wakatime",
+    event = "BufReadPost",
+  },
   -- [LSP]
   {
     "ray-x/lsp_signature.nvim",
