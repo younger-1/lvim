@@ -57,6 +57,7 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
   },
 
   mappings = {
+    ["/"] = { "<cmd>lua require('lir.float').toggle()<cr>", "Lir" },
     ["?"] = {
       name = "Vim",
       ["?"] = { ":h reference_toc<CR>", "❓" },
@@ -117,7 +118,6 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       r = { ":TablineTabRename ", "Tabline Rename" },
     },
     C = { ":call OpenLastClosed()<CR>", "which_key_ignore" },
-    f = { "<cmd>lua require('lir.float').toggle()<cr>", "Files" },
     g = {
       -- ["<tab>"] = {},
       [" "] = {
@@ -196,8 +196,6 @@ lvim.builtin.which_key = vim.tbl_deep_extend("force", lvim.builtin.which_key, {
       A = { "<cmd>Telescope lsp_range_code_actions<cr>", "Range Action" },
       c = { "<cmd>CodeActionMenu<cr>", "Code Action" },
       C = { "<cmd>CmpStatus<cr>", "Code Action" },
-      d = { "<cmd>Telescope lsp_document_diagnostics<cr>", "Document Diagnostics" },
-      w = { "<cmd>Telescope lsp_workspace_diagnostics<cr>", "Workspace Diagnostics" },
       W = { "<cmd>lua pp(vim.lsp.buf.list_workspace_folders())<cr>", "Workspace folders" },
       -- f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
       F = {
