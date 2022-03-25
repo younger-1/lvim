@@ -730,7 +730,7 @@ lvim.plugins = {
     "ruifm/gitlinker.nvim",
     event = "BufRead",
     config = function()
-      require("user.gitlinker").config()
+      require("young.mod.gitlinker").done()
     end,
   },
   {
