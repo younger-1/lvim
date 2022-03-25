@@ -771,17 +771,12 @@ lvim.plugins = {
       end,
     },
     {
-      "vhyrro/neorg",
-      ft = "norg",
+      "nvim-neorg/neorg",
+      -- tag = "latest",
+      ft = { "norg" },
+      -- after = { "nvim-treesitter", "telescope.nvim"},
       config = function()
         require "user.neorg"
-      end,
-    },
-    {
-      "kristijanhusak/orgmode.nvim",
-      ft = { "org" },
-      config = function()
-        require("orgmode").setup {}
       end,
     },
     {
