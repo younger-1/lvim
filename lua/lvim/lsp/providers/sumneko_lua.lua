@@ -1,4 +1,4 @@
-local opts = require("young.lsp.lua").opts
+local opts = require("young.lsp.providers.sumneko_lua")
 opts = vim.tbl_deep_extend('force', opts, {
   settings = {
     Lua = {
@@ -18,6 +18,7 @@ opts = vim.tbl_deep_extend('force', opts, {
     },
   },
 })
+-- pp(opts)
 
 -- local servers = require "nvim-lsp-installer.servers"
 -- local server_available, requested_server = servers.get_server "sumneko_lua"
