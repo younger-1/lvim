@@ -27,7 +27,7 @@ vim.opt.mouse = ""
 vim.opt.scrolloff = 4
 
 -- require("user.lualine").bubbles()
-require "user.dashboard"
+-- require "user.dashboard"
 require "user.treesitter"
 require "user.telescope"
 require "user.whichkey"
@@ -42,7 +42,8 @@ lvim.transparent_window = false
 lvim.colorscheme = "onedarker"
 lvim.log.level = "info"
 
-lvim.builtin.dashboard.active = true
+lvim.builtin.alpha.active = true
+-- lvim.builtin.alpha.mode = "startify"
 lvim.builtin.terminal.active = true
 lvim.builtin.dap.active = true
 lvim.builtin.notify.active = true
@@ -880,8 +881,7 @@ lvim.plugins = {
     "NLKNguyen/papercolor-theme",
     "bluz71/vim-moonfly-colors",
     "bluz71/vim-nightfly-guicolors",
-    -- lua colorscheme
-    { "lunarvim/colorschemes" },
+    -- { "lunarvim/colorschemes" }, -- conflict with Lunarvim/onedarker.nvim
     {
       "folke/tokyonight.nvim",
       setup = function()
