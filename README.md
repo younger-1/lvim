@@ -83,6 +83,7 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 ## TODO
 
 - [x] add some common library or plugin path to lsp runtime path by `lvim.lang.lua.lsp.setup`
+- [x] sudo file: set $EDITOR env-var and `sudo -e filename`
 - [ ] move all uncommon plugins' mappings to buffer-mappings by condition or `ftplugin` or `ftdetect`
 - [ ] understand [](https://github.com/LunarVim/LunarVim/issues/1600#issuecomment-925027298)
 - [ ] lsp for save without formatting(:h :autoformat :formatting) [](https://github.com/LunarVim/LunarVim/issues/1600#issuecomment-925027298)
@@ -90,7 +91,6 @@ An IDE layer for Neovim with sane defaults which works OOTB(out-of-the-box). Com
 - [ ] refactor plugins' configuration in `user` fold, perhaps using `require` to generate `lvim.plugins`
 - [ ] <C-w> for zoom, modes.nvim, filetype.nvim, better-escape, startup-time
 - [ ] auto-session
-- [ ] sudo lvim
 - [ ] entire object: vae vie
 - [ ] go to next/previous symbols like vscode's editor.action.wordHighlight.next
 - [ ] lua require('focus').focus_toggle()

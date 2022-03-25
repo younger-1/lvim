@@ -549,7 +549,7 @@ lvim.plugins = {
     "windwp/nvim-spectre",
     event = "BufRead",
     config = function()
-      require("user.spectre").config()
+      require("young.mod.spectre").done()
     end,
   },
   {
@@ -948,7 +948,6 @@ lvim.autocommands.custom_groups = {
     [[setlocal noswapfile nobackup noundofile]],
   },
   { "InsertEnter", "*", ":normal! zz" },
-  -- { "CursorHold", "*", ":normal! ga" },
   { 'VimLeave', '*', 'set guicursor=a:ver25' },
   { 'User', 'PackerCompileDone', ":lua require('young.mod.notify').yntf('🎴 PackerCompile done')" },
 }
