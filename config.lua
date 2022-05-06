@@ -340,12 +340,13 @@ lvim.plugins = {
         require("user.numb").config()
       end,
     },
-    {
-      "karb94/neoscroll.nvim",
-      config = function()
-        require "user.neoscroll"
-      end,
-    },
+    -- {
+    --   "karb94/neoscroll.nvim",
+    --   event = "BufWinEnter",
+    --   config = function()
+    --     require "young.mod.neoscroll"
+    --   end,
+    -- },
   },
   -- [Change]
   {
