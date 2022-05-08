@@ -96,7 +96,8 @@ lvim.lsp.null_ls.setup.root_dir = function(fname)
   elseif vim.bo.filetype == "php" then
     return require("lspconfig/util").root_pattern("Makefile", ".git", "composer.json")(fname) or vim.fn.getcwd()
   else
-    return require("lspconfig/util").root_pattern("Makefile", ".git")(fname) or require("lspconfig/util").path.dirname(fname)
+    return require("lspconfig/util").root_pattern("Makefile", ".git")(fname)
+      or require("lspconfig/util").path.dirname(fname)
   end
 end
 
@@ -124,11 +125,11 @@ linters.setup {
 
 -- Additional Plugins
 lvim.plugins = {
-    {"folke/tokyonight.nvim"},
-    {
-      "folke/trouble.nvim",
-      cmd = "TroubleToggle",
-    },
+  { "folke/tokyonight.nvim" },
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)

@@ -1,5 +1,5 @@
-local opts = require("young.lsp.providers.sumneko_lua")
-opts = vim.tbl_deep_extend('force', opts, {
+local opts = require "young.lsp.providers.sumneko_lua"
+opts = vim.tbl_deep_extend("force", opts, {
   settings = {
     Lua = {
       workspace = {
@@ -11,8 +11,8 @@ opts = vim.tbl_deep_extend('force', opts, {
       },
       diagnostics = {
         globals = {
-          'lvim',
-          'vim',
+          "lvim",
+          "vim",
         },
       },
     },

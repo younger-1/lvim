@@ -1,6 +1,6 @@
 ---[[--------------------------------------------]]---
 --      config.lua - Configuration for LunarVim     --
---             Author: Younger-1@github             --
+--             Author: younger-1@github             --
 ---[[--------------------------------------------]]---
 
 vim.cmd [[packadd! filetype.nvim]]
@@ -34,13 +34,12 @@ require "user.whichkey"
 require "user.barbar"
 require "user.cmp"
 
-young = "Young"
-
 -- General
 lvim.format_on_save = false
 lvim.transparent_window = false
 lvim.colorscheme = "onedarker"
 lvim.log.level = "info"
+-- lvim.use_icons = false
 
 lvim.builtin.alpha.active = true
 -- lvim.builtin.alpha.mode = "startify"
@@ -49,16 +48,23 @@ lvim.builtin.dap.active = true
 lvim.builtin.notify.active = true
 lvim.builtin.gitsigns.opts.numhl = true
 lvim.builtin.gitsigns.opts.keymaps["x ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
-lvim.builtin.cmp.confirm_opts.select = false
+-- lvim.builtin.cmp.confirm_opts.select = true
 -- lvim.builtin.project.silent_chdir = false
 
 -- LSP
 lvim.lsp.automatic_servers_installation = true
-lvim.lsp.diagnostics.virtual_text = false
+-- lvim.lsp.diagnostics.virtual_text = false
 
----@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
--- vim.list_extend(lvim.lsp.override, { "jdtls" })
--- vim.list_extend(lvim.lsp.override, { "sumneko_lua" })
+---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
+  -- "pyright",
+  -- "jdtls",
+})
+---remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
+---`:LvimInfo` lists which server(s) are skiipped for the current filetype
+-- vim.tbl_map(function(server)
+--   return server ~= "emmet_ls"
+-- end, lvim.lsp.automatic_configuration.skipped_servers)
 
 -- require("user.json_schemas").setup()
 -- [](https://github.com/LunarVim/LunarVim/issues/1639)
@@ -944,8 +950,8 @@ lvim.autocommands.custom_groups = {
     [[setlocal noswapfile nobackup noundofile]],
   },
   { "InsertEnter", "*", ":normal! zz" },
-  { 'VimLeave', '*', 'set guicursor=a:ver25' },
-  { 'User', 'PackerCompileDone', ":lua require('young.mod.notify').yntf('🎴 PackerCompile done')" },
+  { "VimLeave", "*", "set guicursor=a:ver25" },
+  { "User", "PackerCompileDone", ":lua require('young.mod.notify').yntf('🎴 PackerCompile done')" },
 }
 
 -- *Must* be *S*olidity not solidity

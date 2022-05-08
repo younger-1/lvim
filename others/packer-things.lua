@@ -27,7 +27,9 @@ local startup = {
     end,
   },
   ["vim-gist"] = {
-    config = { "\27LJ\1\2>\0\0\2\0\3\0\0054\0\0\0007\0\1\0'\1\1\0:\1\2\0G\0\1\0!gist_open_browser_after_post\6g\bvim\0" },
+    config = {
+      "\27LJ\1\2>\0\0\2\0\3\0\0054\0\0\0007\0\1\0'\1\1\0:\1\2\0G\0\1\0!gist_open_browser_after_post\6g\bvim\0",
+    },
     loaded = true,
     path = "/home/young/.local/share/lunarvim/site/pack/packer/start/vim-gist",
   },
