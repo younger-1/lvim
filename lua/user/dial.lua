@@ -40,4 +40,4 @@ local settings = {
 --   table.insert(dial.config.searchlist.normal, v)
 -- end
 
-require("young.utils").add_to_set(dial.config.searchlist.normal, settings)
+require("young.util").add_to_set(dial.config.searchlist.normal, settings)

@@ -7,7 +7,7 @@ vim.cmd [[packadd! filetype.nvim]]
 
 local ok_young = pcall(function()
   -- require("young.mod.notify").done()
-  require "young.utils.global"
+  require "young.util.global"
   require "young.cfg.global"
   require "young.cfg.option"
 end)
@@ -935,24 +935,49 @@ lvim.plugins = {
 -- TODO: q quits in spectr_panel ft
 -- [Autocommands](https://neovim.io/doc/user/autocmd.html)
 -- [events](https://tech.saigonist.com/b/code/list-all-vim-script-events.html)
-lvim.autocommands.custom_groups = {
-  -- { Event, filetype, command } run a command at a given event for the given filetype
-  -- Return to last edit position when opening files (You want this!)
-  {
-    "BufWinEnter",
-    "*",
-    [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
-  },
-  -- [gopass: vim on Linux](https://github.com/gopasspw/gopass/blob/master/docs/setup.md)
-  {
-    "BufNewFile,BufRead",
-    "/dev/shm/gopass.*,/run/shm/gopass.*",
-    [[setlocal noswapfile nobackup noundofile]],
-  },
-  { "InsertEnter", "*", ":normal! zz" },
-  { "VimLeave", "*", "set guicursor=a:ver25" },
-  { "User", "PackerCompileDone", ":lua require('young.mod.notify').yntf('🎴 PackerCompile done')" },
-}
+
+-- { Event, filetype, command } run a command at a given event for the given filetype
+-- lvim.autocommands.custom_groups = {
+--   -- [gopass: vim on Linux](https://github.com/gopasspw/gopass/blob/master/docs/setup.md)
+--   {
+--     "BufNewFile,BufRead",
+--     "/dev/shm/gopass.*,/run/shm/gopass.*",
+--     [[setlocal noswapfile nobackup noundofile]],
+--   },
+--   { "VimLeave", "*", "set guicursor=a:ver25" },
+--   { "User", "PackerCompileDone", ":lua require('young.mod.notify').yntf('🎴 PackerCompile done')" },
+-- }
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*",
+  command = [[if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif ]],
+  desc = "Return to last edit position when opening files",
+})
+
+vim.api.nvim_create_autocmd("InsertEnter", {
+  pattern = "*",
+  command = ":normal! zz",
+})
+
+vim.api.nvim_create_autocmd("VimLeave", {
+  pattern = "*",
+  command = "set guicursor=a:ver25",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "zsh",
+  callback = function()
+    -- let treesitter use bash highlight for zsh files as well
+    require("nvim-treesitter.highlight").attach(0, "bash")
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "PackerCompileDone",
+  callback = function()
+    require("young.mod.notify").yntf "🎴 PackerCompile done"
+  end,
+})
 
 -- *Must* be *S*olidity not solidity
 -- require("nvim-treesitter.parsers").get_parser_configs().solidity = {
