@@ -3,8 +3,6 @@
 --             Author: younger-1@github             --
 ---[[--------------------------------------------]]---
 
-vim.cmd [[packadd! filetype.nvim]]
-
 local ok_young = pcall(function()
   -- require("young.mod.notify").done()
   require "young.util.global"
@@ -20,11 +18,6 @@ if not ok_young then
   --   title = "Young"
   -- })
 end
-
-vim.opt.clipboard = ""
-vim.opt.cmdheight = 1
-vim.opt.mouse = ""
-vim.opt.scrolloff = 4
 
 -- require("user.lualine").bubbles()
 -- require "user.dashboard"
@@ -212,24 +205,6 @@ lvim.plugins = {
       end,
     },
   },
-  {
-    "mvllow/modes.nvim",
-    opt = true,
-    -- event = "BufRead",
-    config = function()
-      vim.opt.cursorline = true
-      require("modes").setup {
-        colors = {
-          insert = "#78ccc5",
-          visual = "#f5c359",
-          delete = "#c75c6a",
-          copy = "#9745be",
-        },
-        line_opacity = 0.2,
-        focus_only = false,
-      }
-    end,
-  },
   -- [Treesitter]
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
@@ -407,21 +382,6 @@ lvim.plugins = {
       end,
     },
     {
-      "nathom/filetype.nvim",
-      -- opt = true,
-      setup = function() end,
-      config = function()
-        require("young.mod.filetype").done()
-      end,
-    },
-    {
-      "sheerun/vim-polyglot",
-      opt = true,
-      setup = function()
-        vim.g.polyglot_disabled = { "autoindent", "ftdetect", "markdown" }
-      end,
-    },
-    {
       "max397574/better-escape.nvim",
       event = "InsertEnter",
       setup = function()
@@ -440,25 +400,6 @@ lvim.plugins = {
       end,
     },
   },
-  -- {
-  --   "folke/lua-dev.nvim",
-  --   opt = true,
-  --   -- ft = "lua",
-  --   config = function()
-  --     local luadev = require("lua-dev").setup {
-  --       -- options that will be merged in the final lsp config
-  --       lspconfig = lvim.lang.lua.lsp.setup,
-  --       library = {
-  --         vimruntime = false, -- runtime path
-  --         types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
-  --         -- plugins = true, -- installed opt or start plugins in packpath
-  --         -- you can also specify the list of plugins to make available as a workspace library
-  --         plugins = { "plenary.nvim", "telescope.nvim" },
-  --       },
-  --     }
-  --     require("lspconfig").sumneko_lua.setup(luadev)
-  --   end,
-  -- },
   -- [Buffer | Window | Tab]
   {
     {
