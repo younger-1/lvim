@@ -3,18 +3,19 @@
 --             Author: younger-1@github             --
 ---[[--------------------------------------------]]---
 
-local ok_young = pcall(function()
+local ok_young, err_young = pcall(function()
+  vim.cmd "packadd! younger-1"
   -- require("young.mod.notify").done()
-  require "young.util.global"
+  require "young"
   require "young.cfg.global"
   require "young.cfg.option"
 end)
 
 if not ok_young then
-  vim.notify("[Young]: configuring fail", vim.log.levels.WARN)
+  vim.notify("[young]: configuring fail:\n" .. err_young, vim.log.levels.WARN)
   -- In startup, nvim do not have colorscheme, so Highlight group 'Normal' has no background highlight
   -- FIXME: use async or timer
-  -- require("notify")("configuring fail", "warn", {
+  -- require("notify")("[young]: configuring fail", "warn", {
   --   title = "Young"
   -- })
 end
@@ -45,8 +46,12 @@ lvim.builtin.gitsigns.opts.keymaps["x ih"] = ':<C-U>lua require"gitsigns.actions
 -- lvim.builtin.project.silent_chdir = false
 
 -- LSP
-lvim.lsp.automatic_servers_installation = true
+lvim.lsp.installer.setup.automatic_installation = false
 -- lvim.lsp.diagnostics.virtual_text = false
+
+-- lvim.lsp.automatic_configuration.skipped_filetypes
+-- lvim.lsp.automatic_configuration.skipped_servers
+-- lvim.lsp.installer.setup.ensure_installed
 
 ---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, {
@@ -116,6 +121,8 @@ lvim.keys = vim.tbl_deep_extend("force", lvim.keys, {
     -- ["<C-f>"] = "<Right>",
   },
   normal_mode = {
+    ["<S-l>"] = ":BufferLineCycleNext<CR>",
+    ["<S-h>"] = ":BufferLineCyclePrev<CR>",
     ["]e"] = ":lnext<CR>",
     ["[e"] = ":lprev<CR>",
     ["<C-e>"] = ":call LocListToggle()<CR>",
@@ -155,6 +162,7 @@ lvim.plugins = {
   {
     vim.fn.stdpath "config",
     as = "younger-1",
+    opt = true,
   },
   -- { "gelguy/wilder.nvim",
   --   config = function ()
@@ -344,7 +352,7 @@ lvim.plugins = {
     {
       "junegunn/vim-easy-align",
       config = function()
-        require "young.mod.easy-align"
+        require "young.mod.easy_align"
       end,
     },
     {
@@ -483,7 +491,7 @@ lvim.plugins = {
     "Shatur/neovim-session-manager",
     event = "BufRead",
     config = function()
-      require "young.mod.session-manager"
+      require "young.mod.session_manager"
     end,
   },
   {
@@ -791,7 +799,7 @@ lvim.plugins = {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
     config = function()
-      require "young.mod.lsp-signature"
+      require "young.mod.lsp_signature"
     end,
   },
   {
